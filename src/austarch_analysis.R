@@ -11,10 +11,24 @@ austarch_filter_1_df <- filter_austarch_initial(austarch_df)
 # Second filtering step: retaining only robust, occupation-associated material and site types, explicitly removing unusable entries
 austarch_filter_2_df <- filter_austarch_material_site(austarch_filter_1_df)
 
-# Apply the final site filter explicitly:
-austarch_final_df <- filter_sites_min_dates(austarch_filter_2_df, min_dates = 5)
+# Explicitly filter calibrated dates
+austarch_calibrated_dates <- calibrate_dates(austarch_filter_2_df)
 
-# Check final filtered dataset and write to file:
-length(unique(austarch_final_df$SITE))
-str(austarch_final_df)
-write.csv(austarch_final_df, "./data/austarch_filtered.csv", row.names = FALSE)
+austarch_calibrated_filtered <- filter_calibrated_dates_by_range(
+  austarch_calibrated_dates, 
+  min_calBP = 651, 
+  max_calBP = 11650 # Holocene boundary, and 11 ka span
+)
+
+# Select only sites with at least 5 dates within the calibrated Holocene dates
+austarch_final_calibrated_df <- filter_sites_min_calibrated_dates(
+  original_df = austarch_filter_2_df,
+  calibrated_dates = austarch_calibrated_filtered,
+  min_dates = 5
+)
+
+# Check explicitly final results
+length(unique(austarch_final_calibrated_df$SITE))
+str(austarch_final_calibrated_df)
+
+write.csv(austarch_final_calibrated_df, "./data/austarch_filtered.csv", row.names = FALSE)
