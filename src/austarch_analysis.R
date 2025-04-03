@@ -30,5 +30,9 @@ austarch_final_calibrated_df <- filter_sites_min_calibrated_dates(
 # Check explicitly final results
 length(unique(austarch_final_calibrated_df$SITE))
 str(austarch_final_calibrated_df)
+hist(austarch_final_calibrated_df$weighted_mean_calBP)
+#write.csv(austarch_final_calibrated_df, "./data/austarch_filtered.csv", row.names = FALSE)
 
-write.csv(austarch_final_calibrated_df, "./data/austarch_filtered.csv", row.names = FALSE)
+plot_radiocarbon_vs_calibrated(austarch_final_calibrated_df)
+summarise_calibrated_dataset(austarch_final_calibrated_df)
+

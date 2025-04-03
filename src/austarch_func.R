@@ -1,9 +1,10 @@
 # Explicit import of required functions
 import::from("readr", read_csv, cols_only, col_integer, col_double, col_character)
-import::from("dplyr", rename, mutate, select, filter, across, group_by, ungroup, n, count)
+import::from("dplyr", rename, mutate, select, filter, across, group_by, ungroup, n, count, inner_join, summarise, arrange, bind_rows, n_distinct)
 import::from("stringr", str_replace_all)
 import::from("magrittr", "%>%")
 import::from("rcarbon", calibrate, combine)
+import::from("ggplot2", ggplot, aes, geom_line, theme_minimal, labs, scale_x_reverse)
 
 # Load AustArch data (including DATE_ISSUES temporarily)
 load_austarch_data <- function(filepath) {
@@ -170,21 +171,95 @@ filter_calibrated_dates_by_range <- function(calibrated_dates, min_calBP = 100, 
 }
 
 filter_sites_min_calibrated_dates <- function(original_df, calibrated_dates, min_dates = 5) {
-  # Extract ADSID (used as calibration ID)
-  remaining_ids <- as.numeric(calibrated_dates$metadata$DateID)
+  # Extract calibrated ADSIDs
+  retained_ids <- as.numeric(calibrated_dates$metadata$DateID)
 
-  # Filter original dataframe to retain only rows with calibrated ADSIDs
+  # Filter original df to match those calibrated dates
   df_filtered <- original_df %>%
-    filter(ADSID %in% remaining_ids)
+    filter(ADSID %in% retained_ids)
 
-  # Count number of calibrated dates per site
-  site_counts <- df_filtered %>%
-    count(SITE) %>%
-    filter(n >= min_dates)
+  # Calculate weighted mean calibrated age per date
+  weighted_means <- sapply(calibrated_dates$grids, function(grid) {
+    sum(grid$calBP * grid$PrDens)
+  })
 
-  # Retain only those sites with sufficient date counts
+  # Add weighted means as a column back into the filtered df
+  df_filtered <- df_filtered %>%
+    mutate(weighted_mean_calBP = weighted_means[as.character(ADSID)])
+
+  # Drop the redundant RECORD_SOURCE column
+  df_filtered <- df_filtered %>%
+    select(-RECORD_SOURCE)
+
+  # Filter to sites with at least min_dates
   df_final <- df_filtered %>%
-    filter(SITE %in% site_counts$SITE)
+    count(SITE) %>%
+    filter(n >= min_dates) %>%
+    inner_join(df_filtered, by = "SITE")
 
   return(df_final)
+}
+
+bin_age_distribution <- function(df, age_col, bin_width = 250, min_age = 0, max_age = 12000) {
+  df %>%
+    mutate(
+      bin = floor(.data[[age_col]] / bin_width) * bin_width
+    ) %>%
+    filter(bin >= min_age & bin <= max_age) %>%
+    count(bin) %>%
+    arrange(bin)
+}
+
+plot_radiocarbon_vs_calibrated <- function(df, bin_width = 250, min_age = 0, max_age = 12000) {
+  rc_bins <- bin_age_distribution(df, "AGE", bin_width, min_age, max_age)
+  cal_bins <- bin_age_distribution(df, "weighted_mean_calBP", bin_width, min_age, max_age)
+
+  rc_bins$source <- "Radiocarbon age"
+  cal_bins$source <- "Calibrated weighted mean"
+
+  combined <- bind_rows(rc_bins, cal_bins)
+
+  ggplot(combined, aes(x = bin, y = n, color = source)) +
+    geom_line(linewidth = 1) +
+    scale_x_reverse(limits = c(max_age, min_age)) +
+    labs(
+      title = "Temporal Distribution of Radiocarbon vs Calibrated Ages",
+      x = "Years cal BP",
+      y = "Count per bin",
+      color = "Date type"
+    ) +
+    theme_minimal()
+}
+
+summarise_calibrated_dataset <- function(df) {
+  
+  material_summary <- df %>%
+    count(MATERIAL, sort = TRUE)
+
+  site_type_summary <- df %>%
+    count(SITE_TYPE, sort = TRUE)
+
+  dates_per_site <- df %>%
+    count(SITE) %>%
+    arrange(desc(n))
+
+  temporal_spread <- df %>%
+    group_by(SITE) %>%
+    summarise(
+      min_cal = min(weighted_mean_calBP),
+      max_cal = max(weighted_mean_calBP),
+      span = max_cal - min_cal,
+      n_dates = n(),
+      .groups = "drop"
+    ) %>%
+    arrange(desc(span))
+
+  summary_list <- list(
+    materials = material_summary,
+    site_types = site_type_summary,
+    dates_per_site = dates_per_site,
+    temporal_spread = temporal_spread
+  )
+
+  return(summary_list)
 }
