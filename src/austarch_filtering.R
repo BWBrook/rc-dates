@@ -1,12 +1,15 @@
-# Explicit import of required functions
 import::from("readr", read_csv, cols_only, col_integer, col_double, col_character)
-import::from("dplyr", rename, mutate, select, filter, across, group_by, ungroup, n, count, inner_join, summarise, arrange, bind_rows, n_distinct)
+import::from("dplyr", rename, mutate, select, filter, across, count, inner_join)
 import::from("stringr", str_replace_all)
 import::from("magrittr", "%>%")
 import::from("rcarbon", calibrate, combine)
-import::from("ggplot2", ggplot, aes, geom_line, theme_minimal, labs, scale_x_reverse)
 
-# Load AustArch data (including DATE_ISSUES temporarily)
+#' Load and clean AustArch radiocarbon dataset from CSV
+#'
+#' Reads relevant columns, standardises field names, and replaces whitespace with underscores.
+#'
+#' @param filepath Path to the CSV file.
+#' @return A tibble containing the cleaned dataset.
 load_austarch_data <- function(filepath) {
   suppressWarnings({
     austarch_df <- read_csv(
@@ -41,7 +44,12 @@ load_austarch_data <- function(filepath) {
   return(austarch_df)
 }
 
-# First filtering sweep
+#' Apply initial quality filters to radiocarbon dataset
+#'
+#' Retains only radiocarbon entries with valid ages, errors, and contextual relevance.
+#'
+#' @param df Dataframe of AustArch records.
+#' @return A filtered dataframe excluding problematic or invalid records.
 filter_austarch_initial <- function(df) {
   df_filtered <- df %>%
     filter(
@@ -59,7 +67,12 @@ filter_austarch_initial <- function(df) {
   return(df_filtered)
 }
 
-# Second filtering step (material, site_type, and unusable time series)
+#' Filter AustArch data by material type and site context
+#'
+#' Retains only samples from approved materials and archaeological contexts, and within valid radiocarbon ranges.
+#'
+#' @param df Dataframe of filtered AustArch records.
+#' @return A cleaned dataframe restricted to valid materials and site types.
 filter_austarch_material_site <- function(df) {
 
   valid_materials <- c(
@@ -99,6 +112,16 @@ filter_austarch_material_site <- function(df) {
   return(df_filtered)
 }
 
+#' Calibrate terrestrial and marine radiocarbon dates
+#'
+#' Uses appropriate calibration curves (SHCal20 or Marine20) and assigns unique IDs based on ADSID.
+#'
+#' @param df Dataframe of filtered AustArch records.
+#' @param terrestrial_curve Calibration curve for terrestrial samples.
+#' @param marine_curve Calibration curve for marine samples.
+#' @param reservoir_age Marine reservoir offset (default = 0).
+#' @param reservoir_error Error on reservoir offset (default = 0).
+#' @return A CalDates object with all calibrated records.
 calibrate_dates <- function(df, terrestrial_curve = "shcal20", marine_curve = "marine20", reservoir_age = 0, reservoir_error = 0) {
   
   df <- df %>%
@@ -141,6 +164,14 @@ calibrate_dates <- function(df, terrestrial_curve = "shcal20", marine_curve = "m
   }
 }
 
+#' Filter calibrated dates to a defined calendar year range
+#'
+#' Removes dates with no probability mass in the target interval.
+#'
+#' @param calibrated_dates A CalDates object.
+#' @param min_calBP Minimum calendar BP (default = 100).
+#' @param max_calBP Maximum calendar BP (default = 20000).
+#' @return A CalDates object containing only dates overlapping the defined range.
 filter_calibrated_dates_by_range <- function(calibrated_dates, min_calBP = 100, max_calBP = 20000) {
   retained_ids <- names(calibrated_dates$grids)[
     sapply(calibrated_dates$grids, function(x) {
@@ -170,6 +201,14 @@ filter_calibrated_dates_by_range <- function(calibrated_dates, min_calBP = 100, 
   return(filtered_calibrated_dates)
 }
 
+#' Retain sites with a minimum number of calibrated dates
+#'
+#' Adds weighted mean calibrated age to each row and filters out low-count sites.
+#'
+#' @param original_df Original filtered dataset.
+#' @param calibrated_dates A CalDates object.
+#' @param min_dates Minimum number of dates per site (default = 5).
+#' @return A dataframe with only robustly sampled sites.
 filter_sites_min_calibrated_dates <- function(original_df, calibrated_dates, min_dates = 5) {
   # Extract calibrated ADSIDs
   retained_ids <- as.numeric(calibrated_dates$metadata$DateID)
@@ -200,66 +239,32 @@ filter_sites_min_calibrated_dates <- function(original_df, calibrated_dates, min
   return(df_final)
 }
 
-bin_age_distribution <- function(df, age_col, bin_width = 250, min_age = 0, max_age = 12000) {
-  df %>%
-    mutate(
-      bin = floor(.data[[age_col]] / bin_width) * bin_width
-    ) %>%
-    filter(bin >= min_age & bin <= max_age) %>%
-    count(bin) %>%
-    arrange(bin)
-}
+#' Subset a CalDates object using a vector of ADSIDs
+#'
+#' Filters metadata, grids, and calMatrix of a CalDates object to include only the specified ADSIDs.
+#' Returns a new, valid CalDates object.
+#'
+#' @param cal_dates A CalDates object (from rcarbon)
+#' @param adsids A character or numeric vector of ADSIDs to retain
+#' @return A subset CalDates object containing only the specified dates
+subset_caldates_by_adsid <- function(cal_dates, adsids) {
+  adsids <- as.character(adsids)  # Ensure consistent ID format
 
-plot_radiocarbon_vs_calibrated <- function(df, bin_width = 250, min_age = 0, max_age = 12000) {
-  rc_bins <- bin_age_distribution(df, "AGE", bin_width, min_age, max_age)
-  cal_bins <- bin_age_distribution(df, "weighted_mean_calBP", bin_width, min_age, max_age)
+  subset_metadata <- cal_dates$metadata[cal_dates$metadata$DateID %in% adsids, ]
+  subset_grids <- cal_dates$grids[adsids]
 
-  rc_bins$source <- "Radiocarbon age"
-  cal_bins$source <- "Calibrated weighted mean"
+  subset_calmatrix <- if (!is.null(cal_dates$calmatrix) && is.matrix(cal_dates$calmatrix)) {
+    cal_dates$calmatrix[, adsids, drop = FALSE]
+  } else {
+    NULL
+  }
 
-  combined <- bind_rows(rc_bins, cal_bins)
-
-  ggplot(combined, aes(x = bin, y = n, color = source)) +
-    geom_line(linewidth = 1) +
-    scale_x_reverse(limits = c(max_age, min_age)) +
-    labs(
-      title = "Temporal Distribution of Radiocarbon vs Calibrated Ages",
-      x = "Years cal BP",
-      y = "Count per bin",
-      color = "Date type"
-    ) +
-    theme_minimal()
-}
-
-summarise_calibrated_dataset <- function(df) {
-  
-  material_summary <- df %>%
-    count(MATERIAL, sort = TRUE)
-
-  site_type_summary <- df %>%
-    count(SITE_TYPE, sort = TRUE)
-
-  dates_per_site <- df %>%
-    count(SITE) %>%
-    arrange(desc(n))
-
-  temporal_spread <- df %>%
-    group_by(SITE) %>%
-    summarise(
-      min_cal = min(weighted_mean_calBP),
-      max_cal = max(weighted_mean_calBP),
-      span = max_cal - min_cal,
-      n_dates = n(),
-      .groups = "drop"
-    ) %>%
-    arrange(desc(span))
-
-  summary_list <- list(
-    materials = material_summary,
-    site_types = site_type_summary,
-    dates_per_site = dates_per_site,
-    temporal_spread = temporal_spread
+  subset_cal_dates <- list(
+    metadata = subset_metadata,
+    grids = subset_grids,
+    calmatrix = subset_calmatrix
   )
 
-  return(summary_list)
+  class(subset_cal_dates) <- "CalDates"
+  return(subset_cal_dates)
 }
