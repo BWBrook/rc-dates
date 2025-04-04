@@ -1,7 +1,7 @@
 import::from("rcarbon", spd)
 import::from("stats", density)
+import::from("dplyr", mutate, filter, count, arrange, rename, select)
 import::from("tibble", tibble)
-import::from("dplyr", mutate, filter, count, arrange)
 
 #' Generate baseline Summed Probability Distribution (SPD)
 #'

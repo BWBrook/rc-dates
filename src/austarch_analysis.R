@@ -49,6 +49,7 @@ austarch_final_calibrated <- subset_caldates_by_adsid(
   adsids = austarch_final_calibrated_df$ADSID
 )
 
+# This is the result for the equivalent of 0% sampling, i.e., ALL dates are used
 baseline_spd <- generate_spd_baseline(austarch_calibrated_filtered)
 baseline_fd <- generate_fd_baseline(austarch_final_calibrated_df)
 baseline_kde <- generate_kde_baseline(austarch_final_calibrated_df)
@@ -59,6 +60,54 @@ plot_baseline_methods(
   kde_df = baseline_kde,
   smooth_fd = TRUE,
   smooth_window = 5,
-  standardize = TRUE
+  standardise = TRUE
 )
+
+source("./src/austarch_sampling.R") # Functions for subsampling
+
+# 100% sampling (simple case)
+singleton_index_df <- generate_index_dataframe(
+  df = austarch_final_calibrated_df,
+  n_iter = 1000,
+  strategy = "random",
+  n = 1,
+  seed = 1234
+)
+
+
+
+
+
+
+
+
+
+# Generate 50% site subset
+site_subset_df <- generate_site_subset_df(
+  sites = unique(austarch_final_calibrated_df$SITE),
+  proportion = 0.5,
+  n_iter = 1000,
+  seed = 1234
+)
+
+# Generate singleton row indices just for sampled sites
+singleton_index_df <- generate_index_dataframe(
+  df = austarch_final_calibrated_df,
+  n_iter = 1000,
+  strategy = "random",
+  n = 1,
+  seed = 1234,
+  site_subset_df = site_subset_df
+)
+
+# Construct full iteration-1 dataset (50% subsampled, 50% complete)
+sampled_rows <- construct_sampled_dataset(
+  df = austarch_final_calibrated_df,
+  sampled_index_df = singleton_index_df,
+  sampled_sites_df = site_subset_df,
+  iteration = 1
+)
+
+# Get actual data for analysis
+iteration1_data <- austarch_final_calibrated_df[sampled_rows$row_index, ]
 
