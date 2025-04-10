@@ -74,40 +74,34 @@ singleton_index_df <- generate_index_dataframe(
   seed = 1234
 )
 
-
-
-
-
-
-
-
-
-# Generate 50% site subset
-site_subset_df <- generate_site_subset_df(
-  sites = unique(austarch_final_calibrated_df$SITE),
-  proportion = 0.5,
-  n_iter = 1000,
-  seed = 1234
-)
-
-# Generate singleton row indices just for sampled sites
-singleton_index_df <- generate_index_dataframe(
+curve_data_iter1 <- generate_iteration_curves(
   df = austarch_final_calibrated_df,
-  n_iter = 1000,
-  strategy = "random",
-  n = 1,
-  seed = 1234,
-  site_subset_df = site_subset_df
-)
-
-# Construct full iteration-1 dataset (50% subsampled, 50% complete)
-sampled_rows <- construct_sampled_dataset(
-  df = austarch_final_calibrated_df,
-  sampled_index_df = singleton_index_df,
-  sampled_sites_df = site_subset_df,
+  index_df = singleton_index_df,
   iteration = 1
 )
 
-# Get actual data for analysis
-iteration1_data <- austarch_final_calibrated_df[sampled_rows$row_index, ]
+plot_iteration_curves(curve_data_iter1)
+
+
+# Run on 10 iterations of singleton random
+simulated_curves_10 <- run_simulation_curves(
+  df = austarch_final_calibrated_df,
+  index_df = singleton_index_df,
+  n_iter = 10
+)
+
+# Quick plot for sanity:
+simulated_curves_10 %>%
+  ggplot(aes(x = calBP, y = value, color = method, group = interaction(method, iteration))) +
+  geom_line(alpha = 0.3) +
+  scale_x_reverse() +
+  facet_wrap(~method, ncol = 1) +
+  theme_minimal()
+
+summary_df <- summarise_iteration_curves(simulated_curves_10)
+plot_summarised_curves(summary_df)
+plot_density_cloud(simulated_curves_10, alpha = 0.05)
+
+source("./src/austarch_methods.R") # Functions for data analysis
+source("./src/austarch_display.R") # Functions for plots and tables
 

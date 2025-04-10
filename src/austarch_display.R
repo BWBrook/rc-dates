@@ -1,5 +1,5 @@
 import::from("dplyr", mutate, filter, count, arrange, summarise, group_by, ungroup, bind_rows, n)
-import::from("ggplot2", ggplot, aes, geom_line, theme_minimal, labs, scale_x_reverse)
+import::from("ggplot2", ggplot, aes, geom_line, theme_minimal, labs, scale_x_reverse, facet_wrap, geom_ribbon)
 import::from("tibble", tibble)
 import::from("zoo", rollmean)
 
@@ -151,6 +151,89 @@ plot_baseline_methods <- function(spd_obj, fd_df, kde_df, smooth_fd = TRUE, smoo
       title = "Baseline SPD, FD, and KDE (Standardised)",
       x = "Years cal BP",
       y = "Scaled Density",
+      color = "Method"
+    ) +
+    theme_minimal()
+}
+
+#' Plot SPD, FD, and KDE curves from a single simulation iteration
+#'
+#' Produces overlaid or facetted plot of SPD, FD, and KDE results from a single iteration.
+#'
+#' @param df A tibble with columns calBP, value, method (e.g. from generate_iteration_curves()).
+#' @param facet Logical: should methods be split into facets (default = TRUE)?
+#' @return A ggplot object
+plot_iteration_curves <- function(df, facet = TRUE) {
+  p <- ggplot(df, aes(x = calBP, y = value, color = method)) +
+    geom_line(linewidth = 1) +
+    scale_x_reverse() +
+    labs(
+      title = "SPD, FD, and KDE from single iteration",
+      x = "Years cal BP",
+      y = "Scaled Value",
+      color = "Method"
+    ) +
+    theme_minimal()
+
+  if (facet) {
+    p <- p + facet_wrap(~method, ncol = 1, scales = "free_y")
+  }
+
+  return(p)
+}
+
+#' Helper function:
+#' Summarise simulation curves across iterations
+#'
+#' Computes mean and 95% intervals per method and calendar year.
+#'
+#' @param df Output of run_simulation_curves()
+#' @return A summarised tibble with mean, lower, upper, and calBP
+summarise_iteration_curves <- function(df) {
+  df %>%
+    group_by(method, calBP) %>%
+    summarise(
+      mean = mean(value, na.rm = TRUE),
+      lower = quantile(value, 0.025, na.rm = TRUE),
+      upper = quantile(value, 0.975, na.rm = TRUE),
+      .groups = "drop"
+    )
+}
+
+#' Plot summarised SPD, FD, KDE curves across iterations
+#'
+#' @param summary_df Output from summarise_iteration_curves()
+#' @return A ggplot object
+plot_summarised_curves <- function(summary_df) {
+  ggplot(summary_df, aes(x = calBP, y = mean, color = method, fill = method)) +
+    geom_line(linewidth = 1) +
+    geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.2, color = NA) +
+    scale_x_reverse() +
+    labs(
+      title = "Mean and 95% interval of SPD, FD, KDE",
+      x = "Years cal BP",
+      y = "Scaled Value",
+      color = "Method", fill = "Method"
+    ) +
+    theme_minimal()
+}
+
+#' Plot raw SPD, FD, KDE iterations as a density cloud
+#'
+#' Useful for visualising uncertainty structure across simulations
+#'
+#' @param df Long-form iteration tibble (output from run_simulation_curves)
+#' @param alpha Transparency of lines (default = 0.1)
+#' @return A ggplot object
+plot_density_cloud <- function(df, alpha = 0.1) {
+  ggplot(df, aes(x = calBP, y = value, group = interaction(method, iteration), color = method)) +
+    geom_line(alpha = alpha, linewidth = 0.3) +
+    scale_x_reverse() +
+    facet_wrap(~method, ncol = 1, scales = "free_y") +
+    labs(
+      title = "Density cloud of SPD, FD, and KDE across iterations",
+      x = "Years cal BP",
+      y = "Scaled Value",
       color = "Method"
     ) +
     theme_minimal()
