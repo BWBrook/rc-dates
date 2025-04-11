@@ -1,7 +1,14 @@
-import::from("dplyr", mutate, filter, count, arrange, summarise, group_by, ungroup, bind_rows, n)
-import::from("ggplot2", ggplot, aes, geom_line, theme_minimal, labs, scale_x_reverse, facet_wrap, geom_ribbon)
+import::from("dplyr", mutate, filter, count, arrange, summarise, group_by, ungroup, bind_rows, n, select, case_when)
+import::from("ggplot2", ggplot, aes, geom_line, theme_minimal, labs, scale_x_reverse, facet_wrap, geom_ribbon, scale_color_manual, theme, scale_fill_manual)
 import::from("tibble", tibble)
 import::from("zoo", rollmean)
+
+# Set standard colour scheme
+method_colors <- c(
+  SPD = "#1f78b4", # Blue
+  KDE = "#33a02c", # Green
+  FD  = "#e31a1c" # Red
+)
 
 #' Bin age values into discrete time intervals
 #'
@@ -92,63 +99,67 @@ summarise_calibrated_dataset <- function(df) {
   return(summary_list)
 }
 
-#' Plot baseline SPD, FD, and KDE curves with optional smoothing and standardization
+#' Plot baseline SPD, FD, and KDE curves with optional smoothing and standardisation
 #'
-#' Produces a single ggplot comparing normalized SPD, FD, and KDE curves on a common scale.
+#' Produces a single ggplot comparing normalised SPD, FD, and KDE curves on a common scale.
 #'
 #' @param spd_obj An SPD object from rcarbon::spd().
 #' @param fd_df A tibble of frequency bins from generate_fd_baseline().
 #' @param kde_df A tibble of density values from generate_kde_baseline().
 #' @param smooth_fd Logical: apply moving average smoothing to FD? (default = TRUE)
 #' @param smooth_window Integer: width of moving average (default = 3)
-#' @param standardise Logical: scale all curves to max = 1? (default = TRUE)
+#' @param standardise Logical: should output be scaled? (default = TRUE)
+#' @param standardise_mode "max" or "area" (default = "area")
 #' @return A ggplot object.
-plot_baseline_methods <- function(spd_obj, fd_df, kde_df, smooth_fd = TRUE, smooth_window = 3, standardise = TRUE) {
+plot_baseline_methods <- function(spd_obj, fd_df, kde_df, smooth_fd = TRUE, smooth_window = 3, standardise = TRUE, standardise_mode = "area") {
   # SPD
   spd_df <- spd_obj$grid %>%
-    dplyr::select(calBP, PrDens) %>%
-    dplyr::mutate(source = "SPD")
+    select(calBP, PrDens) %>%
+    mutate(source = "SPD")
 
   # KDE
   kde_df <- kde_df %>%
-    dplyr::mutate(source = "KDE", PrDens = density) %>%
-    dplyr::select(calBP, PrDens, source)
+    mutate(source = "KDE", PrDens = density) %>%
+    select(calBP, PrDens, source)
 
   # FD: convert to true density
   bin_width <- fd_df$bin[2] - fd_df$bin[1]  # assumes regular bins
   fd_df <- fd_df %>%
-    dplyr::mutate(
-      PrDens = n / sum(n) / bin_width,
-      source = "FD",
-      calBP = bin
-    ) %>%
-    dplyr::select(calBP, PrDens, source)
+    mutate(source = "FD", calBP = bin, PrDens = value) %>%
+    select(calBP, PrDens, source)
 
   # Optional smoothing of FD
   if (smooth_fd) {
     fd_df <- fd_df %>%
-      dplyr::arrange(calBP) %>%
-      dplyr::mutate(PrDens = zoo::rollmean(PrDens, k = smooth_window, fill = NA, align = "center"))
+      arrange(calBP) %>%
+      mutate(PrDens = rollmean(PrDens, k = smooth_window, fill = NA, align = "center"))
   }
 
   # Combine
-  combined <- dplyr::bind_rows(spd_df, fd_df, kde_df)
-  combined <- combined %>% filter(!is.na(PrDens))
+  combined <- bind_rows(spd_df, fd_df, kde_df) %>%
+    filter(!is.na(PrDens))
 
-  # Standardize (scale each method to max = 1)
+  # Standardise
   if (standardise) {
     combined <- combined %>%
-      dplyr::group_by(source) %>%
-      dplyr::mutate(PrDens = PrDens / max(PrDens, na.rm = TRUE)) %>%
-      dplyr::ungroup()
+      group_by(source) %>%
+      mutate(
+        PrDens = case_when(
+          standardise_mode == "max"  ~ PrDens / max(PrDens, na.rm = TRUE),
+          standardise_mode == "area" & source == "SPD" ~ PrDens / sum(PrDens, na.rm = TRUE),
+          TRUE ~ PrDens
+        )
+      ) %>%
+      ungroup()
   }
 
   # Plot
   ggplot(combined, aes(x = calBP, y = PrDens, color = source)) +
     geom_line(linewidth = 1) +
+    scale_color_manual(values = method_colors) +
     scale_x_reverse() +
     labs(
-      title = "Baseline SPD, FD, and KDE (Standardised)",
+      title = "Baseline SPD, FD, and KDE",
       x = "Years cal BP",
       y = "Scaled Density",
       color = "Method"
@@ -182,15 +193,15 @@ plot_iteration_curves <- function(df, facet = TRUE) {
   return(p)
 }
 
-#' Helper function:
 #' Summarise simulation curves across iterations
 #'
 #' Computes mean and 95% intervals per method and calendar year.
+#' Automatically rescales FD to ensure total area is 1.
 #'
 #' @param df Output of run_simulation_curves()
 #' @return A summarised tibble with mean, lower, upper, and calBP
 summarise_iteration_curves <- function(df) {
-  df %>%
+  summary_df <- df %>%
     group_by(method, calBP) %>%
     summarise(
       mean = mean(value, na.rm = TRUE),
@@ -198,6 +209,39 @@ summarise_iteration_curves <- function(df) {
       upper = quantile(value, 0.975, na.rm = TRUE),
       .groups = "drop"
     )
+
+  # Rescale FD only to ensure area = 1
+  summary_df <- summary_df %>%
+    group_by(method) %>%
+    mutate(
+      mean = if_else(method == "FD", mean / sum(mean[method == "FD"], na.rm = TRUE), mean),
+      lower = if_else(method == "FD", lower / sum(lower[method == "FD"], na.rm = TRUE), lower),
+      upper = if_else(method == "FD", upper / sum(upper[method == "FD"], na.rm = TRUE), upper)
+    ) %>%
+    ungroup()
+
+  return(summary_df)
+}
+
+#' Re-bin SPD and KDE to match FD bin resolution for visual comparability
+#'
+#' @param summary_df A tibble from summarise_iteration_curves()
+#' @param bin_width Desired bin width (default = 100)
+#' @return A rebinned version of the summary tibble
+rebin_summary_df <- function(summary_df, bin_width = 100) {
+  summary_df %>%
+    mutate(
+      bin = floor(calBP / bin_width) * bin_width
+    ) %>%
+    group_by(method, bin) %>%
+    summarise(
+      mean = sum(mean, na.rm = TRUE),
+      lower = sum(lower, na.rm = TRUE),
+      upper = sum(upper, na.rm = TRUE),
+      .groups = "drop"
+    ) %>%
+    rename(calBP = bin) %>%
+    arrange(method, calBP)
 }
 
 #' Plot summarised SPD, FD, KDE curves across iterations
@@ -208,6 +252,8 @@ plot_summarised_curves <- function(summary_df) {
   ggplot(summary_df, aes(x = calBP, y = mean, color = method, fill = method)) +
     geom_line(linewidth = 1) +
     geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.2, color = NA) +
+    scale_color_manual(values = method_colors) +
+    scale_fill_manual(values = method_colors) +
     scale_x_reverse() +
     labs(
       title = "Mean and 95% interval of SPD, FD, KDE",
@@ -226,8 +272,9 @@ plot_summarised_curves <- function(summary_df) {
 #' @param alpha Transparency of lines (default = 0.1)
 #' @return A ggplot object
 plot_density_cloud <- function(df, alpha = 0.1) {
-  ggplot(df, aes(x = calBP, y = value, group = interaction(method, iteration), color = method)) +
-    geom_line(alpha = alpha, linewidth = 0.3) +
+  ggplot(df, aes(x = calBP, y = value, group = interaction(method, iteration))) +
+    geom_line(aes(color = method), alpha = alpha, linewidth = 0.3, show.legend = FALSE) +
+    scale_color_manual(values = method_colors) +
     scale_x_reverse() +
     facet_wrap(~method, ncol = 1, scales = "free_y") +
     labs(

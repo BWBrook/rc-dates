@@ -50,3 +50,6 @@ rsconnect/
 
 # Data directory
 /data/
+
+# Figures directory
+/figs/

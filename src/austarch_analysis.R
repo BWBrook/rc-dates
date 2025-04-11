@@ -59,49 +59,105 @@ plot_baseline_methods(
   fd_df = baseline_fd,
   kde_df = baseline_kde,
   smooth_fd = TRUE,
-  smooth_window = 5,
+  smooth_window = 3,
   standardise = TRUE
 )
 
+# Save plot
+png("figs/baseline_curves.png", width = 900, height = 600)
+print(plot_baseline_methods(
+  spd_obj = baseline_spd,
+  fd_df = baseline_fd,
+  kde_df = baseline_kde,
+  smooth_fd = TRUE,
+  smooth_window = 3,
+  standardise = TRUE
+))
+dev.off()
+
+#####
+
 source("./src/austarch_sampling.R") # Functions for subsampling
 
-# 100% sampling (simple case)
-singleton_index_df <- generate_index_dataframe(
+prefix <- "multiton_100"
+
+index_df <- generate_index_dataframe(
   df = austarch_final_calibrated_df,
-  n_iter = 1000,
+  n_iter = 100,
   strategy = "random",
-  n = 1,
+  n = 5,
   seed = 1234
 )
 
-curve_data_iter1 <- generate_iteration_curves(
+simulated_curves <- run_simulation_curves_preallocated_light(
   df = austarch_final_calibrated_df,
-  index_df = singleton_index_df,
-  iteration = 1
+  index_df = index_df,
+  n_iter = 100,
+  standardise_mode = "area"
 )
 
-plot_iteration_curves(curve_data_iter1)
+# prefix <- "singleton_50"
+# 
+# site_subset_df_50 <- generate_site_subset_df(
+#   sites = unique(austarch_final_calibrated_df$SITE),
+#   proportion = 0.5,
+#   n_iter = 1000,
+#   seed = 1234
+# )
+# 
+# index_df_50 <- generate_index_dataframe(
+#   df = austarch_final_calibrated_df,
+#   n_iter = 1000,
+#   strategy = "random",
+#   n = 1,
+#   seed = 1234,
+#   site_subset_df = site_subset_df_50
+# )
+# 
+# simulated_curves_50 <- run_simulation_curves_partial_preallocated(
+#   df = austarch_final_calibrated_df,
+#   sampled_index_df = index_df_50,
+#   sampled_sites_df = site_subset_df_50,
+#   n_iter = 1000,
+#   standardise_mode = "area"
+# )
+# 
+# summary_df_50 <- summarise_iteration_curves(simulated_curves_50)
+# plot_summarised_curves(summary_df_50)
 
+# Save raw output (450 MB so don't typically save these)
+# write.csv(simulated_curves, paste0("data/simulation_curves_", prefix, ".csv"), row.names = FALSE)
 
-# Run on 10 iterations of singleton random
-simulated_curves_10 <- run_simulation_curves(
-  df = austarch_final_calibrated_df,
-  index_df = singleton_index_df,
-  n_iter = 10
-)
+# Summarise and save
+summary_df <- summarise_iteration_curves(simulated_curves)
+write.csv(summary_df, paste0("data/simulation_summary_", prefix, ".csv"), row.names = FALSE)
 
-# Quick plot for sanity:
-simulated_curves_10 %>%
-  ggplot(aes(x = calBP, y = value, color = method, group = interaction(method, iteration))) +
-  geom_line(alpha = 0.3) +
-  scale_x_reverse() +
-  facet_wrap(~method, ncol = 1) +
-  theme_minimal()
+# Create plot dataframe and do visual check
+summary_df_rebinned <- rebin_summary_df(summary_df)
+plot_summarised_curves(summary_df_rebinned)
 
-summary_df <- summarise_iteration_curves(simulated_curves_10)
-plot_summarised_curves(summary_df)
-plot_density_cloud(simulated_curves_10, alpha = 0.05)
+# Save plot
+png(paste0("figs/curves_", prefix, ".png"), width = 900, height = 600)
+print(plot_summarised_curves(summary_df_rebinned))
+dev.off()
 
-source("./src/austarch_methods.R") # Functions for data analysis
+# Optional: save cloud
+png(paste0("figs/cloud_", prefix, ".png"), width = 900, height = 600)
+print(plot_density_cloud(simulated_curves, alpha = 0.05))
+dev.off()
+
+# Temporarily save the calls here for quick reloading after changing the internal functions
 source("./src/austarch_display.R") # Functions for plots and tables
+source("./src/austarch_sampling.R") # Functions for subsampling
+source("./src/austarch_methods.R") # Functions for data analysis
 
+summary_df %>%
+  group_by(method) %>%
+  summarise(total_area = sum(mean))
+
+
+simulated_curves <- run_simulation_curves(
+  df = austarch_final_calibrated_df,
+  index_df = index_df,
+  n_iter = 1000
+)
