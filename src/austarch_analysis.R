@@ -2,9 +2,9 @@
 setwd("C:/git/rc-dates")
 
 source("./src/austarch_filtering.R") # Functions to filter the AustArch database
-source("./src/austarch_display.R") # Functions for plots and tables
 source("./src/austarch_sampling.R") # Functions for subsampling
 source("./src/austarch_methods.R") # Functions for data analysis
+source("./src/austarch_display.R") # Functions for plots and tables
 
 # Load the raw AustArch data, exclude irrelevant columns and standardise names
 austarch_df <- load_austarch_data("./data/Austarch_1-3_and_IDASQ_28Nov13-1.csv")
@@ -59,98 +59,37 @@ plot_baseline_methods(
 )
 
 # Save plot
-png("figs/baseline_curves.png", width = 900, height = 600)
-print(plot_baseline_methods(
-  spd_obj = baseline_spd,
-  fd_df = baseline_fd,
-  kde_df = baseline_kde,
-  smooth_fd = TRUE,
-  smooth_window = 3,
-  standardise = TRUE
-))
-dev.off()
+# png("figs/baseline_curves.png", width = 900, height = 600)
+# print(plot_baseline_methods(
+#   spd_obj = baseline_spd,
+#   fd_df = baseline_fd,
+#   kde_df = baseline_kde,
+#   smooth_fd = TRUE,
+#   smooth_window = 3,
+#   standardise = TRUE
+# ))
+# dev.off()
 
 #####
-source("./src/austarch_filtering.R") # Functions to filter the AustArch database
-source("./src/austarch_display.R") # Functions for plots and tables
-source("./src/austarch_sampling.R") # Functions for subsampling
-source("./src/austarch_methods.R") # Functions for data analysis
-
-# Need to run 1000 iterations for all the strategies for 50%
+# Need to run 1000 iterations for all the strategies for 50% and random for 100%
 out <- run_sampling_workflow(
   df         = austarch_df,
-  strategy   = "bracketed",    # random, oldest, youngest, bracketed
-  n_iter     = 10,          # 10 for testing, 1000 for full sampling
-  n_samples  = 1,           # set at 1 unless multiton-random
-  proportion = NULL,         # NULL for 100% of sites sampled, 0.5 for 50%
+  strategy   = "random",    # random, oldest, youngest, bracketed
+  n_iter     = 1000,        # 10 for testing, 1000 for full sampling
+  n_samples  = 5,           # set at 1 unless multiton-random
+  proportion = 0.5,         # NULL for 100% of sites sampled, 0.5 for 50%
   seed       = 1234
 )
 plot_summarised_curves(out$rebinned)
-
-# Save raw output (450 MB so don't typically save these)
-# write.csv(out$raw, "data/simulation_raw_50.csv", row.names = FALSE)
-write.csv(out$summary, "data/simulation_summary_50.csv", row.names = FALSE)
+write.csv(out$summary, "data/simulation_summary_oldest_50.csv", row.names = FALSE)
+# write.csv(out$raw, "data/simulation_raw_50.csv", row.names = FALSE) # ~450 MB
 
 # Save plot
-png(paste0("figs/curves_", prefix, ".png"), width = 900, height = 600)
+png("figs/curves_oldest_50.png", width = 900, height = 600)
 print(plot_summarised_curves(out$rebinned))
 dev.off()
 
 # Optional: save cloud
-# png(paste0("figs/cloud_", prefix, ".png"), width = 900, height = 600)
+# png("figs/cloud_random_50.png", width = 900, height = 600)
 # print(plot_density_cloud(out$raw, alpha = 0.05))
 # dev.off()
-
-
-library(dplyr)
-
-index = 1; n_site = 4
-# 1. Pick four sites (here simply the first four in your full dataset)
-sites <- unique(austarch_df$SITE)[index:(index+n_site-1)]
-
-# 2. Subset the full data to those four sites
-df <- austarch_df %>% 
-  filter(SITE %in% sites)
-
-# 3. Build a one‐iteration site_subset_df that biases exactly two sites
-site_subset_df <- tibble(
-  iteration = 1,
-  SITE      = sites[index:(index+(n_site/2)-1)]
-)
-
-# 4. Call the low‐level simulation directly so you can inspect indices
-raw <- run_site_simulation(
-  df             = df,
-  site_subset_df = site_subset_df,
-  strategy       = "oldest",  # try “random” here
-  n_iter         = 1,
-  n_samples      = 1,
-  seed           = 1234
-)
-
-
-#write.csv(df,"df.csv", row.names=F)
-
-# 5. Examine which row_indices were actually sampled vs carried through
-#    (everything outside your two biased sites should show up as “other”)
-#    We’ll regenerate the index_df by hand for clarity:
-idx <- generate_index_dataframe(
-  df             = df,
-  strategy       = "random",
-  n_samples      = 1,
-  site_subset_df = site_subset_df,
-  iteration      = 1
-)
-
-# 6. Inspect
-print(site_subset_df)
-print(idx)
-# Check counts per site:
-idx %>% count(SITE)   # should have 1 row for each of the two biased sites
-df %>% 
-  filter(!SITE %in% site_subset_df$SITE) %>% 
-  count(SITE)           # should return full counts for the other two sites
-
-
-
-
