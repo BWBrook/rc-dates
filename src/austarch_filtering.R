@@ -2,7 +2,6 @@ import::from("readr", read_csv, cols_only, col_integer, col_double, col_characte
 import::from("dplyr", rename, mutate, select, filter, across, count, inner_join)
 import::from("stringr", str_replace_all)
 import::from("magrittr", "%>%")
-import::from("rcarbon", calibrate, combine)
 
 #' Load and clean AustArch radiocarbon dataset from CSV
 #'
@@ -110,58 +109,6 @@ filter_austarch_material_site <- function(df) {
     )
 
   return(df_filtered)
-}
-
-#' Calibrate terrestrial and marine radiocarbon dates
-#'
-#' Uses appropriate calibration curves (SHCal20 or Marine20) and assigns unique IDs based on ADSID.
-#'
-#' @param df Dataframe of filtered AustArch records.
-#' @param terrestrial_curve Calibration curve for terrestrial samples.
-#' @param marine_curve Calibration curve for marine samples.
-#' @param reservoir_age Marine reservoir offset (default = 0).
-#' @param reservoir_error Error on reservoir offset (default = 0).
-#' @return A CalDates object with all calibrated records.
-calibrate_dates <- function(df, terrestrial_curve = "shcal20", marine_curve = "marine20", reservoir_age = 0, reservoir_error = 0) {
-  
-  df <- df %>%
-    mutate(UNIQUE_ID = as.character(ADSID)) %>%
-    filter(!is.na(UNIQUE_ID))  # ensure all are present
-
-  terrestrial_samples <- df %>% filter(TIME_SERIES_RELEVANT == "Terrestrial")
-  marine_samples <- df %>% filter(TIME_SERIES_RELEVANT == "Marine")
-
-  message("Calibrating ", nrow(terrestrial_samples), " terrestrial and ", nrow(marine_samples), " marine dates...")
-
-  calibrated_list <- list()
-
-  if (nrow(terrestrial_samples) > 0) {
-    cal_terrestrial <- calibrate(
-      x = terrestrial_samples$AGE,
-      errors = terrestrial_samples$ERROR,
-      calCurves = terrestrial_curve,
-      ids = terrestrial_samples$UNIQUE_ID
-    )
-    calibrated_list <- append(calibrated_list, list(cal_terrestrial))
-  }
-
-  if (nrow(marine_samples) > 0) {
-    cal_marine <- calibrate(
-      x = marine_samples$AGE,
-      errors = marine_samples$ERROR,
-      calCurves = marine_curve,
-      resOffsets = reservoir_age,
-      resErrors = reservoir_error,
-      ids = marine_samples$UNIQUE_ID
-    )
-    calibrated_list <- append(calibrated_list, list(cal_marine))
-  }
-
-  if (length(calibrated_list) == 1) {
-    return(calibrated_list[[1]])
-  } else {
-    return(do.call(rcarbon::combine, calibrated_list))
-  }
 }
 
 #' Filter calibrated dates to a defined calendar year range

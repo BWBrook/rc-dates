@@ -1,7 +1,59 @@
-import::from("rcarbon", spd)
+import::from("rcarbon", calibrate, combine, spd)
 import::from("stats", density)
-import::from("dplyr", mutate, filter, count, arrange, rename, select, if_else)
+import::from("dplyr", mutate, filter, count, arrange, rename, select, if_else, pull)
 import::from("tibble", tibble)
+import::from("tidyr", crossing)
+
+#' Calibrate terrestrial and marine radiocarbon dates
+#'
+#' Uses appropriate calibration curves (SHCal20 or Marine20) and assigns unique IDs based on ADSID.
+#'
+#' @param df Dataframe of filtered AustArch records.
+#' @param terrestrial_curve Calibration curve for terrestrial samples.
+#' @param marine_curve Calibration curve for marine samples.
+#' @param reservoir_age Marine reservoir offset (default = 0).
+#' @param reservoir_error Error on reservoir offset (default = 0).
+#' @return A CalDates object with all calibrated records.
+calibrate_dates <- function(df, terrestrial_curve = "shcal20", marine_curve = "marine20", reservoir_age = 0, reservoir_error = 0) {
+  df <- df %>%
+    mutate(UNIQUE_ID = as.character(ADSID)) %>%
+    filter(!is.na(UNIQUE_ID))  # ensure all are present
+
+  terrestrial_samples <- df %>% filter(TIME_SERIES_RELEVANT == "Terrestrial")
+  marine_samples <- df %>% filter(TIME_SERIES_RELEVANT == "Marine")
+
+  message("Calibrating ", nrow(terrestrial_samples), " terrestrial and ", nrow(marine_samples), " marine dates...")
+
+  calibrated_list <- list()
+
+  if (nrow(terrestrial_samples) > 0) {
+    cal_terrestrial <- calibrate(
+      x = terrestrial_samples$AGE,
+      errors = terrestrial_samples$ERROR,
+      calCurves = terrestrial_curve,
+      ids = terrestrial_samples$UNIQUE_ID
+    )
+    calibrated_list <- append(calibrated_list, list(cal_terrestrial))
+  }
+
+  if (nrow(marine_samples) > 0) {
+    cal_marine <- calibrate(
+      x = marine_samples$AGE,
+      errors = marine_samples$ERROR,
+      calCurves = marine_curve,
+      resOffsets = reservoir_age,
+      resErrors = reservoir_error,
+      ids = marine_samples$UNIQUE_ID
+    )
+    calibrated_list <- append(calibrated_list, list(cal_marine))
+  }
+
+  if (length(calibrated_list) == 1) {
+    return(calibrated_list[[1]])
+  } else {
+    return(do.call(rcarbon::combine, calibrated_list))
+  }
+}
 
 #' Generate baseline Summed Probability Distribution (SPD)
 #'
@@ -65,7 +117,8 @@ generate_kde_baseline <- function(df, from = 651, to = 11650, bw = 100, n = 1000
 #' @param max_calBP Maximum calendar age (default = 11650)
 #' @param standardise_mode Rescale to unit area or max (default = area)
 #' @return A list with elements: spd, fd, kde
-generate_iteration_curves <- function(df, index_df, iteration, min_calBP = 651, max_calBP = 11650, standardise_mode = "area") {
+generate_iteration_curves <- function(df, index_df, iteration, 
+                                      min_calBP = 651, max_calBP = 11650, standardise_mode = "area") {
   # Pull row indices for this iteration
   selected_rows <- index_df %>%
     filter(iteration == !!iteration) %>%
@@ -120,225 +173,172 @@ standardise_curve_output <- function(obj, method, standardise = TRUE, mode = "ar
   df %>% mutate(method = method)
 }
 
-#' Run SPD, FD, and KDE generation over multiple iterations of a subsampling strategy
+#' Run a complete sub-sampling experiment (100% or partial sites)
 #'
-#' @param df The full calibrated dataframe (e.g., austarch_final_calibrated_df)
-#' @param index_df The sampled index dataframe from generate_index_dataframe()
-#' @param n_iter Number of iterations to run
-#' @param min_calBP Minimum calendar BP for analysis window (default = 651)
-#' @param max_calBP Maximum calendar BP (default = 11650)
-#' @param standardise_mode Rescale to unit area or max (default = area)
-#' @return A long-form dataframe with calBP, value, method, and iteration
-run_simulation_curves <- function(df, index_df, n_iter = 10, min_calBP = 651, max_calBP = 11650, standardise_mode = "area") {
-  results <- vector("list", n_iter)
-
-  for (i in seq_len(n_iter)) {
-    results[[i]] <- generate_iteration_curves(
-      df = df,
-      index_df = index_df,
-      iteration = i,
-      min_calBP = min_calBP,
-      max_calBP = max_calBP,
-      standardise_mode = standardise_mode
-    )
+#' @param df                Curated calibrated data frame with row_index
+#' @param strategy          "random", "oldest", "youngest", or "bracketed"
+#' @param n_iter            Monte‑Carlo iterations (default = 1000)
+#' @param n_samples         Dates per site for random sampling (ignored otherwise)
+#' @param proportion        Proportion of sites to bias (NULL ⇒ 100% sites)
+#' @param seed              Random seed for site and date sampling
+#' @param standardise_mode  "area" or "max" scaling (default = "area")
+#' @param rebin             If TRUE also return rebinned summary
+#' @return A list(index_df, raw, summary, rebinned)
+run_sampling_workflow <- function(
+  df,
+  strategy          = "random",
+  n_iter            = 1000,
+  n_samples         = 1,
+  proportion        = NULL,
+  seed              = 1234,
+  standardise_mode  = "area",
+  rebin             = TRUE
+) {
+  # If we're sampling 100% of the sites with a fully deterministic strategy, only do one iteration
+  if (is.null(proportion) &&
+      strategy %in% c("oldest","youngest","bracketed")) {
+    message("Deterministic full-sample; forcing n_iter → 1")
+    n_iter <- 1
   }
 
-  bind_rows(results)
+  # 1) generate site subsets if needed
+  if (!is.null(proportion)) {
+    site_subset_df <- generate_site_subset_df(
+                       sites      = unique(df$SITE),
+                       proportion = proportion,
+                       n_iter     = n_iter,
+                       seed       = seed
+                     )
+  } else {
+    site_subset_df <- tibble(
+                       iteration = rep(seq_len(n_iter), each = length(unique(df$SITE))),
+                       SITE      = rep(unique(df$SITE), times = n_iter)
+                     )
+  }
+  # 2) run site simulations
+  raw_out <- run_site_simulation(
+               df               = df,
+               site_subset_df   = site_subset_df,
+               strategy         = strategy,
+               n_iter           = n_iter,
+               n_samples        = n_samples,
+               standardise_mode = standardise_mode,
+               seed             = seed
+             )
+  # 3) summarise
+  summary_df <- summarise_iteration_curves(raw_out)
+  if (rebin) {
+    summary_rebinned <- rebin_summary_df(summary_df)
+    return(list(
+      raw      = raw_out,
+      summary  = summary_df,
+      rebinned = summary_rebinned
+    ))
+  }
+  return(list(raw = raw_out, summary = summary_df))
 }
 
-#' Run simulation curves in a preallocated dataframe to avoid list growth
+#' Run Monte-Carlo simulations for partial-site sampling (memory‑efficient)
 #'
-#' Runs one test iteration to get row count, then preallocates a big dataframe
-#' to store results from all iterations. Preserves exact values per iteration
-#' for later quantile-based summarisation. Very efficient memory-wise.
+#' For each iteration, retains all dates from the untouched sites and only
+#' the sampled dates from the biased sites, then computes SPD, FD, and KDE.
+#' Internally rebuilds the index each iteration, so it handles random, oldest,
+#' youngest, or bracketed strategies seamlessly.
 #'
-#' @param df Full data (e.g., austarch_final_calibrated_df)
-#' @param index_df Row index dataframe from generate_index_dataframe()
-#' @param n_iter Number of iterations (default = 1000)
-#' @param min_calBP Minimum calendar BP (default = 651)
-#' @param max_calBP Maximum calendar BP (default = 11650)
-#' @param standardise_mode "area" or "max" (default = "area")
-#' @return A dataframe of all simulation results (one row per calBP × method × iteration)
-run_simulation_curves_preallocated_light <- function(
+#' @param df               Calibrated reference data frame (must have row_index column).
+#' @param site_subset_df   A tibble with columns (iteration, SITE) indicating which sites are biased per iteration.
+#' @param strategy         One of: "random", "oldest", "youngest", or "bracketed".
+#' @param n_iter           Number of Monte‑Carlo iterations.
+#' @param n_samples        Number of dates per site for random sampling (ignored for other strategies).
+#' @param min_calBP        Lower bound of calibrated years (default = 651).
+#' @param max_calBP        Upper bound of calibrated years (default = 11650).
+#' @param standardise_mode "area" or "max" scaling (default = "area").
+#' @param seed             Optional seed for reproducibility of random site sampling only.
+#' @return A data.frame with columns: calBP, value, method, iteration.
+run_site_simulation <- function(
   df,
-  index_df,
-  n_iter = 1000,
-  min_calBP = 651,
-  max_calBP = 11650,
-  standardise_mode = "area"
+  site_subset_df,
+  strategy        = "random",
+  n_iter          = 1000,
+  n_samples       = 1,
+  min_calBP       = 651,
+  max_calBP       = 11650,
+  standardise_mode= "area",
+  seed            = NULL
 ) {
-  message("Running test iteration to estimate row count...")
-
-  # First iteration to estimate max size
-  first_iter <- generate_iteration_curves(
-    df = df,
-    index_df = index_df,
-    iteration = 1,
-    min_calBP = min_calBP,
-    max_calBP = max_calBP,
-    standardise_mode = standardise_mode
-  )
-
-  rows_first <- nrow(first_iter)
-  buffer_rows <- ceiling(rows_first * n_iter * 1.05)
-
-  message("Preallocating ", buffer_rows, " rows...")
-
+  if (!"row_index" %in% names(df)) df <- mutate(df, row_index = row_number())
+  all_sites <- unique(df$SITE)
+  # first iteration to size buffer
+  i0     <- 1
+  sites0 <- site_subset_df %>% filter(iteration == i0) %>% pull(SITE)
+  # build index0
+  idx0   <- generate_index_dataframe(
+              df             = df,
+              n_iter         = 1,
+              strategy       = strategy,
+              n_samples      = n_samples,
+              seed           = seed,
+              site_subset_df = site_subset_df %>% filter(iteration == i0)
+            ) %>% filter(iteration == i0)
+  other0_rows <- df %>% filter(!SITE %in% sites0) %>% select(row_index) %>% mutate(iteration = i0)
+  index0 <- bind_rows(
+              idx0 %>% select(row_index, iteration),
+              other0_rows
+            )
+  out0 <- generate_iteration_curves(
+            df               = df,
+            index_df         = index0,
+            iteration        = i0,
+            min_calBP        = min_calBP,
+            max_calBP        = max_calBP,
+            standardise_mode = standardise_mode
+          )
+  
+  # preallocate
+  rows0    <- nrow(out0)
+  buf_size <- ceiling(rows0 * n_iter * 1.05)
+  if (n_iter > 1) message("Preallocating ", buf_size, " rows for ", n_iter, " iterations…")
   store <- data.frame(
-    calBP = numeric(buffer_rows),
-    value = numeric(buffer_rows),
-    method = character(buffer_rows),
-    iteration = integer(buffer_rows),
+    calBP     = numeric(buf_size),
+    value     = numeric(buf_size),
+    method    = character(buf_size),
+    iteration = integer(buf_size),
     stringsAsFactors = FALSE
   )
-
-  store[1:rows_first, ] <- data.frame(
-    calBP = first_iter$calBP,
-    value = first_iter$value,
-    method = first_iter$method,
-    iteration = 1,
-    stringsAsFactors = FALSE
-  )
-
-  row_pointer <- rows_first + 1
-
-  for (i in 2:n_iter) {
-    iteration_df <- generate_iteration_curves(
-      df = df,
-      index_df = index_df,
-      iteration = i,
-      min_calBP = min_calBP,
-      max_calBP = max_calBP,
-      standardise_mode = standardise_mode
-    )
-
-    rows_this <- nrow(iteration_df)
-
-    if ((row_pointer + rows_this - 1) > buffer_rows) {
-      stop("Buffer too small — try increasing the preallocation margin.")
-    }
-
-    store[row_pointer:(row_pointer + rows_this - 1), ] <- data.frame(
-      calBP = iteration_df$calBP,
-      value = iteration_df$value,
-      method = iteration_df$method,
-      iteration = i,
-      stringsAsFactors = FALSE
-    )
-
-    row_pointer <- row_pointer + rows_this
-    message("Completed iteration ", i)
+  store[1:rows0, ] <- out0
+  ptr <- rows0 + 1
+  # main loop
+  for (i in seq_len(n_iter)[-1]) {
+    sites_i <- site_subset_df %>% filter(iteration == i) %>% pull(SITE)
+    idx_i <- generate_index_dataframe(
+               df               = df,
+               n_iter           = 1,
+               strategy         = strategy,
+               n_samples        = n_samples,
+               seed             = NULL,
+               site_subset_df   = site_subset_df %>% filter(iteration == i),
+               iteration        = i
+             ) %>%
+             select(row_index, iteration)
+    other_i_rows <- df %>% filter(!SITE %in% sites_i) %>% select(row_index) %>% mutate(iteration = i)
+    index_i <- bind_rows(
+                idx_i %>% select(row_index, iteration),
+                other_i_rows
+              )
+    out_i <- generate_iteration_curves(
+              df               = df,
+              index_df         = index_i,
+              iteration        = i,
+              min_calBP        = min_calBP,
+              max_calBP        = max_calBP,
+              standardise_mode = standardise_mode
+            )
+    n_i <- nrow(out_i)
+    if ((ptr + n_i - 1) > buf_size) stop("Buffer overflow at iteration ", i)
+    store[ptr:(ptr + n_i - 1), ] <- out_i
+    ptr <- ptr + n_i
+    if (i %% 10 == 0) message("Completed iteration ", i)
   }
-
-  # Trim unused NA rows
-  store <- store[complete.cases(store), ]
-
-  return(store)
-}
-
-#' Run partial site sampling simulation using a preallocated data frame
-#'
-#' Merges sampled + full rows per iteration and stores results in a memory-efficient structure.
-#' Suitable for 50% or 75% site-level bias tests. Returns the full raw output across all iterations.
-#'
-#' @param df Full calibrated dataset (e.g., austarch_final_calibrated_df)
-#' @param sampled_index_df Row index dataframe from generate_index_dataframe()
-#' @param sampled_sites_df Subset dataframe from generate_site_subset_df()
-#' @param n_iter Number of iterations (default = 1000)
-#' @param min_calBP Minimum year BP (default = 651)
-#' @param max_calBP Maximum year BP (default = 11650)
-#' @param standardise_mode "area" or "max" (default = "area")
-#' @return A long-form dataframe with calBP, value, method, and iteration
-run_simulation_curves_partial_preallocated <- function(
-  df,
-  sampled_index_df,
-  sampled_sites_df,
-  n_iter = 1000,
-  min_calBP = 651,
-  max_calBP = 11650,
-  standardise_mode = "area"
-) {
-  message("Running iteration 1 to estimate row count...")
-
-  # Construct merged dataset for iteration 1
-  sampled_rows_iter1 <- construct_sampled_dataset(
-    df = df,
-    sampled_index_df = sampled_index_df,
-    sampled_sites_df = sampled_sites_df,
-    iteration = 1
-  )
-
-  df_iter1 <- df[sampled_rows_iter1$row_index, ]
-
-  iteration_1_output <- generate_iteration_curves(
-    df = df_iter1,
-    index_df = NULL,  # already sampled
-    iteration = 1,
-    min_calBP = min_calBP,
-    max_calBP = max_calBP,
-    standardise_mode = standardise_mode
-  )
-
-  row_count_iter <- nrow(iteration_1_output)
-  total_rows <- ceiling(row_count_iter * n_iter * 1.05)
-
-  message("Preallocating ", total_rows, " rows...")
-
-  store <- data.frame(
-    calBP = numeric(total_rows),
-    value = numeric(total_rows),
-    method = character(total_rows),
-    iteration = integer(total_rows),
-    stringsAsFactors = FALSE
-  )
-
-  store[1:row_count_iter, ] <- data.frame(
-    calBP = iteration_1_output$calBP,
-    value = iteration_1_output$value,
-    method = iteration_1_output$method,
-    iteration = 1,
-    stringsAsFactors = FALSE
-  )
-
-  row_pointer <- row_count_iter + 1
-
-  for (i in 2:n_iter) {
-    sampled_rows <- construct_sampled_dataset(
-      df = df,
-      sampled_index_df = sampled_index_df,
-      sampled_sites_df = sampled_sites_df,
-      iteration = i
-    )
-
-    df_iter <- df[sampled_rows$row_index, ]
-
-    iteration_df <- generate_iteration_curves(
-      df = df_iter,
-      index_df = NULL,
-      iteration = i,
-      min_calBP = min_calBP,
-      max_calBP = max_calBP,
-      standardise_mode = standardise_mode
-    )
-
-    n_rows <- nrow(iteration_df)
-    if ((row_pointer + n_rows - 1) > total_rows) {
-      stop("Buffer too small. Increase preallocation multiplier.")
-    }
-
-    store[row_pointer:(row_pointer + n_rows - 1), ] <- data.frame(
-      calBP = iteration_df$calBP,
-      value = iteration_df$value,
-      method = iteration_df$method,
-      iteration = i,
-      stringsAsFactors = FALSE
-    )
-
-    row_pointer <- row_pointer + n_rows
-
-    if (i %% 50 == 0) message("Completed iteration ", i)
-  }
-
   store <- store[complete.cases(store), ]
   return(store)
 }
