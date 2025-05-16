@@ -28,7 +28,7 @@ austarch_cal_dates <- filter_calibrated_dates_by_range(
 austarch_df <- filter_sites_min_calibrated_dates(
   original_df = austarch_df,
   calibrated_dates = austarch_cal_dates,
-  min_dates = 5
+  min_dates = 1
 )
 
 # Check explicitly final results
@@ -49,43 +49,34 @@ baseline_spd <- generate_spd_baseline(austarch_cal_dates)
 baseline_fd <- generate_fd_baseline(austarch_df)
 baseline_kde <- generate_kde_baseline(austarch_df)
 
-plot_baseline_methods(
+pb <- plot_baseline_methods(
   spd_obj = baseline_spd,
   fd_df = baseline_fd,
   kde_df = baseline_kde,
   smooth_fd = TRUE,
-  smooth_window = 3,
+  smooth_window = 2,
   standardise = TRUE
 )
 
-# Save plot
-# png("figs/baseline_curves.png", width = 900, height = 600)
-# print(plot_baseline_methods(
-#   spd_obj = baseline_spd,
-#   fd_df = baseline_fd,
-#   kde_df = baseline_kde,
-#   smooth_fd = TRUE,
-#   smooth_window = 3,
-#   standardise = TRUE
-# ))
-# dev.off()
+# Save as vector PDF
+ggsave("rc_fig1.pdf", pb, device = cairo_pdf)
 
 #####
 # Need to run 1000 iterations for all the strategies for 50% and random for 100%
 out <- run_sampling_workflow(
   df         = austarch_df,
-  strategy   = "random",    # random, oldest, youngest, bracketed
-  n_iter     = 1000,        # 10 for testing, 1000 for full sampling
-  n_samples  = 5,           # set at 1 unless multiton-random
-  proportion = 0.5,         # NULL for 100% of sites sampled, 0.5 for 50%
+  strategy   = "oldest",    # random, oldest, youngest, bracketed
+  n_iter     = 10,        # 10 for testing, 1000 for full sampling
+  n_samples  = 1,           # set at 1 unless multiton-random
+  proportion = NULL,         # NULL for 100% of sites sampled, 0.5 for 50%
   seed       = 1234
 )
 plot_summarised_curves(out$rebinned)
-write.csv(out$summary, "data/simulation_summary_oldest_50.csv", row.names = FALSE)
+write.csv(out$summary, "data/simulation_summary_multiton_50.csv", row.names = FALSE)
 # write.csv(out$raw, "data/simulation_raw_50.csv", row.names = FALSE) # ~450 MB
 
 # Save plot
-png("figs/curves_oldest_50.png", width = 900, height = 600)
+png("figs/curves_multiton_50.png", width = 900, height = 600)
 print(plot_summarised_curves(out$rebinned))
 dev.off()
 
@@ -93,3 +84,7 @@ dev.off()
 # png("figs/cloud_random_50.png", width = 900, height = 600)
 # print(plot_density_cloud(out$raw, alpha = 0.05))
 # dev.off()
+
+# Create individual plot for combined panel plot
+plot_rebin(rebin_summary_df(read_csv("data/simulation_summary_multiton_50.csv")), 
+           show_xlabel=T, show_ylabel=T, annot_label="Multiton")

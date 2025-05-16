@@ -1,5 +1,5 @@
+library(ggplot2)
 import::from("dplyr", mutate, filter, count, arrange, summarise, group_by, ungroup, bind_rows, n, select, case_when)
-import::from("ggplot2", ggplot, aes, geom_line, theme_minimal, labs, scale_x_reverse, facet_wrap, geom_ribbon, scale_color_manual, theme, scale_fill_manual)
 import::from("tibble", tibble)
 import::from("zoo", rollmean)
 
@@ -157,11 +157,20 @@ plot_baseline_methods <- function(spd_obj, fd_df, kde_df, smooth_fd = TRUE, smoo
   ggplot(combined, aes(x = calBP, y = PrDens, color = source)) +
     geom_line(linewidth = 1) +
     scale_color_manual(values = method_colors) +
-    scale_x_reverse() +
+    scale_x_reverse(
+      limits = c(12000, 0),
+      #limits = c(max(combined$calBP, na.rm=TRUE), 0),
+      expand = c(0,0)
+    ) +
+    scale_y_continuous(
+      name   = expression("Scaled density ("~10^-4*")"),
+      labels = scales::number_format(scale = 10000, accuracy = 1),
+      limits = c(0, 8e-4), 
+      expand = c(0, 0)
+    ) +
     labs(
-      title = "Baseline SPD, FD, and KDE",
-      x = "Years cal BP",
-      y = "Scaled Density",
+      #title = "Baseline SPD, FD, and KDE",
+      x     = "Years cal BP",
       color = "Method"
     ) +
     theme_minimal()
@@ -284,4 +293,49 @@ plot_density_cloud <- function(df, alpha = 0.1) {
       color = "Method"
     ) +
     theme_minimal()
+}
+
+#' Plot panel elements with axis controls
+#' @param summary_df A tibble from summarise_iteration_curves()
+#' @param show_xlabel Logical: show x-axis label? (default = TRUE)
+#' @param show_ylabel Logical: show y-axis label?
+#' @param anot_label Taxt string for annotation
+plot_rebin <- function(
+    summary_df,
+    show_xlabel = TRUE,
+    show_ylabel = TRUE,
+    annot_label = NULL
+) {
+  p <- ggplot(summary_df, aes(x = calBP, y = mean, color = method, fill = method)) +
+    geom_line(linewidth = 1) +
+    geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.2, color = NA) +
+    scale_color_manual(values = method_colors) +
+    scale_fill_manual(values = method_colors) +
+    scale_x_reverse(limits = c(12000, 0), expand = c(0, 0)) +
+    scale_y_continuous(limits = c(0, 0.05), expand = c(0, 0)) +
+  
+    # Always declare the real labels:
+    labs(x = "Years cal BP", y = "Scaled Value") +
+    
+    theme_minimal() +
+    theme(
+      legend.position = "none",
+      axis.title.x = element_text(
+        color  = if (show_xlabel) "black" else "white",
+        margin = margin(t = 5)
+      ),
+      axis.title.y = element_text(
+        color  = if (show_ylabel) "black" else "white",
+        margin = margin(r = 5)
+      )
+    )
+  
+  if (!is.null(annot_label)) {
+    p <- p + annotate(
+      "text", x = 6500, y = 0.043,
+      label = annot_label, hjust = 0, size = 4
+    )
+  }
+  
+  p
 }
