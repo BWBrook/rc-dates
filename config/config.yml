@@ -1,0 +1,12 @@
+default: &default
+  data:
+    manifest: metadata/data_manifest.csv
+    example: inst/extdata/austarch_example.csv
+  outputs:
+    dir: outputs
+  compute:
+    use_arrow: true
+    write_parquet: true
+
+testthat:
+  <<: *default

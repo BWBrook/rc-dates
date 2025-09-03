@@ -5,7 +5,7 @@ project_dependencies <- function() {
   c(
     # pipeline & IO
     "targets", "tarchetypes", "here", "yaml", "config",
-    "arrow", "duckdb", "qs", "vroom",
+    "arrow", "duckdb", "qs", "vroom", "fs",
     # wrangling & utils
     "dplyr", "readr", "purrr", "tidyr", "tibble", "stringr", "magrittr", "checkmate", "janitor",
     # spatial (if needed later)
@@ -33,4 +33,3 @@ install_project_dependencies <- function(pkgs = project_dependencies()) {
   }
   invisible(TRUE)
 }
-

@@ -27,7 +27,11 @@ inst/extdata/*.gz
 # build / checks
 .Rcheck/
 
+# Global CSV ignore was masking versioned examples. Keep data/ ignored but
+# explicitly allow tracked sample/manifests.
 *.csv
+!inst/extdata/*.csv
+!metadata/*.csv
 
 # renv
 renv/library/
