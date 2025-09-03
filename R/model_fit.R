@@ -11,7 +11,7 @@
 #' @param time_range Integer vector length 2: c(min_calBP, max_calBP).
 #' @return A list with elements `calibrated` (CalDates) and `spd` (rcarbon SPD object).
 #' @export
-calibrate_and_spd <- function(df, time_range = c(100L, 20000L)) {
+calibrate_and_spd <- function(df, time_range = c(651L, 11650L)) {
   import::from("rcarbon", "calibrate", "spd")
   import::from("rlang", "abort")
 
