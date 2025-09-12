@@ -59,7 +59,7 @@ a*.md
 
 # _targets
 /_targets/*
-/docs/ 
+/docs/*.md 
 
 # Misc
 .DS_Store
@@ -70,4 +70,3 @@ a*.md
 *.js
 *.css
 *.woff
-/Alroy/

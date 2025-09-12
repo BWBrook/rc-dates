@@ -1,0 +1,92 @@
+---
+title: Development Guide
+format: gfm
+---
+
+This project follows a non‑package compendium layout with `{targets}` as the pipeline engine and `renv` for dependency management.
+
+## Setup
+
+Run in RStudio Console:
+
+```r
+renv::restore(prompt = FALSE)
+# Optional: install dependencies fast via pak for non‑package compendium
+source("dependencies.R")
+pak::pkg_install(project_dependencies())
+devtools::test()
+```
+
+## Running the Pipeline
+
+```r
+targets::tar_make()
+```
+
+To visualize the DAG:
+
+```r
+targets::tar_visnetwork()
+```
+
+## Docs
+
+Render all documents in `docs/`:
+
+```bash
+quarto render docs/
+```
+
+## Quickstart (compendium)
+
+```r
+renv::restore(prompt = FALSE)
+source("dependencies.R")
+pak::pkg_install(project_dependencies())
+targets::tar_make()
+quarto::quarto_render("reports/paper.qmd")
+```
+
+## Configuration knobs
+
+Edit `config/config.yml` (or override via `R_CONFIG_ACTIVE`). Key sections:
+
+- calibration:
+  - `terrestrial_curve`: e.g., `shcal20` (default).
+  - `marine_curve`: e.g., `marine20` (default).
+  - `time_range`: `[651, 11650]` (Holocene window).
+- branching.site:
+  - `include` / `exclude`: regex patterns to select SITE names.
+  - `limit`: max number of SITE branches/figures.
+- report.site_figures:
+  - `include` / `exclude` / `limit` for selecting SITE figures; `montage` and `ncol` for grid layout.
+- simulate:
+  - `use_precomputed`: `true` to include precomputed summaries.
+  - `dir`: folder containing `simulation_summary_*.csv`.
+  - `pattern`: filename regex (default matches the shipped summaries in `data/`).
+
+After changing config, re-run the pipeline:
+
+```r
+targets::tar_make()
+```
+
+## Conventions
+
+- One exported helper per file under `R/` when reasonable.
+- Pure functions; no `setwd()` or global state. Use `here()` for paths.
+- Explicit imports via `import::from()` inside each function, or fully qualified calls.
+- Errors via `rlang::abort()` with typed classes; user messages via `cli`.
+- Use `{targets}` for all pipelines; no ad‑hoc scripts writing files.
+
+## Testing (non‑package compendium)
+
+Run tests directly with testthat:
+
+```r
+testthat::test_dir("tests/testthat", reporter = "summary")
+# or
+source("tests/run-tests.R")
+```
+
+Note: `devtools::test()` expects a package root and will fail here by design.
