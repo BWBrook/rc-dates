@@ -1,0 +1,28 @@
+name: quarto-render
+
+on:
+  workflow_dispatch:
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+      - name: Install Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+      - name: Restore dependencies via renv
+        shell: Rscript {0}
+        run: |
+          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          renv::restore(prompt = FALSE)
+      - name: Build pipeline (figures only)
+        shell: Rscript {0}
+        run: |
+          if (!requireNamespace("targets", quietly = TRUE)) install.packages("targets")
+          targets::tar_make(names = c("fig_methods_overall","fig_methods_by_site_type","fig_methods_by_site","selected_site_figs","fig_methods_by_site_montage","fig_sim_overlays","fig_sim_montage"))
+      - name: Render report
+        run: quarto render reports/
+
