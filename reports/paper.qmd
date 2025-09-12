@@ -1,21 +1,105 @@
-title: "Project report"
+title: "Project Report"
 format: html
 execute:
   echo: false
 
-# Introduction
+# Overview
 
-This Quarto document is a placeholder for your analysis report.  You can
-embed text, code chunks, and figures.  The pipeline defined in
-`_targets.R` should generate all necessary intermediate data; in this
-document you can read those data via the targets API or by loading
-files under `data/processed/`.
+This report reads pipeline outputs directly via the `{targets}` API. Run the
+pipeline first in your R session:
+
+```r
+targets::tar_make()
+```
+
+Then render this Quarto document:
+
+```bash
+quarto render reports/
+```
+
+## Data Summary
 
 ```{r}
-#| label: use-targets
-# Read targets produced by the pipeline (run after tar_make)
+#| label: summary
+validated <- targets::tar_read(validated_strict)
+cfg       <- targets::tar_read(cfg)
+
+n_rows    <- nrow(validated)
+n_sites   <- dplyr::n_distinct(validated$SITE)
+n_adsid   <- dplyr::n_distinct(validated$ADSID)
+site_types <- sort(unique(validated$SITE_TYPE))
+
+list(
+  n_rows = n_rows,
+  n_sites = n_sites,
+  n_dates = n_adsid,
+  site_types = head(site_types, 8L),
+  calibration = list(
+    terrestrial_curve = cfg$calibration$terrestrial_curve,
+    marine_curve = cfg$calibration$marine_curve,
+    time_range = cfg$calibration$time_range
+  )
+)
+```
+
+## Method Summaries (Overall)
+
+```{r}
+#| label: methods-overall
 spd_tbl <- targets::tar_read(spd_summary)
 fd_tbl  <- targets::tar_read(fd_summary)
 kde_tbl <- targets::tar_read(kde_summary)
-str(list(spd = spd_tbl, fd = fd_tbl, kde = kde_tbl))
+
+# Show quick peeks of each (first 6 rows only)
+utils::head(spd_tbl)
+utils::head(fd_tbl)
+utils::head(kde_tbl)
 ```
+
+### Figure: SPD/FD/KDE Overlay (Overall)
+
+```{r}
+#| label: fig-overall
+#| fig-cap: "Overall SPD/FD/KDE overlay"
+overall_path <- targets::tar_read(fig_methods_overall)
+knitr::include_graphics(overall_path)
+```
+
+## Figures by SITE_TYPE
+
+```{r}
+#| label: figs-by-sitetype
+#| fig-cap: "SPD/FD/KDE overlays by SITE_TYPE"
+#| fig-align: center
+fig_paths <- targets::tar_read(fig_methods_by_site_type)
+fig_paths <- as.character(unlist(fig_paths, use.names = FALSE))
+for (p in fig_paths) knitr::include_graphics(p)
+```
+
+## Figures by SITE (subset)
+
+```{r}
+#| label: figs-by-site
+#| fig-cap: "SPD/FD/KDE overlays by SITE (subset)"
+#| fig-align: center
+site_fig_paths <- targets::tar_read(selected_site_figs)
+for (p in site_fig_paths) knitr::include_graphics(p)
+```
+
+### Montage of SITE Figures
+
+```{r}
+#| label: figs-by-site-montage
+#| fig-cap: "Montage of selected SITE figures"
+montage_path <- targets::tar_read(fig_methods_by_site_montage)
+knitr::include_graphics(montage_path)
+```
+
+## Reproducibility Notes
+
+- Figures and tables reflect the configured calibration curves and time range:
+  `terrestrial = cfg$calibration$terrestrial_curve`,
+  `marine = cfg$calibration$marine_curve`,
+  `time_range = cfg$calibration$time_range`.
+- All inputs are derived from targets; there are no ad‑hoc file reads here.

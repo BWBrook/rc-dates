@@ -92,6 +92,195 @@ list(
     description = "KDE tibble per SITE_TYPE."
   ),
 
+  # SITE-level dynamic branching
+  targets::tar_target(
+    site_levels,
+    filter_levels_by_cfg(
+      sort(unique(validated_strict$SITE)),
+      include = cfg$branching$site$include,
+      exclude = cfg$branching$site$exclude,
+      limit   = cfg$branching$site$limit
+    ),
+    description = "Distinct SITE values for SITE-level grouping (config-filtered)."
+  ),
+
+  targets::tar_target(
+    site_spd_summary,
+    {
+      s <- site_levels
+      df_s <- validated_strict[validated_strict$SITE == s, , drop = FALSE]
+      if (nrow(df_s) == 0) {
+        tibble::tibble(calBP = numeric(0), PrDens = numeric(0), SITE = s)
+      } else {
+        fit <- calibrate_and_spd(
+          df_s,
+          time_range = cfg$calibration$time_range,
+          terrestrial_curve = cfg$calibration$terrestrial_curve,
+          marine_curve = cfg$calibration$marine_curve
+        )
+        tbl <- spd_to_tibble(fit$spd)
+        tbl$SITE <- s
+        tbl
+      }
+    },
+    pattern = map(site_levels),
+    iteration = "vector",
+    description = "SPD tibble per SITE."
+  ),
+
+  targets::tar_target(
+    site_fd_summary,
+    {
+      s <- site_levels
+      df_s <- weighted_means[weighted_means$SITE == s, , drop = FALSE]
+      if (nrow(df_s) == 0) return(NULL)
+      fd_from_weighted_means(
+        df_s,
+        bin_width = 100,
+        min_age = min(cfg$calibration$time_range),
+        max_age = max(cfg$calibration$time_range)
+      ) |>
+        dplyr::mutate(SITE = s)
+    },
+    pattern = map(site_levels),
+    iteration = "vector",
+    description = "FD tibble per SITE."
+  ),
+
+  targets::tar_target(
+    site_kde_summary,
+    {
+      s <- site_levels
+      df_s <- weighted_means[weighted_means$SITE == s, , drop = FALSE]
+      if (nrow(df_s) == 0) return(NULL)
+      kde_from_weighted_means(
+        df_s,
+        from = min(cfg$calibration$time_range),
+        to   = max(cfg$calibration$time_range),
+        bw = 100, n = 256
+      ) |>
+        dplyr::mutate(SITE = s)
+    },
+    pattern = map(site_levels),
+    iteration = "vector",
+    description = "KDE tibble per SITE."
+  ),
+
+  targets::tar_target(
+    fig_methods_by_site,
+    {
+      s <- site_levels
+      ads <- validated_strict$ADSID[validated_strict$SITE == s]
+      cds <- subset_caldates_by_adsid(calibrated, ads)
+      fs::dir_create("figs")
+      safe_name <- gsub("[^A-Za-z0-9_]+", "_", s)
+      out <- fs::path("figs", paste0("methods_site_", safe_name, ".png"))
+      if (length(cds$metadata$DateID) == 0) {
+        ggplot2::ggsave(out, ggplot2::ggplot() + ggplot2::labs(title = paste("No data for", s)), width = 8, height = 5, dpi = 150)
+        return(out)
+      }
+
+      # SPD
+      grid_cols <- tryCatch({ if (length(cds$grids) > 0) names(cds$grids[[1]]) else character(0) }, error = function(e) character(0))
+      message(sprintf("[SITE:%s] first grid cols: %s", s, paste(grid_cols, collapse = ", ")))
+      spd_tbl <- tryCatch({ spd_to_tibble(spd_from_caldates(cds, time_range = cfg$calibration$time_range)) },
+                          error = function(e) { message(sprintf("[SITE:%s] spd_to_tibble failed: %s", s, e$message)); tibble::tibble(calBP = numeric(0), PrDens = numeric(0)) })
+      if (!all(c("calBP", "PrDens") %in% names(spd_tbl))) {
+        if (!"calBP" %in% names(spd_tbl) && length(spd_tbl) >= 1) spd_tbl$calBP <- spd_tbl[[1]]
+        if (!"PrDens" %in% names(spd_tbl) && length(spd_tbl) >= 2) spd_tbl$PrDens <- spd_tbl[[2]]
+        spd_tbl <- spd_tbl[, intersect(c("calBP", "PrDens"), names(spd_tbl)), drop = FALSE]
+      }
+      message(sprintf("[SITE:%s] spd cols: %s", s, paste(names(spd_tbl), collapse = ", ")))
+
+      # FD
+      df_s <- weighted_means[weighted_means$SITE == s, , drop = FALSE]
+      fd_tbl <- tryCatch({
+        if (nrow(df_s) > 0) {
+          fd_from_weighted_means(
+            df_s,
+            min_age = min(cfg$calibration$time_range),
+            max_age = max(cfg$calibration$time_range)
+          )
+        } else {
+          tibble::tibble(bin = numeric(0), value = numeric(0))
+        }
+      }, error = function(e) { message(sprintf("[SITE:%s] fd_from_weighted_means failed: %s", s, e$message)); tibble::tibble(bin = numeric(0), value = numeric(0)) })
+      message(sprintf("[SITE:%s] fd cols: %s", s, paste(names(fd_tbl), collapse = ", ")))
+
+      # KDE
+      kde_tbl <- tryCatch({
+        if (nrow(df_s) > 0) {
+          kde_from_weighted_means(
+            df_s,
+            from = min(cfg$calibration$time_range),
+            to   = max(cfg$calibration$time_range)
+          )
+        } else {
+          tibble::tibble(calBP = numeric(0), density = numeric(0))
+        }
+      }, error = function(e) { message(sprintf("[SITE:%s] kde_from_weighted_means failed: %s", s, e$message)); tibble::tibble(calBP = numeric(0), density = numeric(0)) })
+      if (!all(c("calBP", "density") %in% names(kde_tbl))) {
+        if (!"calBP" %in% names(kde_tbl) && length(kde_tbl) >= 1) kde_tbl$calBP <- kde_tbl[[1]]
+        if (!"density" %in% names(kde_tbl) && length(kde_tbl) >= 2) kde_tbl$density <- kde_tbl[[2]]
+        kde_tbl <- kde_tbl[, intersect(c("calBP", "density"), names(kde_tbl)), drop = FALSE]
+      }
+      message(sprintf("[SITE:%s] kde cols: %s", s, paste(names(kde_tbl), collapse = ", ")))
+
+      p <- tryCatch(
+        plot_methods_overlay(spd_tbl, fd_tbl, kde_tbl, smooth_fd = TRUE, smooth_window = 3),
+        error = function(e) ggplot2::ggplot() + ggplot2::labs(title = paste("Plotting error for", s, "-", e$message))
+      )
+      try({ ggplot2::ggsave(out, p, width = 8, height = 5, dpi = 150) }, silent = TRUE)
+      out
+    },
+    pattern = map(site_levels),
+    iteration = "vector",
+    format = "file",
+    description = "Per-SITE SPD/FD/KDE overlay figures (dynamic)."
+  ),
+
+  # Selected site figures for report (subset based on config)
+  targets::tar_target(
+    selected_site_figs,
+    filter_paths_by_cfg(
+      as.character(unlist(fig_methods_by_site, use.names = FALSE)),
+      include = cfg$report$site_figures$include,
+      exclude = cfg$report$site_figures$exclude,
+      limit   = cfg$report$site_figures$limit
+    ),
+    description = "Subset of per-SITE figure paths for report inclusion."
+  ),
+
+  # Montage of selected site figures (if magick available)
+  targets::tar_target(
+    fig_methods_by_site_montage,
+    {
+      import::from("fs", "path")
+      fs::dir_create("figs")
+      out <- path("figs", "methods_sites_montage.png")
+      fps <- selected_site_figs
+      ok <- FALSE
+      if (length(fps) > 0 && requireNamespace("magick", quietly = TRUE)) {
+        ok <- isTRUE(tryCatch({
+          imgs <- magick::image_read(fps)
+          ncol <- cfg$report$site_figures$ncol
+          if (is.null(ncol) || is.na(ncol)) ncol <- 3L
+          ncol <- max(1L, as.integer(ncol))
+          montage <- magick::image_montage(imgs, tile = paste0(ncol, "x"))
+          magick::image_write(montage, path = out, format = "png")
+          file.exists(out)
+        }, error = function(e) FALSE))
+      }
+      if (!ok) {
+        gr <- ggplot2::ggplot() + ggplot2::labs(title = "Montage not created (no images or magick missing)")
+        ggplot2::ggsave(out, gr, width = 8, height = 5, dpi = 150)
+      }
+      out
+    },
+    format = "file",
+    description = "Montage image of selected per-SITE figures."
+  ),
+
   # Figures (overall and per group)
   targets::tar_target(
     fig_methods_overall,

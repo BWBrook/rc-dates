@@ -50,6 +50,12 @@ cfg_read <- function(active = Sys.getenv("R_CONFIG_ACTIVE", unset = "default")) 
         terrestrial_curve = "shcal20",
         marine_curve = "marine20",
         time_range = c(651L, 11650L)
+      ),
+      branching = list(
+        site = list(include = NULL, exclude = NULL, limit = NULL)
+      ),
+      report = list(
+        site_figures = list(include = NULL, exclude = NULL, limit = 12L, montage = TRUE, ncol = 3L)
       )
     )
   }
@@ -69,6 +75,23 @@ cfg_read <- function(active = Sys.getenv("R_CONFIG_ACTIVE", unset = "default")) 
   if (is.null(cfg$calibration$terrestrial_curve)) cfg$calibration$terrestrial_curve <- "shcal20"
   if (is.null(cfg$calibration$marine_curve))      cfg$calibration$marine_curve      <- "marine20"
   if (is.null(cfg$calibration$time_range))        cfg$calibration$time_range        <- c(651L, 11650L)
+
+  # Backfill branching/report defaults
+  if (is.null(cfg$branching) || !is.list(cfg$branching)) cfg$branching <- list()
+  if (is.null(cfg$branching$site) || !is.list(cfg$branching$site)) cfg$branching$site <- list()
+  if (is.null(cfg$branching$site$include)) cfg$branching$site$include <- NULL
+  if (is.null(cfg$branching$site$exclude)) cfg$branching$site$exclude <- NULL
+  if (is.null(cfg$branching$site$limit))   cfg$branching$site$limit   <- NULL
+
+  if (is.null(cfg$report) || !is.list(cfg$report)) cfg$report <- list()
+  if (is.null(cfg$report$site_figures) || !is.list(cfg$report$site_figures)) cfg$report$site_figures <- list()
+  sf <- cfg$report$site_figures
+  if (is.null(sf$include)) sf$include <- NULL
+  if (is.null(sf$exclude)) sf$exclude <- NULL
+  if (is.null(sf$limit))   sf$limit   <- 12L
+  if (is.null(sf$montage)) sf$montage <- TRUE
+  if (is.null(sf$ncol))    sf$ncol    <- 3L
+  cfg$report$site_figures <- sf
 
   cfg
 }

@@ -12,6 +12,18 @@ default: &default
     marine_curve: marine20
     # Min/Max cal BP (order not important; code handles it)
     time_range: [651, 11650]
+  branching:
+    site:
+      include: []     # optional regex patterns to include SITE names
+      exclude: []     # optional regex patterns to exclude SITE names
+      limit: null     # optional integer to limit number of SITE figures/branches
+  report:
+    site_figures:
+      include: []     # optional regex patterns applied to fig file basenames
+      exclude: []
+      limit: 12       # how many site figures to display in the report
+      montage: true   # also create a montage image from selected site figures
+      ncol: 3         # number of columns in montage grid (if magick available)
 
 testthat:
   <<: *default
