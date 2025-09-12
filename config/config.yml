@@ -24,6 +24,10 @@ default: &default
       limit: 12       # how many site figures to display in the report
       montage: true   # also create a montage image from selected site figures
       ncol: 3         # number of columns in montage grid (if magick available)
+  simulate:
+    use_precomputed: true
+    dir: data
+    pattern: ^simulation_summary_.*\.csv$
 
 testthat:
   <<: *default

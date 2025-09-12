@@ -56,7 +56,8 @@ cfg_read <- function(active = Sys.getenv("R_CONFIG_ACTIVE", unset = "default")) 
       ),
       report = list(
         site_figures = list(include = NULL, exclude = NULL, limit = 12L, montage = TRUE, ncol = 3L)
-      )
+      ),
+      simulate = list(use_precomputed = TRUE, dir = "data", pattern = "^simulation_summary_.*\\.csv$")
     )
   }
 
@@ -92,6 +93,11 @@ cfg_read <- function(active = Sys.getenv("R_CONFIG_ACTIVE", unset = "default")) 
   if (is.null(sf$montage)) sf$montage <- TRUE
   if (is.null(sf$ncol))    sf$ncol    <- 3L
   cfg$report$site_figures <- sf
+
+  if (is.null(cfg$simulate) || !is.list(cfg$simulate)) cfg$simulate <- list()
+  if (is.null(cfg$simulate$use_precomputed)) cfg$simulate$use_precomputed <- TRUE
+  if (is.null(cfg$simulate$dir)) cfg$simulate$dir <- "data"
+  if (is.null(cfg$simulate$pattern)) cfg$simulate$pattern <- "^simulation_summary_.*\\.csv$"
 
   cfg
 }

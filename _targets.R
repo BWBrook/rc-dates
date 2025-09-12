@@ -495,6 +495,88 @@ list(
     description = "Kernel density estimate from weighted mean calibrated ages."
   ),
 
+  # Simulations (read-only): manifest -> tables -> aggregates -> figures
+  targets::tar_target(
+    sim_manifest,
+    if (isTRUE(cfg$simulate$use_precomputed)) read_sim_manifest(cfg$simulate$dir, cfg$simulate$pattern) else tibble::tibble(path = character(0), scenario = character(0), size = integer(0)),
+    description = "Manifest of precomputed simulation summary CSV files."
+  ),
+  targets::tar_target(
+    sim_paths,
+    sim_manifest$path,
+    description = "Vector of simulation summary file paths (non-file target for branching)."
+  ),
+  targets::tar_target(
+    sim_files,
+    sim_manifest$path,
+    format = "file",
+    description = "Simulation summary files (tracked as file targets)."
+  ),
+  targets::tar_target(
+    sim_tables,
+    { sim_files; read_sim_table(sim_paths) },
+    pattern = map(sim_paths),
+    iteration = "list",
+    description = "Per-file tidy simulation tables."
+  ),
+  targets::tar_target(
+    sim_all,
+    {
+      import::from("dplyr", "bind_rows")
+      if (length(sim_tables) == 0) tibble::tibble() else bind_rows(sim_tables)
+    },
+    description = "All simulations bound into one tibble."
+  ),
+  targets::tar_target(
+    sim_scenarios,
+    sort(unique(sim_all$scenario)),
+    description = "Distinct simulation scenarios."
+  ),
+  targets::tar_target(
+    fig_sim_overlays,
+    {
+      s <- sim_scenarios
+      df <- sim_all[sim_all$scenario == s, , drop = FALSE]
+      fs::dir_create("figs")
+      out <- fs::path("figs", paste0("sim_", gsub("[^A-Za-z0-9_]+", "_", s), ".png"))
+      if (nrow(df) == 0) {
+        ggplot2::ggsave(out, ggplot2::ggplot() + ggplot2::labs(title = paste("No sim data for", s)), width = 8, height = 5, dpi = 150)
+      } else {
+        p <- plot_sim_overlay(df)
+        ggplot2::ggsave(out, p, width = 8, height = 5, dpi = 150)
+      }
+      out
+    },
+    pattern = map(sim_scenarios),
+    iteration = "vector",
+    format = "file",
+    description = "Per-scenario simulation overlay figures."
+  ),
+  targets::tar_target(
+    fig_sim_montage,
+    {
+      import::from("fs", "path")
+      fs::dir_create("figs")
+      out <- path("figs", "simulations_montage.png")
+      fps <- as.character(unlist(fig_sim_overlays, use.names = FALSE))
+      ok <- FALSE
+      if (length(fps) > 0 && requireNamespace("magick", quietly = TRUE)) {
+        ok <- isTRUE(tryCatch({
+          imgs <- magick::image_read(fps)
+          montage <- magick::image_montage(imgs, tile = paste0(3, "x"))
+          magick::image_write(montage, path = out, format = "png")
+          file.exists(out)
+        }, error = function(e) FALSE))
+      }
+      if (!ok) {
+        ggplot2::ggsave(out, ggplot2::ggplot() + ggplot2::labs(title = "No simulation figures to montage"), width = 8, height = 5, dpi = 150)
+      }
+      out
+    },
+    format = "file",
+    description = "Montage of simulation overlays."
+  ),
+
   # Report rendering: render to same directory as source file
   targets::tar_target(
     report,
