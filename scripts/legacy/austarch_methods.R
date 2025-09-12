@@ -126,16 +126,15 @@ generate_iteration_curves <- function(df, index_df, iteration,
 
   sample_df <- df[selected_rows, ]
 
-  cal_dates <- calibrate_dates(sample_df)
+  # SPD
+  cds <- calibrate_dates(sample_df)
+  cds <- filter_calibrated_dates_by_range(cds, min_calBP, max_calBP)
+  spd_out <- generate_spd_baseline(cds, time_range = c(max_calBP, min_calBP))
 
-  spd_out <- generate_spd_baseline(cal_dates, time_range = c(max_calBP, min_calBP))
+  # FD
+  fd_out <- generate_fd_baseline(sample_df, bin_width = 100, min_age = min_calBP, max_age = max_calBP)
 
-  sample_df <- sample_df %>%
-    mutate(weighted_mean_calBP = sapply(cal_dates$grids, function(grid) {
-      sum(grid$calBP * grid$PrDens)
-    }))
-
-  fd_out <- generate_fd_baseline(sample_df, min_age = min_calBP, max_age = max_calBP)
+  # KDE
   kde_out <- generate_kde_baseline(sample_df, from = min_calBP, to = max_calBP)
 
   bind_rows(

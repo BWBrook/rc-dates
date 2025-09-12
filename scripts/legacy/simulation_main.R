@@ -27,7 +27,7 @@ theme_set(theme_classic())
 
 # load data based on environment
 if(interactive()){
-  source("simulation_functions.R")
+  source("../R/legacy_simulation_helpers.R")
   data <- readr::read_csv("data/austarch_filtered.csv")
   dir_path <- ""
 } else {
@@ -171,4 +171,3 @@ res <-
 #  bind_rows %>% 
 #  saveRDS(paste0("out/results_",true_model,"_p",prop,"_ratio",ratio_exp,"_nsim",nsim,
 #                "_",rundate,".rds"))
-
