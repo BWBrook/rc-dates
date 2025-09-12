@@ -38,7 +38,12 @@ list(
       if (nrow(df_g) == 0) {
         tibble::tibble(calBP = numeric(0), PrDens = numeric(0), SITE_TYPE = g)
       } else {
-        fit <- calibrate_and_spd(df_g) # uses consistent 651–11650 window
+        fit <- calibrate_and_spd(
+          df_g,
+          time_range = cfg$calibration$time_range,
+          terrestrial_curve = cfg$calibration$terrestrial_curve,
+          marine_curve = cfg$calibration$marine_curve
+        )
         tbl <- spd_to_tibble(fit$spd)
         tbl$SITE_TYPE <- g
         tbl
@@ -55,7 +60,12 @@ list(
       g <- group_levels
       df_g <- weighted_means[weighted_means$SITE_TYPE == g, , drop = FALSE]
       if (nrow(df_g) == 0) return(NULL)
-      fd_from_weighted_means(df_g, bin_width = 100, min_age = 651, max_age = 11650) |>
+      fd_from_weighted_means(
+        df_g,
+        bin_width = 100,
+        min_age = min(cfg$calibration$time_range),
+        max_age = max(cfg$calibration$time_range)
+      ) |>
         dplyr::mutate(SITE_TYPE = g)
     },
     pattern = map(group_levels),
@@ -69,7 +79,12 @@ list(
       g <- group_levels
       df_g <- weighted_means[weighted_means$SITE_TYPE == g, , drop = FALSE]
       if (nrow(df_g) == 0) return(NULL)
-      kde_from_weighted_means(df_g, from = 651, to = 11650, bw = 100, n = 256) |>
+      kde_from_weighted_means(
+        df_g,
+        from = min(cfg$calibration$time_range),
+        to   = max(cfg$calibration$time_range),
+        bw = 100, n = 256
+      ) |>
         dplyr::mutate(SITE_TYPE = g)
     },
     pattern = map(group_levels),
@@ -105,12 +120,76 @@ list(
         ggplot2::ggsave(out, ggplot2::ggplot() + ggplot2::labs(title = paste("No data for", g)), width = 8, height = 5, dpi = 150)
         return(out)
       }
-      spd_tbl <- spd_to_tibble(rcarbon::spd(cds, timeRange = c(11650, 651), spdnormalised = TRUE))
+      # Inspect first grid column names before SPD
+      grid_cols <- tryCatch({
+        if (length(cds$grids) > 0) names(cds$grids[[1]]) else character(0)
+      }, error = function(e) character(0))
+      message(sprintf("[%s] first grid cols: %s", g, paste(grid_cols, collapse = ", ")))
+
+      spd_tbl <- tryCatch({
+        spd_obj <- spd_from_caldates(cds, time_range = cfg$calibration$time_range)
+        spd_to_tibble(spd_obj)
+      }, error = function(e) {
+        message(sprintf("[%s] spd_to_tibble failed: %s", g, e$message))
+        tibble::tibble(calBP = numeric(0), PrDens = numeric(0))
+      })
+      # Normalise SPD column names defensively
+      if (!all(c("calBP", "PrDens") %in% names(spd_tbl))) {
+        if (!"calBP" %in% names(spd_tbl) && length(spd_tbl) >= 1) spd_tbl$calBP <- spd_tbl[[1]]
+        if (!"PrDens" %in% names(spd_tbl) && length(spd_tbl) >= 2) spd_tbl$PrDens <- spd_tbl[[2]]
+        spd_tbl <- spd_tbl[, intersect(c("calBP", "PrDens"), names(spd_tbl)), drop = FALSE]
+      }
+      # Debugging: print column names to aid troubleshooting if plotting fails
+      message(sprintf("[%s] spd cols: %s", g, paste(names(spd_tbl), collapse = ", ")))
       df_g <- weighted_means[weighted_means$SITE_TYPE == g, , drop = FALSE]
-      fd_tbl <- fd_from_weighted_means(df_g)
-      kde_tbl <- kde_from_weighted_means(df_g)
-      p <- plot_methods_overlay(spd_tbl, fd_tbl, kde_tbl, smooth_fd = TRUE, smooth_window = 3)
-      ggplot2::ggsave(out, p, width = 8, height = 5, dpi = 150)
+      fd_tbl <- tryCatch({
+        if (nrow(df_g) > 0) {
+          fd_from_weighted_means(
+            df_g,
+            min_age = min(cfg$calibration$time_range),
+            max_age = max(cfg$calibration$time_range)
+          )
+        } else {
+          tibble::tibble(bin = numeric(0), value = numeric(0))
+        }
+      }, error = function(e) {
+        message(sprintf("[%s] fd_from_weighted_means failed: %s", g, e$message))
+        tibble::tibble(bin = numeric(0), value = numeric(0))
+      })
+      message(sprintf("[%s] fd cols: %s", g, paste(names(fd_tbl), collapse = ", ")))
+      kde_tbl <- tryCatch({
+        if (nrow(df_g) > 0) {
+          kde_from_weighted_means(
+            df_g,
+            from = min(cfg$calibration$time_range),
+            to   = max(cfg$calibration$time_range)
+          )
+        } else {
+          tibble::tibble(calBP = numeric(0), density = numeric(0))
+        }
+      }, error = function(e) {
+        message(sprintf("[%s] kde_from_weighted_means failed: %s", g, e$message))
+        tibble::tibble(calBP = numeric(0), density = numeric(0))
+      })
+      # Normalise KDE column names defensively
+      if (!all(c("calBP", "density") %in% names(kde_tbl))) {
+        if (!"calBP" %in% names(kde_tbl) && length(kde_tbl) >= 1) kde_tbl$calBP <- kde_tbl[[1]]
+        if (!"density" %in% names(kde_tbl) && length(kde_tbl) >= 2) kde_tbl$density <- kde_tbl[[2]]
+        kde_tbl <- kde_tbl[, intersect(c("calBP", "density"), names(kde_tbl)), drop = FALSE]
+      }
+      message(sprintf("[%s] kde cols: %s", g, paste(names(kde_tbl), collapse = ", ")))
+      p <- tryCatch(
+        plot_methods_overlay(spd_tbl, fd_tbl, kde_tbl, smooth_fd = TRUE, smooth_window = 3),
+        error = function(e) ggplot2::ggplot() + ggplot2::labs(title = paste("Plotting error for", g, "-", e$message))
+      )
+      ok <- tryCatch({
+        ggplot2::ggsave(out, p, width = 8, height = 5, dpi = 150)
+        TRUE
+      }, error = function(e) {
+        message(sprintf("[%s] ggsave failed: %s", g, e$message))
+        ggplot2::ggsave(out, ggplot2::ggplot() + ggplot2::labs(title = paste("Placeholder for", g, "-", e$message)), width = 8, height = 5, dpi = 150)
+        FALSE
+      })
       out
     },
     pattern = map(group_levels),
@@ -177,7 +256,12 @@ list(
   # Model fit / SPD summary (Holocene range)
   targets::tar_target(
     model_fit,
-    calibrate_and_spd(validated_strict),
+    calibrate_and_spd(
+      validated_strict,
+      time_range = cfg$calibration$time_range,
+      terrestrial_curve = cfg$calibration$terrestrial_curve,
+      marine_curve = cfg$calibration$marine_curve
+    ),
     description = "Calibrated dates and SPD summary object (651–11650 cal BP)."
   ),
 
@@ -203,12 +287,22 @@ list(
   ),
   targets::tar_target(
     fd_summary,
-    fd_from_weighted_means(weighted_means, bin_width = 100, min_age = 651, max_age = 11650),
+    fd_from_weighted_means(
+      weighted_means,
+      bin_width = 100,
+      min_age = min(cfg$calibration$time_range),
+      max_age = max(cfg$calibration$time_range)
+    ),
     description = "Frequency distribution from weighted mean calibrated ages."
   ),
   targets::tar_target(
     kde_summary,
-    kde_from_weighted_means(weighted_means, from = 651, to = 11650, bw = 100, n = 512),
+    kde_from_weighted_means(
+      weighted_means,
+      from = min(cfg$calibration$time_range),
+      to   = max(cfg$calibration$time_range),
+      bw = 100, n = 512
+    ),
     description = "Kernel density estimate from weighted mean calibrated ages."
   ),
 

@@ -119,8 +119,25 @@ filter_austarch_material_site <- function(df) {
 #' @return A CalDates object containing only dates overlapping the defined range.
 #' @export
 filter_calibrated_dates_by_range <- function(calibrated_dates, min_calBP = 100, max_calBP = 20000) {
+  pick_time_col <- function(df) {
+    nms <- names(df)
+    nms_low <- tolower(nms)
+    cand <- c("calbp", "cal_year_bp", "yearbp", "year", "time")
+    for (c in cand) {
+      i <- which(nms_low == c)[1]
+      if (length(i) == 1 && !is.na(i)) return(nms[[i]])
+    }
+    nms[[1]]
+  }
   retained_ids <- names(calibrated_dates$grids)[
-    vapply(calibrated_dates$grids, function(x) any(x$calBP >= min_calBP & x$calBP <= max_calBP), logical(1))
+    vapply(
+      calibrated_dates$grids,
+      function(x) {
+        tcol <- pick_time_col(x)
+        any(x[[tcol]] >= min_calBP & x[[tcol]] <= max_calBP)
+      },
+      logical(1)
+    )
   ]
 
   filtered_metadata <- calibrated_dates$metadata[calibrated_dates$metadata$DateID %in% retained_ids, ]
@@ -153,7 +170,20 @@ filter_sites_min_calibrated_dates <- function(original_df, calibrated_dates, min
   df_filtered <- original_df |>
     filter(ADSID %in% retained_ids)
 
-  weighted_means <- vapply(calibrated_dates$grids, function(grid) sum(grid$calBP * grid$PrDens), numeric(1))
+  pick_cols <- function(df) {
+    nms <- names(df); nms_low <- tolower(nms)
+    tcol <- if ("calbp" %in% nms_low) nms[[which(nms_low == "calbp")[1]]] else nms[[1]]
+    dcol <- if ("prdens" %in% nms_low) nms[[which(nms_low == "prdens")[1]]] else nms[[max(2, length(nms))]]
+    list(t = tcol, d = dcol)
+  }
+  weighted_means <- vapply(
+    calibrated_dates$grids,
+    function(grid) {
+      cols <- pick_cols(grid)
+      sum(grid[[cols$t]] * grid[[cols$d]])
+    },
+    numeric(1)
+  )
 
   df_filtered <- df_filtered |>
     mutate(weighted_mean_calBP = weighted_means[as.character(ADSID)]) |>
@@ -183,4 +213,3 @@ subset_caldates_by_adsid <- function(cal_dates, adsids) {
   class(out) <- "CalDates"
   out
 }
-

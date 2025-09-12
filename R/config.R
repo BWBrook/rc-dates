@@ -45,7 +45,12 @@ cfg_read <- function(active = Sys.getenv("R_CONFIG_ACTIVE", unset = "default")) 
         example = "inst/extdata/austarch_example.csv"
       ),
       outputs = list(dir = "outputs"),
-      compute = list(use_arrow = TRUE, write_parquet = TRUE)
+      compute = list(use_arrow = TRUE, write_parquet = TRUE),
+      calibration = list(
+        terrestrial_curve = "shcal20",
+        marine_curve = "marine20",
+        time_range = c(651L, 11650L)
+      )
     )
   }
 
@@ -58,6 +63,12 @@ cfg_read <- function(active = Sys.getenv("R_CONFIG_ACTIVE", unset = "default")) 
   if (!is.null(cfg$data$manifest)) cfg$data$manifest <- normalise(cfg$data$manifest)
   if (!is.null(cfg$data$example))  cfg$data$example  <- normalise(cfg$data$example)
   if (!is.null(cfg$outputs$dir))   cfg$outputs$dir   <- normalise(cfg$outputs$dir)
+
+  # Backfill calibration defaults if missing in user config
+  if (is.null(cfg$calibration) || !is.list(cfg$calibration)) cfg$calibration <- list()
+  if (is.null(cfg$calibration$terrestrial_curve)) cfg$calibration$terrestrial_curve <- "shcal20"
+  if (is.null(cfg$calibration$marine_curve))      cfg$calibration$marine_curve      <- "marine20"
+  if (is.null(cfg$calibration$time_range))        cfg$calibration$time_range        <- c(651L, 11650L)
 
   cfg
 }

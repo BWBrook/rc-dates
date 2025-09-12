@@ -7,6 +7,11 @@ default: &default
   compute:
     use_arrow: true
     write_parquet: true
+  calibration:
+    terrestrial_curve: shcal20
+    marine_curve: marine20
+    # Min/Max cal BP (order not important; code handles it)
+    time_range: [651, 11650]
 
 testthat:
   <<: *default

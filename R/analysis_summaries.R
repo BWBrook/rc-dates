@@ -8,19 +8,29 @@ spd_to_tibble <- function(spd_obj) {
   import::from("tibble", "as_tibble", "tibble")
   df <- as_tibble(spd_obj$grid)
   nms <- names(df)
-  # Try common time column names first
-  time_candidates <- c("calBP", "calbp", "CalBP", "cal_year_bp", "calYearBP", "yearBP", "year", "time")
-  dens_candidates <- c("PrDens", "prdens", "Density", "density", "value", "spd")
+  nms_low <- tolower(trimws(nms))
+  # Candidate names (lower case)
+  time_candidates <- c("calbp", "cal_year_bp", "calyearbp", "yearbp", "year", "time")
+  dens_candidates <- c("prdens", "density", "value", "spd")
 
-  pick_first <- function(cands, nms) {
-    cands[which(tolower(cands) %in% tolower(nms))[1]]
+  find_actual <- function(candidates) {
+    for (cand in candidates) {
+      idx <- which(nms_low == cand)[1]
+      if (length(idx) == 1 && !is.na(idx)) return(nms[[idx]])
+    }
+    NA_character_
   }
-  tcol <- pick_first(time_candidates, nms)
-  dcol <- pick_first(dens_candidates, nms)
-  if (is.na(tcol)) tcol <- nms[[1]]
-  if (is.na(dcol)) dcol <- nms[[max(2, length(nms))]]
 
-  tibble(calBP = df[[tcol]], PrDens = as.numeric(df[[dcol]]))
+  tcol <- find_actual(time_candidates)
+  dcol <- find_actual(dens_candidates)
+  if (is.na(tcol)) tcol <- nms[[1]]
+  if (is.na(dcol)) {
+    # pick first column that's not tcol, or fallback to first
+    d_idx <- which(nms != tcol)[1]
+    dcol <- if (length(d_idx) == 1 && !is.na(d_idx)) nms[[d_idx]] else nms[[1]]
+  }
+
+  tibble(calBP = as.numeric(df[[tcol]]), PrDens = as.numeric(df[[dcol]]))
 }
 
 #' Frequency distribution (FD) from weighted mean calibrated ages
@@ -52,6 +62,10 @@ fd_from_weighted_means <- function(df, bin_width = 100, min_age = 651, max_age =
 kde_from_weighted_means <- function(df, from = 651, to = 11650, bw = 100, n = 512) {
   import::from("stats", "density")
   import::from("tibble", "tibble")
-  kd <- density(df$weighted_mean_calBP, from = from, to = to, bw = bw, n = n)
+  x <- df$weighted_mean_calBP
+  if (length(x) < 2 || all(is.na(x))) {
+    return(tibble(calBP = numeric(0), density = numeric(0)))
+  }
+  kd <- density(x, from = from, to = to, bw = bw, n = n)
   tibble(calBP = kd$x, density = kd$y)
 }

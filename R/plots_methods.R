@@ -24,28 +24,48 @@ method_palette <- function() {
 plot_methods_overlay <- function(spd_tbl, fd_tbl, kde_tbl, smooth_fd = TRUE, smooth_window = 3, standardise_mode = "area") {
   import::from("dplyr", "mutate", "select", "arrange", "bind_rows", "filter", "group_by", "ungroup", "case_when")
   import::from("zoo", "rollmean")
+  import::from("tibble", "tibble")
   import::from("ggplot2", "ggplot", "aes", "geom_line", "scale_color_manual", "scale_x_reverse", "scale_y_continuous", "labs", "theme_minimal")
 
-  spd_df <- spd_tbl |>
-    select(calBP, PrDens) |>
-    mutate(source = "SPD")
-
-  fd_df <- fd_tbl |>
-    mutate(source = "FD", calBP = bin, PrDens = value) |>
-    select(calBP, PrDens, source)
-
-  if (smooth_fd) {
-    fd_df <- fd_df |>
-      arrange(calBP) |>
-      mutate(PrDens = rollmean(PrDens, k = smooth_window, fill = NA, align = "center"))
+  # SPD coercion (defensive against column drift)
+  if (!all(c("calBP", "PrDens") %in% names(spd_tbl))) {
+    spd_df <- tibble(calBP = numeric(0), PrDens = numeric(0), source = "SPD")
+  } else {
+    spd_df <- spd_tbl |>
+      select(calBP, PrDens) |>
+      mutate(source = "SPD")
   }
 
-  kde_df <- kde_tbl |>
-    mutate(source = "KDE", PrDens = density) |>
-    select(calBP, PrDens, source)
+  # FD coercion
+  if (!is.null(fd_tbl) && all(c("bin", "value") %in% names(fd_tbl))) {
+    fd_df <- fd_tbl |>
+      mutate(source = "FD", calBP = bin, PrDens = value) |>
+      select(calBP, PrDens, source)
+    if (smooth_fd && nrow(fd_df) > 2) {
+      fd_df <- fd_df |>
+        arrange(calBP) |>
+        mutate(PrDens = rollmean(PrDens, k = smooth_window, fill = NA, align = "center"))
+    }
+  } else {
+    fd_df <- tibble(calBP = numeric(0), PrDens = numeric(0), source = "FD")
+  }
+
+  # KDE coercion
+  if (!is.null(kde_tbl) && all(c("calBP", "density") %in% names(kde_tbl))) {
+    kde_df <- kde_tbl |>
+      mutate(source = "KDE", PrDens = density) |>
+      select(calBP, PrDens, source)
+  } else {
+    kde_df <- tibble(calBP = numeric(0), PrDens = numeric(0), source = "KDE")
+  }
 
   combined <- bind_rows(spd_df, fd_df, kde_df) |>
     filter(!is.na(PrDens))
+
+  # Handle entirely empty input gracefully
+  if (nrow(combined) == 0) {
+    return(ggplot(tibble(calBP = numeric(0), PrDens = numeric(0)), aes(x = calBP, y = PrDens)))
+  }
 
   # Dynamic x-limits from available data to avoid warnings about removed rows
   x_max <- max(combined$calBP, na.rm = TRUE)
