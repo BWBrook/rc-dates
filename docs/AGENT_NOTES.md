@@ -35,3 +35,39 @@
   CI failure to the workflow's test/manifest steps not explicitly activating
   the project `renv`, and updated `.github/workflows/compendium-ci.yml` to
   source `renv/activate.R` and reuse `tests/run-tests.R`.
+- Replaced the placeholder manuscript scaffold with the real manuscript assets
+  staged in `/mnt/c/output`, moving the converted markdown, bibliography YAML,
+  JAS CSL, real figures, and draft cover letter into repo locations suitable
+  for the next `makedoc` cleanup/integration pass.
+- Updated `.gitignore` so real manuscript figure PDFs under `manuscript/figures`
+  can be tracked even though generated build PDFs remain ignored elsewhere.
+- Converted `manuscript/text/main.md` from pseudo-Markdown DOCX output into a
+  proper Markdown document structure, promoting headings, subsection levels,
+  end-matter labels, list syntax, and figure-block labels without yet cleaning
+  the prose or conversion cruft.
+- Cleaned a targeted set of conversion artefacts in `manuscript/text/main.md`,
+  then split author metadata and figure content back out into `makedoc`-native
+  files: `manuscript/authors.yaml` and `manuscript/text/figures.md`.
+- Rewired `settings/build.yaml` so the manuscript profile again uses a main text
+  file plus a separate figure file and structured author metadata, matching the
+  intended external-manuscript contract for `makedoc`.
+- Replaced the manuscript's hard-coded in-text citations with Pandoc/CSL
+  citation tokens matched to `references/refs.yaml`, and confirmed a
+  `pandoc --citeproc` dry run resolves them without unresolved citation output.
+- Performed a conservative follow-up cleanup of prose-level conversion cruft in
+  `manuscript/text/main.md` (hyphenation, punctuation, and a few clear
+  conversion typos), while leaving unresolved equations and other content-heavy
+  conversion gaps for a later, source-aware pass.
+- Restored the broken mathematical notation in the manuscript methods/results
+  text and figure captions, including the two likelihood definitions, AIC/OSE
+  notation, and nearby scientific symbols (`$\chi^2$`, `$\Delta R$`,
+  `$^{14}$C`), then verified the combined manuscript sources convert cleanly
+  through Pandoc when given the correct manuscript resource path.
+- Did a follow-up source-aware cleanup pass on the remaining non-math
+  conversion artefacts in the methods/results prose, focusing on clearly
+  mechanical wording and citation-placement glitches rather than substantive
+  rewriting, and revalidated the manuscript sources with Pandoc.
+- Did the corresponding source-aware cleanup pass on the discussion section,
+  fixing the remaining obvious DOCX-conversion artefacts and validating the
+  updated manuscript sources again through Pandoc before packaging the
+  manuscript-import cleanup work for commit.

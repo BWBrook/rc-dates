@@ -1,15 +1,19 @@
-title_note: Placeholder author metadata for the future paper migration.
 authors:
   - name: Barry W. Brook
     affiliations: [aff1]
     corresponding: true
-    email: barry.brook@example.org
-    orcid: 0000-0000-0000-0000
-  - name: Placeholder Coauthor
-    affiliations: [aff2]
-    corresponding: false
-    email: coauthor@example.org
-    orcid: 0000-0000-0000-0001
+    email: barry.brook@utas.edu.au
+  - name: Rebecca Wheatley
+    affiliations: [aff1]
+  - name: Christopher N. Johnson
+    affiliations: [aff1]
+  - name: Alan N. Williams
+    affiliations: [aff2, aff3]
+  - name: Sean Ulm
+    affiliations: [aff3]
+  - name: Luke A. Yates
+    affiliations: [aff1]
 affiliations:
-  aff1: School of Natural Sciences, University of Tasmania, Hobart, Australia
-  aff2: Placeholder collaborating institution, City, Country
+  aff1: School of Natural Sciences, University of Tasmania, Hobart, TAS 7001, Australia and ARC Centre of Excellence for Australia Biodiversity and Heritage.
+  aff2: EMM Consulting Pty Ltd, 20 Chandos Street, St Leonards, NSW 2065, Australia.
+  aff3: ARC Centre of Excellence for Indigenous and Environmental Histories and Futures, James Cook University, PO Box 6811, Cairns QLD 4870, Australia.

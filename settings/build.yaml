@@ -2,7 +2,7 @@ default_profile: default
 
 profiles:
   default:
-    description: Placeholder manuscript scaffold for future makedoc builds.
+    description: Radiocarbon sampling bias manuscript profile using converted artefacts.
     manuscript_sources:
       - ../manuscript/text/main.md
       - ../manuscript/text/figures.md
@@ -11,8 +11,8 @@ profiles:
       - ../manuscript/text/figures.md
     author_metadata: ../manuscript/authors.yaml
     bibliography: ../references/refs.yaml
-    csl: ../csl/journal-style.csl
-    journal: Placeholder Journal
+    csl: ../csl/journal-of-archaeological-science.csl
+    journal: Journal of Archaeological Science
     csl_search_dirs:
       - ../csl
     output_dir: dist

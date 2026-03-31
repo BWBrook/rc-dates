@@ -58,6 +58,7 @@ reports/_targets.yaml
 *.aux
 *.toc
 *.pdf
+!manuscript/figures/*.pdf
 AGENTS.md
 
 # _targets

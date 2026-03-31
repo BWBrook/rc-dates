@@ -11,6 +11,43 @@ The format is based on Keep a Changelog.
   migrated into the WSL document build workflow with valid placeholder inputs.
 
 ### Changed
+- Replaced the placeholder `makedoc` manuscript scaffold with the real
+  converted manuscript artefacts from `/mnt/c/output`, including the main
+  markdown draft, bibliography YAML, JAS CSL file, real figure files, and a
+  draft cover letter; the build profile now points at those real inputs.
+- Converted the manuscript's hard-coded in-text author-year references in
+  `manuscript/text/main.md` to Pandoc/CSL citation tokens matched against
+  `references/refs.yaml`, so `makedoc`/Pandoc can generate citations and the
+  reference list automatically.
+- Restructured `manuscript/text/main.md` into real Markdown section headings,
+  subsection headings, end-matter headings, and list syntax so the document is
+  usable as authored Markdown rather than raw DOCX-conversion output.
+- Split manuscript metadata into a `makedoc`-native scheme by restoring
+  `manuscript/authors.yaml`, moving figure captions and links into
+  `manuscript/text/figures.md`, and trimming conversion-only front matter and
+  embedded base64 figure blocks from `main.md`.
+- Cleaned a focused set of conversion artefacts in `main.md`, such as malformed
+  spacing before punctuation, escaped inline code underscores, and stray
+  soft-hyphen/non-breaking-hyphen characters, without otherwise editing the
+  manuscript wording or references.
+- Cleaned an additional pass of obvious prose-level conversion artefacts in
+  `manuscript/text/main.md`, including malformed hyphenation, citation-adjacent
+  punctuation, and a small set of conversion-driven spelling/spacing glitches,
+  while leaving equations and other content-bearing unresolved conversions for
+  a later pass.
+- Repaired the manuscript's broken likelihood/math notation in
+  `manuscript/text/main.md` and `manuscript/text/figures.md`, restoring the
+  $\ell^1$/$\ell^2$ likelihood definitions, the AIC expression, and related
+  inline scientific symbols such as $\chi^2$, $\Delta R$, and $^{14}$C where
+  the DOCX conversion had dropped or degraded them.
+- Performed a source-aware cleanup pass over the manuscript methods/results
+  prose in `manuscript/text/main.md`, tightening the remaining clearly
+  conversion-driven wording glitches and citation-adjacent artefacts without
+  changing the scientific substance.
+- Performed a matching source-aware cleanup pass over the manuscript
+  discussion prose in `manuscript/text/main.md`, fixing the remaining obvious
+  conversion artefacts and restoring a dropped contrast in the discussion of
+  smoother choice versus within-site sampling.
 - Made the bootstrap dependency set match the current compendium workflow by
   removing stale `qs`, removing unused `duckdb`, making `{magick}` optional,
   and ensuring `{here}` is installed for report and test paths.

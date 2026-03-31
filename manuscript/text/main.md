@@ -1,45 +1,233 @@
-# Placeholder Manuscript Title
+# Within-site sampling influences radiocarbon “dates-as-data” demographic reconstructions
 
 <div id="authors"></div>
 
+_Word count:_ ~6,000 (Abstract to Discussion)
+
 ## Abstract
 
-This placeholder manuscript scaffold exists so the repository can be wired into
-`makedoc` immediately from WSL. The text, references, figures, CSL, and author
-metadata in this folder are all stand-ins to be replaced with the real paper
-content in a later migration pass [@alpha2020PlaceholderWorkflow].
+Radiocarbon “dates-as-data” is a widely used technique in investigating past demographic and environmental change. Over the last decade, a range of methodological issues have been explored, however the impact of within-site sampling decisions is poorly quantified. Here we combine a Holocene subset of the AustArch database with simulations to measure how common archaeological field sampling at a site-level might affect summed probability distributions (SPD), kernel density estimates (KDE), and frequency distributions (FD) used to smooth and visualise data and make demographic inferences. We then apply a suite of date-subsampling patterns to either 50% or 100% of sites and use these results to parameterise simulations of synthetic population trajectories. Five within-site subsampling rules were used: all dates, random-*n* [n = 1, 3 or 5 dates selected], oldest, youngest, bracketed strata. Simulations generated radiocarbon determinations under three growth models (uniform, linear, exponential), with site counts, per-site sample sizes, and age–error structure based on the dataset. Inference used likelihood-based methods fitted to calibrated posteriors, with model choice by Akaike’s Information Criterion (AIC). Performance was assessed by model-recovery accuracy, parameter bias, and evidential strength (ΔAIC after accounting for estimation uncertainty). Three clear results emerge: i) strategies that preserve within-site temporal span, using all determinations or randomly sampling more than three samples per site, consistently yield high model recovery (~0.9), negligible bias in growth parameters, and strong information-theoretic support, largely independent of intensity; ii) extreme-focused and singleton rules degrade accuracy (~0.3–0.4), parameter estimates show large, directional biases, and ΔAIC margins shrink; and iii) once curves are normalised and aligned, differences among SPD, KDE, and FD are secondary to the within-site sampling influence. We conclude that, given real-world constraints, sampling strategies that preserve as much temporal span within sites as possible are far more informative than those targeting single ‘best’ or extreme contexts. When exhaustive dating is impossible, at least three randomly selected samples should form the minimum criteria for their use in broader radiocarbon modelling. We also propose that publishing information on within-site parameters used in radiocarbon modelling is essential to allow robust interrogation of bias and uncertainty.
 
 ## Keywords
 
-placeholder; reproducibility; manuscript workflow
+radiocarbon dating; archaeological demography; within-site sampling; dates-as-data; summed probability distributions; likelihood-based inference; simulation; Sahul.
 
-## Introduction
+## Highlights
 
-This starter file mirrors the structure expected by `makedoc`, including a
-title, author placeholder, headings, figure references, and Pandoc-style
-citations [@beta2021PlaceholderFigures; @gamma2022PlaceholderMigration].
+- We quantify how within-site sampling rules reshape radiocarbon “dates-as-data” demography using an AustArch-parameterised empirical–simulation design.
 
-## Methods
+- Once curves are normalised, within-site sampling dominates smoother choice (SPD/KDE/FD) for accuracy, bias, and ΔAIC support.
 
-The main manuscript should eventually live here. For now, this file simply
-confirms that citations, equations, and figure links render correctly.
+- Span-preserving strategies (all dates; random-*n* with n ≥ 3) deliver near-ceiling model recovery, negligible parameter bias, and strong evidential strength.
 
-\[
-S = \sum_{i = 1}^{n} x_i
-\]
+- Bracketing (oldest + youngest) aids model identification but induces predictable directional bias, while extreme-only and singleton rules perform poorly.
 
-We reference Fig. [1](#fig-placeholder-main), Fig. [2](#fig-placeholder-results),
-and supplementary Fig. [S1](#fig-placeholder-s1) so the cross-reference path is
-ready for the real manuscript.
+- We introduce a likelihood-based inferential framework operating directly on calibrated posteriors, yielding reproducible guidance for field design and analysis.
 
-## Results
+## 1. Introduction
 
-Placeholder narrative text continues here to exercise the DOCX and PDF build
-routes under `makedoc` [@alpha2020PlaceholderWorkflow].
+### 1.1 “Dates as data” for reconstructing past human population change
 
-## Discussion
+Archaeologists increasingly treat radiocarbon determinations as data for population inference, aggregating them to track temporal change in human activity and, by proxy, population size [@rick1987DatesDataExamination; @robinson2019SpatiotemporalDynamicsPrehistoric; @ulm1996RadiocarbonCulturalChronologies; @williams2016RadiometricDatesAre]. The attraction is straightforward: if more dated activity falls in one interval than another, then, other things being equal, more people were doing datable things in that interval. This logic has been applied from European Neolithic booms and busts [@shennan2013RegionalPopulationCollapse; @timpson2014ReconstructingRegionalPopulation] to Holocene dynamics in Sahul [@johnson2011ReconstructingDynamicsAncient; @williams2013NewPopulationCurve; @williams2012UseSummedRadiocarbon] and other regions [@brown2019MaoriPopulationGrowth; @chaput2016RadiocarbonDatesEstimates; @porcic2016DemographyEarlyNeolithic] and, more recently, to continental and supra-regional syntheses [e.g., @wirtz2024MulticentennialCyclesContinental]. Radiocarbon sample abundance has also been used to test this dates-as-data proxy for population size against independent estimates, and to track non-human dynamics, including late Holocene Californian populations and predator–prey systems [@bird2020FirstEmpiricalAnalysis; @codding2024CountsRadiocarbondatedArchaeological; @marom2024NotePredatorpreyDynamics; @roalkvam2025ComparingSummedProbability]. Several different analytical approaches are in common use. Summed probability distributions (SPD) remain the default [@crema2022StatisticalInferencePrehistoric; @williams2012UseSummedRadiocarbon], but fixed-bin frequency distributions (FD [@brown2015FilterDarklyPopulation; @michczynska2007FrequencyDistributionRadiocarbon; @surovell2007NoteUseTemporal]), kernel density estimates (KDE [@bronkramsey2017MethodsSummarizingRadiocarbon; @mendez-quiros2023ModelingLongtermHuman]), and more explicit population or occupancy models [@johnson2011ReconstructingDynamicsAncient; @robinson2019SpatiotemporalDynamicsPrehistoric] have all been used as alternatives.
 
-Replace this file with converted manuscript markdown once the source Word
-document and supporting files are ready.
+None of these approaches is immune to bias. Physical processes cause differential preservation of older archaeological material, producing the familiar “pull of the recent” [@bluhm2019ValidationGlobalModel; @surovell2009CorrectingTemporalFrequency]. Research effort varies across space and time. The radiocarbon calibration curve introduces non-Gaussian structure that can be aliased by binning and smoothing [@carleton2021SumThingsAre; @crema2022StatisticalInferencePrehistoric; @ramsey2024DevelopmentINTCALDatabase]. Correctives such as taphonomic adjustments [@peros2010PrehistoricDemographyNorth; @williams2012UseSummedRadiocarbon], binning protocols [@williams2012UseSummedRadiocarbon], and simulation-based tests [@shennan2013RegionalPopulationCollapse; @williams2015HoloceneDemographicChanges] have therefore become standard. Recent work has gone further, arguing that SPDs themselves lack a clear statistical definition and exploring alternatives that treat dated events as count or Poisson processes rather than as smoothed probability densities [@crema2025BayesianAlternativeAoristic; @denavascues2025AnalysisAbundanceRadiocarbon; @hanna2025SumPoissonApproach; @heaton2025NewApproachRadiocarbon]. Yet another source of distortion sits closer to the formation of datasets in day-to-day practice and yet has received less systematic attention: the question of which contexts within each site are dated in the first place and how many samples are ultimately collected [@williams2012UseSummedRadiocarbon]. Here, we explore this question and how it affects the results produced by radiocarbon data proxies.
+
+### 1.2 Overview of common analytical approaches and biases
+
+Budgets, research aims, sample availability, and preservation constraints mean that archaeologists rarely date every context at a site. Sampling intensity is therefore highly variable and constrained by site-specific and budgetary factors, and it is still common for only a few samples to be collected from any given site. While there are no specific rules for sampling, it is common to “date the oldest layer to anchor the sequence”, “date the youngest to bracket occupation”, “pick one representative hearth”, or “take two dates, oldest and youngest” [@bronkramsey2017MethodsSummarizingRadiocarbon; @price2021EndtoendBayesianAnalysis].
+
+Database realities reflect this: single-date sites are commonplace and/or two-date sites are often used to bracket occupancy [@saktura2023SahulArchGeochronologicalDatabase; @williams2014AustArchDatabase14C; @williams2013NewPopulationCurve]. This pattern is particularly marked in legacy datasets compiled from mid- and late-twentieth century investigations when the use of radiocarbon was in its infancy and not readily available, although the number of dates per site has increased in recent projects as AMS determinations have become cheaper and more routine. It has been noted that such choices can skew SPDs or other aggregators [@contreras2014SummedRadiocarbonCalibrations; @crema2022StatisticalInferencePrehistoric; @williams2012UseSummedRadiocarbon], however the magnitude of within-site sampling effects, and how they interact with downstream analytic choices, remains under-quantified even in recent model-based work. For example, if many sites contribute only their oldest or youngest context, regional curves might look too early or too late; if singletons dominate, within-site variance is suppressed. Since these decisions are heterogeneous and often undocumented, their influence is hard to separate from taphonomy and research intensity in observational datasets.
+
+This study targets that gap. We combine an empirical Holocene reference set from the AustArch radiocarbon database of Sahul [@williams2014AustArchDatabase14C] with controlled simulations to isolate the inferential consequences of within-site sampling regimes. From AustArch we quantify typical site-level date counts, temporal spans and age–error structure, and show how common within-site rules reshape aggregate SPDs, KDEs and FDs. We then embed these empirically derived patterns in a large simulation study where the true population trajectories are known, applying alternative within-site rules to dates drawn from simple growth models and fitting them with population-growth likelihoods to assess model recovery, parameter bias and evidential strength.
+
+A key methodological pivot underpins the analysis. Rather than read population history off a smoothed regional curve, we treat each calibrated determination as a probability distribution over calendar time and construct likelihoods for explicit population-growth models. We summarise performance using maximum likelihood and Akaike’s Information Criterion (AIC) [@akaike1974NewLookStatistical], focusing on model-recovery accuracy, parameter bias, and the strength of support for the preferred model, with SPDs, KDEs and FDs used as descriptive summaries. In this respect our approach sits alongside recent Poisson and count-based frameworks that model radiocarbon sample occurrence directly [@crema2025BayesianAlternativeAoristic; @denavascues2025AnalysisAbundanceRadiocarbon; @hanna2025SumPoissonApproach; @heaton2025NewApproachRadiocarbon], but it targets a different source of distortion: the within-site rules that determine which contexts enter those models in the first place.
+
+### 1.3 Aims and approach of the present study
+
+In this context our aims were to:
+
+1. Diagnose, under conditions that mimic real site structures, the magnitude and direction of distortions produced by plausible within-site sampling rules.
+
+2. Assess how far a likelihood-based, dates-as-data workflow operating on calibrated posteriors can recover simple population-growth models under those distortions.
+
+3. Direct these results towards practical guidance for study design under resource constraints: what is gained by dating everything; how far smaller random samples per site can stand in; and what is lost under singleton or extremes-focused strategies.
+
+The scope of the paper is deliberately methodological. We do not attempt to reconstruct Australian population history, nor do we correct for taphonomy or variable research intensity, which are well documented and important [@bluhm2019ValidationGlobalModel; @peros2010PrehistoricDemographyNorth; @surovell2009CorrectingTemporalFrequency; @williams2012UseSummedRadiocarbon; @williams2013NewPopulationCurve]. Rather, our focus is a different lever: within-site selection, which has been discussed previously, but yet to be robustly measured. By anchoring simulations in AustArch, calibrating with contemporary curves, we aim to turn the general warning that “what gets dated matters” into a practical rule set for future work, complementing recent probabilistic frameworks for radiocarbon-driven palaeodemography [@arthur2023ProbabilisticReconstructionPaleodemographic; @denavascues2025AnalysisAbundanceRadiocarbon; @heaton2025NewApproachRadiocarbon].
+
+## 2. Methods
+
+### 2.1 AustArch data analysis
+
+#### 2.1.1 Study context and empirical reference set
+
+Our aim was to quantify how decisions on the within-site temporal distribution of radiocarbon dates, whether deliberate or inadvertent, distort regional “dates-as-data” inference. To anchor the analysis in realistic site structures we parameterised the study from AustArch [@williams2014AustArchDatabase14C], a continental-scale compilation for Sahul (5,044 determinations from 1,748 sites). Curation to a final Holocene-only subset proceeded in three passes.
+
+1. Initial screening. We retained radiocarbon determinations (both conventional and AMS) with reported ages and one-sigma errors; records flagged as erroneous or unrelated to human activity were removed. In AustArch this corresponds to records tagged simply as “radiocarbon”, regardless of the underlying laboratory technique. Ages were initially restricted to 100–20,000 $^{14}$C yr BP so that all possible Holocene observations lay within the SHCal20 or Marine20 calibration ranges [@heaton2020Marine20TheMarineRadiocarbon; @hogg2020SHCal20SouthernHemisphere; @ramsey2024DevelopmentINTCALDatabase; @reimer2020INTCAL20NorthernHemisphere].
+
+2. Material and context filtering. To reduce laboratory and reservoir idiosyncrasies we accepted charcoal/wood, human bone collagen, and well-attested freshwater or marine shells from clearly anthropogenic contexts (e.g., rock shelters, middens, hearths, earth mounds). Ambiguous contexts and “unusable” designations were excluded. Duplicate laboratory codes indexing the same context/material were combined when compatible ($\chi^2$ test) using rcarbon::combine.
+
+3. Holocene restriction and site eligibility. Dates were first calibrated and then truncated to the Holocene window 11,650-651 cal BP; the upper bound avoids near-modern boundary effects. We kept only sites contributing ≥5 valid Holocene determinations, yielding a final reference set of 976 determinations from 116 sites (median 7.5 dates per site). Weighted-mean calibrated ages were computed for descriptive plots only; all inference used the full calibrated posteriors.
+
+All processing was done in R 4.5.1 [@rcoreteam2025LanguageEnvironmentStatistical], using the tidyverse for data handling and rcarbon [@crema2021InferenceLargeSets] for calibration. Random seeds were set at the start of each Monte Carlo block for reproducibility.
+
+#### 2.1.2 Baseline demographic curves
+
+The curated AustArch set defines an “all-dates” baseline (Fig. 1) against which sub-sampling scenarios can then be compared (Fig. 2). We constructed three familiar summaries on a common 100-yr calendar grid:
+
+1. Summed probability distribution (SPD). Calibrated posterior grids were summed and then smoothed with a 100-yr running mean.
+
+2. Frequency distribution (FD). Simple counts in 100-yr bins were computed using each date’s median calibrated age.
+
+3. Kernel density estimate (KDE). A Gaussian KDE (bandwidth 100 yr) was centred on each median calibrated age.
+
+Each curve was normalised to unit area; for joint display the SPD and KDE were re-binned to the FD grid to avoid visual aliasing. Note that these curves provide descriptive context only and do not enter the likelihood-based inference.
+
+#### 2.1.3 Within-site sub-sampling experiments
+
+To mimic common field and budget constraints, we imposed five within-site rules on the AustArch reference set: i) singleton-random: one random determination per treated site; ii) random-*n*: a fixed number of random determinations per treated site (here set to *n* = 5; see Fig. 2); iii) oldest: the determination with the earliest median calibrated age; iv) youngest: the determination with the latest median calibrated age; v) bracketed: the pair consisting of the oldest and youngest determinations.
+
+Each rule was applied at two intensities: 50% of sites treated (with the remainder contributing all dates) or 100% treated; the all-dates baseline (Fig. 1) is equivalent to 0% in this framing. For stochastic rules we ran 1,000 Monte Carlo realisations per scenario. For deterministic rules, randomness enters only via the 50% site subset; we also generated 1,000 draws of that subset.
+
+A single realisation comprised: i) sampling the treated sites (if intensity < 100%); ii) selecting date indices within treated sites according to the rule; iii) appending all dates from untreated sites; iv) calibrating determinations with SHCal20 (terrestrial) or Marine20 (shells) (for the purposes of simulation no regional marine offset, or $\Delta R$, was applied in calibrating marine dates); and v) computing SPD, FD, and KDE curves and re-normalising to unit area. For every rule × intensity combination we calculated, at each calendar bin, the mean and 2.5th/97.5th percentiles across realisations. Discrepancy from the all-dates baseline SPD was summarised using `rcarbon::compare_spds`. Figures plot the baseline together with the Monte Carlo mean and 95% interval.
+
+These empirical experiments are used diagnostically to show how within-site rules deform regional aggregates, rather than as demographic reconstructions.
+
+### 2.2 Simulation study
+
+#### 2.2.1 Sample-size and age-error models based on empirical data
+
+To ensure our simulations reflected realistic archaeological dating scenarios, we used the cleaned and filtered AustArch dataset (section 2.1) to parameterise key aspects of radiocarbon sampling. We fitted a truncated negative binomial distribution (minimum 5 dates per site) to the distribution of sample sizes across archaeological sites, capturing the typical variation in dating intensity between sites. We also performed linear regression of logged standard errors against median calibrated radiocarbon ages to model how measurement uncertainty varies with sample age.
+
+#### 2.2.2 Growth models, synthetic-data generation, and sampling strategies
+
+For the Holocene-restricted date range (11650 – 651 cal BP), we defined three population growth models as unit normalised, truncated probability densities: constant (uniform), linearly increasing, and exponentially increasing. Unit normalisation completely determines the uniform density, and it constrains the truncated linear and exponential distributions to one-parameter models which can be uniquely characterised by specifying the proportionate increase in population over the restricted date range.
+
+Each synthetic radiocarbon dataset was characterised by the choice of growth model. For the linear and exponential models, we fixed their distributions by specifying a 10-fold population increase, close to the Holocene increase found by @johnson2011ReconstructingDynamicsAncient. To simulate a dataset, we drew a set of site sample sizes from the negative binomial sample-size model, and calibrated ages from the probability distribution of the specified growth model. To ensure median calibrated dates would lie in the restricted date range, we uncalibrated these ages, simulated standard errors from the age–error model, then recalibrated the dates using rcarbon.
+
+We evaluated seven sampling strategies across three levels of bias intensity (50%, 75%, or 100% of sites). The strategies comprised: all dates (using every available radiocarbon determination), singleton (random-1), random-3, and random-5 (selecting dates randomly without replacement from each site), oldest (selecting the oldest date from each site), youngest, and bracketed (selecting both oldest and youngest dates from each site). Sites not selected for the biased sampling strategy (i.e., at the 50% and 75% intensities) contributed all their dates.
+
+#### 2.2.3 Likelihood calculation, model fitting and model selection
+
+Rather than using smoothed representations of the data such as kernel densities or regressions that do not respect unit normalisation, we fitted the normalised population growth distributions directly to the calibrated dates. Given the distributional nature of the calibrated dates, we considered two possible definitions for the pointwise log-likelihood $\ell_i$:
+
+$$
+\ell_i^1 = \log \int f(x \mid \theta)\, p_i(x)\, dx
+$$
+
+and
+
+$$
+\ell_i^2 = \int \log\!\bigl(f(x \mid \theta)\bigr)\, p_i(x)\, dx
+$$
+
+where $f(x \mid \theta)$ is the probability density of the growth model, $p_i(x)$ is the posterior probability density of the calibrated age, and $\theta$ is the distributional parameter to be estimated. The $\ell^1$ approach is more commonly used for response-error distributions, while $\ell^2$ is often used to compute information criteria [@gelman2013BayesianDataAnalysis]. In practice, the calibrated age distribution $p_i(x)$ is represented as a discrete set of values, and the integrals are replaced by finite sums. The $\ell^2$ approach is equivalent to fitting models directly to SPD curves, where each discrete probability value under the growth model is weighted by its corresponding SPD density and the total number of discrete points.
+
+We fitted all models by maximum likelihood estimation using each definition of the log likelihood. We then computed the Akaike Information Criterion ($\mathrm{AIC} = -2\ell + 2k$), where $\ell = \sum_{i=1}^N \ell_i$ is the total log likelihood of the fitted growth model and $k$ is the number of estimated parameters [@akaike1974NewLookStatistical], and applied the modified one-standard-error (OSE) rule to identify models that have comparable AIC estimates while accounting explicitly for estimation uncertainty [@yates2021ParsimoniousModelSelection]. Specifically, the OSE rule selects models with $\Delta \mathrm{AIC} \le \mathrm{SE}(\Delta \mathrm{AIC})$, where $\Delta \mathrm{AIC}$ is the difference from the minimum AIC and $\mathrm{SE}(\Delta \mathrm{AIC})$ is the standard error of the pointwise $\Delta \mathrm{AIC}$ values across sites.
+
+Note that @timpson2021DirectlyModellingPopulation propose a likelihood equivalent to our $\ell^1$, although they chose to use BIC rather than AIC for their model comparison. They argue against using SPD curves as input data for models, although we show that the same results are achieved so long as the contributing points are appropriately weighted (our $\ell^2$).
+
+#### 2.2.4 Simulation design and performance evaluation
+
+We generated 1,000 simulated datasets for each of the three population models (uniform, linear, exponential). Each dataset was then subsampled using all sampling strategies and bias intensities, resulting in 63,000 total analysis scenarios. For every subsampled dataset, we fitted all three candidate models using both likelihood approaches and applied both minimum AIC and OSE model selection rules.
+
+We evaluated sampling strategy performance using three metrics: i) *accuracy* – the proportion of simulations correctly identifying the true population model, ii) *parameter bias* – the difference between estimated and true model parameters for linear and exponential models, and iii) *evidential strength* – the proportion of simulations where the OSE rule selected only the true model without ambiguity. Bootstrap resampling (1,000 iterations) was used to generate confidence intervals for accuracy estimates.
+
+### 2.3 Reproducibility
+
+All code, random seeds, and intermediate results (site subsets, index matrices, re-binned summaries, simulation outputs) are archived in a Zenodo release and GitHub repository, enabling full reproducibility checks without re-running calibration. High-volume simulation runs were parallelised on institutional high-performance computing.
+
+## 3. Results
+
+### 3.1 Empirical behaviour of the AustArch reference set
+
+Figure 1 shows the 0% sub-sampling baseline: all eligible determinations calibrated with SHCal20 or Marine20, then summarised as SPD, KDE, and FD curves on a common 100-year grid. At centennial resolution, the three aggregators agree closely. The FD is jagged by construction, the KDE is slightly smoother, and the smoothed SPD tracks the KDE. The broad pattern is familiar: low and noisy early-mid Holocene values, a gradual rise through the mid-to-late Holocene, and a steep increase in the last two millennia. Since each curve is normalised to unit area, these displays describe relative density only, serving as a visual anchor for the sub-sampling experiments.
+
+Figure 2 illustrates how plausible within-site sampling rules deform this baseline when applied to 50% or 100% of sites. Choosing the oldest determination per site converts the dataset toward a distribution of site onsets. At 100% intensity the FD develops step-like mid-Holocene plateaus and the SPD/KDE shift mass from the most recent centuries into earlier periods; at 50% intensity these effects are diluted by the untreated half of sites. Selecting the youngest determination produces the mirror distortion. With 100% intensity the very recent peak is attenuated, and structure is redistributed into the mid-to-late Holocene; at 50% the curves track the baseline more closely but still show a damped recent amplitude.
+
+The bracketed rule (oldest + youngest) preserves site spans but reweights probability toward their edges. Even when applied to every site, the overall shape remains similar to the baseline, yet the very late Holocene mass is only modestly elevated relative to mid-span levels. The singleton rule (one random determination per treated site) is approximately unbiased in expectation but volatile: Monte Carlo ribbons widen across the Holocene, especially with 100% sampling intensity when every site is reduced to a single date. In contrast, the random-5 rule (multiton in Figure 2) preserves span while capping per-site influence; the resulting curves are visually close to the baseline and uncertainty ribbons are narrow. Across all panels, differences among SPD, KDE, and FD are minor compared with the effect of the within-site rule. This motivates the simulation analysis.
+
+### 3.2 Simulation experiments
+
+All simulation results reported here use the $\ell^1$ likelihood; the $\ell^2$ variant yields qualitatively identical patterns (Supplementary Information). We summarise three metrics: (i) model-recovery accuracy, the proportion of simulations in which minimum AIC selects the true growth model; (ii) parameter bias, the deviation of the estimated slope (linear generating model) or rate (exponential generating model) from its true value; and (iii) evidential strength, the proportion of simulations for which the OSE rule selected the true model without ambiguity; i.e., no other models had a $\Delta \mathrm{AIC}$ estimate within one standard error (using pointwise estimates) of zero.
+
+#### 3.2.1 Model recovery
+
+Model recovery is summarised in Figure 3. Span-preserving strategies sit near the ceiling and are insensitive to intensity. Using all dates or random-5 recovers the correct family in roughly 0.92–0.96 of replicates across 50%, 75%, and 100% application. Random-3 performs slightly worse but remains high and stable. Reducing each treated site to a singleton leads to a monotonic decline: performance near 0.95 when only half of sites are affected falls into the mid-0.8s when every site is reduced to one date.
+
+Boundary-focused rules fare poorly. Oldest-only appears accurate at low intensity but collapses as the rule is applied to more sites, falling to roughly one-third correct at 100%. Youngest-only performs poorly at all intensities, with accuracy around 0.4 and even worse performance as more sites are subjected to the rule. The bracketed rule is mid-tier (~0.65) and largely flat across intensities: it clearly outperforms either extreme alone, but it does not match the span-preserving random-sampling strategies.
+
+#### 3.2.2 Parameter bias
+
+Parameter estimation gives a sharper view of these differences (Fig. 4). When the generating model is exponential, the growth rate is effectively unbiased under all dates and random-*n*. The oldest and youngest rules show strong, sign-opposed biases that increase with intensity: oldest underestimates the rate (negative bias), youngest overestimates it (positive bias), and bracketed inherits a milder averaged negative bias. Under linear truth, slopes behave similarly on a tighter scale.
+
+#### 3.2.3 Evidential strength
+
+Evidential strength, measured as the proportion of simulations where the OSE rule selected only the true population model without ambiguity, distinguishes methods that are often correct from those that are both correct and decisive (Fig. 5). The all-dates rule is near 0.9 at every intensity, indicating that adding more sites does not dilute the signal when within-site span is preserved. Random-5 is next best, drifting modestly downward as more sites are capped at five determinations; random-3 is lower and declines more steeply. Random-1 experiences the sharpest loss of power, falling from roughly three-quarters to less than half of replicates as the rule is applied to all sites.
+
+Boundary-focused strategies again perform poorly. Oldest-only collapses with intensity, moving from mid-range to low support. Youngest-only is low and essentially flat, consistent with its weak performance in accuracy. Bracketed is mid-tier and largely invariant with intensity: the additional information gained from using both boundaries helps discriminate growth families better than singletons at higher sampling.
+
+### 3.3 Synthesis
+
+Taken together, the empirical (Fig. 2) and simulation (Figs 3–5) results clarify the mechanism visible in the AustArch reference dataset (Fig. 1). First, after normalisation, the choice among SPD, KDE, and FD smoothers is a second-order concern; the dominant source of distortion is what is dated within sites. Second, site coverage matters, but it cannot compensate for a poor within-site rule: forcing every site into oldest-only, youngest-only, or singleton regimes reduces both accuracy and confidence, and induces large, directional parameter biases. Third, the efficient approach in resource-constrained settings is random-*n* with n ≥ 3, as this preserves within-site span, achieves near-ceiling model recovery, yields negligible bias in slopes and rates, and maintains strong ΔAIC margins. Bracketing is an acceptable compromise when only two dates per site are feasible, and it does improve growth-model identification relative to singletons, but it introduces predictable bias that grows with intensity and should be acknowledged or corrected.
+
+## 4. Discussion
+
+### 4.1 Within-site sampling as the dominant lever
+
+Our study proposed to measure, under controlled conditions, how within-site sampling choices propagate into regional demographic inference from radiocarbon determinations. The core result is simple: once curves are normalised and placed on a common grid, the choice among SPDs, FDs, and KDEs is relatively minor. The dominant issue is what gets dated within each site, and how many samples are collected. Rules that preserve within-site temporal span (using all dates or drawing a small random set of determinations per site) recover the correct growth-model family reliably, yield near-zero bias in growth parameters, and sustain clear ΔAIC margins. Rules that promote temporal extremes (oldest, youngest) or reduce sites to single samples depress accuracy, induce strong directional bias, and erode evidential strength as their use becomes more pervasive. These outcomes are not taphonomic, but arise even in an idealised archive where research intensity has been held constant.
+
+The empirical AustArch panels make the mechanism visible without inviting historical interpretation. Starting from an all-dates baseline, imposing the oldest-only rule approximates a distribution of site onsets and shifts mass earlier; the youngest-only rule does the opposite. Bracketing preserves span but reweights to edges of the curve, subtly lifting the early and very recent shoulders. Reducing sites to singletons inflates between-realisation variance. In contrast, taking several random dates per site keeps the curves close to the baseline (i.e., closest to the full-data pattern). The simulations then quantify these patterns: span-preserving strategies keep model-recovery accuracy near the ceiling, parameter bias near zero, and evidential strength high, whereas extremes and singletons do the opposite, with bracketing in between. In short, increasing site coverage cannot compensate for a bad within-site rule. Rather, more sites can simply make us more certain of the wrong or increasingly inaccurate answers.
+
+### 4.2 Rethinking “dates-as-data” method debates
+
+These results reframe several long-running debates in the dates-as-data literature. A great deal of attention has focused on the relative merits of SPDs, KDEs, and FD count aggregators, and on the extent to which calibration wiggles, bin widths, and bandwidths might mislead [@bronkramsey2017MethodsSummarizingRadiocarbon; @brown2015FilterDarklyPopulation; @carleton2021SumThingsAre; @crema2022StatisticalInferencePrehistoric; @crema2016SummedProbabilityDistribution; @riris2018DatesDataRevisited; @shennan2007PrehistoricPopulationHistory; @smith2016UseSummedprobabilityPlots; @surovell2007NoteUseTemporal; @williams2012UseSummedRadiocarbon]. More recently, several authors have proposed fully model-based alternatives that treat radiocarbon determinations as events in count or Poisson processes, or as temporally uncertain observations in Bayesian frameworks, rather than as inputs to SPD [@arthur2023ProbabilisticReconstructionPaleodemographic; @crema2025BayesianAlternativeAoristic; @denavascues2025AnalysisAbundanceRadiocarbon; @hanna2025SumPoissonApproach; @heaton2025NewApproachRadiocarbon]. Our findings do not deny those sensitivities, but they do identify a more critical issue: if many sites contribute only their earliest or latest context, or indeed a single arbitrary context, then the regional evidence will be compromised before any SPD, KDE, or FD is drawn or any statistical models are fitted.
+
+Uneven sampling has been flagged before [@contreras2014SummedRadiocarbonCalibrations; @crema2022StatisticalInferencePrehistoric; @williams2012UseSummedRadiocarbon], and recent process-based models sharpen how we treat regional counts and event rates [@crema2025BayesianAlternativeAoristic; @denavascues2025AnalysisAbundanceRadiocarbon; @hanna2025SumPoissonApproach; @heaton2025NewApproachRadiocarbon], but the magnitude of within-site sampling effects and their interaction with model choice and parameter estimation have not, to our knowledge, been quantified under controlled conditions. Likelihood-based methods offer a way out of the “smoother wars”: SPDs, KDEs, and FDs become descriptive tools for exploring and communicating broad structure, while the demographic question is asked at the level of an explicit model fitted to calibrated posteriors. Studies comparing SPDs derived from different proxies, such as shoreline positions versus radiocarbon dates [@roalkvam2025ComparingSummedProbability], underline that even methodologically careful curves can diverge sharply when the underlying sampling process differs. Our results show that within-site decisions on dating are a major component of that process.
+
+In terms of population-growth modelling, this work contributes to the ongoing debate about using SPDs as input data for statistical models [@freeman2018CultureProcessInterpretation; @timpson2015InferentialMistakesPopulation; @torfing2015NeolithicPopulationSummed] and provides a robust model-selection approach. @timpson2021DirectlyModellingPopulation employed a marginal likelihood (our $\ell^1$) and used BIC to mitigate overfitting, which they attribute to deficiencies of alternative likelihood constructions. Here we use the OSE rule with AIC to mitigate overfitting [@yates2021ParsimoniousModelSelection], which retains an information-theoretic interpretation and identifies a parsimonious set of models with comparable expected predictive performance. Because our growth families are low-dimensional, we do not fully exploit the parsimony advantages of the OSE rule; for parameter-rich models (e.g., with multiple changepoints), it would be especially useful for selecting the simplest model whose $\Delta \mathrm{AIC}$ lies within one standard error of the minimum. Although we focus on the effects of sampling biases using a simple class of growth models, the likelihood framework is easily extended to more complex growth structures in both frequentist and Bayesian settings.
+
+### 4.3 Implications for legacy datasets, study design and database reporting
+
+It has generally been considered that large, aggregated samples (for example, >50 dates) are sufficient to reduce or remove local idiosyncrasies [see @timpson2014ReconstructingRegionalPopulation; @williams2012UseSummedRadiocarbon]. Large global syntheses and regional validation exercises make clear why this belief is appealing but not robust: impressive sample sizes can underpin striking demographic narratives or proxy tests [@brown2019MaoriPopulationGrowth; @chaput2016RadiocarbonDatesEstimates; @codding2024CountsRadiocarbondatedArchaeological; @porcic2016DemographyEarlyNeolithic; @wirtz2024MulticentennialCyclesContinental], yet they still inherit whatever biases are built into the underlying dataset and sampling techniques. Our results suggest the opposite: if within-site contributions are systematically extreme, adding more sites just increases precision around a biased estimator. What matters is not only how many determinations exist, but how much temporal span within sites those determinations cover. A database with modest totals but three to five randomly chosen contexts per site can outperform a much larger database with biased within-site sampling.
+
+These problems are most acute for legacy datasets assembled during periods when radiocarbon determinations were expensive and laboratory capacity limited, and it was routine to date only one or two contexts per site. Contemporary projects, benefitting from cheaper AMS measurements and more explicit sampling designs, typically generate higher per-site counts and are less vulnerable to the worst-case scenarios we simulate here. Nonetheless, most large regional and continental compilations have large numbers of older, sparsely dated sites [@bird2022P3k14cSyntheticGlobal; @loftus2019ArchaeologicalRadiocarbonDatabase; @lucarini2020MedAfriCarbonRadiocarbonDatabase; @saktura2023SahulArchGeochronologicalDatabase], so the within-site biases we quantify are still inevitably baked into much of the evidence base.
+
+The implications for field practices and sampling strategies are clear. If budgets allow, dating all eligible contexts is preferred on every metric; when that is impossible, a small random sample per site ($n \ge 3$) would be needed to allow integration of the data into broader radiocarbon analyses, preserving span while capping per-site influence and still delivering high model recovery and negligible parameter bias. Systematic aggregation pipelines now exist for constructing regional $^{14}$C datasets and standardising key metadata [e.g., @bird2022P3k14cSyntheticGlobal; @bunbury2025RobustDemographicModels; @loftus2019ArchaeologicalRadiocarbonDatabase; @lucarini2020MedAfriCarbonRadiocarbonDatabase], but even careful workflows rarely encode the within-site selection rules that our simulations identify as a primary source of inferential risk.
+
+Repositories should, wherever possible, record the within-site decisions that were made when choosing what to date, the number of determinations per site, and simple descriptors of stratigraphic span. Published analyses should report not only the best performing model, point estimates and their confidence or credible intervals, but also detailed summaries of model-selection score estimates and associated uncertainties, so that accuracy and confidence can be distinguished. Without such metadata it is difficult to know whether regional trends reflect human history, taphonomy, or extreme-focused sampling; with it, analysts can run more realistic simulations, implement bias corrections for bracketed designs, and down-weight or exclude pathological cases.
+
+### 4.4 Interactions with taphonomy and research intensity
+
+Our experiments held taphonomy and research intensity constant to isolate the site-level mechanism, but in real archives both forces act together [@becerra-valdivia2020ChallengesSampleProcessing; @bluhm2019ValidationGlobalModel; @contreras2024LandscapeTaphonomyPredictably; @peros2010PrehistoricDemographyNorth; @shennan2013RegionalPopulationCollapse; @surovell2009CorrectingTemporalFrequency; @williams2012UseSummedRadiocarbon]. In such settings, within-site selection can compound the elevation of recent samples and/or suppress genuine early peaks. Applications that read long-term robustness, hazard, or ecological interaction from radiocarbon-based SPDs and related summaries [@marom2024NotePredatorpreyDynamics; @roalkvam2025ComparingSummedProbability; @stutz2025HiddenHazardsLongTerm] inevitably reflect the combined effects of these processes, including the within-site rules we quantify here. The order of operations therefore matters: correcting for taphonomy on an evidence base already skewed by oldest-only or singleton practices risks compounding error.
+
+A more robust workflow is to: i) review and, where possible, redesign site-level sampling to maximise data points; ii) fit population models to calibrated posteriors using a likelihood framework; and, if necessary, iii) layer taphonomic or research-intensity adjustments and test their leverage with simulations. This sequence keeps the largest controllable source of bias - within-site selection - closest to the data and exposes the incremental effect of taphonomic corrections against an archive that already preserves within-site span.
+
+### 4.5 Limitations and future directions
+
+The study is deliberately conservative in several respects. We consider three simple growth families on a fixed Holocene window, whereas real histories show pulses, plateaus, and regime shifts. The likelihood-based approach we use would extend naturally to piecewise-linear or spline-regularised families, but we have not fitted them here. Sites were treated as exchangeable, with spatial heterogeneity and material-specific offsets not modelled explicitly. Calibration-curve uncertainty and laboratory systematics were propagated through the posteriors but were not treated as additional sources of parameter uncertainty, and we did not attempt to model the process by which contexts are selected for dating.
+
+Our findings identify several opportunities for further analysis, including: i) embedding the date-level likelihoods in hierarchical models that pool information across regions and materials while allowing local deviation; ii) designing bias-aware estimators for bracketed sampling, providing corrected parameters with appropriate uncertainty; and iii) building “design-to-inference” workflows that allow for translation of budget scenarios into expected accuracy, bias, and statistical power. Existing probabilistic and hierarchical treatments of radiocarbon and related temporal data [@arthur2023ProbabilisticReconstructionPaleodemographic; @crema2025BayesianAlternativeAoristic; @crema2017SpatiotemporalApproachesArchaeological; @denavascues2025AnalysisAbundanceRadiocarbon; @demjan2016ModellingDistributionArchaeological; @heaton2025NewApproachRadiocarbon] provide ready templates for these extensions that could be coupled explicitly to models of within-site selection. More generally, the framework could be adapted to richer demographic models, including pulse-like events and multi-phase histories, while retaining the core approach of modelling each calibrated determination as a probability distribution rather than a single point.
+
+### 4.6 Conclusions
+
+Overall, our analysis provides two key findings in the use and application of radiocarbon data as a proxy for past demographic and environmental change. First, our results indicate that SPDs, KDEs, and FDs remain valuable as descriptive summaries and for broader communication, but they should not bear the full weight of inference. Likelihood-based methods allow demographic questions to be posed at the level of explicit models while preserving the calibration and uncertainty of each determination. Second, sampling strategies for archaeologists should seek to ensure a minimum of three chronological determinations are recovered; and these should seek to maximise the temporal span within the site (i.e. not focus on a single or limited strata). If three or five dates per site sound expensive, weigh that cost against the cost of large regional programmes that produce precise but biased answers; a modest number of well-chosen determinations per site yields substantial gains in inferential reliability.
+
+In summary, “dates-as-data” demography is not fundamentally flawed by sampling idiosyncrasy, but it is only as credible as the within-site decisions that form the foundation of the datasets used. Our empirical demonstrations show how malleable aggregate curves are to those decisions; our simulations quantify the resulting losses in model recovery, parameter accuracy, and evidential strength; and our likelihood-based framework provides a way forward that is not dependent on smoothing choices.
+
+## Authors' contributions
+
+All authors co-designed or co-contributed to the ideas behind the study. R.W. collected the data. B.W.B., R.W. and C.N.J. planned the paper. L.A.Y. and B.W.B. did the coding and data analysis. B.W.B. wrote the full draft, with methods contributions from L.A.Y., and B.W.B. and L.A.Y. prepared the display items. All authors provided input into the manuscript and agree to be held accountable for the content.
+
+## Data accessibility
+
+All input data, R code, and workflows required for full replication are available at [BWBrook/rc-dates](https://github.com/BWBrook/rc-dates). A versioned archival snapshot is deposited on Zenodo: [add link].
+
+## Competing interests
+
+None to declare.
+
+## Funding
+
+This research was supported by the ARC Centre of Excellence for Australian Biodiversity and Heritage [project number CE170100015]
 
 ## References

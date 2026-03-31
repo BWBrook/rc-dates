@@ -1,46 +1,3212 @@
 ---
 references:
-  - id: alpha2020PlaceholderWorkflow
-    citation-key: alpha2020PlaceholderWorkflow
-    type: article-journal
-    title: Placeholder workflow design for manuscript migration
-    author:
-      - family: Alpha
-        given: Avery
-    issued:
-      - year: 2020
-    container-title: Journal of Placeholder Studies
-    volume: '1'
-    issue: '1'
-    page: 1-10
+- id: akaike1974NewLookStatistical
+  author:
+    - family: Akaike
+      given: H.
+  citation-key: akaike1974NewLookStatistical
+  container-title: IEEE Transactions on Automatic Control
+  container-title-short: IEEE Transactions on Automatic Control
+  DOI: 10.1109/tac.1974.1100705
+  issue: '6'
+  issued:
+    - year: 1974
+  page: 716–723
+  title: A new look at the statistical model identification
+  type: article-journal
+  volume: '19'
 
-  - id: beta2021PlaceholderFigures
-    citation-key: beta2021PlaceholderFigures
-    type: article-journal
-    title: Placeholder figures for reproducible document pipelines
-    author:
-      - family: Beta
-        given: Bailey
-    issued:
-      - year: 2021
-    container-title: Reproducible Documents Quarterly
-    volume: '2'
-    issue: '4'
-    page: 22-35
+- id: armit2014RapidClimateChange
+  abstract: >-
+    The impact of rapid climate change on contemporary human populations is of
+    global concern. To contextualize our understanding of human responses to
+    rapid climate change it is necessary to examine the archeological record
+    during past climate transitions. One episode of abrupt climate change has
+    been correlated with societal collapse at the end of the northwestern
+    European Bronze Age. We apply new methods to interrogate archeological and
+    paleoclimate data for this transition in Ireland at a higher level of
+    precision than has previously been possible. We analyze archeological C-14
+    dates to demonstrate dramatic population collapse and present high-precision
+    proxy climate data, analyzed through Bayesian methods, to provide evidence
+    for a rapid climatic transition at ca. 750 calibrated years B.C. Our results
+    demonstrate that this climatic downturn did not initiate population collapse
+    and highlight the nondeterministic nature of human responses to past climate
+    change.
+  author:
+    - family: Armit
+      given: I.
+    - family: Swindles
+      given: G. T.
+    - family: Becker
+      given: K.
+    - family: Plunkett
+      given: G.
+    - family: Blaauw
+      given: M.
+  citation-key: armit2014RapidClimateChange
+  container-title: >-
+    PROCEEDINGS OF THE NATIONAL ACADEMY OF SCIENCES OF THE UNITED STATES OF
+    AMERICA
+  container-title-short: >-
+    Proceedings of the National Academy of Sciences of the United States of
+    America
+  DOI: 10.1073/pnas.1408028111
+  ISSN: 0027-8424
+  issue: '48'
+  issued:
+    - year: 2014
+  page: 17045–17049
+  title: >-
+    Rapid climate change did not cause population collapse at the end of the
+    European Bronze Age
+  type: article-journal
+  volume: '111'
 
-  - id: gamma2022PlaceholderMigration
-    citation-key: gamma2022PlaceholderMigration
-    type: article-journal
-    title: Migrating drafted manuscripts into markdown-first publishing systems
-    author:
-      - family: Gamma
-        given: Gray
-      - family: Singh
-        given: Priya
-    issued:
-      - year: 2022
-    container-title: Computational Writing Systems
-    volume: '5'
-    issue: '2'
-    page: 100-118
+- id: arthur2023ProbabilisticReconstructionPaleodemographic
+  abstract: >-
+    We present a comprehensive Bayesian approach to paleodemography, emphasizing
+    the proper handling of uncertainties. We then apply that framework to survey
+    data from Cyprus, and quantify the uncertainties in the paleodemographic
+    estimates to demonstrate the applicability of the Bayesian approach and to
+    show the large uncertainties present in current paleodemographic models and
+    data. We also discuss methods to reduce the uncertainties and improve the
+    efficacy of paleodemographic models.
+  accessed:
+    - year: 2025
+      month: 11
+      day: 20
+  author:
+    - family: Arthur
+      given: L. M.
+    - family: Chelazzi
+      given: F.
+    - family: Lawrence
+      given: D.
+    - family: Price
+      given: M. D.
+  citation-key: arthur2023ProbabilisticReconstructionPaleodemographic
+  DOI: 10.48550/ARXIV.2312.05152
+  issued:
+    - year: 2023
+  license: Creative Commons Attribution 4.0 International
+  publisher: arXiv
+  source: DOI.org (Datacite)
+  title: Probabilistic reconstruction of paleodemographic signals
+  type: article
+  URL: https://arxiv.org/abs/2312.05152
+  version: '2'
+
+- id: balsera2015ApproachingDemographyLate
+  abstract: >-
+    We present the first summed calibrated date probability distributions for
+    the later prehistory of the Iberian Peninsula. The SCDPD is based on 4402
+    determination between 8000 and 3000 BP, a time range beginning in the
+    regional late Mesolithic and running through the Bronze Age. This period is
+    known to see the first introduction of farming at the beginning of the
+    Neolithic, the development of the first large population aggregations during
+    the Copper Age and the subsequent abrupt transition to the substantially
+    diverse Iberian Bronze Age 'cultures'. The results conform to an exponential
+    model for demographic growth, with a slight "boom and bust" episode between
+    5300 and 5150 cal BC, some 300 years after the first dated evidence for
+    agriculture in Iberia. The evidence suggest that if migrants from outside
+    Iberia were involved in the introduction of domesticates, this must have
+    happened at a small scale, one not observable through SCDPD. The dating of
+    the observed population "boom" coincides with the decline in frequency of
+    the cardial-impressed and the wide spread of "epicardial" wares throughout
+    the Peninsula. It thus seems reasonable to suppose that these patterns
+    indicate a moderate increase in fertility rates of early farming groups. The
+    SCDPD analysis also suggests that explanatory models for the rise of Copper
+    Age 'complexity' or the transition to the Bronze Age should not rely on
+    substantial changes in overall Iberian population densities. (C) 2015
+    Elsevier Ltd and INQUA. All rights reserved.
+  author:
+    - family: Balsera
+      given: V.
+    - family: Díaz-del-Río
+      given: P.
+    - family: Gilman
+      given: A.
+    - family: Uriarte
+      given: A.
+    - family: Vicent
+      given: J. M.
+  citation-key: balsera2015ApproachingDemographyLate
+  container-title: QUATERNARY INTERNATIONAL
+  container-title-short: Quaternary International
+  DOI: 10.1016/j.quaint.2015.06.022
+  ISSN: 1040-6182 1873-4553
+  issued:
+    - year: 2015
+  page: 208–211
+  title: >-
+    Approaching the demography of late prehistoric Iberia through summed
+    calibrated date probability distributions (7000-2000 cal BC)
+  type: article-journal
+  volume: '386'
+
+- id: becerra-valdivia2020ChallengesSampleProcessing
+  abstract: >-
+    For decades, researchers have employed sets of radiocarbon dates to
+    reconstruct trends in ancient human populations. The overarching assumption
+    in this analysis is that the frequency of dates is proportional to the
+    magnitude of past human activity. Thus, the distribution of summed or
+    otherwise summarized dates is used to extrapolate population density and
+    mobility patterns. There are, however, a number of underlying assumptions
+    associated with this analysis that workers address to varying degrees and
+    which, if false and not critically accounted for, will introduce bias,
+    misrepresent the magnitude of activity, and ultimately prove misleading in
+    archaeological interpretations. In this regard, research has so far mainly
+    focused on correcting for the effects of time-dependent degradation of
+    archaeological sites and constituent materials, calibration irregularities,
+    and the efficacy of the statistical methods used. Assumptions directly
+    related to sample processing in radiocarbon dating, however, are less
+    discussed in 'C-14-dates-as-data' analyses. It is, for example, assumed that
+    all carbonaceous materials will yield sufficient, endogenous carbon for
+    radiocarbon measurement. Yet sample failure in radiocarbon dating is common
+    and contingent on, largely, deterministic factors such as post-depositional
+    environment. Sets of radiocarbon dates analyzed, therefore, represent
+    successful measurements independent of reliability. In this work, we discuss
+    the biases introduced by challenges in radiocarbon processing and their
+    impact on C-14-dates-as-data studies.
+  author:
+    - family: Becerra-Valdivia
+      given: L.
+    - family: Leal-Cervantes
+      given: R.
+    - family: Wood
+      given: R.
+    - family: Higham
+      given: T.
+  citation-key: becerra-valdivia2020ChallengesSampleProcessing
+  container-title: JOURNAL OF ARCHAEOLOGICAL SCIENCE
+  container-title-short: Journal of Archaeological Science
+  DOI: 10.1016/j.jas.2019.105043
+  ISSN: 0305-4403 1095-9238
+  issued:
+    - year: 2020
+  title: >-
+    Challenges in sample processing within radiocarbon dating and their impact
+    in ¹⁴C-dates-as-data studies
+  type: article-journal
+  volume: '113'
+
+- id: bird2020FirstEmpiricalAnalysis
+  abstract: >-
+    Questions regarding population stability among animals and plants are
+    fundamental to population ecology, yet this has not been a topic studied by
+    archeologists focusing on prehistoric human populations. This is an
+    important knowledge gap. The fluctuation of human populations over decades
+    to centuries - population instability - may constrain the expansion of human
+    economies. A first step toward describing basic patterns of population
+    stability would be to identify sizes of fluctuations through time, since
+    smaller fluctuations are more stable than larger fluctuations. We conduct a
+    biogeographic analysis of the long-term stability of human societies in
+    North America using a continental scale radiocarbon dataset. Our analysis
+    compares the stability of summed calibrated radiocarbon date probability
+    distributions (SPDs) with subsistence strategies and modeled climate
+    stability between 6000 and 300 BP. This coarse-grained analysis reveals
+    general trends regarding the stability of human systems in North America
+    that future studies may build upon. Our results demonstrate that
+    agricultural sequences have more stable SPDs than hunter-gatherer sequences
+    in general, but agricultural sequences also experience rare, extreme
+    increases and decreases in SPDs not seen among hunter-gatherers. We propose
+    that the adoption of agriculture has the unintended consequence of
+    increasing population density and stability over most time scales, but also
+    increases the vulnerability of populations to large, rare changes.
+    Conversely, hunter-gatherer systems remain flexible and less vulnerable to
+    large population changes. Climate stability may have an indirect effect on
+    long-term population stability, and climate shocks may be buffered by other
+    aspects of subsistence strategies prior to affecting human demography.
+  author:
+    - family: Bird
+      given: D.
+    - family: Freeman
+      given: J.
+    - family: Robinson
+      given: E.
+    - family: Maughan
+      given: G.
+    - family: Finley
+      given: J. B.
+    - family: Lambert
+      given: P. M.
+    - family: Kelly
+      given: R. L.
+  citation-key: bird2020FirstEmpiricalAnalysis
+  container-title: HOLOCENE
+  container-title-short: Holocene
+  DOI: 10.1177/0959683620919975
+  ISSN: 0959-6836 1477-0911
+  issue: '9'
+  issued:
+    - year: 2020
+  page: 1345–1359
+  title: >-
+    A first empirical analysis of population stability in North America using
+    radiocarbon records
+  type: article-journal
+  volume: '30'
+
+- id: bird2022P3k14cSyntheticGlobal
+  abstract: >-
+    Archaeologists increasingly use large radiocarbon databases to model
+    prehistoric human demography (also termed paleo-demography). Numerous
+    independent projects, funded over the past decade, have assembled such
+    databases from multiple regions of the world. These data provide
+    unprecedented potential for comparative research on human population ecology
+    and the evolution of social-ecological systems across the Earth. However,
+    these databases have been developed using different sample selection
+    criteria, which has resulted in interoperability issues for global-scale,
+    comparative paleo-demographic research and integration with paleoclimate and
+    paleoenvironmental data. We present a synthetic, global-scale archaeological
+    radiocarbon database composed of 180,070 radiocarbon dates that have been
+    cleaned according to a standardized sample selection criteria. This database
+    increases the reusability of archaeological radiocarbon data and streamlines
+    quality control assessments for various types of paleo-demographic research.
+    As part of an assessment of data quality, we conduct two analyses of
+    sampling bias in the global database at multiple scales. This database is
+    ideal for paleo-demographic research focused on dates-as-data, bayesian
+    modeling, or summed probability distribution methodologies.
+  author:
+    - family: Bird
+      given: D.
+    - family: Miranda
+      given: L.
+    - family: Vander Linden
+      given: M.
+    - family: Robinson
+      given: E.
+    - family: Bocinsky
+      given: R. K.
+    - family: Nicholson
+      given: C.
+    - family: Capriles
+      given: J. M.
+    - family: Finley
+      given: J. B.
+    - family: Gayo
+      given: E. M.
+    - family: Gil
+      given: A.
+    - family: Guedes
+      given: J. D.
+    - family: Hoggarth
+      given: J. A.
+    - family: Kay
+      given: A.
+    - family: Loftus
+      given: E.
+    - family: Lombardo
+      given: U.
+    - family: Mackie
+      given: M.
+    - family: Palmisano
+      given: A.
+    - family: Solheim
+      given: S.
+    - family: Kelly
+      given: R. L.
+    - family: Freeman
+      given: J.
+  citation-key: bird2022P3k14cSyntheticGlobal
+  container-title: SCIENTIFIC DATA
+  container-title-short: Scientific Data
+  DOI: 10.1038/s41597-022-01118-7
+  ISSN: 2052-4463
+  issue: '1'
+  issued:
+    - year: 2022
+  page: '27'
+  title: p3k14c, a synthetic global database of archaeological radiocarbon dates
+  type: article-journal
+  volume: '9'
+
+- id: bluhm2019ValidationGlobalModel
+  abstract: >-
+    Temporal frequency distributions of radiocarbon ages from archaeological
+    sites can be used as a proxy record for human paleodemography after
+    correction for taphonomic bias, or the time dependent loss of sediments due
+    to erosion. Surovell et al. (2009) presented a global taphonomic correction
+    model based on radiocarbon ages from volcanic deposits that has since been
+    used by several researchers for paleodemographic reconstructions. This
+    method is based on the assumption that the best indicator of relative human
+    population density over time is not the absolute abundance of archaeological
+    materials over time but, instead, the abundance of cultural material
+    relative to geologic contexts in which those materials can occur. To verify
+    the Surovell et al. model, in this paper we take 2457 radiocarbon ages from
+    geologic contexts collected from published literature to create an
+    independent model of taphonomic bias. We find that between 1 and 39 ka, the
+    two curves are largely indistinguishable, but that they diverge in recent
+    times. This suggests that current global models of taphonomic correction can
+    be used to reconstruct human populations for the late Quaternary, but that
+    demographic reconstructions remain challenging for the most recent two
+    millennia.
+  author:
+    - family: Bluhm
+      given: L. E.
+    - family: Surovell
+      given: T. A.
+  citation-key: bluhm2019ValidationGlobalModel
+  container-title: QUATERNARY RESEARCH
+  container-title-short: Quaternary Research
+  DOI: 10.1017/qua.2018.78
+  ISSN: 0033-5894 1096-0287
+  issue: '1'
+  issued:
+    - year: 2019
+  page: 325–328
+  title: >-
+    Validation of a global model of taphonomic bias using geologic radiocarbon
+    ages
+  type: article-journal
+  volume: '91'
+
+- id: bronkramsey2017MethodsSummarizingRadiocarbon
+  abstract: >-
+    Bayesian models have proved very powerful in analyzing large datasets of
+    radiocarbon (C-14) measurements from specific sites and in regional cultural
+    or political models. These models require the prior for the underlying
+    processes that are being described to be defined, including the distribution
+    of underlying events. Chronological information is also incorporated into
+    Bayesian models used in DNA research, with the use of Skyline plots to show
+    demographic trends. Despite these advances, there remain difficulties in
+    assessing whether data conform to the assumed underlying models, and in
+    dealing with the type of artifacts seen in Sum plots. In addition, existing
+    methods are not applicable for situations where it is not possible to
+    quantify the underlying process, or where sample selection is thought to
+    have filtered the data in a way that masks the original event distribution.
+    In this paper three different approaches are compared: "Sum" distributions,
+    postulated undated events, and kernel density approaches. Their
+    implementation in the OxCal program is described and their suitability for
+    visualizing the results from chronological and geographic analyses
+    considered for cases with and without useful prior information. The
+    conclusion is that kernel density analysis is a powerful method that could
+    be much more widely applied in a wide range of dating applications.
+  author:
+    - family: Bronk Ramsey
+      given: C.
+  citation-key: bronkramsey2017MethodsSummarizingRadiocarbon
+  container-title: RADIOCARBON
+  container-title-short: Radiocarbon
+  DOI: 10.1017/RDC.2017.108
+  ISSN: 0033-8222 1945-5755
+  issue: '6'
+  issued:
+    - year: 2017
+  page: 1809–1833
+  title: Methods for summarizing radiocarbon datasets
+  type: article-journal
+  volume: '59'
+
+- id: brown2015FilterDarklyPopulation
+  abstract: >-
+    Archaeologists are increasingly concerned that the non-linear relationship
+    between the calendric and radiocarbon timelines may introduce anomalous
+    structures into radiocarbon-supported temporal frequency distributions
+    (tfds) - time series data describing temporal fluctuations in the frequency
+    of archaeological, paleontological, or other geological deposits. This
+    concern emphasizes a need for improved middle range theory on Yd formation,
+    addressing the interaction between several stochastic processes. This paper
+    outlines a Monte Carlo simulation designed to explore the influence of
+    several variables on tfd morphology, including the nonlinear
+    calendric-to-radiocarbon age relationship. The results indicate that this
+    non-linear relationship entails greater variance between identically
+    generated tfds over some temporal intervals than others but does not
+    predictably lead to tfd peaks over these intervals as previously suggested.
+    Additional variance between identically generated tfds results from small
+    sample sizes and high values in the underlying TFD. Smoothing the tfd is a
+    solution not only to calibration curve interference but also to sample
+    size-dependent sampling error. (C) 2014 Elsevier Ltd. All rights reserved.
+  author:
+    - family: Brown
+      given: W. A.
+  citation-key: brown2015FilterDarklyPopulation
+  container-title: JOURNAL OF ARCHAEOLOGICAL SCIENCE
+  container-title-short: Journal of Archaeological Science
+  DOI: 10.1016/j.jas.2014.10.013
+  ISSN: 0305-4403 1095-9238
+  issued:
+    - year: 2015
+  page: 133–147
+  title: >-
+    Through a filter, darkly: population size estimation, systematic error, and
+    random error in radiocarbon-supported demographic temporal frequency
+    analysis
+  type: article-journal
+  volume: '53'
+
+- id: brown2019MaoriPopulationGrowth
+  abstract: >-
+    Past population dynamics play a key role in integrated models of
+    socio-cultural change in Polynesia. A key aspect of these models is the
+    interplay between food production and population growth. Located on the
+    margins of Polynesia, New Zealand presented considerable challenges to
+    traditional Polynesian food production, many crops were not successfully
+    established and those that were produced greatly reduced yields. However,
+    despite the hurdles to food production and the likely influence on
+    population, little empirical analysis of Maori population has been carried
+    out in New Zealand. Here, we use summed probability distributions of
+    radiocarbon dates (SPDRD) to show clear regional and local variation
+    population dynamics. Specifically, we find population in the optimal
+    horticultural zone follows a logistic pattern of growth, while in the
+    sub-optimal zone both a modified logistic curve, representing slower growth
+    than the north, or a "stepped" pattern are supported. In the
+    non-horticultural south our results concur with previous studies that
+    suggest population rapidly grew and then declined as faunal resources
+    diminished. Finally, our analysis of local-scale growth showed considerable
+    heterogeneity within the horticultural zone and homogeneity in the southern
+    hunting region. This suggests that population trends were similar in
+    southern areas, but finer-grained models are required for horticultural
+    communities. Crucially, our results are empirically derived and can be
+    placed within an absolute chronological context allowing further
+    investigation of key trends.
+  author:
+    - family: Brown
+      given: A. A.
+    - family: Crema
+      given: E. R.
+  citation-key: brown2019MaoriPopulationGrowth
+  container-title: JOURNAL OF ISLAND & COASTAL ARCHAEOLOGY
+  container-title-short: Journal of Island & Coastal Archaeology
+  DOI: 10.1080/15564894.2019.1605429
+  ISSN: 1556-4894 1556-1828
+  issued:
+    - year: 2019
+  title: >-
+    Maori population growth in pre-contact New Zealand: Regional population
+    dynamics inferred from summed probability distributions of radiocarbon dates
+  type: article-journal
+
+- id: bunbury2025RobustDemographicModels
+  accessed:
+    - year: 2025
+      month: 11
+      day: 20
+  author:
+    - family: Bunbury
+      given: Magdalena Maria Elisabeth
+  citation-key: bunbury2025RobustDemographicModels
+  container-title: Journal of Open Archaeology Data
+  DOI: 10.5334/joad.144
+  ISSN: 2049-1565
+  issued:
+    - year: 2025
+  language: en
+  page: '3'
+  source: DOI.org (Crossref)
+  title: >-
+    Towards robust demographic models: A systematic framework to ¹⁴C data
+    aggregation and analysis with lessons from the southern Levant
+  title-short: Towards Robust Demographic Models
+  type: article-journal
+  URL: http://openarchaeologydata.metajnl.com/articles/10.5334/joad.144/
+  volume: '13'
+
+- id: capuzzo2020CREMATIONVSINHUMATION
+  abstract: >-
+    The adoption of a new funerary ritual with all its social and cognitive
+    meanings is of great importance to understanding social transformations of
+    past societies. The first known occurrence of cremation in the territory
+    corresponding to modern Belgium dates back to the Mesolithic period. From
+    the end of the Neolithic onward, the practice of cremation was characterized
+    by periods in which this rite was predominant and periods of contractions,
+    defined by a decrease in the use of this funerary ritual. This paper aims to
+    quantify such phenomenon for the first time by modeling discontinuities in
+    burial practices through kernel density analysis of 1428 radiocarbon (C-14)
+    dates from 311 archaeological sites located in Belgium from the Mesolithic
+    to the Middle Ages. Despite possible taphonomic and sampling biases, the
+    results highlight the existence of periods with a large uptake of cremation
+    rite followed by periods of contractions; such discontinuities took place in
+    correlation with changes in the socio-economical structure of local
+    communities, as, for example, during the later Middle Bronze Age and at the
+    end of the Roman Period.
+  author:
+    - family: Capuzzo
+      given: G.
+    - family: Snoeck
+      given: C.
+    - family: Boudin
+      given: M.
+    - family: Dalle
+      given: S.
+    - family: Annaert
+      given: R.
+    - family: Hlad
+      given: M.
+    - family: Kontopoulos
+      given: I.
+    - family: Sabaux
+      given: C.
+    - family: Salesse
+      given: K.
+    - family: Sengelov
+      given: A.
+    - family: Stamataki
+      given: E.
+    - family: Veselka
+      given: B.
+    - family: Warmenbol
+      given: E.
+    - family: De Mulder
+      given: G.
+    - family: Tys
+      given: D.
+    - family: Vercauteren
+      given: M.
+  citation-key: capuzzo2020CREMATIONVSINHUMATION
+  container-title: RADIOCARBON
+  container-title-short: Radiocarbon
+  DOI: 10.1017/RDC.2020.88
+  ISSN: 0033-8222 1945-5755
+  issue: '6'
+  issued:
+    - year: 2020
+  page: 1809–1832
+  title: >-
+    CREMATION VS. INHUMATION: MODELING CULTURAL CHANGES IN FUNERARY PRACTICES
+    FROM THE MESOLITHIC TO THE MIDDLE AGES IN BELGIUM USING KERNEL DENSITY
+    ANALYSIS ON ^14^C DATA
+  type: article-journal
+  volume: '62'
+
+- id: carleton2021SumThingsAre
+  abstract: >-
+    Radiocarbon-date assemblages are commonly used as proxies for past human and
+    environmental phenomena. Prominent examples of target phenomena include past
+    population levels and sea level fluctuations. These processes are thought to
+    have affected the amount of organic carbon deposited into the archaeological
+    and/or palaeoenvironmental record. Time-series representing through-time
+    fluctuations in the frequency of radiocarbon samples are, therefore, often
+    used as proxies for such processes. However, there are critical problems
+    with using radiocarbon "dates-as-data" in point-wise comparisons and these
+    problems have gone largely underappreciated. The key problem is that the
+    established proxies are easily misinterpreted. They conflate process
+    variation and chronological uncertainty, which makes them unsuitable for
+    point-wise comparisons aimed at identifying rates of change, comparing
+    variables directly, or estimating parameters in regression models. Here we
+    explore the interpretive and analytical problems in detail in an effort to
+    raise awareness and promote skepticism about the use of the established
+    proxies in point-wise comparisons. We also provide suggestions for future
+    research and point to potential methodological alternatives that may improve
+    the viability of dates-as-data approaches.
+  author:
+    - family: Carleton
+      given: W. C.
+    - family: Groucutt
+      given: H. S.
+  citation-key: carleton2021SumThingsAre
+  container-title: HOLOCENE
+  container-title-short: Holocene
+  DOI: 10.1177/0959683620981700
+  ISSN: 0959-6836 1477-0911
+  issue: '4'
+  issued:
+    - year: 2021
+  page: 630–643
+  title: >-
+    Sum things are not what they seem: Problems with point-wise interpretations
+    and quantitative analyses of proxies based on aggregated radiocarbon dates
+  type: article-journal
+  volume: '31'
+
+- id: chaput2016RadiocarbonDatesEstimates
+  abstract: >-
+    Archaeological radiocarbon (C-14) dates are a fundamental source of
+    information documenting patterns in paleodemographic change from prehistoric
+    to modern times. Several open access databases (Canadian Archaeological
+    Radiocarbon Database, Radiocarbon Palaeolithic Europe Database, CONTEXT,
+    RAdiocarbon Dates ONline, and AustArch) and publications which include lists
+    of dates provide easy access to archaeological C-14 data, presently
+    totalling over 70,000 dates worldwide. Some parts of the world are more
+    extensively sampled than others including North America, Australia and
+    China, whereas in others the databases have not yet been prepared. A
+    comparison of frequency distributions of C-14 dates from North America and
+    Australia to modeled estimates of historical population growth for these
+    continents from the HYDE 3.1 database shows similarities, providing
+    confidence in long-term estimates of population growth using both methods.
+    Our capacity to study global demographic change is currently limited by the
+    spatiotemporal completeness of regional C-14 databases. These results
+    suggest the systematic collection and entry of dates into an
+    openly-accessible, global C-14 database will allow for significant advances
+    to be made in archaeology, anthropology and Quaternary paleogeography. (C)
+    2015 Elsevier Ltd. All rights reserved.
+  author:
+    - family: Chaput
+      given: M. A.
+    - family: Gajewski
+      given: K.
+  citation-key: chaput2016RadiocarbonDatesEstimates
+  container-title: ANTHROPOCENE
+  container-title-short: Anthropocene
+  DOI: 10.1016/j.ancene.2015.10.002
+  ISSN: 2213-3054
+  issued:
+    - year: 2016
+  page: 3–12
+  title: Radiocarbon dates as estimates of ancient human population size
+  type: article-journal
+  volume: '15'
+
+- id: codding2024CountsRadiocarbondatedArchaeological
+  abstract: |-
+    Abstract
+                Researchers increasingly rely on aggregations of radiocarbon dates from archaeological sites as proxies for past human populations. This approach has been critiqued on several grounds, including the assumptions that material is deposited, preserved, and sampled in proportion to past population size. However, various attempts to quantitatively assess the approach suggest there may be some validity in assuming date counts reflect relative population size. To add to this conversation, here we conduct a preliminary analysis coupling estimates of ethnographic population density with late Holocene radiocarbon dates across all counties in California. Results show that counts of late Holocene radiocarbon-dated archaeological sites increase significantly as a function of ethnographic population density. This trend is robust across varying sampling windows over the last 5000 BP. Though the majority of variation in dated-site counts remains unexplained by population density. Outliers reveal how departures from the central trend may be influenced by regional differences in research traditions, development-driven contract work, organic preservation, and landscape taphonomy. Overall, this exercise provides some support for the “dates-as-data” approach and offers insights into the conditions where the underlying assumptions may or may not hold.
+  accessed:
+    - year: 2025
+      month: 11
+      day: 20
+  author:
+    - family: Codding
+      given: Brian F
+    - family: Meyer
+      given: Jack
+    - family: Brewer
+      given: Simon C
+    - family: Kelly
+      given: Robert L
+    - family: Jones
+      given: Terry L
+  citation-key: codding2024CountsRadiocarbondatedArchaeological
+  container-title: Radiocarbon
+  container-title-short: Radiocarbon
+  DOI: 10.1017/RDC.2024.81
+  ISSN: 0033-8222, 1945-5755
+  issue: '4'
+  issued:
+    - year: 2024
+  language: en
+  page: 610–623
+  source: DOI.org (Crossref)
+  title: >-
+    Do counts of radiocarbon-dated archaeological sites reflect human population
+    density? A preliminary empirical validation examining spatial variation
+    across late Holocene California
+  title-short: >-
+    Do counts of radiocarbon-dated archaeological sites reflect human population
+    density?
+  type: article-journal
+  URL: >-
+    https://www.cambridge.org/core/product/identifier/S003382222400081X/type/journal_article
+  volume: '66'
+
+- id: contreras2014SummedRadiocarbonCalibrations
+  abstract: >-
+    The logic of using summed radiocarbon (C-14) calibrations (cumulative
+    probability density functions for large numbers of calibrated C-14 dates) as
+    proxies for past populations rests on the presumption of a proportional
+    relationship between population size and the production, and subsequent
+    preservation, recovery, and analysis, of C-14-datable material. Critiques of
+    this approach have generally focused on the various problems that may
+    undermine the validity of this assumption. Here, instead, we presume a
+    perfect correspondence between population size and the quantity of datable
+    material produced at any given time, and explore the question of how well
+    summed C-14 calibrations can track demographic changes under such ideal
+    circumstances. We introduce a method of generating a random sample of
+    simulated C-14 determinations, from a specified distribution, with variable
+    data densities and measurement errors. In other words, we generate a random
+    sample of C-14 dates not from an ideal statistical distribution but rather
+    using a defined population curve to determine the probability distribution
+    from which the calendar dates of the simulated C-14 samples are drawn. We
+    generate simulated C-14 ages for these samples, calibrate them, and sum
+    those calibrations. We compare the resulting proxy population curve to the
+    known population distribution from which it was generated, to see whether
+    known population fluctuations are unambiguously visible on a proxy curve
+    derived from C-14 data sets that are realistic in terms of the number and
+    precision of the C-14 determinations included. Results highlight 1) the
+    critical role played by the magnitude and duration of any population
+    fluctuation, and 2) the importance of sample size, and the reality that the
+    numbers of samples required to detect significant population changes are
+    generally far higher than those available to researchers proposing
+    demographic reconstructions on the basis of literature searches for
+    radiocarbon dates. We conclude that even if archaeological C-14 data sets
+    could be corrected for taphonomic filters and research biases, demographic
+    signals would be difficult to distinguish from statistical noise in summed
+    probability distributions. We suggest that simulation studies should be
+    integral components of any attempt to reconstruct prehistoric demography
+    from C-14 dates. (c) 2014 Elsevier Ltd. All rights reserved.
+  author:
+    - family: Contreras
+      given: D. A.
+    - family: Meadows
+      given: J.
+  citation-key: contreras2014SummedRadiocarbonCalibrations
+  container-title: JOURNAL OF ARCHAEOLOGICAL SCIENCE
+  container-title-short: Journal of Archaeological Science
+  DOI: 10.1016/j.jas.2014.05.030
+  ISSN: 0305-4403 1095-9238
+  issued:
+    - year: 2014
+  page: 591–608
+  title: >-
+    Summed radiocarbon calibrations as a population proxy: a critical evaluation
+    using a realistic simulation approach
+  type: article-journal
+  volume: '52'
+
+- id: contreras2024LandscapeTaphonomyPredictably
+  abstract: >-
+    Accurately reconstructing past human population dynamics is critical for
+    explaining major patterns in the human past. Demand for demographic proxies
+    has driven hopeful interest in the "dates-as-data" approach, which models
+    past demography by assuming a relationship between population size, the
+    production of dateable material, and the corpus of radiocarbon dates
+    produced by archaeological research. However, several biases can affect
+    assemblages of dates, complicating inferences about population size. One
+    serious but potentially addressable issue centers on landscape taphonomy -
+    the ways in which geologic processes structure the preservation and recovery
+    of archaeological sites and/or materials at landscape scales. Here, we
+    explore the influence of landscape taphonomy on demographic proxies. More
+    specifically, we evaluate how well demographic proxies may be corrected for
+    taphonomic effects with either a common generalized approach or an
+    empirically based tailored approach. We demonstrate that frequency
+    distributions of landforms of varying ages can be used to develop local
+    corrections that are more accurate than either global corrections or
+    uncorrected estimates. Using generalized scenarios and a simulated case
+    study based on empirical data on landform ages from the Coso Basin in the
+    western Great Basin region, we illustrate the way in which landscape
+    taphonomy predictably complicates "dates-as-data" approaches, propose and
+    demonstrate a new method of empirically based correction, and explore the
+    interpretive ramifications of ignoring or correcting for taphonomic bias.
+  author:
+    - family: Contreras
+      given: D. A.
+    - family: Codding
+      given: B. F.
+  citation-key: contreras2024LandscapeTaphonomyPredictably
+  container-title: JOURNAL OF ARCHAEOLOGICAL METHOD AND THEORY
+  container-title-short: Journal of Archaeological Method and Theory
+  DOI: 10.1007/s10816-023-09634-5
+  ISSN: 1072-5369 1573-7764
+  issue: '3'
+  issued:
+    - year: 2024
+  page: 1102–1128
+  title: Landscape taphonomy predictably complicates demographic reconstruction
+  type: article-journal
+  volume: '31'
+
+- id: crema2016SummedProbabilityDistribution
+  abstract: >-
+    Recent advances in the use of summed probability distribution (SPD) of
+    calibrated C-14 dates have opened new possibilities for studying prehistoric
+    demography. The degree of correlation between climate change and population
+    dynamics can now be accurately quantified, and divergences in the
+    demographic history of distinct geographic areas can be statistically
+    assessed. Here we contribute to this research agenda by reconstructing the
+    prehistoric population change of Jomon hunter-gatherers between 7,000 and
+    3,000 cal BP. We collected 1,433 C-14 dates from three different regions in
+    Eastern Japan (Kanto, Aomori and Hokkaido) and established that the observed
+    fluctuations in the SPDs were statistically significant. We also introduced
+    a new non-parametric permutation test for comparing multiple sets of SPDs
+    that highlights point of divergences in the population history of different
+    geographic regions. Our analyses indicate a general rise-and-fall pattern
+    shared by the three regions but also some key regional differences during
+    the 6th millennium cal BP. The results confirm some of the patterns
+    suggested by previous archaeological studies based on house and site counts
+    but offer statistical significance and an absolute chronological framework
+    that will enable future studies aiming to establish potential correlation
+    with climatic changes.
+  author:
+    - family: Crema
+      given: E. R.
+    - family: Habu
+      given: J.
+    - family: Kobayashi
+      given: K.
+    - family: Madella
+      given: M.
+  citation-key: crema2016SummedProbabilityDistribution
+  container-title: PLOS ONE
+  container-title-short: PLoS ONE
+  DOI: 10.1371/journal.pone.0154809
+  ISSN: 1932-6203
+  issue: '4'
+  issued:
+    - year: 2016
+  title: >-
+    Summed probability distribution of ¹⁴C dates suggests regional divergences
+    in the population dynamics of the Jomon period in eastern Japan
+  type: article-journal
+  volume: '11'
+
+- id: crema2017SpatiotemporalApproachesArchaeological
+  abstract: >-
+    Summed probability distributions of radiocarbon dates are an increasingly
+    popular means by which to reconstruct prehistoric population dynamics,
+    enabling more thorough cross-regional comparison and more robust hypothesis
+    testing, for example with regard to the impact of climate change on past
+    human demography. Here we review another use of such summed distributions to
+    make spatially explicit inferences about geographic variation in prehistoric
+    populations. We argue that most of the methods proposed so far have been
+    strongly biased by spatially varying sampling intensity, and we therefore
+    propose a spatial permutation test that is robust to such forms of bias and
+    able to detect both positive and negative local deviations from pan-regional
+    rates of change in radiocarbon date density. We test our method both on some
+    simple, simulated population trajectories and also on a large real-world
+    dataset, and show that we can draw useful conclusions about spatio-temporal
+    variation in population across Neolithic Europe. (C) 2017 Elsevier Ltd. All
+    rights reserved.
+  author:
+    - family: Crema
+      given: E. R.
+    - family: Bevan
+      given: A.
+    - family: Shennan
+      given: S.
+  citation-key: crema2017SpatiotemporalApproachesArchaeological
+  container-title: JOURNAL OF ARCHAEOLOGICAL SCIENCE
+  container-title-short: Journal of Archaeological Science
+  DOI: 10.1016/j.jas.2017.09.007
+  ISSN: 0305-4403 1095-9238
+  issued:
+    - year: 2017
+  page: 1–9
+  title: Spatio-temporal approaches to archaeological radiocarbon dates
+  type: article-journal
+  volume: '87'
+
+- id: crema2021InferenceLargeSets
+  abstract: >-
+    The last decade has seen the development of a range of new statistical and
+    computational techniques for analysing large collections of radiocarbon
+    (C-14) dates, often but not exclusively to make inferences about human
+    population change in the past. Here we introduce rcarbon, an open-source
+    software package for the R statistical computing language which implements
+    many of these techniques and looks to foster transparent future study of
+    their strengths and weaknesses. In this paper, we review the key
+    assumptions, limitations and potentials behind statistical analyses of
+    summed probability distribution of C-14 dates, including Monte-Carlo
+    simulation-based tests, permutation tests, and spatial analyses.
+    Supplementary material provides a fully reproducible analysis with further
+    details not covered in the main paper.
+  author:
+    - family: Crema
+      given: E. R.
+    - family: Bevan
+      given: A.
+  citation-key: crema2021InferenceLargeSets
+  container-title: RADIOCARBON
+  container-title-short: Radiocarbon
+  DOI: 10.1017/RDC.2020.95
+  ISSN: 0033-8222 1945-5755
+  issue: '1'
+  issued:
+    - year: 2021
+  page: 23–39
+  title: 'Inference from large sets of radiocarbon dates: software and methods'
+  type: article-journal
+  volume: '63'
+
+- id: crema2022StatisticalInferencePrehistoric
+  abstract: >-
+    The last decade saw a rapid increase in the number of studies where
+    time-frequency changes of radiocarbon dates have been used as a proxy for
+    inferring past population dynamics. Although its universal and
+    straightforward premise is appealing and undoubtedly offers some unique
+    opportunities for research on long-term comparative demography, practical
+    applications are far from trivial and riddled with issues pertaining to the
+    very nature of the proxy under examination. Here I review the most common
+    criticisms concerning the nature of radiocarbon time-frequency data as a
+    demographic proxy, focusing on key statistical and inferential challenges. I
+    then examine and compare recent methodological advances in the field by
+    grouping them into three approaches: reconstructive, null-hypothesis
+    significance testing, and model fitting. I will then conclude with some
+    general recommendations for applying these techniques in archaeological and
+    paleo-demographic research.
+  author:
+    - family: Crema
+      given: E. R.
+  citation-key: crema2022StatisticalInferencePrehistoric
+  container-title: JOURNAL OF ARCHAEOLOGICAL METHOD AND THEORY
+  container-title-short: Journal of Archaeological Method and Theory
+  DOI: 10.1007/s10816-022-09559-5
+  ISSN: 1072-5369 1573-7764
+  issue: '4'
+  issued:
+    - year: 2022
+  page: 1387–1418
+  title: >-
+    Statistical inference of prehistoric demography from frequency distributions
+    of radiocarbon dates: A review and a guide for the perplexed
+  type: article-journal
+  volume: '29'
+
+- id: crema2025BayesianAlternativeAoristic
+  abstract: |-
+    Abstract
+                
+                  Aoristic analysis is often used to handle chronological uncertainties of datasets where scientific dates (e.g.,
+                  14
+                  C and OSL) are unavailable, and observations are described by association to archaeological periods or phases. Although several advances have been made over the last 2 decades, the basic principle of this approach remains fundamentally the same. Temporal windows of analyses are first divided into regularly sized time blocks, and probability weight is assigned to each of these for every observation. Weights are then aggregated by time block, and the resulting vector of summed probabilities is interpreted as a curve representing changes in the intensity over time of a particular phenomenon. This paper reviews the basic principles and assumptions of aoristic analyses in archaeology, highlighting several issues with its application and interpretation, advocating for a Bayesian alternative implemented via
+                  baorista
+                  , a new package written in R statistical computing language. The robustness of the proposed solution is evaluated through a series of experiments based on simulated datasets, which showcase key advantages over aoristic analysis. Two specific solutions are considered: a parametric approach where data are fitted to specific growth models and a nonparametric approach that allows for the visualisation of the changing frequencies of events, accounting for sampling error and the peculiarities of archaeological periodisation.
+  accessed:
+    - year: 2025
+      month: 11
+      day: 20
+  author:
+    - family: Crema
+      given: Enrico R.
+  citation-key: crema2025BayesianAlternativeAoristic
+  container-title: Archaeometry
+  container-title-short: Archaeometry
+  DOI: 10.1111/arcm.12984
+  ISSN: 0003-813X, 1475-4754
+  issue: S1
+  issued:
+    - year: 2025
+  language: en
+  page: 7–30
+  source: DOI.org (Crossref)
+  title: A Bayesian alternative for aoristic analyses in archaeology
+  type: article-journal
+  URL: https://onlinelibrary.wiley.com/doi/10.1111/arcm.12984
+  volume: '67'
+
+- id: demjan2016ModellingDistributionArchaeological
+  abstract: >-
+    We analyse variations in prehistoric agricultural settlement behaviour both
+    in space and time to detect main turning points and shifts in settlement
+    patterns in Bohemia, western Czech Republic. We propose a theoretical
+    framework to address our research question and a new evidence density
+    estimation (EDE) method combining and extending existing approaches to
+    produce probabilistic maps and temporal frequency distribution (TFD) curves.
+    This method takes into account heterogeneous spatial and temporal accuracy
+    of archaeological data, and it models settlement structure where respective
+    sites have a specific area and a given interval of duration. We determined
+    minimal sampling densities of archaeological data enabling the method to
+    predict prehistoric settlement at a statistically significant level. The EDE
+    method is universally applicable for all datasets with sampling densities of
+    more than 0.05 archaeological actions per km(2) for chrono-typologically
+    dated evidence and 0.035 actions per km(2) for radiocarbon or similar dates.
+    The results show that changes in spatial extent, density and clustering of
+    settlement activities occur repeatedly throughout the whole agricultural
+    prehistory and shed new light on settlement behaviour of past populations.
+    (C) 2016 Elsevier Ltd. All rights reserved.
+  author:
+    - family: Demján
+      given: P.
+    - family: Dreslerová
+      given: D.
+  citation-key: demjan2016ModellingDistributionArchaeological
+  container-title: JOURNAL OF ARCHAEOLOGICAL SCIENCE
+  container-title-short: Journal of Archaeological Science
+  DOI: 10.1016/j.jas.2016.04.003
+  ISSN: 0305-4403 1095-9238
+  issued:
+    - year: 2016
+  page: 100–109
+  title: >-
+    Modelling distribution of archaeological settlement evidence based on
+    heterogeneous spatial and temporal data
+  type: article-journal
+  volume: '69'
+
+- id: denavascues2025AnalysisAbundanceRadiocarbon
+  abstract: >-
+    The analysis of the abundance of radiocarbon samples through time has become
+    a popular method to address questions of demography in archaeology. The
+    history of this approach is marked by the use of the Sum of Probability
+    Distributions (SPD), a key methodological development that first allowed
+    researchers to visualize the abundance of radiocarbon samples on a
+    calibrated temporal scale. However, the lack of a mathematical definition
+    hinders the use of SPD in a proper statistical framework. Recent
+    developments of model-based approaches have allowed a more rigorous
+    statistical analysis of the abundance of radiocarbon data. Despite these
+    advances, these methods inherit from the SPD an interpretation of the
+    abundance of samples as a probability distribution. In this work we propose
+    a change of perspective by treating radiocarbon data as count data. We
+    present an approach that models the expected number of samples occurring at
+    each year. We argue that this model provides more interpretable parameters
+    and better accounts for the uncertainty in the number of samples. The
+    performance of the proposed approach is evaluated through simulations and
+    compared to an alternative state-of-the-art approach. Our new method is
+    competitive with the state-of-the-art model. Furthermore, we demonstrate the
+    computational burden of using the SPD as summary statistics under an
+    approximate Bayesian computation analysis and propose more efficient summary
+    statistics. Finally, we use a dataset of radiocarbon samples from Ireland
+    and Britain to provide an application example. The results of these analyses
+    are largely congruent with previous work on the same dataset except in
+    revealing an earlier start of the Neolithic demographic expansion.
+  accessed:
+    - year: 2025
+      month: 11
+      day: 20
+  author:
+    - family: De Navascués
+      given: Miguel
+    - family: Burgarella
+      given: Concetta
+    - family: Jakobsson
+      given: Mattias
+  citation-key: denavascues2025AnalysisAbundanceRadiocarbon
+  container-title: Peer Community Journal
+  DOI: 10.24072/pcjournal.522
+  ISSN: 2804-3871
+  issued:
+    - year: 2025
+  language: en
+  page: e20
+  source: DOI.org (Crossref)
+  title: Analysis of the abundance of radiocarbon samples as count data
+  type: article-journal
+  URL: https://peercommunityjournal.org/articles/10.24072/pcjournal.522/
+  volume: '5'
+
+- id: eren2012EstimatingRichnessPopulation
+  abstract: >-
+    Background: Estimating assemblage species or class richness from samples
+    remains a challenging, but essential, goal. Though a variety of statistical
+    tools for estimating species or class richness have been developed, they are
+    all singly-bounded: assuming only a lower bound of species or classes.
+    Nevertheless there are numerous situations, particularly in the cultural
+    realm, where the maximum number of classes is fixed. For this reason, a new
+    method is needed to estimate richness when both upper and lower bounds are
+    known. Methodology/Principal Findings: Here, we introduce a new method for
+    estimating class richness: doubly-bounded confidence intervals (both lower
+    and upper bounds are known). We specifically illustrate our new method using
+    the Chao1 estimator, rarefaction, and extrapolation, although any estimator
+    of asymptotic richness can be used in our method. Using a case study of
+    Clovis stone tools from the North American Lower Great Lakes region, we
+    demonstrate that singly-bounded richness estimators can yield confidence
+    intervals with upper bound estimates larger than the possible maximum number
+    of classes, while our new method provides estimates that make empirical
+    sense. Conclusions/Significance: Application of the new method for
+    constructing doubly-bound richness estimates of Clovis stone tools permitted
+    conclusions to be drawn that were not otherwise possible with singly-bounded
+    richness estimates, namely, that Lower Great Lakes Clovis Paleoindians
+    utilized a settlement pattern that was probably more logistical in nature
+    than residential. However, our new method is not limited to archaeological
+    applications. It can be applied to any set of data for which there is a
+    fixed maximum number of classes, whether that be site occupancy models,
+    commercial products (e. g. athletic shoes), or census information (e. g.
+    nationality, religion, age, race).
+  author:
+    - family: Eren
+      given: M. I.
+    - family: Chao
+      given: A.
+    - family: Hwang
+      given: W. H.
+    - family: Colwell
+      given: R. K.
+  citation-key: eren2012EstimatingRichnessPopulation
+  container-title: PLOS ONE
+  container-title-short: PLoS ONE
+  DOI: 10.1371/journal.pone.0034179
+  ISSN: 1932-6203
+  issue: '5'
+  issued:
+    - year: 2012
+  title: >-
+    Estimating the Richness of a Population When the Maximum Number of Classes
+    Is Fixed: A Nonparametric Solution to an Archaeological Problem
+  type: article-journal
+  volume: '7'
+
+- id: freeman2018CultureProcessInterpretation
+  abstract: >-
+    Over the last decade, archaeologists have turned to large radiocarbon (C-14)
+    data sets to infer prehistoric population size and change. An outstanding
+    question concerns just how direct of an estimate C-14 dates are for human
+    populations. In this paper we propose that C-14 dates are a better estimate
+    of energy consumption, rather than an unmediated, proportional estimate of
+    population size. We use a parametric model to describe the relationship
+    between population size, economic complexity and energy consumption in human
+    societies, and then parametrize the model using data from modern contexts.
+    Our results suggest that energy consumption scales sub-linearly with
+    population size, which means that the analysis of a large C-14 time-series
+    has the potential to misestimate rates of population change and absolute
+    population size. Energy consumption is also an exponential function of
+    economic complexity. Thus, the C-14 record could change semi-independent of
+    population as complexity grows or declines. Scaling models are an important
+    tool for stimulating future research to tease apart the different effects of
+    population and social complexity on energy consumption, and explain
+    variation in the forms of C-14 date time-series in different regions.
+  author:
+    - family: Freeman
+      given: J.
+    - family: Byers
+      given: D. A.
+    - family: Robinson
+      given: E.
+    - family: Kelly
+      given: R. L.
+  citation-key: freeman2018CultureProcessInterpretation
+  container-title: RADIOCARBON
+  container-title-short: Radiocarbon
+  DOI: 10.1017/RDC.2017.124
+  ISSN: 0033-8222 1945-5755
+  issue: '2'
+  issued:
+    - year: 2018
+  page: 453–467
+  title: Culture, process and the interpretation of radiocarbon data
+  type: article-journal
+  volume: '60'
+
+- id: garcia-puchol2018BAYESIANAPPROACHTIMING
+  abstract: >-
+    In this paper, we compile recent C-14 dates related to the Neolithic
+    transition in Mediterranean Iberia and present a Bayesian chronological
+    approach for testing the dual model, a mixed model proposed to explain the
+    spread of farming and husbandry processes in eastern Iberia. The dual model
+    postulates the coexistence of agricultural pioneers and indigenous
+    Mesolithic foraging groups in the Middle Holocene. We test this general
+    model with more regional models of four geographical areas (Northeast,
+    Upper, and Middle Ebro Valley, and Eastern and South/Southeastern regions)
+    and present a filtered summed probability of all C-14 dates known in the
+    region in order to compare socioecological dynamics over a long period.
+    Finally, we discuss the results and analyze how certain specific
+    characteristics of sites and their chronologies can serve for timing the
+    Neolithic expansion in Mediterranean Iberia.
+  author:
+    - family: García-Puchol
+      given: O.
+    - family: Bernabeu-Aubán
+      given: J.
+    - family: Barton
+      given: C. M.
+    - family: Pardo-Gordó
+      given: S.
+    - family: McClure
+      given: S. B.
+    - family: Diez-Castillo
+      given: A.
+  citation-key: garcia-puchol2018BAYESIANAPPROACHTIMING
+  container-title: RADIOCARBON
+  container-title-short: Radiocarbon
+  DOI: 10.1017/RDC.2017.61
+  ISSN: 0033-8222 1945-5755
+  issue: '1'
+  issued:
+    - year: 2018
+  page: 181–205
+  title: A BAYESIAN APPROACH FOR TIMING THE NEOLITHIZATION IN MEDITERRANEAN IBERIA
+  type: article-journal
+  volume: '60'
+
+- id: gelman2013BayesianDataAnalysis
+  accessed:
+    - year: 2025
+      month: 11
+      day: 27
+  author:
+    - family: Gelman
+      given: Andrew
+    - family: Carlin
+      given: John B.
+    - family: Stern
+      given: Hal S.
+    - family: Dunson
+      given: David B.
+    - family: Vehtari
+      given: Aki
+    - family: Rubin
+      given: Donald B.
+  citation-key: gelman2013BayesianDataAnalysis
+  DOI: 10.1201/b16018
+  ISBN: 978-0-429-11307-9
+  issued:
+    - year: 2013
+  language: en
+  publisher: Chapman and Hall/CRC
+  source: DOI.org (Crossref)
+  title: Bayesian Data Analysis
+  type: book
+  URL: https://www.taylorfrancis.com/books/9781439898208
+
+- id: hanna2025SumPoissonApproach
+  accessed:
+    - year: 2025
+      month: 11
+      day: 20
+  author:
+    - family: Hanna
+      given: Jonathan
+  citation-key: hanna2025SumPoissonApproach
+  container-title: Peer Community in Archaeology
+  container-title-short: PCI Archaeology
+  DOI: 10.24072/pci.archaeo.100583
+  ISSN: 2742-1929
+  issued:
+    - year: 2025
+  language: en
+  license: https://creativecommons.org/licenses/by/4.0/
+  page: '100583'
+  source: DOI.org (Crossref)
+  title: 'Beyond the sum: A Poisson approach to radiocarbon analysis'
+  title-short: Beyond the Sum
+  type: article-journal
+  URL: https://archaeo.peercommunityin.org/articles/rec?id=583
+
+- id: heaton2020Marine20TheMarineRadiocarbon
+  abstract: |-
+    ABSTRACT
+                
+                  The concentration of radiocarbon (
+                  14
+                  C) differs between ocean and atmosphere. Radiocarbon determinations from samples which obtained their
+                  14
+                  C in the marine environment therefore need a marine-specific calibration curve and cannot be calibrated directly against the atmospheric-based IntCal20 curve. This paper presents Marine20, an update to the internationally agreed marine radiocarbon age calibration curve that provides a non-polar global-average marine record of radiocarbon from 0–55 cal kBP and serves as a baseline for regional oceanic variation. Marine20 is intended for calibration of marine radiocarbon samples from non-polar regions; it is not suitable for calibration in polar regions where variability in sea ice extent, ocean upwelling and air-sea gas exchange may have caused larger changes to concentrations of marine radiocarbon. The Marine20 curve is based upon 500 simulations with an ocean/atmosphere/biosphere box-model of the global carbon cycle that has been forced by posterior realizations of our Northern Hemispheric atmospheric IntCal20
+                  14
+                  C curve and reconstructed changes in CO
+                  2
+                  obtained from ice core data. These forcings enable us to incorporate carbon cycle dynamics and temporal changes in the atmospheric
+                  14
+                  C level. The box-model simulations of the global-average marine radiocarbon reservoir age are similar to those of a more complex three-dimensional ocean general circulation model. However, simplicity and speed of the box model allow us to use a Monte Carlo approach to rigorously propagate the uncertainty in both the historic concentration of atmospheric
+                  14
+                  C and other key parameters of the carbon cycle through to our final Marine20 calibration curve. This robust propagation of uncertainty is fundamental to providing reliable precision for the radiocarbon age calibration of marine based samples. We make a first step towards deconvolving the contributions of different processes to the total uncertainty; discuss the main differences of Marine20 from the previous age calibration curve Marine13; and identify the limitations of our approach together with key areas for further work. The updated values for
+                  ΔR
+                  , the regional marine radiocarbon reservoir age corrections required to calibrate against Marine20, can be found at the data base
+                  http://calib.org/marine/
+                  .
+  accessed:
+    - year: 2025
+      month: 11
+      day: 28
+  author:
+    - family: Heaton
+      given: Timothy J
+    - family: Köhler
+      given: Peter
+    - family: Butzin
+      given: Martin
+    - family: Bard
+      given: Edouard
+    - family: Reimer
+      given: Ron W
+    - family: Austin
+      given: William E N
+    - family: Bronk Ramsey
+      given: Christopher
+    - family: Grootes
+      given: Pieter M
+    - family: Hughen
+      given: Konrad A
+    - family: Kromer
+      given: Bernd
+    - family: Reimer
+      given: Paula J
+    - family: Adkins
+      given: Jess
+    - family: Burke
+      given: Andrea
+    - family: Cook
+      given: Mea S
+    - family: Olsen
+      given: Jesper
+    - family: Skinner
+      given: Luke C
+  citation-key: heaton2020Marine20TheMarineRadiocarbon
+  container-title: Radiocarbon
+  container-title-short: Radiocarbon
+  DOI: 10.1017/RDC.2020.68
+  ISSN: 0033-8222, 1945-5755
+  issue: '4'
+  issued:
+    - year: 2020
+  language: en
+  page: 779–820
+  source: DOI.org (Crossref)
+  title: Marine20—The Marine Radiocarbon Age Calibration Curve (0–55,000 cal BP)
+  type: article-journal
+  URL: >-
+    https://www.cambridge.org/core/product/identifier/S0033822220000685/type/journal_article
+  volume: '62'
+
+- id: heaton2025NewApproachRadiocarbon
+  accessed:
+    - year: 2025
+      month: 11
+      day: 20
+  author:
+    - family: Heaton
+      given: Timothy J.
+    - family: Al-assam
+      given: Sara
+    - family: Bard
+      given: Edouard
+  citation-key: heaton2025NewApproachRadiocarbon
+  container-title: Journal of Archaeological Science
+  container-title-short: Journal of Archaeological Science
+  DOI: 10.1016/j.jas.2025.106237
+  ISSN: '03054403'
+  issued:
+    - year: 2025
+  language: en
+  page: '106237'
+  source: DOI.org (Crossref)
+  title: >-
+    A new approach to radiocarbon summarisation: Rigorous identification of
+    variations/changepoints in the occurrence rate of radiocarbon samples using
+    a Poisson process
+  title-short: A new approach to radiocarbon summarisation
+  type: article-journal
+  URL: https://linkinghub.elsevier.com/retrieve/pii/S030544032500086X
+  volume: '182'
+
+- id: hiscock2016DatesDemographyNeed
+  abstract: >-
+    Our paper (Attenbrow and Hiscock 2015) raised serious concerns about the use
+    of radiocarbon dates (sum probability distributions) as evidence of ancient
+    demography. Prominent researchers who commented here and who rely on such
+    interpretations are uncomfortable with our critique, and insist that
+    quantities of dates are a reliable indicator of past population size. Here,
+    we note that while those researchers acknowledge the difficulties of sample
+    selection, taphonomic bias, and the relationship of charcoal and radiocarbon
+    data to human activity, they have not studied or controlled for these
+    matters. At this time, we again advocate caution in the use of dates as data
+    for demographic reconstructions.
+  author:
+    - family: Hiscock
+      given: P.
+    - family: Attenbrow
+      given: V.
+  citation-key: hiscock2016DatesDemographyNeed
+  container-title: ARCHAEOLOGY IN OCEANIA
+  container-title-short: Archaeology in Oceania
+  DOI: 10.1002/arco.5096
+  ISSN: 0728-4896 1834-4453
+  issue: '3'
+  issued:
+    - year: 2016
+  page: 218–219
+  title: >-
+    Dates and demography? The need for caution in using radiometric dates as a
+    robust proxy for prehistoric population change
+  type: article-journal
+  volume: '51'
+
+- id: hogg2020SHCal20SouthernHemisphere
+  abstract: >-
+    Early researchers of radiocarbon levels in Southern Hemisphere tree rings
+    identified a variable North-South hemispheric offset, necessitating
+    construction of a separate radiocarbon calibration curve for the South. We
+    present here SHCal20, a revised calibration curve from 0-55,000 cal BP,
+    based upon SHCal13 and fortified by the addition of 14 new tree-ring data
+    sets in the 2140-0, 3520-3453, 3608-3590 and 13,140-11,375 cal BP time
+    intervals. We detail the statistical approaches used for curve construction
+    and present recommendations for the use of the Northern Hemisphere curve
+    (IntCal20), the Southern Hemisphere curve (SHCal20) and suggest where
+    application of an equal mixture of the curves might be more appropriate.
+    Using our Bayesian spline with errors-in-variables methodology, and based
+    upon a comparison of Southern Hemisphere tree-ring data compared with
+    contemporaneous Northern Hemisphere data, we estimate the mean Southern
+    Hemisphere offset to be 36 +/- 27 C-14 yrs older.
+  author:
+    - family: Hogg
+      given: A. G.
+    - family: Heaton
+      given: T. J.
+    - family: Hua
+      given: Q.
+    - family: Palmer
+      given: J. G.
+    - family: Turney
+      given: C. S.
+    - family: Southon
+      given: J.
+    - family: Bayliss
+      given: A.
+    - family: Blackwell
+      given: P. G.
+    - family: Boswijk
+      given: G.
+    - family: Ramsey
+      given: C. B.
+    - family: Pearson
+      given: C.
+    - family: Petchey
+      given: F.
+    - family: Reimer
+      given: P.
+    - family: Reimer
+      given: R.
+    - family: Wacker
+      given: L.
+  citation-key: hogg2020SHCal20SouthernHemisphere
+  container-title: RADIOCARBON
+  container-title-short: Radiocarbon
+  DOI: 10.1017/RDC.2020.59
+  ISSN: 0033-8222 1945-5755
+  issue: '4'
+  issued:
+    - year: 2020
+  page: 759–778
+  title: SHCal20 Southern Hemisphere calibration, 0-55,000 years cal BP
+  type: article-journal
+  volume: '62'
+
+- id: inomata2022RadiocarbonDatesBurials
+  abstract: >-
+    In the Maya lowlands, where bedrock consists largely of carbonate rocks,
+    aquatic organisms living in inland bodies of water may incorporate inorganic
+    carbon derived from those rocks. Their tissues may reflect the freshwater
+    reservoir effect (FRE), which would give radiocarbon dates older than those
+    of contemporaneous terrestrial plants. FRE may also affect humans and
+    terrestrial animals that consume those aquatic organisms. To evaluate the
+    FRE of the Pasi & PRIME;on River region of Guatemala, we radiocarbon dated
+    modern fish and mollusks, as well as mollusk shells and terrestrial plants
+    found in a lake core. The modern fish and the mollusk soft tissues indicated
+    a radiocarbon age offset of 596 & PLUSMN; 422 years, whereas lake core
+    samples gave an offset of 2124 +/- 148 years. The difference most likely
+    resulted from the incorporation of inorganic carbon in shell carbonate in
+    addition to metabolic carbon. We applied these data to 50 radiocarbon dates
+    of human remains excavated from Ceibal and nearby sites. To estimate the
+    portion of aquatic organisms in their diet, we analyzed carbon and nitrogen
+    stable isotopes of these remains with the Bayesian mixing model FRUITS (Food
+    Reconstruction Using Isotopic Transferred Signals). The offset of 596 +/-
+    422 years led to radiocarbon date corrections of 92-179 years to human
+    remains from the Middle Preclassic period and 44-99 years to those from the
+    later periods. The applications of FRE corrections suggest that groups
+    maintaining an Archaic way of life may have coexisted with ceramic-using
+    groups when ceremonial complexes were built. This study indicates the
+    importance of considering FRE in chronology building, particularly for the
+    Preclassic period.
+  author:
+    - family: Inomata
+      given: T.
+    - family: Sharpe
+      given: A.
+    - family: Palomo
+      given: J. M.
+    - family: Pinzon
+      given: F.
+    - family: Nasu
+      given: H.
+    - family: Triadan
+      given: D.
+    - family: Culleton
+      given: B. J.
+    - family: Kennett
+      given: D. J.
+  citation-key: inomata2022RadiocarbonDatesBurials
+  container-title: JOURNAL OF ARCHAEOLOGICAL SCIENCE-REPORTS
+  container-title-short: Journal of Archaeological Science - Reports
+  DOI: 10.1016/j.jasrep.2022.103506
+  ISSN: 2352-409X
+  issued:
+    - year: 2022
+  title: >-
+    Radiocarbon dates of burials from Ceibal and other Pasi?on Maya sites,
+    Guatemala, and the examination of freshwater reservoir effect through diet
+    reconstruction
+  type: article-journal
+  volume: '44'
+
+- id: johnson2011ReconstructingDynamicsAncient
+  abstract: >-
+    Measuring trends in the size of prehistoric populations is fundamental to
+    our understanding of the demography of ancient people and their responses to
+    environmental change. Archaeologists commonly use the temporal distribution
+    of radiocarbon dates to reconstruct population trends, but this can give a
+    false picture of population growth because of the loss of evidence from
+    older sites. We demonstrate a method for quantifying this bias, and we use
+    it to test for population growth through the Holocene of Australia. We used
+    model simulations to show how turnover of site occupation across an
+    archaeological landscape, interacting with erasure of evidence at abandoned
+    sites, can create an increase in apparent site occupation towards the
+    present when occupation density is actually constant. By estimating the
+    probabilities of abandonment and erasure from archaeological data, we then
+    used the model to show that this effect does not account for the observed
+    increase in occupation through the Holocene in Australia. This is best
+    explained by population growth, which was low for the first part of the
+    Holocene but accelerated about 5000 years ago. Our results provide new
+    evidence for the dynamism of non-agricultural populations through the
+    Holocene.
+  author:
+    - family: Johnson
+      given: C. N.
+    - family: Brook
+      given: B. W.
+  citation-key: johnson2011ReconstructingDynamicsAncient
+  container-title: PROCEEDINGS OF THE ROYAL SOCIETY B-BIOLOGICAL SCIENCES
+  container-title-short: Proceedings of the Royal Society B - Biological Sciences
+  DOI: 10.1098/rspb.2011.0343
+  ISSN: 0962-8452 1471-2954
+  issue: '1725'
+  issued:
+    - year: 2011
+  page: 3748–3754
+  title: >-
+    Reconstructing the dynamics of ancient human populations from radiocarbon
+    dates: 10 000 years of population growth in Australia
+  type: article-journal
+  volume: '278'
+
+- id: loftus2019ArchaeologicalRadiocarbonDatabase
+  abstract: >-
+    The Southern African Radiocarbon Database (SARD) is a new online,
+    open-access database of published radiocarbon dates from southern African
+    archaeological contexts. Compatible with the calibration, Bayesian modelling
+    and mapping functionality of the OxCal software, the SARD will greatly
+    assist in the documentation and analysis of chronological trends across the
+    subcontinent. This article introduces the database and presents two case
+    studies that demonstrate its utility and its integration with OxCal,
+    comparing the temporal distribution of radiocarbon dates in two
+    archaeologically well-investigated regions, and assessing the timing of
+    Middle to Later Stone Age technological developments across the African
+    subcontinent.
+  author:
+    - family: Loftus
+      given: E.
+    - family: Mitchell
+      given: P. J.
+    - family: Ramsey
+      given: C. B.
+  citation-key: loftus2019ArchaeologicalRadiocarbonDatabase
+  container-title: ANTIQUITY
+  container-title-short: Antiquity
+  DOI: 10.15184/aqy.2019.75
+  ISSN: 0003-598X 1745-1744
+  issue: '370'
+  issued:
+    - year: 2019
+  page: 870–885
+  title: An archaeological radiocarbon database for southern Africa
+  type: article-journal
+  volume: '93'
+
+- id: lucarini2020MedAfriCarbonRadiocarbonDatabase
+  abstract: >-
+    The MedAfriCarbon radiocarbon database and its accompanying web application
+    are outcomes of the MedAfrica project - Archaeological deep history and
+    dynamics of Mediterranean Africa, ca. 9600-700 BC. The dataset presented
+    here in Version 1.0 of the database includes 1587 archaeological 14C dates
+    from 368 sites in Mediterranean Africa. The database is unusual because the
+    majority of the dates within it have been annotated with further cultural
+    and environmental variables, notably the presence/absence of different
+    domestic/wild species and particular material culture traits. MedAfriCarbon
+    also includes an publicly-accessible web application that facilitates data
+    exploration and informal analysis.
+  author:
+    - family: Lucarini
+      given: G.
+    - family: Wilkinson
+      given: T.
+    - family: Crema
+      given: E. R.
+    - family: Palombini
+      given: A.
+    - family: Bevan
+      given: A.
+    - family: Broodbank
+      given: C.
+  citation-key: lucarini2020MedAfriCarbonRadiocarbonDatabase
+  container-title: JOURNAL OF OPEN ARCHAEOLOGY DATA
+  container-title-short: Journal of Open Archaeology Data
+  DOI: 10.5334/joad.60
+  ISSN: 2049-1565
+  issued:
+    - year: 2020
+  title: >-
+    The MedAfriCarbon radiocarbon database and web application. Archaeological
+    dynamics in Mediterranean Africa, ca. 9600-700 BC
+  type: article-journal
+  volume: '8'
+
+- id: marom2024NotePredatorpreyDynamics
+  abstract: >-
+    Predator-prey interactions have been a central theme in population ecology
+    for the past century, but real-world data sets only exist for recent,
+    relatively short (<100 years) time spans. This limits our ability to study
+    centennial/millennial-scale predator-prey dynamics. We propose that regional
+    radiocarbon databases can be used to reconstruct a signal of predator-prey
+    population dynamics in deep time, overcoming this limitation. We support our
+    argument with examples from Pleistocene Beringia and the Holocene Judean
+    Desert.
+  accessed:
+    - year: 2025
+      month: 11
+      day: 20
+  author:
+    - family: Marom
+      given: Nimrod
+    - family: Wolkowski
+      given: Uri
+  citation-key: marom2024NotePredatorpreyDynamics
+  container-title: Peer Community Journal
+  DOI: 10.24072/pcjournal.395
+  ISSN: 2804-3871
+  issued:
+    - year: 2024
+  language: en
+  page: e29
+  source: DOI.org (Crossref)
+  title: A note on predator-prey dynamics in radiocarbon datasets
+  type: article-journal
+  URL: https://peercommunityjournal.org/articles/10.24072/pcjournal.395/
+  volume: '4'
+
+- id: mendez-quiros2023ModelingLongtermHuman
+  abstract: >-
+    Food production is one of the most significant achievements in Andean
+    history. The domestication of plants and animals presented an enormous
+    challenge, relating to changing technologies, settlement patterns, and
+    social organization. This paper aims to assess Atacama Desert population
+    dynamics and their relationship to the domestication of plants and animals
+    through chronological modeling using kernel density estimation on
+    radiocarbon (C-14) dates, assuming that a higher C-14 probability density is
+    related to more intense human occupation. The analysis is based on a C-14
+    dataset comprising 1003 C-14 dates (between 11,000 and 150 BP) from 243
+    archaeological sites in the Arica and Tarapaca regions of northern Chile,
+    collected from published data. We observed two population-dynamics
+    inflection points for these regions. First, starting at ca. 3000 BP,
+    constant population growth occurred, which was related to horticulture in
+    the Arica region and to agriculture in the Tarapaca region. Second, between
+    ca. 1000 and 400 BP, a general population rise occurred due to the
+    consolidation of intensive agriculture in the lowlands and precordillera
+    altitudinal belts in both regions and the integration of the coast and the
+    altiplano into macro-regional population dynamics.
+  author:
+    - family: Mendez-Quiros
+      given: P.
+    - family: Barceló
+      given: J. A.
+    - family: Santana-Sagredo
+      given: F.
+    - family: Uribe
+      given: M.
+  citation-key: mendez-quiros2023ModelingLongtermHuman
+  container-title: RADIOCARBON
+  container-title-short: Radiocarbon
+  DOI: 10.1017/RDC.2023.27
+  ISSN: 0033-8222 1945-5755
+  issue: '3'
+  issued:
+    - year: 2023
+  page: 665–679
+  title: >-
+    Modeling long-term human population dynamics using kernel density analysis
+    of ¹⁴C data in the Atacama desert (18°-21°S)
+  type: article-journal
+  volume: '65'
+
+- id: michczynska2007FrequencyDistributionRadiocarbon
+  abstract: >-
+    Large sets of radiocarbon dates of 1019 peat, 155 speleothem, and 100 tufa
+    samples, as well as dates of 330 fluvial samples, were investigated in order
+    to estimate environmental variability during the last 16,000 calendar years
+    in Poland. All C-14 dating was carried out in the Gliwice Radiocarbon
+    Laboratory, and results are stored in the RoS database. Probability density
+    functions (PDFs) were created by summing up (on the calendar timescale)
+    individual age probability distributions of all dates for different types of
+    material and for different regions of Poland. We used an updated version of
+    the Gliwice Radiocarbon Laboratory calibration program GdCALIB. The C-14
+    dates were calibrated using the IntCal04 calibration curve (Reimer et al.
+    2004), and results were compared with other paleoenvironmental records. The
+    authors conclude that analyzing PDFs of different types of sediments can be
+    helpful in the qualitative reconstruction of the past environment. The PDF
+    for peat samples primarily reflects paleohydrological conditions; the PDFs
+    for speleothem and tufa samples reflect changes in temperature and humidity,
+    while analysis of the PDF created for fluvial data is in a general agreement
+    with the PDFs constructed for peat samples.
+  author:
+    - family: Michczynska
+      given: D. J.
+    - family: Michczynski
+      given: A.
+    - family: Pazdur
+      given: A.
+  citation-key: michczynska2007FrequencyDistributionRadiocarbon
+  container-title: RADIOCARBON
+  container-title-short: Radiocarbon
+  DOI: 10.1017/S0033822200042673
+  ISSN: 0033-8222
+  issue: '2'
+  issued:
+    - year: 2007
+  page: 799–806
+  title: >-
+    Frequency distribution of radiocarbon dates as a tool for reconstructing
+    environmental changes
+  type: article-journal
+  volume: '49'
+
+- id: millar2014RadiocarbonDatingAmerican
+  abstract: >-
+    The American pika (Ochotona princeps) has become a species of concern for
+    its sensitivity to warm temperatures and potential vulnerability to global
+    warming. We explored the value of radiocarbon dating of fecal pellets to
+    address questions of population persistence and timing of site extirpation.
+    Carbon was extracted from pellets collected at 43 locations in the western
+    Great Basin, USA, including three known occupied sites and 40 sites of
+    uncertain status at range margins or where previous studies indicated the
+    species is vulnerable. We resolved calibrated dates with high precision
+    (within several years), most of which fell in the period of the mid-late
+    20th century bomb curve. The two-sided nature of the bomb curve renders far-
+    and near-side dates of equal probability, which are separated by one to four
+    decades. We document methods for narrowing resolution to one age range,
+    including stratigraphic analysis of vegetation collected from pika haypiles.
+    No evidence was found for biases in atmospheric C-14 levels due to
+    fossil-derived or industrial CO2 contamination. Radiocarbon dating indicated
+    that pellets can persist for >59 years; known occupied sites resolved
+    contemporary dates. Using combined evidence from field observations and
+    radiocarbon dating, and the Bodie Mountains as an example, we propose a
+    historical biogeographic scenario for pikas in minor Great Basin mountain
+    ranges adjacent to major cordillera, wherein historical climate variability
+    led to cycles of extirpation and recolonization during alternating cool and
+    warm centuries. Using this model to inform future dynamics for small ranges
+    in biogeographic settings similar to the Bodie Mountains in California,
+    extirpation of pikas appears highly likely under directional warming trends
+    projected for the next century, even while populations in extensive
+    cordillera (e.g., Sierra Nevada, Rocky Mountains, Cascade Range) are likely
+    to remain viable due to extensive, diverse habitat and high connectivity.
+  author:
+    - family: Millar
+      given: C. I.
+    - family: Heckman
+      given: K.
+    - family: Swanston
+      given: C.
+    - family: Schmidt
+      given: K.
+    - family: Westfall
+      given: R. D.
+    - family: Delany
+      given: D. L.
+  citation-key: millar2014RadiocarbonDatingAmerican
+  container-title: ECOLOGICAL APPLICATIONS
+  container-title-short: Ecological Applications
+  DOI: 10.1890/13-0520.1
+  ISSN: 1051-0761 1939-5582
+  issue: '7'
+  issued:
+    - year: 2014
+  page: 1748–1768
+  title: >-
+    Radiocarbon dating of American pika fecal pellets provides insights into
+    population extirpations and climate refugia
+  type: article-journal
+  volume: '24'
+
+- id: mullen2012ArchaeologicalTestEffects
+  abstract: >-
+    The hypothesis that Athapaskan speakers in Alaska, British Columbia, and the
+    Yukon Territory were displaced by volcanic eruptions at 1147 and 1830 cal
+    B.P. is tested using radiocarbon dates as a proxy for population. Published
+    data concerning the extent of the ash lobes were digitized in GIS to select
+    dates recovered from anthropogenic contexts from within the affected areas
+    and from regions thought to have absorbed the immigrant populations. Changes
+    in the frequency of calibrated, taphonomic-bias-corrected radiocarbon dates
+    from the areas of the White River Ash (WRA) eruptions suggest that both
+    eruptions precipitated migration events. Results are tentative due to
+    limited sample sizes, but demonstrate the potential to use radiocarbon dates
+    to track regional abandonment and migrations caused by catastrophic events.
+  author:
+    - family: Mullen
+      given: P. O.
+  citation-key: mullen2012ArchaeologicalTestEffects
+  container-title: ARCTIC ANTHROPOLOGY
+  container-title-short: Arctic Anthropology
+  DOI: 10.1353/arc.2012.0013
+  ISSN: 0066-6939
+  issue: '1'
+  issued:
+    - year: 2012
+  page: 35–44
+  title: An Archaeological Test of the Effects of the White River Ash Eruptions
+  type: article-journal
+  volume: '49'
+
+- id: park2026RescalingRadiocarbonData
+  abstract: |-
+    Abstract
+                Radiocarbon dates have become a cornerstone in archaeological reconstructions of past population dynamics. The increasing reliance on large-scale radiocarbon databases, usually aggregated from diverse sources, however, raises persistent concerns about sampling bias, especially heterogeneous sampling intensity across sites. In this paper, we introduce a rescaling method that adjusts the frequency of dates in radiocarbon datasets in proportion to dwelling counts at the settlement level, using weighting and bootstrap resampling. Through a series of simulations, we show that this approach consistently yields probability distributions that more closely reflect hypothetical population trends, particularly in contexts with high inter-settlement variability in sampling intensity. We apply our method to archaeological data from two areas in Korea, the Yeongsan and Geum River Basins, during the Proto–Three Kingdoms (1C BC–AD 3C) and Three Kingdoms Periods (AD 4–7C). Results demonstrate that rescaled datasets offer significantly different interpretations of population organization and reconfiguration than those derived from original data. This study highlights the importance of addressing sampling heterogeneity in local-scale demographic research and suggests that rescaling is a valuable complement to existing bias-correction strategies in archaeological studies of demography.
+  accessed:
+    - year: 2026
+      month: 3
+      day: 31
+  author:
+    - family: Park
+      given: Jiyoung
+    - family: Kim
+      given: Sejin
+    - family: Jo
+      given: Taechang
+    - family: Kim
+      given: Jangsuk
+  citation-key: park2026RescalingRadiocarbonData
+  container-title: Radiocarbon
+  container-title-short: Radiocarbon
+  DOI: 10.1017/RDC.2026.10203
+  ISSN: 0033-8222, 1945-5755
+  issued:
+    - year: 2026
+  language: en
+  page: 1–26
+  source: DOI.org (Crossref)
+  title: >-
+    Rescaling radiocarbon data: A method for addressing inter-site sampling
+    heterogeneity in reconstructing population history
+  title-short: Rescaling radiocarbon data
+  type: article-journal
+  URL: >-
+    https://www.cambridge.org/core/product/identifier/S0033822226102033/type/journal_article
+
+- id: perez2016PopulationDynamicsNorthwest
+  abstract: >-
+    Studying demographic changes in past human populations is of great interest
+    due to their role in processes of cultural change as well as the biological
+    evolution of populations. Despite this, a general consensus about the most
+    adequate methodological approach to this end is still lacking. Here, a new
+    approach that combines radiocarbon frequency distributions uncorrected and
+    corrected by taphonomic bias and demographic curves independently estimated
+    with modern mitochondrial DNA (mtDNA) is used to estimate population size
+    changes in Northwest Patagonia since the Pleistocene Holocene transition to
+    recent times. Results based on mtDNA sequences suggest a census size of
+    approximately 3000 individuals (with an estimated female effective size of
+    ca. 750 individuals) by the initial peopling of this region around 10,000
+    years ago. A strong correspondence between curves based on mtDNA data and
+    those based on archaeological radiocarbon dates (n = 251) was obtained after
+    the effect of taphonomic bias was accounted for. The demographic curves
+    indicate that the population size was relatively stable during the earlier
+    Early Holocene and it increased between 7000 and 5000 years ago, reaching a
+    maximum size around 1000 years ago. Then, the population size declined until
+    present time. We conclude that demographic inferences made on the basis of
+    radiocarbon dates are not necessarily biased but this needs to be evaluated
+    with independent evidence in each specific geographical region. (C) 2015
+    Elsevier Ltd. All rights reserved.
+  author:
+    - family: Perez
+      given: S. I.
+    - family: Gonzalez
+      given: P. N.
+    - family: Bernal
+      given: V.
+  citation-key: perez2016PopulationDynamicsNorthwest
+  container-title: JOURNAL OF ARCHAEOLOGICAL SCIENCE
+  container-title-short: Journal of Archaeological Science
+  DOI: 10.1016/j.jas.2015.11.013
+  ISSN: 0305-4403 1095-9238
+  issued:
+    - year: 2016
+  page: 154–160
+  title: >-
+    Past population dynamics in Northwest Patagonia: An estimation using
+    molecular and radiocarbon data
+  type: article-journal
+  volume: '65'
+
+- id: peros2010PrehistoricDemographyNorth
+  abstract: >-
+    Large radiocarbon datasets are increasingly used as a paleodemographic
+    proxy, although potential sources of bias in such records are poorly
+    understood. In this paper, we use more than 25,000 radiocarbon dates
+    extracted from the Canadian Archaeological Radiocarbon Database (CARD) to
+    estimate long-term population trends in North America, while critically
+    examining biases in such records. The frequency distribution of CARD dates
+    shows a positive curvilinear pattern, such that older dates exist in lower
+    numbers than more recent dates, which in part reflects the removal of
+    cultural carbon from the archaeological record through processes such as
+    erosion and dissolution. The average annual growth rate of radiocarbon dates
+    in CARD was calculated and used to derive estimates of the population of
+    North America from the Paleo-Indian to the Contact Periods. While taphonomic
+    bias has likely affected the CARD data, other factors, such as the
+    overrepresentation of Paleo-Indian and Archaic radiocarbon dates, may have
+    offset any bias due to taphonomy. A quantitative reconstruction of Native
+    American population shows that population increased rapidly around 2000 cal
+    yr BP, reaching a maximum of 2,500,000 people by similar to AD 1150. From
+    this time until European contact, the population declined, possibly due to
+    the effects of increased sedentism and population density. (C) 2009 Elsevier
+    Ltd. All rights reserved.
+  author:
+    - family: Peros
+      given: M. C.
+    - family: Munoz
+      given: S. E.
+    - family: Gajewski
+      given: K.
+    - family: Viau
+      given: A. E.
+  citation-key: peros2010PrehistoricDemographyNorth
+  container-title: JOURNAL OF ARCHAEOLOGICAL SCIENCE
+  container-title-short: Journal of Archaeological Science
+  DOI: 10.1016/j.jas.2009.10.029
+  ISSN: 0305-4403 1095-9238
+  issue: '3'
+  issued:
+    - year: 2010
+  page: 656–664
+  title: Prehistoric demography of North America inferred from radiocarbon data
+  type: article-journal
+  volume: '37'
+
+- id: porcic2016DemographyEarlyNeolithic
+  abstract: >-
+    The Central Balkans region is of great importance for understanding the
+    spread of the Neolithic in Europe but the Early Neolithic population
+    dynamics of the region is unknown. In this study we apply the method of
+    summed calibrated probability distributions to a set of published
+    radiocarbon dates from the Republic of Serbia in order to reconstruct
+    population dynamics in the Early Neolithic in this part of the Central
+    Balkans. The results indicate that there was a significant population growth
+    after similar to 6200 calBC, when the Neolithic was introduced into the
+    region, followed by a bust at the end of the Early Neolithic phase (similar
+    to 5400 calBC). These results are broadly consistent with the predictions of
+    the Neolithic Demographic Transition theory and the patterns of population
+    booms and busts detected in other regions of Europe. These results suggest
+    that the cultural process that underlies the patterns observed in Central
+    and Western Europe was also in operation in the Central Balkan Neolithic and
+    that the population increase component of this process can be considered as
+    an important factor for the spread of the Neolithic as envisioned in the
+    demic diffusion hypothesis.
+  author:
+    - family: Porcic
+      given: M.
+    - family: Blagojevic
+      given: T.
+    - family: Stefanovic
+      given: S.
+  citation-key: porcic2016DemographyEarlyNeolithic
+  container-title: PLOS ONE
+  container-title-short: PLoS ONE
+  DOI: 10.1371/journal.pone.0160832
+  ISSN: 1932-6203
+  issue: '8'
+  issued:
+    - year: 2016
+  title: >-
+    Demography of the Early Neolithic population in Central Balkans: Population
+    dynamics reconstruction using summed radiocarbon probability distributions
+  type: article-journal
+  volume: '11'
+
+- id: price2021EndtoendBayesianAnalysis
+  abstract: >-
+    Archaeologists and demographers increasingly employ aggregations of
+    published radiocarbon (C-14) dates as demographic proxies summarizing
+    changes in human activity in past societies. Presently, summed probability
+    densities (SPDs) of calibrated radiocarbon dates are the dominant method of
+    using C-14 dates to reconstruct demographic trends. Unfortunately, SPDs are
+    incapable of converging on the distribution that generated a set of
+    radiocarbon measurements, even when the number of observations is large. To
+    overcome this problem, we propose a more principled alternative that
+    combines finite mixture models and end-to-end Bayesian inference. Numerical
+    simulations and an assessment of the statistical identifiability of our
+    method demonstrate that it correctly converges on the generating
+    distribution for two important models, exponentials and finite Gaussian
+    mixtures, at least if the same statistical model is used to fit the data as
+    was used to generate the data. To further validate this approach, we apply
+    it to a set of radiocarbon dates from the Maya city of Tikal. We show that
+    an end-to-end approach reconstructs with high accuracy expert demographic
+    reconstructions based on settlement patterns and ceramics, but with more
+    precise time-resolution and characterization of uncertainty than has
+    heretofore been possible. Future work should consider alternatives to finite
+    Gaussian mixtures for fitting the generating distribution.
+  author:
+    - family: Price
+      given: M. H.
+    - family: Capriles
+      given: J. M.
+    - family: Hoggarth
+      given: J. A.
+    - family: Bocinsky
+      given: R. K.
+    - family: Ebert
+      given: C. E.
+    - family: Jones
+      given: J. H.
+  citation-key: price2021EndtoendBayesianAnalysis
+  container-title: JOURNAL OF ARCHAEOLOGICAL SCIENCE
+  container-title-short: Journal of Archaeological Science
+  DOI: 10.1016/j.jas.2021.105473
+  ISSN: 0305-4403 1095-9238
+  issued:
+    - year: 2021
+  title: End-to-end Bayesian analysis for summarizing sets of radiocarbon dates
+  type: article-journal
+  volume: '135'
+
+- id: ramsey2024DevelopmentINTCALDatabase
+  abstract: >-
+    The IntCal family of radiocarbon (14C) calibration curves is based on
+    research spanning more than three decades. The IntCal group have collated
+    the 14C and calendar age data (mostly derived from primary publications with
+    other types of data and meta-data) and, since 2010, made them available for
+    other sorts of analysis through an open-access database. This has ensured
+    transparency in terms of the data used in the construction of the ratified
+    calibration curves. As the IntCal database expands, work is underway to
+    facilitate best practice for new data submissions, make more of the
+    associated metadata available in a structured form, and help those wishing
+    to process the data with programming languages such as R, Python, and
+    MATLAB. The data and metadata are complex because of the range of different
+    types of archives. A restructured interface, based on the "IntChron"
+    open-access data model, includes tools which allow the data to be plotted
+    and compared without the need for export. The intention is to include
+    complementary information which can be used alongside the main 14C series to
+    provide new insights into the global carbon cycle, as well as facilitating
+    access to the data for other research applications. Overall, this work aims
+    to streamline the generation of new calibration curves.
+  author:
+    - family: Ramsey
+      given: C. B.
+    - family: Adolphi
+      given: F.
+    - family: Austin
+      given: W.
+    - family: Bard
+      given: E.
+    - family: Bayliss
+      given: A.
+    - family: Blaauw
+      given: M.
+    - family: Cheng
+      given: H.
+    - family: Edwards
+      given: R. L.
+    - family: Friedrich
+      given: M.
+    - family: Heaton
+      given: T.
+    - family: Hogg
+      given: A.
+    - family: Hua
+      given: Q.
+    - family: Hughen
+      given: K.
+    - family: Kromer
+      given: B.
+    - family: Manning
+      given: S.
+    - family: Muscheler
+      given: R.
+    - family: Palmer
+      given: J.
+    - family: Pearson
+      given: C.
+    - family: Reimer
+      given: P.
+    - family: Reimer
+      given: R.
+    - family: Richards
+      given: D.
+    - family: Scott
+      given: M.
+    - family: Southon
+      given: J.
+    - family: Turney
+      given: C.
+    - family: Wacker
+      given: L.
+  citation-key: ramsey2024DevelopmentINTCALDatabase
+  container-title: RADIOCARBON
+  container-title-short: Radiocarbon
+  DOI: 10.1017/RDC.2023.53
+  ISSN: 0033-8222 1945-5755
+  issue: '6'
+  issued:
+    - year: 2024
+  page: 1852–1868
+  title: Development of the INTCAL database
+  type: article-journal
+  volume: '66'
+
+- id: rcoreteam2025LanguageEnvironmentStatistical
+  author:
+    - family: R Core Team
+      given: ''
+  citation-key: rcoreteam2025LanguageEnvironmentStatistical
+  issued:
+    - year: 2025
+  publisher: R Foundation for Statistical Computing
+  publisher-place: Vienna, Austria. https://www.R-project.org
+  title: 'R: A Language and Environment for Statistical Computing'
+  type: book
+  URL: https://www.R-project.org
+
+- id: reimer2020INTCAL20NorthernHemisphere
+  abstract: >-
+    Radiocarbon (C-14) ages cannot provide absolutely dated chronologies for
+    archaeological or paleoenvironmental studies directly but must be converted
+    to calendar age equivalents using a calibration curve compensating for
+    fluctuations in atmospheric C-14 concentration. Although calibration curves
+    are constructed from independently dated archives, they invariably require
+    revision as new data become available and our understanding of the Earth
+    system improves. In this volume the international C-14 calibration curves
+    for both the Northern and Southern Hemispheres, as well as for the ocean
+    surface layer, have been updated to include a wealth of new data and
+    extended to 55,000 cal BP. Based on tree rings, IntCal20 now extends as a
+    fully atmospheric record to ca. 13,900 cal BP. For the older part of the
+    timescale, IntCal20 comprises statistically integrated evidence from
+    floating tree-ring chronologies, lacustrine and marine sediments,
+    speleothems, and corals. We utilized improved evaluation of the timescales
+    and location variable C-14 offsets from the atmosphere (reservoir age, dead
+    carbon fraction) for each dataset. New statistical methods have refined the
+    structure of the calibration curves while maintaining a robust treatment of
+    uncertainties in the C-14 ages, the calendar ages and other corrections. The
+    inclusion of modeled marine reservoir ages derived from a three-dimensional
+    ocean circulation model has allowed us to apply more appropriate reservoir
+    corrections to the marine C-14 data rather than the previous use of constant
+    regional offsets from the atmosphere. Here we provide an overview of the new
+    and revised datasets and the associated methods used for the construction of
+    the IntCal20 curve and explore potential regional offsets for tree-ring
+    data. We discuss the main differences with respect to the previous
+    calibration curve, IntCal13, and some of the implications for archaeology
+    and geosciences ranging from the recent past to the time of the extinction
+    of the Neanderthals.
+  author:
+    - family: Reimer
+      given: P. J.
+    - family: Austin
+      given: W. E. N.
+    - family: Bard
+      given: E.
+    - family: Bayliss
+      given: A.
+    - family: Blackwell
+      given: P. G.
+    - family: Ramsey
+      given: C. B.
+    - family: Butzin
+      given: M.
+    - family: Cheng
+      given: H.
+    - family: Edwards
+      given: R. L.
+    - family: Friedrich
+      given: M.
+    - family: Grootes
+      given: P. M.
+    - family: Guilderson
+      given: T. P.
+    - family: Hajdas
+      given: I.
+    - family: Heaton
+      given: T. J.
+    - family: Hogg
+      given: A. G.
+    - family: Hughen
+      given: K. A.
+    - family: Kromer
+      given: B.
+    - family: Manning
+      given: S. W.
+    - family: Muscheler
+      given: R.
+    - family: Palmer
+      given: J. G.
+    - family: Pearson
+      given: C.
+    - family: Plicht
+      given: J.
+      non-dropping-particle: van der
+    - family: Reimer
+      given: R. W.
+    - family: Richards
+      given: D. A.
+    - family: Scott
+      given: E. M.
+    - family: Southon
+      given: J. R.
+    - family: Turney
+      given: C. S. M.
+    - family: Wacker
+      given: L.
+    - family: Adolphi
+      given: F.
+    - family: Büntgen
+      given: U.
+    - family: Capano
+      given: M.
+    - family: Fahrni
+      given: S. M.
+    - family: Fogtmann-Schulz
+      given: A.
+    - family: Friedrich
+      given: R.
+    - family: Köhler
+      given: P.
+    - family: Kudsk
+      given: S.
+    - family: Miyake
+      given: F.
+    - family: Olsen
+      given: J.
+    - family: Reinig
+      given: F.
+    - family: Sakamoto
+      given: M.
+    - family: Sookdeo
+      given: A.
+    - family: Talamo
+      given: S.
+  citation-key: reimer2020INTCAL20NorthernHemisphere
+  container-title: RADIOCARBON
+  container-title-short: Radiocarbon
+  DOI: 10.1017/RDC.2020.41
+  ISSN: 0033-8222 1945-5755
+  issue: '4'
+  issued:
+    - year: 2020
+  page: 725–757
+  title: >-
+    The INTCAL20 northern hemisphere radiocarbon age calibration curve (0-55 cal
+    kbp)
+  type: article-journal
+  volume: '62'
+
+- id: rick1987DatesDataExamination
+  author:
+    - family: Rick
+      given: J. W.
+  citation-key: rick1987DatesDataExamination
+  container-title: AMERICAN ANTIQUITY
+  container-title-short: American Antiquity
+  DOI: 10.2307/281060
+  ISSN: 0002-7316
+  issue: '1'
+  issued:
+    - year: 1987
+  page: 55–73
+  title: Dates as data - an examination of the Peruvian preceramic radiocarbon record
+  type: article-journal
+  volume: '52'
+
+- id: riris2018DatesDataRevisited
+  abstract: >-
+    This paper adopts a formal model-testing approach to the Peruvian
+    radiocarbon (C-14) record, the site of the first aggregate analysis of this
+    type of archaeological data. Using a large and improved regional dataset of
+    radiometric determinations (n = 1180) from the period 14000-3000 C-14 years
+    before present, the study performs a comparative analysis of the demographic
+    trajectories of two sub-regions, the desert coast and Andean highlands.
+    Against the backdrop of theoretical models of population growth, and
+    controlling for taphonomic factors and sampling biases, the study performs
+    global significance and permutation tests on the data. These provide a
+    necessary measure of statistical confidence that have hereto been absent
+    from the discussion of pre-Columbian demography. Contrary to the findings of
+    prior work, this study of radiocarbon data in Peru reveals that regional
+    trends in the data are statistically indistinguishable. Further testing and
+    comparison to climate archives is able to illustrate sustained population
+    growth over the entire Holocene epoch in this region, with only a few
+    notable exceptions at the end of the mid-Holocene (5000 cal BP). The
+    findings of the analysis are viewed in relation to the cultural and
+    technological changes that indigenous societies experienced in the timeframe
+    in question, and some directions for methodological advances are suggested.
+  author:
+    - family: Riris
+      given: P.
+  citation-key: riris2018DatesDataRevisited
+  container-title: JOURNAL OF ARCHAEOLOGICAL SCIENCE
+  container-title-short: Journal of Archaeological Science
+  DOI: 10.1016/j.jas.2018.06.008
+  ISSN: 0305-4403 1095-9238
+  issued:
+    - year: 2018
+  page: 67–76
+  title: >-
+    Dates as data revisited: A statistical examination of the Peruvian
+    preceramic radiocarbon record
+  type: article-journal
+  volume: '97'
+
+- id: roalkvam2025ComparingSummedProbability
+  abstract: |-
+    Abstract
+                By developing a new methodology for handling and assessing a large number of shoreline dated sites, this paper compares the summed probability distribution of radiocarbon dates and shoreline dates along the Skagerrak coast of south-eastern Norway. Both measures have previously been compared to elucidate demographic developments in Fennoscandia, but these have not been based on probabilistic methods for shoreline dating. The findings indicate a largely diverging development of the two data sets through the Mesolithic. The number of shoreline dated sites undergoes some process of overall decrease through the period, while the radiocarbon data is characterised by a lacking signal in the earliest parts of the period and then undergoes a logistic growth that quickly plateaus and remains stable for the remainder of the period. The precise nature of this discrepancy will necessitate further substantiation and the method of shoreline dating itself still requires further testing and assessment. Having noted this, we still tentatively suggest that while the number of shoreline dated sites is not devoid of influence from a demographic signal, this measure could be more heavily influenced by mobility patterns. Conversely, we also suggest that the lacking radiocarbon data from the earliest part of the Mesolithic is in part the result of mobility patterns, but that the radiocarbon data could be reflecting population dynamics more directly.
+  accessed:
+    - year: 2025
+      month: 11
+      day: 20
+  author:
+    - family: Roalkvam
+      given: Isak
+    - family: Solheim
+      given: Steinar
+  citation-key: roalkvam2025ComparingSummedProbability
+  container-title: Journal of Archaeological Method and Theory
+  container-title-short: J Archaeol Method Theory
+  DOI: 10.1007/s10816-025-09696-7
+  ISSN: 1072-5369, 1573-7764
+  issue: '1'
+  issued:
+    - year: 2025
+  language: en
+  page: '26'
+  source: DOI.org (Crossref)
+  title: >-
+    Comparing summed probability distributions of shoreline and radiocarbon
+    dates from the Mesolithic Skagerrak coast of Norway
+  type: article-journal
+  URL: https://link.springer.com/10.1007/s10816-025-09696-7
+  volume: '32'
+
+- id: robinson2019SpatiotemporalDynamicsPrehistoric
+  abstract: >-
+    Archaeologists now routinely use summed radiocarbon dates as a measure of
+    past population size, yet few have coupled these measures to theoretical
+    expectations about social organization. To help move the 'dates as data'
+    approach from description to explanation, this paper proposes a new
+    integrative theory and method for quantitative analyses of radiocarbon
+    summed probability distributions (SPDs) in space. We present this new
+    approach to 'SPDs in space' with a case study of 3571 geo-referenced
+    radiocarbon dates from Wyoming, USA. We develop a SPD for the Holocene in
+    Wyoming, then analyze the spatial distribution of the SPD as a function of
+    time using a standard nearest-neighbor statistic. We compare population
+    growth and decline throughout the Holocene with expectations for different
+    Ideal Distribution Models from population ecology that predict the
+    relationship between habitat quality and population density. Results suggest
+    that populations in Wyoming were initially clustered and then became
+    increasingly dispersed through the course of the Holocene. These results
+    suggest that Allee-like benefits to aggregation, rather than ideal
+    free-driven dispersion patterns, explain settlement decisions in response to
+    growing populations. Our approach is a first step in constructing a method
+    and theory for describing relationships between social organization and
+    population growth trends derived from archaeological radiocarbon
+    time-series.
+  author:
+    - family: Robinson
+      given: E.
+    - family: Zahid
+      given: H. J.
+    - family: Codding
+      given: B. F.
+    - family: Haas
+      given: R.
+    - family: Kelly
+      given: R. L.
+  citation-key: robinson2019SpatiotemporalDynamicsPrehistoric
+  container-title: JOURNAL OF ARCHAEOLOGICAL SCIENCE
+  container-title-short: Journal of Archaeological Science
+  DOI: 10.1016/j.jas.2018.11.006
+  ISSN: 0305-4403 1095-9238
+  issued:
+    - year: 2019
+  page: 63–71
+  title: >-
+    Spatiotemporal dynamics of prehistoric human population growth: Radiocarbon
+    'dates as data' and population ecology models
+  type: article-journal
+  volume: '101'
+
+- id: saktura2023SahulArchGeochronologicalDatabase
+  accessed:
+    - year: 2025
+      month: 11
+      day: 28
+  author:
+    - family: Saktura
+      given: Wanchese M.
+    - family: Rehn
+      given: Emma
+    - family: Linnenlucke
+      given: Lauren
+    - family: Munack
+      given: Henry
+    - family: Wood
+      given: Rachel
+    - family: Petchey
+      given: Fiona
+    - family: Codilean
+      given: Alexandru T.
+    - family: Jacobs
+      given: Zenobia
+    - family: Cohen
+      given: Tim J.
+    - family: Williams
+      given: Alan N.
+    - family: Ulm
+      given: Sean
+  citation-key: saktura2023SahulArchGeochronologicalDatabase
+  container-title: Australian Archaeology
+  container-title-short: Australian Archaeology
+  DOI: 10.1080/03122417.2022.2159751
+  ISSN: 0312-2417, 2470-0363
+  issue: '1'
+  issued:
+    - year: 2023
+  language: en
+  page: 1–13
+  source: DOI.org (Crossref)
+  title: 'SahulArch: A geochronological database for the archaeology of Sahul'
+  title-short: SahulArch
+  type: article-journal
+  URL: https://www.tandfonline.com/doi/full/10.1080/03122417.2022.2159751
+  volume: '89'
+
+- id: shennan2007PrehistoricPopulationHistory
+  abstract: >-
+    Summed probability distributions of radiocarbon dates are used to make
+    inferences about the history of population fluctuations from the Mesolithic
+    to the late Neolithic for three countries in central and northern Europe:
+    Germany, Poland and Denmark. Two different methods of summing the dates
+    produce very similar overall patterns. The validity of the aggregate
+    patterns is supported by a number of regional studies based on other lines
+    of evidence. The dramatic rise in population associated with the arrival of
+    farming in these areas that is visible in the date distributions is not
+    surprising. Much more unexpected are the fluctuations during the course of
+    the Neolithic, and especially the indications of a drop in population at the
+    end of the LBK early Neolithic that lasted for nearly a millennium. Possible
+    reasons for the pattern are discussed. (c) 2006 Elsevier Ltd. All rights
+    reserved.
+  author:
+    - family: Shennan
+      given: S.
+    - family: Edinborough
+      given: K.
+  citation-key: shennan2007PrehistoricPopulationHistory
+  container-title: JOURNAL OF ARCHAEOLOGICAL SCIENCE
+  container-title-short: Journal of Archaeological Science
+  DOI: 10.1016/j.jas.2006.10.031
+  ISSN: 0305-4403
+  issue: '8'
+  issued:
+    - year: 2007
+  page: 1339–1345
+  title: >-
+    Prehistoric population history: from the late glacial to the late neolithic
+    in central and northern Europe
+  type: article-journal
+  volume: '34'
+
+- id: shennan2013RegionalPopulationCollapse
+  abstract: >-
+    Following its initial arrival in SE Europe 8,500 years ago agriculture
+    spread throughout the continent, changing food production and consumption
+    patterns and increasing population densities. Here we show that, in contrast
+    to the steady population growth usually assumed, the introduction of
+    agriculture into Europe was followed by a boom-and-bust pattern in the
+    density of regional populations. We demonstrate that summed calibrated
+    radiocarbon date distributions and simulation can be used to test the
+    significance of these demographic booms and busts in the context of
+    uncertainty in the radiocarbon date calibration curve and archaeological
+    sampling. We report these results for Central and Northwest Europe between
+    8,000 and 4,000 cal. BP and investigate the relationship between these
+    patterns and climate. However, we find no evidence to support a
+    relationship. Our results thus suggest that the demographic patterns may
+    have arisen from endogenous causes, although this remains speculative.
+  author:
+    - family: Shennan
+      given: S.
+    - family: Downey
+      given: S. S.
+    - family: Timpson
+      given: A.
+    - family: Edinborough
+      given: K.
+    - family: Colledge
+      given: S.
+    - family: Kerig
+      given: T.
+    - family: Manning
+      given: K.
+    - family: Thomas
+      given: M. G.
+  citation-key: shennan2013RegionalPopulationCollapse
+  container-title: NATURE COMMUNICATIONS
+  container-title-short: Nature Communications
+  DOI: 10.1038/ncomms3486
+  ISSN: 2041-1723
+  issued:
+    - year: 2013
+  title: >-
+    Regional population collapse followed initial agriculture booms in
+    mid-Holocene Europe
+  type: article-journal
+  volume: '4'
+
+- id: smith2016UseSummedprobabilityPlots
+  abstract: >-
+    Attenbrow and Hiscock (2015) are critical of the use of "dates as data" to
+    infer prehistoric population levels. Their critique needs some amendment, as
+    methods and assumptions have evolved since Rick (1987) first proposed this
+    approach.
+  author:
+    - family: Smith
+      given: M.
+  citation-key: smith2016UseSummedprobabilityPlots
+  container-title: ARCHAEOLOGY IN OCEANIA
+  container-title-short: Archaeology in Oceania
+  DOI: 10.1002/arco.5094
+  ISSN: 0728-4896 1834-4453
+  issue: '3'
+  issued:
+    - year: 2016
+  page: 214–215
+  title: The use of summed-probability plots of radiocarbon data in archaeology
+  type: article-journal
+  volume: '51'
+
+- id: stutz2025HiddenHazardsLongTerm
+  abstract: "Abstract\n            This chapter considers radiocarbon-date evidence of demographic dynamics in the Epipalaeolithic of the Levant, ca. 25,000–12,000\_cal BP. The calibration analysis results reveal a millennial-scale trend, stretching over nearly 9000\_years. It involves significant long-term average demographic expansion followed by deceleration. This development is gradual, rather than abrupt. It does not appear to have been significantly affected by climatic fluctuations. This main finding highlights the robusticity of hunter-gatherer adaptability, even in the face of sporadic, otherwise archaeologically invisible, short-term hazards that inevitably impacted fertility, mortality, and migration over decadal and centennial time frames. By the end of the Last Glacial Maximum (LGM, ca. 22–19,000\_cal BP), regional human cultural systems had evolved significant resilience to natural perturbations, but something else may also have emerged. Resilient cultural institutions and built environments already in place at that time constituted social networks that stretched across strong gradients in biomass productivity. Over the long run, cultural adaptations and self-organizing demographic responses to spatial gradients in ecological productivity interacted, supporting adaptive social responses to perturbations. Increases in resource-extraction efficiency raised, in turn, culturally mediated demographic carrying capacity. Elucidating this emergent feature of coupled human–environment systems is key for understanding the root causes of long-term human demographic dynamics and environmental impacts."
+  accessed:
+    - year: 2025
+      month: 11
+      day: 20
+  author:
+    - family: Stutz
+      given: Aaron Jonas
+  citation-key: stutz2025HiddenHazardsLongTerm
+  collection-title: Human-Environment Interactions
+  container-title: Under Pressure?
+  DOI: 10.1007/978-3-031-85348-7_14
+  editor:
+    - family: Bradtmöller
+      given: Marcel
+    - family: Grimm
+      given: Sonja B.
+    - family: Nyland
+      given: Astrid J.
+    - family: Lavi
+      given: Noa
+  ISBN: 978-3-031-85347-0 978-3-031-85348-7
+  issued:
+    - year: 2025
+  language: en
+  page: 301–330
+  publisher: Springer Nature Switzerland
+  publisher-place: Cham
+  source: DOI.org (Crossref)
+  title: >-
+    Hidden Hazards and the Long-Term Robusticity of Foraging Societies in the
+    Levantine Epipalaeolithic (25–12 ka)
+  type: chapter
+  URL: https://link.springer.com/10.1007/978-3-031-85348-7_14
+  volume: '10'
+
+- id: surovell2007NoteUseTemporal
+  abstract: >-
+    Temporal frequency distributions of archaeological sites and radiocarbon
+    dates are commonly used as proxies for prehistoric population levels based
+    on the assumption that more people create a stronger archaeological signal.
+    While this assumption is certainly correct, we question whether relative
+    frequencies of sites or dates observed from prehistoric contexts are
+    necessarily linked to human demography. In this paper, we demonstrate that
+    the typical positive curvilinear frequency distributions observed in
+    archaeological contexts also regularly occur in paleontological and
+    geological contexts and are thus likely caused by the operation of
+    time-dependent destructive processes, what we call "taphonomic bias." Using
+    a simple model, which assumes a constant rate of site loss over time, we
+    show how. taphonomic bias can produce positive curvilinear frequency
+    distributions through time even in cases of population stasis, decline, and
+    fluctuation. We conclude that caution must be used when attempting to infer
+    demographic trends from frequency distributions alone. (c) 2007 Elsevier
+    Ltd. All rights reserved.
+  author:
+    - family: Surovell
+      given: T. A.
+    - family: Brantingham
+      given: P. J.
+  citation-key: surovell2007NoteUseTemporal
+  container-title: JOURNAL OF ARCHAEOLOGICAL SCIENCE
+  container-title-short: Journal of Archaeological Science
+  DOI: 10.1016/j.jas.2007.01.003
+  ISSN: 0305-4403 1095-9238
+  issue: '11'
+  issued:
+    - year: 2007
+  page: 1868–1877
+  title: >-
+    A note on the use of temporal frequency distributions in studies of
+    prehistoric demography
+  type: article-journal
+  volume: '34'
+
+- id: surovell2009CorrectingTemporalFrequency
+  abstract: >-
+    In this paper, we expand upon a prior study [Surovell, T.A., Brantingham,
+    P.J., 2007. A note on the use of temporal frequency distributions in studies
+    of prehistoric demography. journal of Archaeological Science 34,1868-1877.]
+    that explored the problem of taphonomic bias. Taphonomic bias refers to the
+    tendency for younger things to be over-represented relative to older things
+    in the archaeological record due to the operation of destructive processes
+    like erosion and weathering. Using a database of radiocarbon dated volcanic
+    deposits from Bryson, R.U., Bryson, RA., Ruter, A. [2006. A calibrated
+    radiocarbon database of late Quaternary volcanic eruptions. Earth
+    Discussions 1, 123-124.], we develop an empirical model of taphonomic bias.
+    In contrast to our prior study in which we modeled taphonomic bias as an
+    exponential function wherein the likelihood of site loss remains constant
+    through time, we argue that the probability of site destruction actually
+    decreases with site age. We further demonstrate how this model can be used
+    to correct temporal frequency distributions and extract demographic
+    histories. We illustrate this approach using databases of radiocarbon dates
+    from rockshelter and open-air sites in the Bighorn Basin, Wyoming, USA, and
+    mammoths and humans in Siberia, Russia. (C) 2009 Elsevier Ltd. All rights
+    reserved.
+  author:
+    - family: Surovell
+      given: T. A.
+    - family: Finley
+      given: J. B.
+    - family: Smith
+      given: G. M.
+    - family: Brantingham
+      given: P. J.
+    - family: Kelly
+      given: R.
+  citation-key: surovell2009CorrectingTemporalFrequency
+  container-title: JOURNAL OF ARCHAEOLOGICAL SCIENCE
+  container-title-short: Journal of Archaeological Science
+  DOI: 10.1016/j.jas.2009.03.029
+  ISSN: 0305-4403 1095-9238
+  issue: '8'
+  issued:
+    - year: 2009
+  page: 1715–1724
+  title: Correcting temporal frequency distributions for taphonomic bias
+  type: article-journal
+  volume: '36'
+
+- id: timpson2014ReconstructingRegionalPopulation
+  abstract: >-
+    In a previous study we presented a new method that used summed probability
+    distributions (SPD) of radiocarbon dates as a proxy for population levels,
+    and Monte-Carlo simulation to test the significance of the observed
+    fluctuations in the context of uncertainty in the calibration curve and
+    archaeological sampling. The method allowed us to identify periods of
+    significant short-term population change, caveated with the fact that around
+    5% of these periods were false positives. In this study we present an
+    improvement to the method by applying a criterion to remove these false
+    positives from both the simulated and observed distributions, resulting in a
+    substantial improvement to both its sensitivity and specificity. We also
+    demonstrate that the method is extremely robust in the face of small sample
+    sizes. Finally we apply this improved method to radiocarbon datasets from 12
+    European regions, covering the period 8000-4000 BP. As in our previous
+    study, the results reveal a boom-bust pattern for most regions, with
+    population levels rising rapidly after the local arrival of farming,
+    followed by a crash to levels much lower than the peak. The prevalence of
+    this phenomenon, combined with the dissimilarity and lack of synchronicity
+    in the general shapes of the regional SPDs, supports the hypothesis of
+    endogenous causes. (c) 2014 The Authors. Published by Elsevier Ltd.
+  author:
+    - family: Timpson
+      given: A.
+    - family: Colledge
+      given: S.
+    - family: Crema
+      given: E.
+    - family: Edinborough
+      given: K.
+    - family: Kerig
+      given: T.
+    - family: Manning
+      given: K.
+    - family: Thomas
+      given: M. G.
+    - family: Shennan
+      given: S.
+  citation-key: timpson2014ReconstructingRegionalPopulation
+  container-title: JOURNAL OF ARCHAEOLOGICAL SCIENCE
+  container-title-short: Journal of Archaeological Science
+  DOI: 10.1016/j.jas.2014.08.011
+  ISSN: 0305-4403 1095-9238
+  issued:
+    - year: 2014
+  page: 549–557
+  title: >-
+    Reconstructing regional population fluctuations in the European Neolithic
+    using radiocarbon dates: a new case-study using an improved method
+  type: article-journal
+  volume: '52'
+
+- id: timpson2015InferentialMistakesPopulation
+  abstract: >-
+    In his paper "Neolithic population and summed probability distribution of
+    C-14-dates" Torfing opposes the widely held principle originally proposed by
+    Rick (1987) that variation through time in the amount of archaeological
+    material discovered in a region will reflect variation in the size of that
+    local human population. His argument illustrates a persistent divide in
+    archaeology between analytical and descriptive approaches when using proxies
+    for past population size. We critically evaluate the numerous inferential
+    mistakes he makes, showing that his conclusion is unjustified. (C) 2015
+    Elsevier Ltd. All rights reserved.
+  author:
+    - family: Timpson
+      given: A.
+    - family: Manning
+      given: K.
+    - family: Shennan
+      given: S.
+  citation-key: timpson2015InferentialMistakesPopulation
+  container-title: JOURNAL OF ARCHAEOLOGICAL SCIENCE
+  container-title-short: Journal of Archaeological Science
+  DOI: 10.1016/j.jas.2015.08.018
+  ISSN: 0305-4403 1095-9238
+  issued:
+    - year: 2015
+  page: 199–202
+  title: >-
+    Inferential mistakes in population proxies: A response to Torfing's
+    "Neolithic population and summed probability distribution of ¹⁴C-dates"
+  type: article-journal
+  volume: '63'
+
+- id: timpson2021DirectlyModellingPopulation
+  abstract: |-
+    Large anthropogenic
+                  14
+                  C datasets are widely used to generate summed probability distributions (SPDs) as a proxy for past human population levels. However, SPDs are a poor proxy when datasets are small, bearing little relationship to true population dynamics. Instead, more robust inferences can be achieved by directly modelling the population and assessing the model likelihood given the data. We introduce the R package ADMUR which uses a continuous piecewise linear (CPL) model of population change, calculates the model likelihood given a
+                  14
+                  C dataset, estimates credible intervals using Markov chain Monte Carlo, applies a goodness-of-fit test, and uses the Schwarz Criterion to compare CPL models. We demonstrate the efficacy of this method using toy data, showing that spurious dynamics are avoided when sample sizes are small, and true population dynamics are recovered as sample sizes increase. Finally, we use an improved
+                  14
+                  C dataset for the South American Arid Diagonal to compare CPL modelling to current simulation methods, and identify three Holocene phases when population trajectory estimates changed from rapid initial growth of 4.15% per generation to a decline of 0.05% per generation between 10 821 and 7055 yr BP, then gently grew at 0.58% per generation until 2500 yr BP.
+                
+                This article is part of the theme issue ‘Cross-disciplinary approaches to prehistoric demography’.
+  accessed:
+    - year: 2025
+      month: 11
+      day: 27
+  author:
+    - family: Timpson
+      given: Adrian
+    - family: Barberena
+      given: Ramiro
+    - family: Thomas
+      given: Mark G.
+    - family: Méndez
+      given: César
+    - family: Manning
+      given: Katie
+  citation-key: timpson2021DirectlyModellingPopulation
+  container-title: 'Philosophical Transactions of the Royal Society B: Biological Sciences'
+  container-title-short: Phil. Trans. R. Soc. B
+  DOI: 10.1098/rstb.2019.0723
+  ISSN: 0962-8436, 1471-2970
+  issue: '1816'
+  issued:
+    - year: 2021
+  language: en
+  page: '20190723'
+  source: DOI.org (Crossref)
+  title: >-
+    Directly modelling population dynamics in the South American Arid Diagonal
+    using ¹⁴C dates
+  type: article-journal
+  URL: https://royalsocietypublishing.org/doi/10.1098/rstb.2019.0723
+  volume: '376'
+
+- id: torfing2015LayersAssumptionsReply
+  abstract: >-
+    In a response to my paper "Neolithic population and summed probability
+    distribution of C-14-dates", Timpson, Shennan, and Manning accuse me of
+    making a series of inferential mistakes. Their argument is based on the
+    opinion that if advanced statistical treatment of data is performed and an
+    explicit null hypothesis is tested, then the argument is well founded. I
+    argue that they ignore a series of underlying assumptions that connect the
+    object of interest - prehistoric population - to the data they utilize
+    radiocarbon dates. In my article, I explored some of the issues regarding
+    these assumptions and demonstrated that it is difficult to argue that these
+    assumptions are true. If the underlying assumptions are not true, or it
+    cannot be established whether they are true or not, further statistical
+    analysis of the data will not provide a reliable result. (C) 2015 Elsevier
+    Ltd. All rights reserved.
+  author:
+    - family: Torfing
+      given: T.
+  citation-key: torfing2015LayersAssumptionsReply
+  container-title: JOURNAL OF ARCHAEOLOGICAL SCIENCE
+  container-title-short: Journal of Archaeological Science
+  DOI: 10.1016/j.jas.2015.08.017
+  ISSN: 0305-4403 1095-9238
+  issued:
+    - year: 2015
+  page: 203–205
+  title: 'Layers of assumptions: A reply to Timpson, Manning, and Shennan'
+  type: article-journal
+  volume: '63'
+
+- id: torfing2015NeolithicPopulationSummed
+  abstract: >-
+    This paper assesses the use of radiocarbon dates as a population proxy
+    during the north European Mesolithic Neolithic transition. By addressing
+    data from the Jutland peninsula, it is shown that the sum probability
+    distributions are influenced by three human-inflicted biases. Two of these
+    changed ritual behaviour and changes of subsistence strategies refer to past
+    human activity, while the third consists of modern research strategies. The
+    analysis questions the validity of sum probability distributions as a
+    population proxy in a period where a society experiences a transformation
+    process. (C) 2015 Elsevier Ltd. All rights reserved.
+  author:
+    - family: Torfing
+      given: T.
+  citation-key: torfing2015NeolithicPopulationSummed
+  container-title: JOURNAL OF ARCHAEOLOGICAL SCIENCE
+  container-title-short: Journal of Archaeological Science
+  DOI: 10.1016/j.jas.2015.06.004
+  ISSN: 0305-4403 1095-9238
+  issued:
+    - year: 2015
+  page: 193–198
+  title: Neolithic population and summed probability distribution of ¹⁴C-dates
+  type: article-journal
+  volume: '63'
+
+- id: ulm1996RadiocarbonCulturalChronologies
+  author:
+    - family: Ulm
+      given: Sean
+    - family: Hall
+      given: J
+  citation-key: ulm1996RadiocarbonCulturalChronologies
+  container-title: >-
+    Australian Archaeology ’95: Proceedings of the 1995 Australian
+    Archaeological Association Annual Conference
+  editor:
+    - family: Ulm
+      given: S
+    - family: Lilley
+      given: L
+    - family: Ross
+      given: A.
+  issued:
+    - year: 1996
+  page: 45–62
+  publisher: >-
+    Anthropology Museum, Department of Anthropology and Sociology, University of
+    Queensland
+  publisher-place: St. Lucia
+  title: Radiocarbon and cultural chronologies in southeast Queensland prehistory
+  type: chapter
+
+- id: williams2012UseSummedRadiocarbon
+  abstract: >-
+    Using a database of Australian archaeological radiocarbon dates (n = 2996),
+    this paper explores three key methodological issues associated with the use
+    of summed probability plots of radiocarbon data: 1) the minimum sample size
+    needed for a statistically reliable plot; 2) the effect of radiocarbon
+    calibration on the structure of these plots; and 3) the application of a
+    taphonomic correction to such time-series data. The results identify several
+    protocols, recommended as best-practice when using summed probability plots:
+    1) a minimum sample size of 500 radiocarbon dates should be used, and the
+    sample size and the mean of the standard deviations of the radiocarbon dates
+    (Delta T) in the sample should both be reported; 2) a moving average
+    trendline of 500-800 years should be used to offset the effects of the
+    calibration process; and 3) Surovell et al. "Correcting temporal frequency
+    distributions for taphonomic bias" \[Journal of Archaeological Science 36
+    (2009) 1715-1724] is explored, with modifications and temporal limits
+    (<25,000 cal years BP) proposed. Correction of time-series data using
+    theoretical taphonomic correction curves is useful as a heuristic tool but
+    can obscure real trends if applied routinely. Comparison between summed
+    probability plots and other occupation data is presented and shows good
+    correlation. However it is recommended that plots are supplemented by other
+    archaeological indices and the cross-comparison of such multiple proxies
+    will strengthen identification of occupation trends. (C) 2011 Elsevier Ltd.
+    All rights reserved.
+  author:
+    - family: Williams
+      given: A. N.
+  citation-key: williams2012UseSummedRadiocarbon
+  container-title: JOURNAL OF ARCHAEOLOGICAL SCIENCE
+  container-title-short: Journal of Archaeological Science
+  DOI: 10.1016/j.jas.2011.07.014
+  ISSN: 0305-4403 1095-9238
+  issue: '3'
+  issued:
+    - year: 2012
+  page: 578–589
+  title: >-
+    The use of summed radiocarbon probability distributions in archaeology: a
+    review of methods
+  type: article-journal
+  volume: '39'
+
+- id: williams2013HumanRefugiaAustralia
+  accessed:
+    - year: 2025
+      month: 11
+      day: 28
+  author:
+    - family: Williams
+      given: Alan N.
+    - family: Ulm
+      given: Sean
+    - family: Cook
+      given: Andrew R.
+    - family: Langley
+      given: Michelle C.
+    - family: Collard
+      given: Mark
+  citation-key: williams2013HumanRefugiaAustralia
+  container-title: Journal of Archaeological Science
+  container-title-short: Journal of Archaeological Science
+  DOI: 10.1016/j.jas.2013.06.015
+  ISSN: '03054403'
+  issue: '12'
+  issued:
+    - year: 2013
+  language: en
+  page: 4612–4625
+  source: DOI.org (Crossref)
+  title: >-
+    Human refugia in Australia during the Last Glacial Maximum and Terminal
+    Pleistocene: a geospatial analysis of the 25–12 ka Australian archaeological
+    record
+  title-short: >-
+    Human refugia in Australia during the Last Glacial Maximum and Terminal
+    Pleistocene
+  type: article-journal
+  URL: https://linkinghub.elsevier.com/retrieve/pii/S0305440313002215
+  volume: '40'
+
+- id: williams2013NewPopulationCurve
+  abstract: >-
+    This paper presents a new reconstruction of prehistoric population of
+    Australia for the last 50 ka, using the most comprehensive radiocarbon
+    database currently available for the continent. The application of new
+    techniques to manipulate radiocarbon data (including correction for
+    taphonomic bias), gives greater reliability to the reconstructed population
+    curve. This shows low populations through the Late Pleistocene, before a
+    slow stepwise increase in population beginning during the Holocene
+    transition (approx. 12 ka) and continuing in pulses (approx. 8.3-6.6,
+    4.4-3.7 and 1.6-0.4 ka) through the Holocene. These data give no support for
+    an early saturation of the continent, although the estimated population
+    following initial landfall was probably greater than previously allowed
+    (comparable with the Early Holocene). The greatest increase in population
+    occurred in the Late Holocene, but in contrast to existing intensification
+    models, changes in demography and diversification of economic activities
+    began much earlier. Some demographic changes appear to be in response to
+    major climatic events, most notably during the last glacial maximum, where
+    the curve suggests that population fell by about 60 per cent between 21 and
+    18 ka. An application of statistical demographic methods to Australian
+    ethnographic and genetic data suggests that a founding group of 1000-2000 at
+    50 ka would result in a population high of approximately 1.2 million at
+    approximately 0.5 ka. Data suggests an 8 per cent decline to approximately
+    770 000-1.1 million at the time of European contact, giving a figure
+    consistent with ethnographic estimates and with historical observations of
+    the impact of smallpox, and other diseases introduced by Macassans and
+    Europeans during and after AD 1788.
+  author:
+    - family: Williams
+      given: A. N.
+  citation-key: williams2013NewPopulationCurve
+  container-title: PROCEEDINGS OF THE ROYAL SOCIETY B-BIOLOGICAL SCIENCES
+  container-title-short: Proceedings of the Royal Society B - Biological Sciences
+  DOI: 10.1098/rspb.2013.0486
+  ISSN: 0962-8452 1471-2954
+  issue: '1761'
+  issued:
+    - year: 2013
+  title: A new population curve for prehistoric Australia
+  type: article-journal
+  volume: '280'
+
+- id: williams2014AustArchDatabase14C
+  accessed:
+    - year: 2025
+      month: 11
+      day: 28
+  author:
+    - family: Williams
+      given: Alan
+    - family: Ulm
+      given: Sean
+    - family: Smith
+      given: Mike
+    - family: Reid
+      given: Jill
+  citation-key: williams2014AustArchDatabase14C
+  container-title: Internet Archaeology
+  container-title-short: IA
+  DOI: 10.11141/ia.36.6
+  ISSN: '13635387'
+  issue: '36'
+  issued:
+    - year: 2014
+  source: DOI.org (Crossref)
+  title: >-
+    AustArch: A database of ¹⁴C and Non-¹⁴C Ages from archaeological sites in
+    Australia - composition, compilation and review
+  title-short: AustArch
+  type: article-journal
+  URL: http://intarch.ac.uk/journal/issue36/6/williams.html
+
+- id: williams2015ContinentalNarrativeHuman
+  accessed:
+    - year: 2025
+      month: 11
+      day: 28
+  author:
+    - family: Williams
+      given: Alan N.
+    - family: Veth
+      given: Peter
+    - family: Steffen
+      given: Will
+    - family: Ulm
+      given: Sean
+    - family: Turney
+      given: Chris S.M.
+    - family: Reeves
+      given: Jessica M.
+    - family: Phipps
+      given: Steven J.
+    - family: Smith
+      given: Mike
+  citation-key: williams2015ContinentalNarrativeHuman
+  container-title: Quaternary Science Reviews
+  container-title-short: Quaternary Science Reviews
+  DOI: 10.1016/j.quascirev.2015.06.018
+  ISSN: '02773791'
+  issued:
+    - year: 2015
+  language: en
+  page: 91–112
+  source: DOI.org (Crossref)
+  title: >-
+    A continental narrative: Human settlement patterns and Australian climate
+    change over the last 35,000 years
+  title-short: A continental narrative
+  type: article-journal
+  URL: https://linkinghub.elsevier.com/retrieve/pii/S0277379115300275
+  volume: '123'
+
+- id: williams2015HoloceneDemographicChanges
+  abstract: >-
+    A continental-scale model of Holocene Australian hunter-gatherer demography
+    and mobility is generated using radiocarbon data and geospatial techniques.
+    Results show a delayed expansion and settlement of much of Australia
+    following the termination of the late Pleistocene until after 9,000 years
+    ago (or 9ka). The onset of the Holocene climatic optimum (9-6ka) coincides
+    with rapid expansion, growth and establishment of regional populations
+    across similar to 75% of Australia, including much of the arid zone. This
+    diffusion from isolated Pleistocene refugia provides a mechanism for the
+    synchronous spread of pan-continental archaeological and linguistic
+    attributes at this time (e.g. Pama-Nyungan language, Panaramitee art style,
+    backed artefacts). We argue longer patch residence times were possible at
+    the end of the optimum, resulting in a shift to more sedentary lifestyles
+    and establishment of low-level food production in some parts of the
+    continent. The onset of El Nino - Southern Oscillation (ENSO; 4.5-2ka)
+    restricted low-level food production, and resulted in population
+    fragmentation, abandonment of marginal areas, and reduction in ranging
+    territory of similar to 26%. Importantly, climate amelioration brought about
+    by more pervasive La Nina conditions (post-2ka), resulted in an
+    intensification of the mobility strategies and technological innovations
+    that were developed in the early- to mid-Holocene. These changes resulted in
+    population expansion and utilization of the entire continent. We propose
+    that it was under these demographically packed conditions that the complex
+    social and religious societies observed at colonial contact were formed.
+  author:
+    - family: Williams
+      given: A. N.
+    - family: Ulm
+      given: S.
+    - family: Turney
+      given: C. S. M.
+    - family: Rohde
+      given: D.
+    - family: White
+      given: G.
+  citation-key: williams2015HoloceneDemographicChanges
+  container-title: PLOS ONE
+  container-title-short: PLoS ONE
+  DOI: 10.1371/journal.pone.0128661
+  ISSN: 1932-6203
+  issue: '6'
+  issued:
+    - year: 2015
+  title: >-
+    Holocene demographic changes and the emergence of complex societies in
+    prehistoric Australia
+  type: article-journal
+  volume: '10'
+
+- id: williams2016RadiometricDatesAre
+  abstract: >-
+    Attenbrow and Hiscock (2015) raise a series of concerns about the use of
+    radiocarbon dates as data (sum probability distributions), including sample
+    selection, taphonomic bias, and the relationship of charcoal and radiocarbon
+    data to human activity. We show that these concerns have been widely
+    acknowledged and addressed in the literature. We advocate the considered use
+    of dates as data approaches as a heuristic tool for broad regional- and
+    continental-scale questions, used in conjunction with other archaeological
+    proxies, and within the constraints of documented and well-known
+    methodological limitations.
+  author:
+    - family: Williams
+      given: A. N.
+    - family: Ulm
+      given: S.
+  citation-key: williams2016RadiometricDatesAre
+  container-title: ARCHAEOLOGY IN OCEANIA
+  container-title-short: Archaeology in Oceania
+  DOI: 10.1002/arco.5095
+  ISSN: 0728-4896 1834-4453
+  issue: '3'
+  issued:
+    - year: 2016
+  page: 216–217
+  title: >-
+    Radiometric dates are a robust proxy for long-term demographic change: a
+    comment on Attenbrow and Hiscock (2015)
+  type: article-journal
+  volume: '51'
+
+- id: wirtz2024MulticentennialCyclesContinental
+  abstract: "Abstract\n            Human population dynamics and their drivers are not well understood, especially over the long term and on large scales. Here, we estimate demographic growth trajectories from 9 to 3 ka BP across the entire globe by employing summed probability distributions of radiocarbon dates. Our reconstruction reveals multicentennial growth cycles on all six inhabited continents, which exhibited matching dominant frequencies and phase relations. These growth oscillations were often also synchronised with multicentennial variations in solar activity. The growth cycle for Europe, reconstructed based on \_>91,000 radiocarbon dates, was backed by archaeology-derived settlement data and showed only a weak correlation with mean climate states, but a strong correlation with the stability of these states. We therefore suggest a link between multicentennial variations in solar activity and climate stability. This stability provided more favourable conditions for human subsistence success, and seems to have induced synchrony between regional growth cycles worldwide."
+  accessed:
+    - year: 2025
+      month: 11
+      day: 20
+  author:
+    - family: Wirtz
+      given: Kai W.
+    - family: Antunes
+      given: Nicolas
+    - family: Diachenko
+      given: Aleksandr
+    - family: Laabs
+      given: Julian
+    - family: Lemmen
+      given: Carsten
+    - family: Lohmann
+      given: Gerrit
+    - family: McLaughlin
+      given: Rowan
+    - family: Zorita
+      given: Eduardo
+    - family: Gronenborn
+      given: Detlef
+  citation-key: wirtz2024MulticentennialCyclesContinental
+  container-title: Nature Communications
+  container-title-short: Nat Commun
+  DOI: 10.1038/s41467-024-54474-w
+  ISSN: 2041-1723
+  issue: '1'
+  issued:
+    - year: 2024
+  language: en
+  page: '10248'
+  source: DOI.org (Crossref)
+  title: >-
+    Multicentennial cycles in continental demography synchronous with solar
+    activity and climate stability
+  type: article-journal
+  URL: https://www.nature.com/articles/s41467-024-54474-w
+  volume: '15'
+
+- id: yates2021ParsimoniousModelSelection
+  abstract: |-
+    Abstract
+                Information‐theoretic approaches to model selection, such as Akaike's information criterion (AIC) and cross validation, provide a rigorous framework to select among candidate hypotheses in ecology, yet the persistent concern of overfitting undermines the interpretation of inferred processes. A common misconception is that overfitting is due to the choice of criterion or model score, despite research demonstrating that selection uncertainty associated with score estimation is the predominant influence. Here we introduce a novel selection rule that identifies a parsimonious model by directly accounting for estimation uncertainty, while still retaining an information‐theoretic interpretation. The new rule, which is a modification of the existing one‐standard‐error rule, mitigates overfitting and reduces the likelihood that spurious effects will be included in the selected model, thereby improving its inferential properties. We present the rule and illustrative examples in the context of maximum‐likelihood estimation and Kullback‐Leibler discrepancy, although the rule is applicable in a more general setting, including Bayesian model selection and other types of discrepancy.
+  accessed:
+    - year: 2025
+      month: 11
+      day: 27
+  author:
+    - family: Yates
+      given: Luke A.
+    - family: Richards
+      given: Shane A.
+    - family: Brook
+      given: Barry W.
+  citation-key: yates2021ParsimoniousModelSelection
+  container-title: Ecology
+  container-title-short: Ecology
+  DOI: 10.1002/ecy.3475
+  ISSN: 0012-9658, 1939-9170
+  issue: '10'
+  issued:
+    - year: 2021
+  language: en
+  page: e03475
+  source: DOI.org (Crossref)
+  title: >-
+    Parsimonious model selection using information theory: a modified selection
+    rule
+  title-short: Parsimonious model selection using information theory
+  type: article-journal
+  URL: https://esajournals.onlinelibrary.wiley.com/doi/10.1002/ecy.3475
+  volume: '102'
 ...
