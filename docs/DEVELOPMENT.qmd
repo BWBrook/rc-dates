@@ -14,7 +14,7 @@ renv::restore(prompt = FALSE)
 # Optional: install dependencies fast via pak for non‑package compendium
 source("dependencies.R")
 pak::pkg_install(project_dependencies())
-devtools::test()
+source("tests/run-tests.R")
 ```
 
 ## Running the Pipeline
@@ -47,6 +47,13 @@ targets::tar_make()
 quarto::quarto_render("reports/paper.qmd")
 ```
 
+Optional montage support uses `{magick}`. If your system has the ImageMagick
+development libraries available, you can add it explicitly:
+
+```r
+pak::pkg_install(project_dependencies(include_optional = TRUE))
+```
+
 ## Configuration knobs
 
 Edit `config/config.yml` (or override via `R_CONFIG_ACTIVE`). Key sections:
@@ -61,15 +68,22 @@ Edit `config/config.yml` (or override via `R_CONFIG_ACTIVE`). Key sections:
 - report.site_figures:
   - `include` / `exclude` / `limit` for selecting SITE figures; `montage` and `ncol` for grid layout.
 - simulate:
-  - `use_precomputed`: `true` to include precomputed summaries.
-  - `dir`: folder containing `simulation_summary_*.csv`.
-  - `pattern`: filename regex (default matches the shipped summaries in `data/`).
+  - `mode`: `demo` (default), `precomputed`, or `none`.
+  - `precomputed.dir` / `precomputed.pattern`: where to find external `simulation_summary_*.csv` files.
+  - `demo.iterations`, `demo.seed`, `demo.site_proportions`, `demo.strategies`,
+    `demo.singleton_n`, `demo.multiton_n`: reduced legacy-style demo matrix controls.
 
 After changing config, re-run the pipeline:
 
 ```r
 targets::tar_make()
 ```
+
+In the default `demo` mode, the pipeline writes generated simulation summaries
+to `outputs/simulations/demo/` using legacy-style names such as
+`simulation_summary_oldest_50.csv` and `simulation_summary_multiton_100.csv`.
+This keeps the heavy full simulation study out of the default workflow while
+still giving fresh clones a visible reproduction path.
 
 ## Conventions
 

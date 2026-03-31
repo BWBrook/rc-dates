@@ -1,4 +1,4 @@
-## Simulation readers and plotting (read-only integration)
+## Simulation readers, manifests, and plotting
 
 #' Parse scenario and size from a simulation summary filename
 #' @param path File path like 'data/simulation_summary_singleton_50.csv'
@@ -21,23 +21,15 @@ parse_sim_filename <- function(path) {
 #' Build a manifest of available simulation summary files
 #' @param dir Directory to scan
 #' @param pattern Regex to match filenames
-#' @return Tibble with columns path (absolute), scenario, size
+#' @param origin Source label for the manifest rows.
+#' @return Tibble with columns path (absolute), scenario, size, origin.
 #' @export
-read_sim_manifest <- function(dir, pattern = "^simulation_summary_.*\\.csv$") {
+read_sim_manifest <- function(dir, pattern = "^simulation_summary_.*\\.csv$", origin = "precomputed") {
   import::from("fs", "dir_exists")
   import::from("here", "here")
-  import::from("tibble", "tibble")
-  import::from("dplyr", "mutate", "arrange")
   d <- if (dir_exists(dir)) dir else here(dir)
   files <- list.files(d, pattern = pattern, full.names = TRUE)
-  if (length(files) == 0) return(tibble(path = character(0), scenario = character(0), size = integer(0)))
-  info <- lapply(files, parse_sim_filename)
-  tibble(
-    path = normalizePath(files, winslash = "/", mustWork = FALSE),
-    scenario = vapply(info, function(x) x$scenario, character(1)),
-    size = vapply(info, function(x) x$size, integer(1))
-  ) |>
-    arrange(scenario, size)
+  build_sim_manifest_from_paths(files, origin = origin)
 }
 
 #' Read a simulation summary CSV into a tidy tibble
@@ -51,6 +43,8 @@ read_sim_table <- function(path) {
   meta <- parse_sim_filename(path)
   tbl <- suppressWarnings(read_csv(
     path,
+    num_threads = 1,
+    show_col_types = FALSE,
     col_types = cols_only(
       method = col_character(),
       calBP = col_double(),
@@ -83,4 +77,3 @@ plot_sim_overlay <- function(df) {
     labs(x = "Years cal BP", y = "Mean density", color = "Method", title = unique(df$scenario)) +
     theme_minimal()
 }
-

@@ -8,8 +8,8 @@
 #' @keywords internal
 core_packages <- function() {
   c(
-    "targets","tarchetypes","arrow","duckdb","vroom","dplyr",
-    "readr","purrr","tidyr","sf","terra","yaml","config","qs",
+    "targets","tarchetypes","here","arrow","vroom","dplyr",
+    "readr","purrr","tidyr","sf","terra","yaml","config",
     "lgr","progressr"
   )
 }

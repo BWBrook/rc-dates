@@ -25,9 +25,17 @@ default: &default
       montage: true   # also create a montage image from selected site figures
       ncol: 3         # number of columns in montage grid (if magick available)
   simulate:
-    use_precomputed: true
-    dir: data
-    pattern: ^simulation_summary_.*\.csv$
+    mode: demo
+    precomputed:
+      dir: data
+      pattern: ^simulation_summary_.*\.csv$
+    demo:
+      iterations: 10
+      seed: 1234
+      site_proportions: [0.5, 1.0]
+      strategies: [oldest, youngest, bracketed, singleton, multiton]
+      singleton_n: 1
+      multiton_n: 3
 
 testthat:
   <<: *default

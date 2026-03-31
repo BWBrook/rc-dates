@@ -26,9 +26,6 @@ quarto render reports/
 
 ```{r}
 #| label: summary
-# Ensure targets uses the project store regardless of working dir
-try(targets::tar_config_set(store = here::here("_targets")), silent = TRUE)
-
 # Helper to resolve project-root absolute paths regardless of current wd
 is_abs_path <- function(p) {
   p <- as.character(p)
@@ -36,12 +33,21 @@ is_abs_path <- function(p) {
 }
 resolve_proj_path <- function(p) {
   p <- as.character(p)
+  if (length(p) == 0) {
+    return(character(0))
+  }
   out <- ifelse(is_abs_path(p), p, here::here(p))
   # normalise for Windows path separators
   normalizePath(out, winslash = "/", mustWork = FALSE)
 }
-validated <- targets::tar_read(validated_strict)
-cfg       <- targets::tar_read(cfg)
+targets_store <- resolve_proj_path("_targets")
+tar_read_proj <- function(name) {
+  targets::tar_read_raw(name, store = targets_store)
+}
+
+validated <- tar_read_proj("validated_strict")
+cfg       <- tar_read_proj("cfg")
+sim_mode  <- tar_read_proj("sim_mode")
 
 n_rows    <- nrow(validated)
 n_sites   <- dplyr::n_distinct(validated$SITE)
@@ -57,7 +63,8 @@ list(
     terrestrial_curve = cfg$calibration$terrestrial_curve,
     marine_curve = cfg$calibration$marine_curve,
     time_range = cfg$calibration$time_range
-  )
+  ),
+  simulation_mode = sim_mode
 )
 ```
 
@@ -65,9 +72,9 @@ list(
 
 ```{r}
 #| label: methods-overall
-spd_tbl <- targets::tar_read(spd_summary)
-fd_tbl  <- targets::tar_read(fd_summary)
-kde_tbl <- targets::tar_read(kde_summary)
+spd_tbl <- tar_read_proj("spd_summary")
+fd_tbl  <- tar_read_proj("fd_summary")
+kde_tbl <- tar_read_proj("kde_summary")
 
 # Show quick peeks of each (first 6 rows only)
 utils::head(spd_tbl)
@@ -80,7 +87,7 @@ utils::head(kde_tbl)
 ```{r}
 #| label: fig-overall
 #| fig-cap: "Overall SPD/FD/KDE overlay"
-overall_path <- resolve_proj_path(targets::tar_read(fig_methods_overall))
+overall_path <- resolve_proj_path(tar_read_proj("fig_methods_overall"))
 stopifnot(file.exists(overall_path))
 knitr::include_graphics(overall_path)
 ```
@@ -91,7 +98,7 @@ knitr::include_graphics(overall_path)
 #| label: figs-by-sitetype
 #| fig-cap: "SPD/FD/KDE overlays by SITE_TYPE"
 #| fig-align: center
-fig_paths <- as.character(unlist(targets::tar_read(fig_methods_by_site_type), use.names = FALSE))
+fig_paths <- as.character(unlist(tar_read_proj("fig_methods_by_site_type"), use.names = FALSE))
 fig_paths <- resolve_proj_path(fig_paths)
 fig_paths <- fig_paths[file.exists(fig_paths)]
 if (length(fig_paths) > 0) knitr::include_graphics(fig_paths)
@@ -103,7 +110,7 @@ if (length(fig_paths) > 0) knitr::include_graphics(fig_paths)
 #| label: figs-by-site
 #| fig-cap: "SPD/FD/KDE overlays by SITE (subset)"
 #| fig-align: center
-site_fig_paths <- as.character(targets::tar_read(selected_site_figs))
+site_fig_paths <- as.character(tar_read_proj("selected_site_figs"))
 site_fig_paths <- resolve_proj_path(site_fig_paths)
 site_fig_paths <- site_fig_paths[file.exists(site_fig_paths)]
 if (length(site_fig_paths) > 0) knitr::include_graphics(site_fig_paths)
@@ -114,7 +121,7 @@ if (length(site_fig_paths) > 0) knitr::include_graphics(site_fig_paths)
 ```{r}
 #| label: figs-by-site-montage
 #| fig-cap: "Montage of selected SITE figures"
-montage_path <- resolve_proj_path(targets::tar_read(fig_methods_by_site_montage))
+montage_path <- resolve_proj_path(tar_read_proj("fig_methods_by_site_montage"))
 stopifnot(file.exists(montage_path))
 knitr::include_graphics(montage_path)
 ```
@@ -127,13 +134,24 @@ knitr::include_graphics(montage_path)
   `time_range = cfg$calibration$time_range`.
 - All inputs are derived from targets; there are no ad‑hoc file reads here.
 
-# Simulations (precomputed summaries)
+# Simulations
 
 ```{r}
 #| label: sims-summary
-if (isTRUE(cfg$simulate$use_precomputed)) {
-  sim_mf <- targets::tar_read(sim_manifest)
-  list(n_files = nrow(sim_mf), scenarios = unique(sim_mf$scenario))
+sim_mf <- tar_read_proj("sim_manifest")
+if (identical(sim_mode, "demo")) {
+  list(
+    mode = sim_mode,
+    source = "Generated locally from the filtered dataset with reduced demo settings.",
+    iterations = cfg$simulate$demo$iterations,
+    scenarios = sim_mf[, c("scenario", "size", "origin")]
+  )
+} else if (identical(sim_mode, "precomputed")) {
+  list(
+    mode = sim_mode,
+    source = paste("Read from", cfg$simulate$precomputed$dir),
+    scenarios = sim_mf[, c("scenario", "size", "origin")]
+  )
 } else {
   "Simulations disabled in config."
 }
@@ -142,8 +160,8 @@ if (isTRUE(cfg$simulate$use_precomputed)) {
 ```{r}
 #| label: sims-figs
 #| fig-cap: "Simulation overlays by scenario"
-if (isTRUE(cfg$simulate$use_precomputed)) {
-  sim_figs <- as.character(unlist(targets::tar_read(fig_sim_overlays), use.names = FALSE))
+if (!identical(sim_mode, "none")) {
+  sim_figs <- as.character(unlist(tar_read_proj("fig_sim_overlays"), use.names = FALSE))
   sim_figs <- resolve_proj_path(sim_figs)
   sim_figs <- sim_figs[file.exists(sim_figs)]
   if (length(sim_figs) > 0) knitr::include_graphics(sim_figs)
@@ -153,8 +171,8 @@ if (isTRUE(cfg$simulate$use_precomputed)) {
 ```{r}
 #| label: sims-montage
 #| fig-cap: "Simulation montage"
-if (isTRUE(cfg$simulate$use_precomputed)) {
-  sim_montage <- resolve_proj_path(targets::tar_read(fig_sim_montage))
+if (!identical(sim_mode, "none")) {
+  sim_montage <- resolve_proj_path(tar_read_proj("fig_sim_montage"))
   if (file.exists(sim_montage)) knitr::include_graphics(sim_montage)
 }
 ```

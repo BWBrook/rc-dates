@@ -23,6 +23,24 @@ resolve_path <- function(path) {
   here(path)
 }
 
+default_simulation_config <- function() {
+  list(
+    mode = "demo",
+    precomputed = list(
+      dir = "data",
+      pattern = "^simulation_summary_.*\\.csv$"
+    ),
+    demo = list(
+      iterations = 10L,
+      seed = 1234L,
+      site_proportions = c(0.5, 1.0),
+      strategies = c("oldest", "youngest", "bracketed", "singleton", "multiton"),
+      singleton_n = 1L,
+      multiton_n = 3L
+    )
+  )
+}
+
 #' Read project configuration
 #'
 #' Reads `config/config.yml` using `{config}` if available; otherwise returns
@@ -57,7 +75,7 @@ cfg_read <- function(active = Sys.getenv("R_CONFIG_ACTIVE", unset = "default")) 
       report = list(
         site_figures = list(include = NULL, exclude = NULL, limit = 12L, montage = TRUE, ncol = 3L)
       ),
-      simulate = list(use_precomputed = TRUE, dir = "data", pattern = "^simulation_summary_.*\\.csv$")
+      simulate = default_simulation_config()
     )
   }
 
@@ -95,9 +113,33 @@ cfg_read <- function(active = Sys.getenv("R_CONFIG_ACTIVE", unset = "default")) 
   cfg$report$site_figures <- sf
 
   if (is.null(cfg$simulate) || !is.list(cfg$simulate)) cfg$simulate <- list()
-  if (is.null(cfg$simulate$use_precomputed)) cfg$simulate$use_precomputed <- TRUE
-  if (is.null(cfg$simulate$dir)) cfg$simulate$dir <- "data"
-  if (is.null(cfg$simulate$pattern)) cfg$simulate$pattern <- "^simulation_summary_.*\\.csv$"
+  sim_defaults <- default_simulation_config()
+  if (is.null(cfg$simulate$mode)) {
+    if (!is.null(cfg$simulate$use_precomputed)) {
+      cfg$simulate$mode <- if (isTRUE(cfg$simulate$use_precomputed)) "precomputed" else "none"
+    } else {
+      cfg$simulate$mode <- sim_defaults$mode
+    }
+  }
+  cfg$simulate$mode <- tolower(as.character(cfg$simulate$mode))
+  if (!(cfg$simulate$mode %in% c("demo", "precomputed", "none"))) {
+    stop("simulate.mode must be one of: demo, precomputed, none", call. = FALSE)
+  }
+
+  if (is.null(cfg$simulate$precomputed) || !is.list(cfg$simulate$precomputed)) cfg$simulate$precomputed <- list()
+  if (is.null(cfg$simulate$precomputed$dir) && !is.null(cfg$simulate$dir)) cfg$simulate$precomputed$dir <- cfg$simulate$dir
+  if (is.null(cfg$simulate$precomputed$pattern) && !is.null(cfg$simulate$pattern)) cfg$simulate$precomputed$pattern <- cfg$simulate$pattern
+  if (is.null(cfg$simulate$precomputed$dir)) cfg$simulate$precomputed$dir <- sim_defaults$precomputed$dir
+  if (is.null(cfg$simulate$precomputed$pattern)) cfg$simulate$precomputed$pattern <- sim_defaults$precomputed$pattern
+  cfg$simulate$precomputed$dir <- normalise(cfg$simulate$precomputed$dir)
+
+  if (is.null(cfg$simulate$demo) || !is.list(cfg$simulate$demo)) cfg$simulate$demo <- list()
+  if (is.null(cfg$simulate$demo$iterations)) cfg$simulate$demo$iterations <- sim_defaults$demo$iterations
+  if (is.null(cfg$simulate$demo$seed)) cfg$simulate$demo$seed <- sim_defaults$demo$seed
+  if (is.null(cfg$simulate$demo$site_proportions)) cfg$simulate$demo$site_proportions <- sim_defaults$demo$site_proportions
+  if (is.null(cfg$simulate$demo$strategies)) cfg$simulate$demo$strategies <- sim_defaults$demo$strategies
+  if (is.null(cfg$simulate$demo$singleton_n)) cfg$simulate$demo$singleton_n <- sim_defaults$demo$singleton_n
+  if (is.null(cfg$simulate$demo$multiton_n)) cfg$simulate$demo$multiton_n <- sim_defaults$demo$multiton_n
 
   cfg
 }

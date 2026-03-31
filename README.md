@@ -15,13 +15,21 @@ targets::tar_make()
 quarto::quarto_render("reports/paper.qmd")
 ```
 
+Optional figure montage support uses `{magick}`. If you want that and have the
+system ImageMagick development libraries installed, run:
+
+```r
+pak::pkg_install(project_dependencies(include_optional = TRUE))
+```
+
 ## What’s inside
 
 - Reproducible pipeline (`_targets.R`) with ingest → validation → calibration → summaries →
-  grouped and site-level figures → simulations (read-only) → report.
+  grouped and site-level figures → simulation mode selection (`demo`, `precomputed`, `none`) → report.
 - Modular helpers in `R/` with explicit imports; legacy scripts archived in `scripts/legacy/`.
 - Config file `config/config.yml` with calibration, branching, report and simulations knobs.
-- Example report `reports/paper.qmd` reads some targets directly and includes figures.
+- Example report `reports/paper.qmd` reads targets directly and now distinguishes generated demo simulations from precomputed summaries.
+- `{magick}`-backed montages are optional; the pipeline writes placeholder montage images when it is unavailable.
 
 See `docs/DEVELOPMENT.qmd` for configuration details and common commands.
 
@@ -51,9 +59,17 @@ report:
     ncol: 3
 
 simulate:
-  use_precomputed: true
-  dir: data
-  pattern: ^simulation_summary_.*\.csv$
+  mode: demo
+  precomputed:
+    dir: data
+    pattern: ^simulation_summary_.*\.csv$
+  demo:
+    iterations: 10
+    seed: 1234
+    site_proportions: [0.5, 1.0]
+    strategies: [oldest, youngest, bracketed, singleton, multiton]
+    singleton_n: 1
+    multiton_n: 3
 ```
 
 After updating config, rebuild the relevant targets:
@@ -62,3 +78,8 @@ After updating config, rebuild the relevant targets:
 targets::tar_make()
 quarto::quarto_render("reports/paper.qmd")
 ```
+
+Default fresh-clone behavior is `simulate.mode: demo`, which generates a
+reduced legacy-style simulation matrix under `outputs/simulations/demo/`.
+Switch to `precomputed` to read external `simulation_summary_*.csv` files, or
+to `none` to skip simulations entirely.

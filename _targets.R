@@ -179,58 +179,33 @@ list(
         ggplot2::ggsave(out, ggplot2::ggplot() + ggplot2::labs(title = paste("No data for", s)), width = 8, height = 5, dpi = 150)
         return(out)
       }
-
-      # SPD
-      grid_cols <- tryCatch({ if (length(cds$grids) > 0) names(cds$grids[[1]]) else character(0) }, error = function(e) character(0))
-      message(sprintf("[SITE:%s] first grid cols: %s", s, paste(grid_cols, collapse = ", ")))
-      spd_tbl <- tryCatch({ spd_to_tibble(spd_from_caldates(cds, time_range = cfg$calibration$time_range)) },
-                          error = function(e) { message(sprintf("[SITE:%s] spd_to_tibble failed: %s", s, e$message)); tibble::tibble(calBP = numeric(0), PrDens = numeric(0)) })
-      if (!all(c("calBP", "PrDens") %in% names(spd_tbl))) {
-        if (!"calBP" %in% names(spd_tbl) && length(spd_tbl) >= 1) spd_tbl$calBP <- spd_tbl[[1]]
-        if (!"PrDens" %in% names(spd_tbl) && length(spd_tbl) >= 2) spd_tbl$PrDens <- spd_tbl[[2]]
-        spd_tbl <- spd_tbl[, intersect(c("calBP", "PrDens"), names(spd_tbl)), drop = FALSE]
-      }
-      message(sprintf("[SITE:%s] spd cols: %s", s, paste(names(spd_tbl), collapse = ", ")))
+      spd_tbl <- spd_to_tibble(spd_from_caldates(cds, time_range = cfg$calibration$time_range))
 
       # FD
       df_s <- weighted_means[weighted_means$SITE == s, , drop = FALSE]
-      fd_tbl <- tryCatch({
-        if (nrow(df_s) > 0) {
-          fd_from_weighted_means(
-            df_s,
-            min_age = min(cfg$calibration$time_range),
-            max_age = max(cfg$calibration$time_range)
-          )
-        } else {
-          tibble::tibble(bin = numeric(0), value = numeric(0))
-        }
-      }, error = function(e) { message(sprintf("[SITE:%s] fd_from_weighted_means failed: %s", s, e$message)); tibble::tibble(bin = numeric(0), value = numeric(0)) })
-      message(sprintf("[SITE:%s] fd cols: %s", s, paste(names(fd_tbl), collapse = ", ")))
+      fd_tbl <- if (nrow(df_s) > 0) {
+        fd_from_weighted_means(
+          df_s,
+          min_age = min(cfg$calibration$time_range),
+          max_age = max(cfg$calibration$time_range)
+        )
+      } else {
+        tibble::tibble(bin = numeric(0), value = numeric(0))
+      }
 
       # KDE
-      kde_tbl <- tryCatch({
-        if (nrow(df_s) > 0) {
-          kde_from_weighted_means(
-            df_s,
-            from = min(cfg$calibration$time_range),
-            to   = max(cfg$calibration$time_range)
-          )
-        } else {
-          tibble::tibble(calBP = numeric(0), density = numeric(0))
-        }
-      }, error = function(e) { message(sprintf("[SITE:%s] kde_from_weighted_means failed: %s", s, e$message)); tibble::tibble(calBP = numeric(0), density = numeric(0)) })
-      if (!all(c("calBP", "density") %in% names(kde_tbl))) {
-        if (!"calBP" %in% names(kde_tbl) && length(kde_tbl) >= 1) kde_tbl$calBP <- kde_tbl[[1]]
-        if (!"density" %in% names(kde_tbl) && length(kde_tbl) >= 2) kde_tbl$density <- kde_tbl[[2]]
-        kde_tbl <- kde_tbl[, intersect(c("calBP", "density"), names(kde_tbl)), drop = FALSE]
+      kde_tbl <- if (nrow(df_s) > 0) {
+        kde_from_weighted_means(
+          df_s,
+          from = min(cfg$calibration$time_range),
+          to   = max(cfg$calibration$time_range)
+        )
+      } else {
+        tibble::tibble(calBP = numeric(0), density = numeric(0))
       }
-      message(sprintf("[SITE:%s] kde cols: %s", s, paste(names(kde_tbl), collapse = ", ")))
 
-      p <- tryCatch(
-        plot_methods_overlay(spd_tbl, fd_tbl, kde_tbl, smooth_fd = TRUE, smooth_window = 3),
-        error = function(e) ggplot2::ggplot() + ggplot2::labs(title = paste("Plotting error for", s, "-", e$message))
-      )
-      try({ ggplot2::ggsave(out, p, width = 8, height = 5, dpi = 150) }, silent = TRUE)
+      p <- plot_methods_overlay(spd_tbl, fd_tbl, kde_tbl, smooth_fd = TRUE, smooth_window = 3)
+      ggplot2::ggsave(out, p, width = 8, height = 5, dpi = 150)
       out
     },
     pattern = map(site_levels),
@@ -309,76 +284,29 @@ list(
         ggplot2::ggsave(out, ggplot2::ggplot() + ggplot2::labs(title = paste("No data for", g)), width = 8, height = 5, dpi = 150)
         return(out)
       }
-      # Inspect first grid column names before SPD
-      grid_cols <- tryCatch({
-        if (length(cds$grids) > 0) names(cds$grids[[1]]) else character(0)
-      }, error = function(e) character(0))
-      message(sprintf("[%s] first grid cols: %s", g, paste(grid_cols, collapse = ", ")))
 
-      spd_tbl <- tryCatch({
-        spd_obj <- spd_from_caldates(cds, time_range = cfg$calibration$time_range)
-        spd_to_tibble(spd_obj)
-      }, error = function(e) {
-        message(sprintf("[%s] spd_to_tibble failed: %s", g, e$message))
-        tibble::tibble(calBP = numeric(0), PrDens = numeric(0))
-      })
-      # Normalise SPD column names defensively
-      if (!all(c("calBP", "PrDens") %in% names(spd_tbl))) {
-        if (!"calBP" %in% names(spd_tbl) && length(spd_tbl) >= 1) spd_tbl$calBP <- spd_tbl[[1]]
-        if (!"PrDens" %in% names(spd_tbl) && length(spd_tbl) >= 2) spd_tbl$PrDens <- spd_tbl[[2]]
-        spd_tbl <- spd_tbl[, intersect(c("calBP", "PrDens"), names(spd_tbl)), drop = FALSE]
-      }
-      # Debugging: print column names to aid troubleshooting if plotting fails
-      message(sprintf("[%s] spd cols: %s", g, paste(names(spd_tbl), collapse = ", ")))
+      spd_tbl <- spd_to_tibble(spd_from_caldates(cds, time_range = cfg$calibration$time_range))
       df_g <- weighted_means[weighted_means$SITE_TYPE == g, , drop = FALSE]
-      fd_tbl <- tryCatch({
-        if (nrow(df_g) > 0) {
-          fd_from_weighted_means(
-            df_g,
-            min_age = min(cfg$calibration$time_range),
-            max_age = max(cfg$calibration$time_range)
-          )
-        } else {
-          tibble::tibble(bin = numeric(0), value = numeric(0))
-        }
-      }, error = function(e) {
-        message(sprintf("[%s] fd_from_weighted_means failed: %s", g, e$message))
+      fd_tbl <- if (nrow(df_g) > 0) {
+        fd_from_weighted_means(
+          df_g,
+          min_age = min(cfg$calibration$time_range),
+          max_age = max(cfg$calibration$time_range)
+        )
+      } else {
         tibble::tibble(bin = numeric(0), value = numeric(0))
-      })
-      message(sprintf("[%s] fd cols: %s", g, paste(names(fd_tbl), collapse = ", ")))
-      kde_tbl <- tryCatch({
-        if (nrow(df_g) > 0) {
-          kde_from_weighted_means(
-            df_g,
-            from = min(cfg$calibration$time_range),
-            to   = max(cfg$calibration$time_range)
-          )
-        } else {
-          tibble::tibble(calBP = numeric(0), density = numeric(0))
-        }
-      }, error = function(e) {
-        message(sprintf("[%s] kde_from_weighted_means failed: %s", g, e$message))
-        tibble::tibble(calBP = numeric(0), density = numeric(0))
-      })
-      # Normalise KDE column names defensively
-      if (!all(c("calBP", "density") %in% names(kde_tbl))) {
-        if (!"calBP" %in% names(kde_tbl) && length(kde_tbl) >= 1) kde_tbl$calBP <- kde_tbl[[1]]
-        if (!"density" %in% names(kde_tbl) && length(kde_tbl) >= 2) kde_tbl$density <- kde_tbl[[2]]
-        kde_tbl <- kde_tbl[, intersect(c("calBP", "density"), names(kde_tbl)), drop = FALSE]
       }
-      message(sprintf("[%s] kde cols: %s", g, paste(names(kde_tbl), collapse = ", ")))
-      p <- tryCatch(
-        plot_methods_overlay(spd_tbl, fd_tbl, kde_tbl, smooth_fd = TRUE, smooth_window = 3),
-        error = function(e) ggplot2::ggplot() + ggplot2::labs(title = paste("Plotting error for", g, "-", e$message))
-      )
-      ok <- tryCatch({
-        ggplot2::ggsave(out, p, width = 8, height = 5, dpi = 150)
-        TRUE
-      }, error = function(e) {
-        message(sprintf("[%s] ggsave failed: %s", g, e$message))
-        ggplot2::ggsave(out, ggplot2::ggplot() + ggplot2::labs(title = paste("Placeholder for", g, "-", e$message)), width = 8, height = 5, dpi = 150)
-        FALSE
-      })
+      kde_tbl <- if (nrow(df_g) > 0) {
+        kde_from_weighted_means(
+          df_g,
+          from = min(cfg$calibration$time_range),
+          to   = max(cfg$calibration$time_range)
+        )
+      } else {
+        tibble::tibble(calBP = numeric(0), density = numeric(0))
+      }
+      p <- plot_methods_overlay(spd_tbl, fd_tbl, kde_tbl, smooth_fd = TRUE, smooth_window = 3)
+      ggplot2::ggsave(out, p, width = 8, height = 5, dpi = 150)
       out
     },
     pattern = map(group_levels),
@@ -495,11 +423,50 @@ list(
     description = "Kernel density estimate from weighted mean calibrated ages."
   ),
 
-  # Simulations (read-only): manifest -> tables -> aggregates -> figures
+  # Simulations: demo generation, precomputed ingestion, or none
+  targets::tar_target(
+    sim_mode,
+    normalize_simulation_mode(cfg$simulate$mode),
+    description = "Configured simulation mode."
+  ),
+  targets::tar_target(
+    demo_sim_specs,
+    if (identical(sim_mode, "demo")) build_demo_sim_specs(cfg) else tibble::tibble(),
+    description = "Scenario matrix for generated demo simulation summaries."
+  ),
+  targets::tar_target(
+    demo_sim_summary_files,
+    if (identical(sim_mode, "demo")) {
+      write_demo_simulation_summaries(validated_strict, cfg, demo_sim_specs)
+    } else {
+      character(0)
+    },
+    format = "file",
+    description = "Generated demo simulation summary CSV files."
+  ),
+  targets::tar_target(
+    sim_precomputed_manifest,
+    if (identical(sim_mode, "precomputed")) {
+      read_sim_manifest(
+        cfg$simulate$precomputed$dir,
+        cfg$simulate$precomputed$pattern,
+        origin = "precomputed"
+      )
+    } else {
+      empty_sim_manifest()
+    },
+    description = "Manifest of externally supplied simulation summary CSV files."
+  ),
   targets::tar_target(
     sim_manifest,
-    if (isTRUE(cfg$simulate$use_precomputed)) read_sim_manifest(cfg$simulate$dir, cfg$simulate$pattern) else tibble::tibble(path = character(0), scenario = character(0), size = integer(0)),
-    description = "Manifest of precomputed simulation summary CSV files."
+    if (identical(sim_mode, "demo")) {
+      build_sim_manifest_from_paths(demo_sim_summary_files, origin = "demo")
+    } else if (identical(sim_mode, "precomputed")) {
+      sim_precomputed_manifest
+    } else {
+      empty_sim_manifest()
+    },
+    description = "Unified manifest of simulation summary CSV files."
   ),
   targets::tar_target(
     sim_paths,
@@ -514,8 +481,10 @@ list(
   ),
   targets::tar_target(
     sim_tables,
-    { sim_files; read_sim_table(sim_paths) },
-    pattern = map(sim_paths),
+    {
+      sim_files
+      lapply(sim_paths, read_sim_table)
+    },
     iteration = "list",
     description = "Per-file tidy simulation tables."
   ),
@@ -529,26 +498,42 @@ list(
   ),
   targets::tar_target(
     sim_scenarios,
-    sort(unique(sim_all$scenario)),
+    {
+      if (!("scenario" %in% names(sim_all)) || nrow(sim_all) == 0) {
+        character(0)
+      } else {
+        sort(unique(sim_all$scenario))
+      }
+    },
     description = "Distinct simulation scenarios."
   ),
   targets::tar_target(
     fig_sim_overlays,
     {
-      s <- sim_scenarios
-      df <- sim_all[sim_all$scenario == s, , drop = FALSE]
       fs::dir_create("figs")
-      out <- fs::path("figs", paste0("sim_", gsub("[^A-Za-z0-9_]+", "_", s), ".png"))
-      if (nrow(df) == 0) {
-        ggplot2::ggsave(out, ggplot2::ggplot() + ggplot2::labs(title = paste("No sim data for", s)), width = 8, height = 5, dpi = 150)
-      } else {
-        p <- plot_sim_overlay(df)
-        ggplot2::ggsave(out, p, width = 8, height = 5, dpi = 150)
+      if (nrow(sim_manifest) == 0) {
+        return(character(0))
       }
-      out
+
+      vapply(
+        seq_len(nrow(sim_manifest)),
+        function(i) {
+          s <- sim_manifest$scenario[[i]]
+          sz <- sim_manifest$size[[i]]
+          df <- sim_all[sim_all$scenario == s & sim_all$size == sz, , drop = FALSE]
+          out <- fs::path("figs", paste0("sim_", gsub("[^A-Za-z0-9_]+", "_", s), "_", sz, ".png"))
+          if (nrow(df) == 0) {
+            ggplot2::ggsave(out, ggplot2::ggplot() + ggplot2::labs(title = paste("No sim data for", s, sz)), width = 8, height = 5, dpi = 150)
+          } else {
+            p <- plot_sim_overlay(df)
+            p <- p + ggplot2::labs(title = paste0(tools::toTitleCase(gsub("_", " ", s)), " (", sz, "% sites)"))
+            ggplot2::ggsave(out, p, width = 8, height = 5, dpi = 150)
+          }
+          out
+        },
+        character(1)
+      )
     },
-    pattern = map(sim_scenarios),
-    iteration = "vector",
     format = "file",
     description = "Per-scenario simulation overlay figures."
   ),
@@ -576,25 +561,41 @@ list(
     format = "file",
     description = "Montage of simulation overlays."
   ),
+  targets::tar_target(
+    report_qmd,
+    "reports/paper.qmd",
+    format = "file",
+    description = "Quarto report source file."
+  ),
+  targets::tar_target(
+    report_quarto_yml,
+    "quarto.yml",
+    format = "file",
+    description = "Project-level Quarto configuration file."
+  ),
 
   # Report rendering: render to same directory as source file
   targets::tar_target(
     report,
     {
-      qmd <- "reports/paper.qmd"
+      list(
+        cfg, validated_strict, spd_summary, fd_summary, kde_summary,
+        fig_methods_overall, fig_methods_by_site_type, selected_site_figs,
+        fig_methods_by_site_montage, sim_manifest, fig_sim_overlays, fig_sim_montage
+      )
+      qmd <- report_qmd
+      report_quarto_yml
       out_dir <- dirname(qmd)
       # Render with Quarto if available; otherwise write a simple placeholder HTML
       has_quarto <- requireNamespace("quarto", quietly = TRUE) && !is.na(tryCatch(quarto::quarto_path(), error = function(e) NA))
       base <- tools::file_path_sans_ext(basename(qmd))
       html <- file.path(out_dir, paste0(base, ".html"))
-      ok <- FALSE
       if (has_quarto) {
-        ok <- isTRUE(tryCatch({
-          quarto::quarto_render(input = qmd, quiet = TRUE)
-          file.exists(html)
-        }, error = function(e) FALSE))
-      }
-      if (!ok) {
+        quarto::quarto_render(input = qmd, quiet = TRUE)
+        if (!file.exists(html)) {
+          stop(sprintf("Quarto render did not produce expected output: %s", html))
+        }
+      } else {
         writeLines("<html><body><p>Report placeholder (Quarto not available or render failed).</p></body></html>", html)
       }
       html

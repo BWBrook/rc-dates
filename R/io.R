@@ -20,8 +20,11 @@ lread <- function(path, ...) {
   path_abs <- resolve_path(path)
   assert_file_exists(path_abs)
   tryCatch(
-    vroom(path_abs, show_col_types = FALSE, ...),
-    error = function(e) abort(paste0("Failed to read file: ", path_abs), class = "rcdates_io_error")
+    vroom(path_abs, show_col_types = FALSE, num_threads = 1, ...),
+    error = function(e) abort(
+      paste0("Failed to read file: ", path_abs, " (", conditionMessage(e), ")"),
+      class = "rcdates_io_error"
+    )
   )
 }
 
@@ -41,8 +44,11 @@ read_manifest <- function(manifest_path) {
   mp <- resolve_path(manifest_path)
   assert_file_exists(mp)
   mf <- tryCatch(
-    vroom(mp, show_col_types = FALSE),
-    error = function(e) abort(paste0("Failed to read manifest: ", mp), class = "rcdates_io_error")
+    vroom(mp, show_col_types = FALSE, num_threads = 1),
+    error = function(e) abort(
+      paste0("Failed to read manifest: ", mp, " (", conditionMessage(e), ")"),
+      class = "rcdates_io_error"
+    )
   )
   required <- c("id", "path")
   missing <- setdiff(required, names(mf))

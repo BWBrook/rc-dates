@@ -17,6 +17,8 @@ load_austarch_data <- function(filepath) {
   suppressWarnings({
     austarch_df <- read_csv(
       fp,
+      num_threads = 1,
+      show_col_types = FALSE,
       col_types = cols_only(
         ADSID = col_integer(),
         LONGITUDE = col_double(),
@@ -202,10 +204,15 @@ filter_sites_min_calibrated_dates <- function(original_df, calibrated_dates, min
 #' @export
 subset_caldates_by_adsid <- function(cal_dates, adsids) {
   adsids <- as.character(adsids)
-  subset_metadata <- cal_dates$metadata[cal_dates$metadata$DateID %in% adsids, ]
-  subset_grids <- cal_dates$grids[adsids]
+  metadata_ids <- as.character(cal_dates$metadata$DateID)
+  grid_ids <- names(cal_dates$grids)
+  retained_ids <- unique(adsids[adsids %in% metadata_ids & adsids %in% grid_ids])
+
+  subset_metadata <- cal_dates$metadata[match(retained_ids, metadata_ids), , drop = FALSE]
+  subset_grids <- cal_dates$grids[retained_ids]
   subset_calmatrix <- if (!is.null(cal_dates$calmatrix) && is.matrix(cal_dates$calmatrix)) {
-    cal_dates$calmatrix[, adsids, drop = FALSE]
+    cols <- retained_ids[retained_ids %in% colnames(cal_dates$calmatrix)]
+    cal_dates$calmatrix[, cols, drop = FALSE]
   } else {
     NULL
   }

@@ -51,6 +51,7 @@ vignettes/*.pdf
 *.html
 *.knit.md
 /report_files
+reports/_targets.yaml
 *.tex
 *.log
 *.aux
@@ -61,6 +62,10 @@ AGENTS.md
 # _targets
 /_targets/*
 /docs/*.md 
+!/docs/AGENT_NOTES.md
+!/docs/CHANGELOG.md
+!/docs/LEGACY_PARITY.md
+!/docs/PIPELINE.md
 
 # Misc
 .DS_Store
