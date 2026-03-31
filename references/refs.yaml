@@ -1,0 +1,46 @@
+---
+references:
+  - id: alpha2020PlaceholderWorkflow
+    citation-key: alpha2020PlaceholderWorkflow
+    type: article-journal
+    title: Placeholder workflow design for manuscript migration
+    author:
+      - family: Alpha
+        given: Avery
+    issued:
+      - year: 2020
+    container-title: Journal of Placeholder Studies
+    volume: '1'
+    issue: '1'
+    page: 1-10
+
+  - id: beta2021PlaceholderFigures
+    citation-key: beta2021PlaceholderFigures
+    type: article-journal
+    title: Placeholder figures for reproducible document pipelines
+    author:
+      - family: Beta
+        given: Bailey
+    issued:
+      - year: 2021
+    container-title: Reproducible Documents Quarterly
+    volume: '2'
+    issue: '4'
+    page: 22-35
+
+  - id: gamma2022PlaceholderMigration
+    citation-key: gamma2022PlaceholderMigration
+    type: article-journal
+    title: Migrating drafted manuscripts into markdown-first publishing systems
+    author:
+      - family: Gamma
+        given: Gray
+      - family: Singh
+        given: Priya
+    issued:
+      - year: 2022
+    container-title: Computational Writing Systems
+    volume: '5'
+    issue: '2'
+    page: 100-118
+...

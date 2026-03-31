@@ -1,0 +1,33 @@
+default_profile: default
+
+profiles:
+  default:
+    description: Placeholder manuscript scaffold for future makedoc builds.
+    manuscript_sources:
+      - ../manuscript/text/main.md
+      - ../manuscript/text/figures.md
+    lint_sources:
+      - ../manuscript/text/main.md
+      - ../manuscript/text/figures.md
+    author_metadata: ../manuscript/authors.yaml
+    bibliography: ../references/refs.yaml
+    csl: ../csl/journal-style.csl
+    journal: Placeholder Journal
+    csl_search_dirs:
+      - ../csl
+    output_dir: dist
+    output_stem: manuscript
+    page_numbers: lower_right
+    line_spacing: single
+    line_numbering: continuous
+    figures:
+      placement: pages
+      caption_position: top
+      placeholder_id: figures
+    margins:
+      unit: cm
+      paper_size: a4
+      top: 2.0
+      right: 2.5
+      bottom: 2.0
+      left: 2.5

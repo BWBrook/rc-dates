@@ -1,0 +1,15 @@
+title_note: Placeholder author metadata for the future paper migration.
+authors:
+  - name: Barry W. Brook
+    affiliations: [aff1]
+    corresponding: true
+    email: barry.brook@example.org
+    orcid: 0000-0000-0000-0000
+  - name: Placeholder Coauthor
+    affiliations: [aff2]
+    corresponding: false
+    email: coauthor@example.org
+    orcid: 0000-0000-0000-0001
+affiliations:
+  aff1: School of Natural Sciences, University of Tasmania, Hobart, Australia
+  aff2: Placeholder collaborating institution, City, Country

@@ -22,3 +22,16 @@
   `R/` and wired it into `_targets.R`, the report, and the test suite.
 - Added pipeline/provenance docs to clarify the current DAG and how legacy
   scripts map onto the reproducible compendium.
+
+## 2026-03-31
+- Added a `makedoc`-ready external manuscript scaffold to this repository:
+  placeholder markdown sources, tracked placeholder figure assets, author
+  metadata, bibliography YAML, a placeholder CSL file, and `settings/build.yaml`
+  with config-relative paths suitable for `makedoc` external-path mode.
+- Updated `.gitignore` so future `makedoc` build outputs under `dist/` stay out
+  of version control while the scaffold's tracked placeholder figure PNGs
+  remain addable.
+- Investigated the failing post-push GitHub Actions run on `main`, traced the
+  CI failure to the workflow's test/manifest steps not explicitly activating
+  the project `renv`, and updated `.github/workflows/compendium-ci.yml` to
+  source `renv/activate.R` and reuse `tests/run-tests.R`.

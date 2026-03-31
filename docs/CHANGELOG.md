@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog.
 
 ## [Unreleased]
+### Added
+- Added a `makedoc`-ready manuscript scaffold under `manuscript/`,
+  `references/`, `csl/`, and `settings/build.yaml` so the paper can be
+  migrated into the WSL document build workflow with valid placeholder inputs.
+
 ### Changed
 - Made the bootstrap dependency set match the current compendium workflow by
   removing stale `qs`, removing unused `duckdb`, making `{magick}` optional,
@@ -25,3 +30,6 @@ The format is based on Keep a Changelog.
   the default demo workflow.
 - Added `docs/PIPELINE.md` and `docs/LEGACY_PARITY.md` to document the current
   target graph and the legacy-to-current provenance crosswalk.
+- Updated GitHub Actions to activate `renv` explicitly before the test and
+  manifest steps, and to use the repo's `tests/run-tests.R` harness so CI
+  matches the validated local test path.
