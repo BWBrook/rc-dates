@@ -9,6 +9,8 @@ The format is based on Keep a Changelog.
 - Added a `makedoc`-ready manuscript scaffold under `manuscript/`,
   `references/`, `csl/`, and `settings/build.yaml` so the paper can be
   migrated into the WSL document build workflow with valid placeholder inputs.
+- Added `docs/READ_THIS_FIRST.md` as a detailed handoff note for resuming the
+  compendium and manuscript workflow from a fresh MacBook clone.
 
 ### Changed
 - Replaced the placeholder `makedoc` manuscript scaffold with the real

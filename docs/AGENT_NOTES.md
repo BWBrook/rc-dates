@@ -71,3 +71,9 @@
   fixing the remaining obvious DOCX-conversion artefacts and validating the
   updated manuscript sources again through Pandoc before packaging the
   manuscript-import cleanup work for commit.
+
+## 2026-04-24
+- Added `docs/READ_THIS_FIRST.md` as a MacBook handoff guide, summarising the
+  current project goals, recent stabilisation/manuscript work, resolved review
+  findings, important paths, validation commands, and recommended next steps for
+  continuing from a fresh clone.
