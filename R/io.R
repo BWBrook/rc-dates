@@ -76,3 +76,46 @@ require_columns <- function(x, cols, class = "rcdates_validation_error") {
   }
   invisible(TRUE)
 }
+
+#' Decide whether to use Arrow for intermediate storage
+#'
+#' Arrow Parquet writes can be brittle on some macOS source builds, so this
+#' helper keeps the default pipeline on a CSV fallback there.
+#' @param use_arrow Logical preference from project configuration.
+#' @param system_name Optional OS name for testing; defaults to `Sys.info()`.
+#' @return Logical scalar.
+#' @export
+should_use_arrow_interim <- function(use_arrow, system_name = Sys.info()[["sysname"]]) {
+  isTRUE(use_arrow) &&
+    !identical(system_name, "Darwin") &&
+    requireNamespace("arrow", quietly = TRUE)
+}
+
+#' Write validated data to portable intermediate storage
+#'
+#' Writes Parquet when Arrow is enabled and safe for the host, otherwise writes
+#' CSV. Returns the generated file path for `{targets}` file tracking.
+#' @param x Data frame to write.
+#' @param out_dir Base output directory.
+#' @param use_arrow Logical preference from project configuration.
+#' @return Character path to the written file.
+#' @export
+write_interim_validated <- function(x, out_dir, use_arrow = TRUE) {
+  import::from("fs", "dir_create", "path")
+
+  dir_create(path(out_dir, "interim"))
+  use_arrow_now <- should_use_arrow_interim(use_arrow)
+  out_file <- path(
+    out_dir,
+    "interim",
+    if (use_arrow_now) "validated_strict.parquet" else "validated_strict.csv"
+  )
+
+  if (use_arrow_now) {
+    arrow::write_parquet(x, out_file)
+  } else {
+    readr::write_csv(x, out_file)
+  }
+
+  out_file
+}

@@ -362,6 +362,18 @@ CONFIG=/path/to/rc-dates/settings/build.yaml make check
 CONFIG=/path/to/rc-dates/settings/build.yaml make all
 ```
 
+MacBook helper targets, from this repo root:
+
+```sh
+make manuscript-validate
+make manuscript-check
+make manuscript-build
+make manuscript-profile
+```
+
+These helper targets assume `makedoc` is at `/Users/bwbrook/work/makedoc` and
+prepend its repo-local `.venv/bin` to `PATH` before calling `make` there.
+
 Git hygiene:
 
 ```sh

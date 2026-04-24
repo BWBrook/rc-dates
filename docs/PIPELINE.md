@@ -4,6 +4,8 @@ The active workflow lives in `_targets.R` and follows this sequence:
 
 1. `cfg` and `raw_manifest` resolve configuration and tracked inputs.
 2. `raw_tbl`, `validated`, and `validated_strict` ingest and gate the AustArch data.
+   `interim_parquet` writes the validated data to intermediate storage, using
+   Parquet when Arrow is enabled and safe for the host, and CSV on macOS.
 3. `model_fit`, `calibrated`, `weighted_means`, `spd_summary`, `fd_summary`, and `kde_summary` produce the baseline analytical outputs.
 4. Dynamic SITE_TYPE and SITE branches create overlay summaries and figures.
 5. Simulation mode selection fans into one of three paths:
@@ -16,6 +18,8 @@ The active workflow lives in `_targets.R` and follows this sequence:
 Key reproducibility properties:
 
 - File inputs are tracked via manifest and file-format targets.
+- Intermediate storage is tracked as a file target and uses a macOS CSV
+  fallback to avoid known local Arrow Parquet writer crashes.
 - The report depends on `reports/paper.qmd` and `quarto.yml` contents, not just string paths.
 - Simulation demo outputs are generated inside the pipeline from the filtered dataset rather than prepared manually.
 - The report reads the `_targets` store directly and does not create `reports/_targets.yaml`.

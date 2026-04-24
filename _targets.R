@@ -354,18 +354,11 @@ list(
   # Intermediate storage (Arrow preferred; CSV fallback)
   targets::tar_target(
     interim_parquet,
-    {
-      import::from("fs", "dir_create", "path")
-      out_dir <- cfg$outputs$dir
-      dir_create(path(out_dir, "interim"))
-      out_file <- path(out_dir, "interim", if (isTRUE(cfg$compute$use_arrow)) "validated_strict.parquet" else "validated_strict.csv")
-      if (isTRUE(cfg$compute$use_arrow) && requireNamespace("arrow", quietly = TRUE)) {
-        arrow::write_parquet(validated_strict, out_file)
-      } else {
-        readr::write_csv(validated_strict, out_file)
-      }
-      out_file
-    },
+    write_interim_validated(
+      validated_strict,
+      cfg$outputs$dir,
+      use_arrow = cfg$compute$use_arrow
+    ),
     format = "file",
     description = "Intermediate normalised storage of validated data."
   ),

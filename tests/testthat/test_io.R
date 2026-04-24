@@ -19,3 +19,17 @@ test_that("read_manifest resolves relative paths and validates columns", {
   expect_true(all(c("id", "path") %in% names(mf)))
   expect_true(file.exists(mf$path[[1]]))
 })
+
+test_that("interim storage falls back to CSV on macOS", {
+  expect_false(should_use_arrow_interim(TRUE, system_name = "Darwin"))
+})
+
+test_that("write_interim_validated returns a tracked file path", {
+  out_dir <- tempfile("rcdates-interim-")
+  tbl <- tibble::tibble(ADSID = 1L, AGE = 1000L)
+
+  out_file <- write_interim_validated(tbl, out_dir, use_arrow = FALSE)
+
+  expect_match(out_file, "validated_strict[.]csv$")
+  expect_true(file.exists(out_file))
+})

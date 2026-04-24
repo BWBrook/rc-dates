@@ -81,3 +81,25 @@
   it to a `pak` dependency-solver failure during `renv::restore()`, and updated
   the workflow to install the required Ubuntu system libraries and force CI
   restores through `renv` without `pak` delegation.
+- Confirmed the MacBook checkout is ahead of the written handoff baseline at
+  `1eb054d agent: fix(ci): stabilise renv restore`, with clean local state
+  before manuscript setup.
+- Added a root `Makefile` so common manuscript commands can run directly from
+  this repository while using `/Users/bwbrook/work/makedoc` and its repo-local
+  virtualenv automatically.
+- Verified `make manuscript-validate` and `make manuscript-check` from the
+  `rc-dates` root after hardening `makedoc`'s manual-citation lint against
+  parenthesized acronym-plus-Pandoc-citation false positives.
+- Produced fresh manuscript outputs under
+  `/Users/bwbrook/work/makedoc/dist/rc-dates/`: `manuscript.pdf`,
+  `manuscript.docx`, and `manuscript_build_manifest.json`.
+- Installed local MacBook build prerequisites `cmake` and `imagemagick@6` with
+  Homebrew, then restored the `renv` library to the checked-in lockfile
+  versions; `renv::status()` reports a consistent project library.
+- Ran `make compendium-test` successfully after the MacBook `renv` restore.
+- Attempted `make compendium-pipeline`; the run exposed a macOS Arrow Parquet
+  writer segfault at the `interim_parquet` target, so the pipeline now routes
+  intermediate storage to CSV on Darwin while retaining Arrow use elsewhere.
+- Re-ran `make compendium-test`, `make compendium-pipeline`, and
+  `make compendium-report` successfully after the macOS intermediate-storage
+  fallback; the pipeline completed 67 targets with 14 skipped.

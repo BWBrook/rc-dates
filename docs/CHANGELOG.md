@@ -6,6 +6,9 @@ The format is based on Keep a Changelog.
 
 ## [Unreleased]
 ### Added
+- Added a root `Makefile` with MacBook-friendly helper targets for the
+  manuscript workflow (`manuscript-validate`, `manuscript-check`,
+  `manuscript-build`, `manuscript-profile`) and the core R compendium checks.
 - Added a `makedoc`-ready manuscript scaffold under `manuscript/`,
   `references/`, `csl/`, and `settings/build.yaml` so the paper can be
   migrated into the WSL document build workflow with valid placeholder inputs.
@@ -13,6 +16,9 @@ The format is based on Keep a Changelog.
   compendium and manuscript workflow from a fresh MacBook clone.
 
 ### Changed
+- Made the intermediate pipeline storage target fall back to CSV automatically
+  on macOS, avoiding a local Arrow Parquet writer crash while preserving the
+  existing Arrow preference on other platforms.
 - Replaced the placeholder `makedoc` manuscript scaffold with the real
   converted manuscript artefacts from `/mnt/c/output`, including the main
   markdown draft, bibliography YAML, JAS CSL file, real figure files, and a
