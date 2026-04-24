@@ -77,3 +77,7 @@
   current project goals, recent stabilisation/manuscript work, resolved review
   findings, important paths, validation commands, and recommended next steps for
   continuing from a fresh clone.
+- Investigated the failing `compendium-ci` GitHub Actions run on `main`, traced
+  it to a `pak` dependency-solver failure during `renv::restore()`, and updated
+  the workflow to install the required Ubuntu system libraries and force CI
+  restores through `renv` without `pak` delegation.

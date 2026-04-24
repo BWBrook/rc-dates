@@ -72,3 +72,8 @@ The format is based on Keep a Changelog.
 - Updated GitHub Actions to activate `renv` explicitly before the test and
   manifest steps, and to use the repo's `tests/run-tests.R` harness so CI
   matches the validated local test path.
+
+### Fixed
+- Hardened the GitHub Actions dependency restore path by installing the system
+  libraries reported by `renv` and disabling `pak` delegation in CI, avoiding a
+  broad `pak` solver failure before tests can run.
