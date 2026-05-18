@@ -80,6 +80,9 @@ The format is based on Keep a Changelog.
   matches the validated local test path.
 
 ### Fixed
+- Pinned GitHub Actions R setup to R 4.5.3 so CI restores against the
+  lockfile's documented R series instead of floating to R 4.6.0 and failing
+  while compiling locked packages.
 - Hardened the GitHub Actions dependency restore path by installing the system
   libraries reported by `renv` and disabling `pak` delegation in CI, avoiding a
   broad `pak` solver failure before tests can run.

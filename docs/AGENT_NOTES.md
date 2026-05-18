@@ -1,5 +1,14 @@
 # AGENT_NOTES
 
+## 2026-05-18
+- Investigated the failing GitHub Actions `compendium-ci / tests` run on
+  `main` with the GitHub plugin and `gh`, tracing the failure to
+  `r-lib/actions/setup-r@v2` floating from R 4.5.3 in the last green run to
+  R 4.6.0 in the failing run.
+- Pinned both GitHub Actions workflows that restore `renv` dependencies to
+  R 4.5.3, matching the documented lockfile series and avoiding the observed
+  `S7` source compile failure under R 4.6.0.
+
 ## 2026-03-30
 - Cloned `BWBrook/rc-dates` into `/home/bwbrook/papers/rc-dates` and completed
   a high-level orientation of the targets pipeline, tests, and report flow.
