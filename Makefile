@@ -2,7 +2,8 @@ SHELL := /bin/bash
 
 MAKEDOC_DIR ?= /Users/bwbrook/work/makedoc
 MAKEDOC_CONFIG := $(abspath settings/build.yaml)
-MAKEDOC_VENV_BIN := $(MAKEDOC_DIR)/.venv/bin
+MAKEDOC_VENV_BIN ?= $(MAKEDOC_DIR)/.venv/bin
+MAKEDOC_PATH = $(if $(wildcard $(MAKEDOC_VENV_BIN)/python3),$(MAKEDOC_VENV_BIN):$(PATH),$(PATH))
 
 .PHONY: help
 help:
@@ -23,24 +24,26 @@ help:
 .PHONY: makedoc-preflight
 makedoc-preflight:
 	@test -d "$(MAKEDOC_DIR)" || { echo "Missing makedoc repo: $(MAKEDOC_DIR)"; exit 1; }
-	@test -x "$(MAKEDOC_VENV_BIN)/python3" || { echo "Missing makedoc virtualenv Python: $(MAKEDOC_VENV_BIN)/python3"; exit 1; }
+	@if ! test -x "$(MAKEDOC_VENV_BIN)/python3"; then \
+		command -v python3 >/dev/null || { echo "Missing python3 and makedoc virtualenv: $(MAKEDOC_VENV_BIN)/python3"; exit 1; }; \
+	fi
 	@test -f "$(MAKEDOC_CONFIG)" || { echo "Missing makedoc config: $(MAKEDOC_CONFIG)"; exit 1; }
 
 .PHONY: manuscript-validate
 manuscript-validate: makedoc-preflight
-	@PATH="$(MAKEDOC_VENV_BIN):$$PATH" $(MAKE) -C "$(MAKEDOC_DIR)" validate-config CONFIG="$(MAKEDOC_CONFIG)"
+	@PATH="$(MAKEDOC_PATH)" $(MAKE) -C "$(MAKEDOC_DIR)" validate-config CONFIG="$(MAKEDOC_CONFIG)"
 
 .PHONY: manuscript-check
 manuscript-check: makedoc-preflight
-	@PATH="$(MAKEDOC_VENV_BIN):$$PATH" $(MAKE) -C "$(MAKEDOC_DIR)" check CONFIG="$(MAKEDOC_CONFIG)"
+	@PATH="$(MAKEDOC_PATH)" $(MAKE) -C "$(MAKEDOC_DIR)" check CONFIG="$(MAKEDOC_CONFIG)"
 
 .PHONY: manuscript-build
 manuscript-build: makedoc-preflight
-	@PATH="$(MAKEDOC_VENV_BIN):$$PATH" $(MAKE) -C "$(MAKEDOC_DIR)" all CONFIG="$(MAKEDOC_CONFIG)"
+	@PATH="$(MAKEDOC_PATH)" $(MAKE) -C "$(MAKEDOC_DIR)" all CONFIG="$(MAKEDOC_CONFIG)"
 
 .PHONY: manuscript-profile
 manuscript-profile: makedoc-preflight
-	@PATH="$(MAKEDOC_VENV_BIN):$$PATH" $(MAKE) -C "$(MAKEDOC_DIR)" profile-show CONFIG="$(MAKEDOC_CONFIG)"
+	@PATH="$(MAKEDOC_PATH)" $(MAKE) -C "$(MAKEDOC_DIR)" profile-show CONFIG="$(MAKEDOC_CONFIG)"
 
 .PHONY: compendium-bootstrap
 compendium-bootstrap:

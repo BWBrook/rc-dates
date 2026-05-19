@@ -1,40 +1,38 @@
 [Date]
 
-Professor Marcos Martinón-Torres
-Editor-in-Chief
+Editors-in-Chief
 *Journal of Archaeological Science*
 
-Dear Professor Martinón-Torres and colleagues,
+Dear Professors Martinón-Torres and Nikita,
 
-I am pleased to submit our manuscript, *“Within-site sampling shapes radiocarbon ‘dates-as-data’ demography”*, for consideration as an Original Research Article in the *Journal of Archaeological Science*.
+I am pleased to submit our manuscript, *Within-site sampling influences radiocarbon “dates-as-data” demographic reconstructions*, for consideration as an Original Research Article in the *Journal of Archaeological Science*.
 
-Radiocarbon “dates-as-data” approaches are now a standard tool for reconstructing past human demography, with summed probability distributions (SPDs), kernel density estimates (KDEs), and related methods widely used in regional and global syntheses. These studies have generated influential narratives about Holocene population change, but they stand on an implicit assumption: that the way dates are distributed within sites is either benign or washed out by large sample sizes. In practice, field budgets, research questions and preservation conditions enforce strong within-site sampling rules, yet their impact on downstream demographic inference has never been systematically quantified.
+Radiocarbon “dates-as-data” approaches are now widely used to reconstruct past human demography. Much methodological attention has focused on summed probability distributions (SPDs), kernel density estimates (KDEs), calibration effects, binning, smoothing, taphonomy and research intensity. Our manuscript addresses a related but less quantified source of bias: which contexts within each site are selected for dating, and how many dates each site contributes to regional analysis.
 
-Our paper isolates this problem and shows that within-site sampling is a dominant lever in radiocarbon-based demography. We first use the AustArch database for Sahul to construct an empirical “all-dates” baseline, then impose a set of realistic within-site sampling rules (e.g. single-date “flag” samples, extreme contexts, moderate multitons). These generate SPDs, KDEs and frequency distributions that are explicitly *not* interpreted as demography, but used as mechanism diagrams grounded in real site-level structure. We then embed those patterns in a large simulation study where the true population trajectories (uniform, linear, exponential growth) are known.
+The issue is important because archaeological dating is rarely exhaustive. Field budgets, research aims, sample availability, preservation conditions and cultural resource management constraints often lead to small numbers of dates per site. Those choices can determine whether a regional dataset preserves within-site temporal span, or instead over-represents oldest contexts, youngest contexts, or one-date records. Large sample sizes do not necessarily remove this bias if the same within-site selection pattern is repeated across many sites.
 
-Methodologically, we introduce posterior-based likelihoods defined directly on calibrated radiocarbon posteriors, fit explicit growth models, and evaluate performance in terms of model-recovery accuracy, parameter bias and evidential strength (ΔAIC, using a one-standard-error rule for parsimonious model choice). This avoids the familiar “curve-on-curve” problems of SPD-based fitting and makes full use of calibrated uncertainty while remaining computationally straightforward.
+We examine the problem using an empirical-simulation design based on the AustArch database for Sahul. First, we construct an all-dates Holocene reference set and impose common within-site sampling rules, including all dates, random-*n*, oldest, youngest and bracketed strategies. These experiments show how such rules reshape SPDs, KDEs and frequency distributions without treating those curves as demographic reconstructions. We then embed the empirically derived site structures in simulations where the true population trajectories are known, allowing us to assess model-recovery accuracy, parameter bias and evidential strength under controlled conditions.
 
-The key findings are clear and practically important:
+Methodologically, the manuscript fits population-growth models directly to calibrated radiocarbon posteriors. This likelihood-based framework preserves calibrated uncertainty, avoids treating smoothed curves as the inferential object, and provides a transparent basis for model comparison using AIC and a one-standard-error rule.
 
-* Within-site rules matter more than the choice between SPD, KDE and FD. Under reasonable sampling, all three summarisation methods recover the correct growth model with high accuracy.
-* Extreme-focused and singleton rules perform badly even with large aggregated sample sizes, driving model-recovery accuracy down towards ~0.3–0.4, inducing large directional parameter biases, and collapsing ΔAIC margins.
-* Moderate, multi-date rules approximate the all-dates baseline, showing that a modest number of well-chosen determinations per site can deliver substantial gains in inferential reliability.
+The main findings are:
 
-We argue that many recent “method wars” around SPDs and calibration curves are mis-targeted: the more consequential decision is often which contexts get dated in the first place. We conclude with concrete recommendations for:
+* Within-site sampling has a larger effect on inference than the choice among SPD, KDE and FD summaries once curves are normalised and aligned.
+* Rules that preserve temporal span within sites, including all dates and random-*n* strategies with n ≥ 3, produce high model recovery, negligible parameter bias and strong model-selection support.
+* Oldest, youngest and random-1 rules reduce model-recovery accuracy, induce directional parameter bias and weaken evidential strength.
+* Regional syntheses should audit per-site date counts and test the sensitivity of results to sites with fewer than three determinations, especially in legacy datasets.
 
-* Study design: prioritising within-site sampling strategies that support robust inference rather than maximising site counts at minimal per-site investment.
-* Database curation: recording and exposing site-level sampling rules and date-selection criteria in large radiocarbon repositories.
-* Analytical practice: adopting likelihood-based population models on calibrated posteriors, with transparent model-selection rules, as a complement to SPD-based summaries.
+The manuscript provides practical guidance for archaeologists, database curators and modellers. For field design, we recommend prioritising well-spaced within-site determinations, ideally including oldest secure, youngest secure and intermediate contexts when exhaustive dating is not possible. For database curation, we recommend recording site-level date counts, stratigraphic span and date-selection criteria. For analysis, we recommend treating SPDs, KDEs and FDs as useful descriptive summaries while using likelihood-based models on calibrated posteriors for inference.
 
-We believe this work is well suited to JAS because our study tackles a central, widely used technique—radiocarbon-based demographic reconstruction—with a combination of empirical analysis, formal modelling and simulation, and it delivers immediately actionable guidance for archaeologists, database curators and modellers working across regions and periods.
+The manuscript is well suited to *Journal of Archaeological Science* because it addresses a widely used archaeological inference workflow with a combination of empirical analysis, formal modelling and simulation, and provides recommendations that are relevant to field sampling, data compilation and regional demographic analysis.
 
-The MS has not been published elsewhere and is not under consideration by any other journal. All authors have approved the submitted version and have no conflicts of interest to declare. All input data, simulation code and analysis scripts are openly available via the GitHub repository cited in the manuscript, ensuring full reproducibility.
+The manuscript has not been published elsewhere and is not under consideration by any other journal. All authors have approved the submitted version and have no conflicts of interest to declare. All input data, simulation code and analysis scripts are included via a zip file of code/data. These will be made publically available on a GitHub repository, and as a Zendo archive, once the manuscript is accepted, thereby supporting full reproducibility.
 
-Thank you for considering our work for publication in JAS. We hope you will find it suitable to send out for peer review.
+Thank you for considering our work for publication in *Journal of Archaeological Science*. We hope you will find it suitable for peer review.
 
 Yours sincerely,
 
-*Barry W. Brook*
+*Barry W. Brook*, on behalf of all authors
 School of Natural Sciences
 University of Tasmania
 Hobart, Australia

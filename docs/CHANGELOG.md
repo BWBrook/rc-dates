@@ -16,6 +16,53 @@ The format is based on Keep a Changelog.
   compendium and manuscript workflow from a fresh MacBook clone.
 
 ### Changed
+- Standardised manuscript terminology for within-site sampling rules so the
+  abstract, results, discussion, and figure captions consistently use the
+  declared descriptors (`all dates`, `random-*n*`, `oldest`, `youngest`, and
+  `bracketed`) rather than mixed umbrella labels.
+- Added a manuscript note that cultural resource management and development-led
+  contract archaeology can reinforce price- and timeline-driven minimal dating
+  practices.
+- Rewrote the Introduction's likelihood/AIC framing paragraph in plainer
+  language while preserving the same methodological content.
+- Removed the redundant "Aims and approach" subsection from the Introduction,
+  keeping the methodological-scope paragraph as the close of section 1.2.
+- Clarified that the Holocene-only curation was used to reduce long-term
+  taphonomic contrast while retaining a large regional dataset.
+- Removed a redundant AustArch tag explanation from the first curation pass in
+  the Methods because the sentence already identifies conventional and AMS
+  radiocarbon determinations.
+- Clarified that sites with fewer than five Holocene determinations, including
+  those with fewer than three, are excluded from the empirical reference set and
+  represented through down-sampled sparse-site scenarios instead.
+- Reduced repeated simulation-metric definitions in the Results by keeping the
+  formal definitions in Methods and making section 3.2 a concise results guide.
+- Reframed `random-*n*` in the Discussion as an unbiased simulation benchmark
+  and translated it into practical archaeological guidance: sample oldest,
+  youngest, and independent intermediate contexts to preserve within-site span.
+- Added guidance for regional syntheses using legacy datasets to audit per-site
+  date counts and test sensitivity to excluding, down-weighting, or separately
+  analysing sites with fewer than three determinations.
+- Reworded the database-reporting recommendations to use reader-friendly terms
+  such as date counts, large-scale data-compilation workflows, and vulnerable
+  one- or two-date records.
+- Added a Limitations note that Pleistocene applications likely face the same
+  within-site selection issue compounded by stronger taphonomic loss and
+  calibration/material uncertainty.
+- Expanded the Conclusions from two to three key findings, adding a regional
+  synthesis recommendation for auditing and sensitivity-testing sparse sites.
+- Lightly edited the manuscript prose and figure captions for scientific tone,
+  removing rhetorical phrasing, reducing contrastive constructions, and
+  improving clarity without changing the scientific content.
+- Reworked the draft JAS cover letter to align with the current manuscript
+  framing, update sampling-rule terminology, and remove older rhetorical
+  phrasing.
+- Added Park et al. (2026) to the manuscript framing as recent complementary
+  work on rescaling radiocarbon datasets to address inter-site sampling
+  heterogeneity.
+- Made the root `makedoc` helper targets work with either a repo-local
+  `makedoc` virtualenv or the host `python3`, so the same manuscript checks run
+  cleanly on both the MacBook and WSL checkouts.
 - Made the intermediate pipeline storage target fall back to CSV automatically
   on macOS, avoiding a local Arrow Parquet writer crash while preserving the
   existing Arrow preference on other platforms.

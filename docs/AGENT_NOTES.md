@@ -112,3 +112,72 @@
 - Re-ran `make compendium-test`, `make compendium-pipeline`, and
   `make compendium-report` successfully after the macOS intermediate-storage
   fallback; the pipeline completed 67 targets with 14 skipped.
+
+## 2026-05-18
+- Began the interactive co-author/comment pass by incorporating Sean's
+  recommended Park et al. (2026) citation into the manuscript where it
+  complements, but does not replace, the paper's within-site sampling focus:
+  inter-settlement sampling heterogeneity in the Introduction and rescaling as
+  a complementary database-level response in the Discussion.
+- Made the root `Makefile` manuscript helpers portable between the MacBook
+  `makedoc` checkout, which uses `.venv`, and the WSL checkout, which currently
+  runs the `makedoc` checks successfully with host `python3`.
+- Addressed a co-author comment on the abstract phrase "extreme-focused and
+  singleton rules" by standardising the manuscript's sampling-rule terminology
+  around the declared labels (`all dates`, `random-*n*`, `oldest`, `youngest`,
+  and `bracketed`) across the abstract, results, discussion, and Figure 2
+  caption.
+- Addressed a co-author comment on cultural resource management by adding a
+  concise sentence to the sampling-practice paragraph about development-led
+  contract work and price/timeline constraints, using an existing Codding et al.
+  (2024) citation already present in the bibliography.
+- Addressed a co-author comment that the Introduction's methodological pivot
+  paragraph was too technical by rewriting it in plainer language: smoothed
+  curves are descriptive, each calibrated date retains its uncertainty, and the
+  likelihood/AIC workflow asks which simple growth model best explains those
+  uncertain dates.
+- Addressed a co-author comment that the "Aims and approach" subsection was
+  redundant by deleting the aims list and leaving the methodological-scope
+  paragraph as the closing paragraph of section 1.2.
+- Addressed a co-author comment asking why the analysis used a Holocene-only
+  subset by adding a Methods sentence that this reduces long-term taphonomic
+  contrast while retaining a large regional dataset.
+- Addressed a co-author comment that the AustArch "radiocarbon" tag
+  explanation was redundant by deleting that sentence from the initial
+  screening pass.
+- Addressed a co-author comment about sites with fewer than three
+  determinations by clarifying that the >=5-date eligibility threshold creates a
+  well-dated empirical reference set and that sparse-site consequences are
+  assessed by down-sampling those better-dated sites into sparse analogues.
+- Addressed a co-author comment about repeated simulation-metric definitions by
+  leaving formal definitions in Methods section 2.2.4 and trimming Results
+  section 3.2/3.2.3 to concise interpretive signposting.
+- Addressed the remaining Discussion/Conclusion comments in one pass: explained
+  `random-*n*` as an unbiased simulation benchmark rather than a literal field
+  instruction, translated the practical guidance to oldest/youngest plus
+  intermediate contexts, added regional-synthesis sensitivity guidance for
+  sparse legacy sites, replaced confusing phrases such as "systematic
+  aggregation pipelines" and "pathological cases", clarified date-count
+  metadata, added a Pleistocene limitation note, and expanded the Conclusions to
+  include sparse-site auditing as a third key finding.
+- Ran the batched manuscript check after the comment pass with
+  `MAKEDOC_DIR=/home/bwbrook/work/makedoc make manuscript-check`; makedoc
+  validation, lint, reference audit, author metadata checks, and DOCX build all
+  passed with zero unknown citation keys.
+- Completed a light editorial pass over `manuscript/text/main.md` and
+  `manuscript/text/figures.md`, tightening wording for clarity, replacing
+  remaining rhetorical flourishes and contrastive phrasing, and confirming that
+  the manuscript text/figure sources contain no em dashes. The user-edited
+  `manuscript/submission/draft_cover_letter.md` was intentionally left alone.
+- Re-ran `MAKEDOC_DIR=/home/bwbrook/work/makedoc make manuscript-check` after
+  the editorial pass; makedoc validation, lint, reference audit, author metadata
+  checks, and DOCX build all passed with zero unknown citation keys.
+- Reworked `manuscript/submission/draft_cover_letter.md` to align with the
+  current manuscript: replaced older labels such as "singleton",
+  "extreme-focused", and "moderate multitons" with the current sampling-rule
+  terminology, removed the "method wars" framing, added sparse-site audit
+  guidance, and tightened the pitch for JAS.
+- Re-ran `MAKEDOC_DIR=/home/bwbrook/work/makedoc make manuscript-check` before
+  committing the revision bundle; makedoc validation, lint, reference audit,
+  author metadata checks, and the build target all passed with zero unknown
+  citation keys.
