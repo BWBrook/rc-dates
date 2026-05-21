@@ -24,6 +24,17 @@ The format is based on Keep a Changelog.
   compendium and manuscript workflow from a fresh MacBook clone.
 
 ### Changed
+- Moved the reproducibility-level Methods detail into the Supplementary
+  Information and replaced the main-text Methods with a condensed,
+  interpretation-focused version, bringing the manuscript to roughly 4,900
+  words from Abstract through Discussion.
+- Tightened the Introduction and Discussion after the Methods move, reducing
+  repeated framing and consolidating the implications, limitations, and
+  conclusions into a leaner JAS-style argument of roughly 3,500 words from
+  Abstract through Discussion.
+- Updated the Supplementary Information build step to run Pandoc citeproc with
+  the manuscript bibliography and JAS CSL, so Methods citations moved into the
+  SI render correctly.
 - Dated the JAS cover letter as 20 May 2026 and aligned its data/code
   availability wording with the submitted de-identified review package and
   planned public GitHub/Zenodo release on acceptance.

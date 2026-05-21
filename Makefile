@@ -71,12 +71,20 @@ submission-build: manuscript-build
 		-o "$(SUBMISSION_DIST)/title_page.docx"
 	pandoc manuscript/submission/highlights.md --standalone \
 		-o "$(SUBMISSION_DIST)/highlights.docx"
-	cd manuscript/text && pandoc supplementary.md --standalone --pdf-engine=xelatex \
-		--resource-path=.:../figures -V mainfont="DejaVu Serif" -V papersize=a4 \
+	cd manuscript/text && pandoc supplementary.md --standalone \
+		--from markdown+tex_math_dollars+tex_math_single_backslash --citeproc \
+		--bibliography ../../references/refs.yaml \
+		--csl ../../csl/journal-of-archaeological-science.csl \
+		--resource-path=.:../figures --pdf-engine=xelatex \
+		-V mainfont="DejaVu Serif" -V papersize=a4 \
 		-V geometry:margin=2.5cm \
 		-o ../submission/dist/supplementary_information.pdf
 	cd manuscript/text && pandoc supplementary.md --standalone \
-		--resource-path=.:../figures -o ../submission/dist/supplementary_information.docx
+		--from markdown+tex_math_dollars+tex_math_single_backslash --citeproc \
+		--bibliography ../../references/refs.yaml \
+		--csl ../../csl/journal-of-archaeological-science.csl \
+		--resource-path=.:../figures \
+		-o ../submission/dist/supplementary_information.docx
 	@if test -f "$(REVIEW_PACKAGE)"; then \
 		cp "$(REVIEW_PACKAGE)" "$(SUBMISSION_DIST)/rc_review_package.zip"; \
 	else \

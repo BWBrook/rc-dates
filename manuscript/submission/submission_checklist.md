@@ -16,7 +16,7 @@ Checked against the Journal of Archaeological Science Guide for Authors on 19 Ma
 
 - The JAS guide currently states single-anonymized review, so author details do not need to be stripped from the manuscript unless Editorial Manager requests it.
 - Enter the corresponding author's phone number in Editorial Manager if requested; the local title-page draft includes email and postal address but not a phone number.
-- The guide says article submissions should not normally exceed 5000 words excluding tables and references. The current manuscript remains longer than that, so either accept this as a methodological-paper exception or trim before submission.
+- The guide says article submissions should not normally exceed 5000 words excluding tables and references. After moving reproducibility-level Methods detail to the Supplementary Information and tightening the Introduction/Discussion, the current manuscript is approximately 3,500 words from Abstract through Discussion; re-check after final edits.
 - JAS research-data guidance asks for repository deposition and article citation/linking. The current manuscript states that the de-identified review package is supplied at submission and that the public GitHub/Zenodo DOI will be added on acceptance.
 - The journal requires a declaration if generative AI tools were used in manuscript preparation. A draft statement has been added before the references.
 - Confirm whether to opt in to a graphical abstract or Research Elements/Data in Brief co-submission; neither is required for the current packet.

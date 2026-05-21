@@ -201,10 +201,24 @@
   PDF/DOCX, title page PDF/DOCX, highlights DOCX, Supplementary Information
   PDF/DOCX, and the de-identified review package.
 - Cross-checked against the live JAS Guide for Authors. Important findings:
-  current JAS peer review is single-anonymized, editable source files are
-  required for submission (PDF alone is not an acceptable source file), and the
-  manuscript remains above the journal's usual 5,000-word article guidance.
+  current JAS peer review is single-anonymized and editable source files are
+  required for submission (PDF alone is not an acceptable source file). At this
+  point in the workflow, before the later Methods/Discussion tightening, the
+  manuscript remained above the journal's usual 5,000-word article guidance.
 - Ran `make submission-build` successfully and visually inspected rendered cover
   letter and Supplementary Information PDF pages via `pdftoppm`; also ran
   `make manuscript-check`, which passed with `Unknown keys: 0` and 13 unused
   bibliography keys reported as non-fatal.
+- First-pass word-count reduction moved the full reproducibility-level Methods
+  text into `manuscript/text/supplementary.md` as Supplementary Methods and
+  replaced the main Methods with a condensed design summary. This reduced the
+  manuscript from 5,937 to approximately 4,900 words from Abstract through
+  Discussion while preserving the details in the SI.
+- Updated `make submission-build` so the Supplementary Information render uses
+  citeproc with `references/refs.yaml` and the JAS CSL; `make submission-build`
+  and `make manuscript-check` both passed after the Methods move.
+- Tightened the Discussion and then sanity-checked the Introduction against the
+  leaner Methods and conclusions. The Discussion was consolidated from six
+  subsections to five, with repeated method-debate and implications material
+  compressed into a sharper JAS-style argument. The manuscript is now roughly
+  3,500 words from Abstract through Discussion.
