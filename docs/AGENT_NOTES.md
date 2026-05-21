@@ -222,3 +222,18 @@
   subsections to five, with repeated method-debate and implications material
   compressed into a sharper JAS-style argument. The manuscript is now roughly
   3,500 words from Abstract through Discussion.
+- Ran a final co-author-comment regression sanity pass after the manuscript
+  tightening. Confirmed that the earlier concerns remained addressed: sampling
+  descriptors stay aligned, the CRM/budget point remains, the technical
+  likelihood framing is still in plain language, sparse-site guidance remains
+  nuanced, and confusing phrases such as "pathological" or "best performing"
+  have not returned. Added a small parenthetical defining site-level date counts
+  for non-technical readers.
+- Reviewed the large diff from the fuller submission packet (`d04546d`) to the
+  tightened JAS version to check whether explanatory context had been cut too
+  aggressively. Most removed material was either moved into the Supplementary
+  Information or was safely redundant. Restored only small clarity points: made
+  `random-*n*` notation consistent, clarified that simulation intensities apply
+  to sub-sampling strategies, translated "precision around a biased estimator"
+  into plainer language, and reintroduced the compact point that smaller,
+  well-spaced site sequences can outperform larger edge-only/one-date datasets.

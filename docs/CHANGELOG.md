@@ -32,6 +32,11 @@ The format is based on Keep a Changelog.
   repeated framing and consolidating the implications, limitations, and
   conclusions into a leaner JAS-style argument of roughly 3,500 words from
   Abstract through Discussion.
+- Clarified the Discussion recommendation to define site-level date counts as
+  the number of radiocarbon determinations contributed by each site.
+- Restored a compact Discussion clarification that smaller, well-spaced site
+  sequences may be more informative than larger datasets dominated by
+  edge-only or one-date records.
 - Updated the Supplementary Information build step to run Pandoc citeproc with
   the manuscript bibliography and JAS CSL, so Methods citations moved into the
   SI render correctly.
