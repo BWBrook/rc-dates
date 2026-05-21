@@ -41,6 +41,7 @@ renv/sandbox/
 # output files
 outputs/
 dist/
+manuscript/submission/dist/
 
 /*.tar.gz
 /*.zip

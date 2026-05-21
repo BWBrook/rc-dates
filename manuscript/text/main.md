@@ -6,7 +6,7 @@ _Word count:_ ~6,000 (Abstract to Discussion)
 
 ## Abstract
 
-Radiocarbon “dates-as-data” is widely used to investigate past demographic and environmental change. Although many methodological issues have been examined over the last decade, the impact of within-site sampling decisions remains poorly quantified. Here we combine a Holocene subset of the AustArch database with simulations to measure how common archaeological field sampling at site level might affect summed probability distributions (SPD), kernel density estimates (KDE), and frequency distributions (FD) used for visualisation and demographic inference. We then apply a suite of date-subsampling patterns to either 50% or 100% of sites and use these results to parameterise simulations of synthetic population trajectories. Five within-site subsampling rules were used: all dates, random-*n* (n = 1, 3 or 5 dates), oldest, youngest, and bracketed (oldest + youngest). Simulations generated radiocarbon determinations under three growth models (uniform, linear, exponential), with site counts, per-site sample sizes, and age–error structure based on the dataset. Inference used likelihood-based methods fitted to calibrated posteriors, with model choice by Akaike’s Information Criterion (AIC). Performance was assessed by model-recovery accuracy, parameter bias, and evidential strength (ΔAIC after accounting for estimation uncertainty). The results show that: i) the all-dates and random-*n* strategies with n ≥ 3 consistently yield high model recovery (~0.9), negligible bias in growth parameters, and strong information-theoretic support, largely independent of intensity; ii) oldest, youngest, and random-1 rules degrade accuracy (~0.3–0.4), parameter estimates show large, directional biases, and ΔAIC margins shrink; and iii) once curves are normalised and aligned, differences among SPD, KDE, and FD are secondary to within-site sampling. We conclude that, given real-world constraints, sampling strategies that preserve as much temporal span within sites as possible are more informative than those using random-1, oldest, or youngest rules. When exhaustive dating is impossible, at least three well-spaced samples spanning the within-site sequence should be the minimum target for broader radiocarbon modelling. We also recommend publishing information on within-site parameters used in radiocarbon modelling to support interrogation of bias and uncertainty.
+Radiocarbon "dates-as-data" is widely used to investigate past demographic and environmental change, but the effect of within-site sampling decisions remains poorly quantified. We combine a Holocene subset of the AustArch database with simulations to test how common site-level sampling rules affect summed probability distributions (SPDs), kernel density estimates (KDEs), frequency distributions (FDs), and likelihood-based demographic inference. Five rules were evaluated: all dates, random-*n* (n = 1, 3 or 5), oldest, youngest, and bracketed (oldest + youngest), applied to either 50% or 100% of sites in empirical experiments and to 50%, 75% or 100% of sites in simulations. Simulated radiocarbon determinations were generated under uniform, linear, and exponential growth models, with site counts, per-site sample sizes, and age-error structure parameterised from AustArch. Inference used likelihoods fitted directly to calibrated posteriors, with model choice by Akaike's Information Criterion. All-dates and random-*n* strategies using three or more dates consistently produced high model recovery, negligible parameter bias, and strong model-selection support. Oldest, youngest, and random-1 rules reduced accuracy, induced directional bias, and weakened support for the preferred model. Once curves were normalised and aligned, differences among SPD, KDE, and FD summaries were secondary to within-site sampling. We conclude that radiocarbon modelling should prioritise temporal span within sites. When exhaustive dating is not possible, at least three well-spaced determinations spanning the site sequence should be the minimum target for broader demographic inference.
 
 ## Keywords
 
@@ -14,15 +14,15 @@ radiocarbon dating; archaeological demography; within-site sampling; dates-as-da
 
 ## Highlights
 
-- We quantify how within-site sampling rules reshape radiocarbon “dates-as-data” demography using an AustArch-parameterised empirical–simulation design.
+- We test how within-site sampling reshapes radiocarbon demographic inference.
 
-- Once curves are normalised, within-site sampling dominates smoother choice (SPD/KDE/FD) for accuracy, bias, and ΔAIC support.
+- AustArch-based simulations compare all-dates, random-n and biased rules.
 
-- Span-preserving strategies (all dates; random-*n* with n ≥ 3) produce high model recovery, negligible parameter bias, and strong evidential strength.
+- Three well-spaced dates per site recover growth models reliably.
 
-- The bracketed rule (oldest + youngest) aids model identification but induces predictable directional bias, while oldest, youngest, and random-1 rules perform poorly.
+- Oldest, youngest and random-1 rules cause biased, weak model selection.
 
-- We introduce a likelihood-based inferential framework operating directly on calibrated posteriors, yielding reproducible guidance for field design and analysis.
+- Posterior likelihoods separate demographic inference from smoothing choice.
 
 ## 1. Introduction
 
@@ -56,7 +56,7 @@ Our aim was to quantify how decisions on the within-site temporal distribution o
 
 2. Material and context filtering. To reduce laboratory and reservoir idiosyncrasies we accepted charcoal/wood, human bone collagen, and well-attested freshwater or marine shells from clearly anthropogenic contexts (e.g., rock shelters, middens, hearths, earth mounds). Ambiguous contexts and “unusable” designations were excluded. Duplicate laboratory codes indexing the same context/material were combined when compatible ($\chi^2$ test) using rcarbon::combine.
 
-3. Holocene restriction and site eligibility. Dates were first calibrated and then truncated to the Holocene window 11,650-651 cal BP; the upper bound avoids near-modern boundary effects. We kept only sites contributing ≥5 valid Holocene determinations, yielding a final reference set of 976 determinations from 116 sites (median 7.5 dates per site). This threshold excludes sparsely dated sites, including those with fewer than three determinations, from the empirical baseline because they do not contain enough within-site chronological information to benchmark what a sampling rule has removed. Their consequences are instead assessed experimentally by down-sampling the better-dated sites into sparse-site analogues, including random-1, random-3, oldest, youngest, and bracketed scenarios. Weighted-mean calibrated ages were computed for descriptive plots only; all inference used the full calibrated posteriors.
+3. Holocene restriction and site eligibility. Dates were first calibrated and then truncated to the Holocene window 11,650-651 cal BP; the upper bound avoids near-modern boundary effects. We kept only sites contributing five or more valid Holocene determinations, yielding a final reference set of 976 determinations from 116 sites (median 7.5 dates per site). This threshold excludes sparsely dated sites, including those with fewer than three determinations, from the empirical baseline because they do not contain enough within-site chronological information to benchmark what a sampling rule has removed. Their consequences are instead assessed experimentally by down-sampling the better-dated sites into sparse-site analogues, including random-1, random-3, oldest, youngest, and bracketed scenarios. Weighted-mean calibrated ages were computed for descriptive plots only; all inference used the full calibrated posteriors.
 
 All processing was done in R 4.5.1 [@rcoreteam2025LanguageEnvironmentStatistical], using the tidyverse for data handling and rcarbon [@crema2021InferenceLargeSets] for calibration. Random seeds were set at the start of each Monte Carlo block for reproducibility.
 
@@ -124,7 +124,7 @@ We evaluated sampling strategy performance using three metrics: i) *accuracy* �
 
 ### 2.3 Reproducibility
 
-All code, random seeds, and intermediate results (site subsets, index matrices, re-binned summaries, simulation outputs) are archived in a Zenodo release and GitHub repository, enabling full reproducibility checks without re-running calibration. High-volume simulation runs were parallelised on institutional high-performance computing.
+All code, random seeds, and intermediate results (site subsets, index matrices, re-binned summaries, simulation outputs) are included in the submitted de-identified review package, enabling full reproducibility checks without re-running calibration. On acceptance, these materials will be made publicly available through a GitHub repository and archived on Zenodo with a DOI. High-volume simulation runs were parallelised on institutional high-performance computing.
 
 ## 3. Results
 
@@ -158,7 +158,7 @@ The oldest and youngest strategies again perform poorly. The oldest rule collaps
 
 ### 3.3 Synthesis
 
-Taken together, the empirical (Fig. 2) and simulation (Figs 3–5) results clarify the mechanism visible in the AustArch reference dataset (Fig. 1). First, after normalisation, the choice among SPD, KDE, and FD smoothers is less important than what is dated within sites. Second, site coverage matters, but it cannot compensate for a poor within-site rule: forcing every site into oldest, youngest, or random-1 regimes reduces both accuracy and confidence, and induces large, directional parameter biases. Third, the efficient approach in resource-constrained settings is random-*n* with n ≥ 3, as this preserves within-site span, achieves high model recovery, yields negligible bias in slopes and rates, and maintains strong ΔAIC margins. The bracketed rule is an acceptable compromise when only two dates per site are feasible, and it does improve growth-model identification relative to random-1, but it introduces predictable bias that grows with intensity and should be acknowledged or corrected.
+Taken together, the empirical (Fig. 2) and simulation (Figs 3–5) results clarify the mechanism visible in the AustArch reference dataset (Fig. 1). First, after normalisation, the choice among SPD, KDE, and FD smoothers is less important than what is dated within sites. Second, site coverage matters, but it cannot compensate for a poor within-site rule: forcing every site into oldest, youngest, or random-1 regimes reduces both accuracy and confidence, and induces large, directional parameter biases. Third, the efficient approach in resource-constrained settings is random-*n* using three or more dates, as this preserves within-site span, achieves high model recovery, yields negligible bias in slopes and rates, and maintains strong ΔAIC margins. The bracketed rule is an acceptable compromise when only two dates per site are feasible, and it does improve growth-model identification relative to random-1, but it introduces predictable bias that grows with intensity and should be acknowledged or corrected.
 
 ## 4. Discussion
 
@@ -208,11 +208,11 @@ In summary, “dates-as-data” demography depends on the within-site decisions 
 
 ## Authors' contributions
 
-All authors co-designed or co-contributed to the ideas behind the study. R.W. collected the data. B.W.B., R.W. and C.N.J. planned the paper. L.A.Y. and B.W.B. did the coding and data analysis. B.W.B. wrote the full draft, with methods contributions from L.A.Y., and B.W.B. and L.A.Y. prepared the display items. All authors provided input into the manuscript and agree to be held accountable for the content.
+CRediT author statement: B.W.B.: Conceptualization, Methodology, Software, Formal analysis, Visualization, Writing - original draft, Writing - review and editing, Project administration. R.W.: Conceptualization, Data curation, Writing - review and editing. C.N.J.: Conceptualization, Writing - review and editing. A.N.W.: Conceptualization, Resources, Writing - review and editing. S.U.: Conceptualization, Resources, Writing - review and editing. L.A.Y.: Methodology, Software, Formal analysis, Visualization, Writing - review and editing. All authors approved the submitted version and agree to be accountable for the content.
 
 ## Data accessibility
 
-All input data, R code, and workflows required for full replication are available at [BWBrook/rc-dates](https://github.com/BWBrook/rc-dates). A versioned archival snapshot is deposited on Zenodo: [add link].
+For initial review, all input data, R code, and workflows required for full replication are provided in the submitted de-identified code/data package (`rc_review_package.zip`). On acceptance, these materials will be made publicly available through a GitHub repository and archived on Zenodo with a DOI.
 
 ## Competing interests
 
@@ -221,5 +221,9 @@ None to declare.
 ## Funding
 
 This research was supported by the ARC Centre of Excellence for Australian Biodiversity and Heritage [project number CE170100015]
+
+## Declaration of generative AI and AI-assisted technologies in the manuscript preparation process
+
+During preparation of this work, the authors used OpenAI ChatGPT/Codex to assist with manuscript-source conversion, citation tokenisation, reproducible workflow checks, and language-editing suggestions. After using these tools, the authors reviewed and edited the content as needed and take full responsibility for the content of the published article.
 
 ## References

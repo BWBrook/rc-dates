@@ -1,9 +1,13 @@
 SHELL := /bin/bash
 
-MAKEDOC_DIR ?= /Users/bwbrook/work/makedoc
+DEFAULT_MAKEDOC_DIR := $(firstword $(wildcard /home/bwbrook/work/makedoc) $(wildcard /Users/bwbrook/work/makedoc))
+MAKEDOC_DIR ?= $(if $(DEFAULT_MAKEDOC_DIR),$(DEFAULT_MAKEDOC_DIR),/Users/bwbrook/work/makedoc)
 MAKEDOC_CONFIG := $(abspath settings/build.yaml)
 MAKEDOC_VENV_BIN ?= $(MAKEDOC_DIR)/.venv/bin
 MAKEDOC_PATH = $(if $(wildcard $(MAKEDOC_VENV_BIN)/python3),$(MAKEDOC_VENV_BIN):$(PATH),$(PATH))
+MAKEDOC_OUTPUT_DIR ?= $(MAKEDOC_DIR)/dist/rc-dates
+SUBMISSION_DIST ?= manuscript/submission/dist
+REVIEW_PACKAGE ?= /home/bwbrook/papers/de_identified_repos/rc_review_package.zip
 
 .PHONY: help
 help:
@@ -14,6 +18,7 @@ help:
 	@echo "  make manuscript-check      Run strict makedoc checks and build"
 	@echo "  make manuscript-build      Build DOCX/PDF outputs"
 	@echo "  make manuscript-profile    Show resolved makedoc profile"
+	@echo "  make submission-build      Build manuscript, SI, cover letter and packet files"
 	@echo
 	@echo "R compendium:"
 	@echo "  make compendium-bootstrap  Restore/install R dependencies"
@@ -44,6 +49,39 @@ manuscript-build: makedoc-preflight
 .PHONY: manuscript-profile
 manuscript-profile: makedoc-preflight
 	@PATH="$(MAKEDOC_PATH)" $(MAKE) -C "$(MAKEDOC_DIR)" profile-show CONFIG="$(MAKEDOC_CONFIG)"
+
+.PHONY: submission-build
+submission-build: manuscript-build
+	@command -v pandoc >/dev/null || { echo "Missing pandoc"; exit 1; }
+	@command -v xelatex >/dev/null || { echo "Missing xelatex"; exit 1; }
+	@mkdir -p "$(SUBMISSION_DIST)"
+	@test -f "$(MAKEDOC_OUTPUT_DIR)/manuscript.pdf" || { echo "Missing makedoc PDF: $(MAKEDOC_OUTPUT_DIR)/manuscript.pdf"; exit 1; }
+	@test -f "$(MAKEDOC_OUTPUT_DIR)/manuscript.docx" || { echo "Missing makedoc DOCX: $(MAKEDOC_OUTPUT_DIR)/manuscript.docx"; exit 1; }
+	cp "$(MAKEDOC_OUTPUT_DIR)/manuscript.pdf" "$(SUBMISSION_DIST)/manuscript.pdf"
+	cp "$(MAKEDOC_OUTPUT_DIR)/manuscript.docx" "$(SUBMISSION_DIST)/manuscript.docx"
+	pandoc manuscript/submission/draft_cover_letter.md --standalone --pdf-engine=xelatex \
+		-V mainfont="DejaVu Serif" -V papersize=a4 -V geometry:margin=2.5cm \
+		-o "$(SUBMISSION_DIST)/cover_letter.pdf"
+	pandoc manuscript/submission/draft_cover_letter.md --standalone \
+		-o "$(SUBMISSION_DIST)/cover_letter.docx"
+	pandoc manuscript/submission/title_page.md --standalone --pdf-engine=xelatex \
+		-V mainfont="DejaVu Serif" -V papersize=a4 -V geometry:margin=2.5cm \
+		-o "$(SUBMISSION_DIST)/title_page.pdf"
+	pandoc manuscript/submission/title_page.md --standalone \
+		-o "$(SUBMISSION_DIST)/title_page.docx"
+	pandoc manuscript/submission/highlights.md --standalone \
+		-o "$(SUBMISSION_DIST)/highlights.docx"
+	cd manuscript/text && pandoc supplementary.md --standalone --pdf-engine=xelatex \
+		--resource-path=.:../figures -V mainfont="DejaVu Serif" -V papersize=a4 \
+		-V geometry:margin=2.5cm \
+		-o ../submission/dist/supplementary_information.pdf
+	cd manuscript/text && pandoc supplementary.md --standalone \
+		--resource-path=.:../figures -o ../submission/dist/supplementary_information.docx
+	@if test -f "$(REVIEW_PACKAGE)"; then \
+		cp "$(REVIEW_PACKAGE)" "$(SUBMISSION_DIST)/rc_review_package.zip"; \
+	else \
+		echo "Warning: review package not found: $(REVIEW_PACKAGE)"; \
+	fi
 
 .PHONY: compendium-bootstrap
 compendium-bootstrap:

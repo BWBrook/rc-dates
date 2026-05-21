@@ -6,6 +6,14 @@ The format is based on Keep a Changelog.
 
 ## [Unreleased]
 ### Added
+- Added submission-facing manuscript files for the JAS packet: a separate
+  highlights file, title-page draft, Supplementary Information source with two
+  SI figures and captions, and a submission checklist based on the live JAS
+  Guide for Authors.
+- Added a `submission-build` Make target that regenerates the manuscript
+  PDF/DOCX, cover letter, title page, highlights DOCX, Supplementary
+  Information PDF/DOCX, and copies the de-identified review package into the
+  local submission output folder.
 - Added a root `Makefile` with MacBook-friendly helper targets for the
   manuscript workflow (`manuscript-validate`, `manuscript-check`,
   `manuscript-build`, `manuscript-profile`) and the core R compendium checks.
@@ -16,6 +24,20 @@ The format is based on Keep a Changelog.
   compendium and manuscript workflow from a fresh MacBook clone.
 
 ### Changed
+- Dated the JAS cover letter as 20 May 2026 and aligned its data/code
+  availability wording with the submitted de-identified review package and
+  planned public GitHub/Zenodo release on acceptance.
+- Shortened the manuscript abstract and highlights to better match JAS
+  submission constraints, including keeping highlight bullets within the
+  85-character limit.
+- Replaced public GitHub/Zenodo placeholder wording in the manuscript with
+  review-package wording and added a generative-AI disclosure statement before
+  the references.
+- Updated the manuscript author-contribution section to a CRediT-style author
+  statement.
+- Made the root `Makefile` auto-detect the local `makedoc` checkout on WSL or
+  macOS and ignore generated submission outputs under
+  `manuscript/submission/dist/`.
 - Standardised manuscript terminology for within-site sampling rules so the
   abstract, results, discussion, and figure captions consistently use the
   declared descriptors (`all dates`, `random-*n*`, `oldest`, `youngest`, and

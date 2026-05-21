@@ -181,3 +181,30 @@
   committing the revision bundle; makedoc validation, lint, reference audit,
   author metadata checks, and the build target all passed with zero unknown
   citation keys.
+
+## 2026-05-19
+- Prepared the manuscript for a JAS submission-readiness pass: dated the cover
+  letter as 20 May 2026, changed public GitHub/Zenodo placeholder wording to
+  match the de-identified `rc_review_package.zip` review package, and added a
+  generative-AI declaration before the references.
+- Added submission-facing support files under `manuscript/submission/`: a
+  separate highlights file with five bullets under the 85-character JAS limit,
+  a title-page draft, and a JAS submission checklist noting current Guide for
+  Authors requirements and remaining human checks.
+- Added `manuscript/text/supplementary.md` with draft SI captions for
+  `SI_data_generating_distributions.png` and
+  `SI_dates_per_site_in_austarch_holocene.png`, plus a short likelihood-
+  sensitivity note to support the main-text references to Supplementary
+  Information.
+- Added `make submission-build`, which builds/copies local submission outputs
+  into ignored `manuscript/submission/dist/`: manuscript PDF/DOCX, cover letter
+  PDF/DOCX, title page PDF/DOCX, highlights DOCX, Supplementary Information
+  PDF/DOCX, and the de-identified review package.
+- Cross-checked against the live JAS Guide for Authors. Important findings:
+  current JAS peer review is single-anonymized, editable source files are
+  required for submission (PDF alone is not an acceptable source file), and the
+  manuscript remains above the journal's usual 5,000-word article guidance.
+- Ran `make submission-build` successfully and visually inspected rendered cover
+  letter and Supplementary Information PDF pages via `pdftoppm`; also ran
+  `make manuscript-check`, which passed with `Unknown keys: 0` and 13 unused
+  bibliography keys reported as non-fatal.

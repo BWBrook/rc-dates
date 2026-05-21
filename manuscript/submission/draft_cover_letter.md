@@ -1,6 +1,6 @@
-[Date]
+20 May 2026
 
-Editors-in-Chief
+Editors-in-Chief\
 *Journal of Archaeological Science*
 
 Dear Professors Martinón-Torres and Nikita,
@@ -18,7 +18,7 @@ Methodologically, the manuscript fits population-growth models directly to calib
 The main findings are:
 
 * Within-site sampling has a larger effect on inference than the choice among SPD, KDE and FD summaries once curves are normalised and aligned.
-* Rules that preserve temporal span within sites, including all dates and random-*n* strategies with n ≥ 3, produce high model recovery, negligible parameter bias and strong model-selection support.
+* Rules that preserve temporal span within sites, including all dates and random-*n* strategies using three or more dates, produce high model recovery, negligible parameter bias and strong model-selection support.
 * Oldest, youngest and random-1 rules reduce model-recovery accuracy, induce directional parameter bias and weaken evidential strength.
 * Regional syntheses should audit per-site date counts and test the sensitivity of results to sites with fewer than three determinations, especially in legacy datasets.
 
@@ -26,14 +26,14 @@ The manuscript provides practical guidance for archaeologists, database curators
 
 The manuscript is well suited to *Journal of Archaeological Science* because it addresses a widely used archaeological inference workflow with a combination of empirical analysis, formal modelling and simulation, and provides recommendations that are relevant to field sampling, data compilation and regional demographic analysis.
 
-The manuscript has not been published elsewhere and is not under consideration by any other journal. All authors have approved the submitted version and have no conflicts of interest to declare. All input data, simulation code and analysis scripts are included via a zip file of code/data. These will be made publically available on a GitHub repository, and as a Zendo archive, once the manuscript is accepted, thereby supporting full reproducibility.
+The manuscript has not been published elsewhere and is not under consideration by any other journal. All authors have approved the submitted version and have no conflicts of interest to declare. All input data, simulation code and analysis scripts are included in the submitted de-identified code/data package (`rc_review_package.zip`). On acceptance, these materials will be made publicly available through a GitHub repository and archived on Zenodo with a DOI, thereby supporting full reproducibility.
 
 Thank you for considering our work for publication in *Journal of Archaeological Science*. We hope you will find it suitable for peer review.
 
 Yours sincerely,
 
-*Barry W. Brook*, on behalf of all authors
-School of Natural Sciences
-University of Tasmania
-Hobart, Australia
+*Barry W. Brook*, on behalf of all authors\
+School of Natural Sciences\
+University of Tasmania\
+Hobart, Australia\
 Email: barry.brook@utas.edu.au
