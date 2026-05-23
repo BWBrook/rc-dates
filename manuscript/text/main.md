@@ -15,13 +15,9 @@ radiocarbon dating; archaeological demography; within-site sampling; dates-as-da
 ## Highlights
 
 - We test how within-site sampling reshapes radiocarbon demographic inference.
-
-- AustArch-based simulations compare all-dates, random-*n* and biased rules.
-
+- AustArch database-anchored simulations compare all-dates, random-n and biased rules.
 - Three well-spaced dates per site recover growth models reliably.
-
 - Oldest, youngest and random-1 rules cause biased, weak model selection.
-
 - Posterior likelihoods separate demographic inference from smoothing choice.
 
 ## 1. Introduction
@@ -44,7 +40,7 @@ Our inferential approach keeps the uncertainty attached to each radiocarbon dete
 
 ## 2. Methods
 
-Full filtering, calibration, likelihood, and simulation details are provided in the Supplementary Methods; the code and intermediate data objects are supplied in the de-identified review package. Here we summarise the design choices needed to interpret the results.
+Full filtering, calibration, likelihood, and simulation details for reproducibility are provided in the Supplementary Methods; the code and intermediate data objects are supplied as a Zendo bundle (details to confirm after review). Here we summarise the design choices needed to interpret the results.
 
 ### 2.1 Empirical reference set and descriptive curves
 
@@ -66,7 +62,7 @@ Inference was based on maximum-likelihood fitting to calibrated posteriors rathe
 
 ### 2.4 Reproducibility
 
-All analyses were run in R using rcarbon for calibration and standard tidyverse workflows for data handling [@crema2021InferenceLargeSets; @rcoreteam2025LanguageEnvironmentStatistical]. The submitted de-identified review package contains the input data, code, random seeds, and intermediate simulation outputs needed to reproduce the workflow without re-running the most expensive calibration steps. On acceptance, these materials will be released through a public GitHub repository and archived on Zenodo with a DOI.
+All analyses were run in R using rcarbon for calibration and standard tidyverse workflows for data handling [@crema2021InferenceLargeSets; @rcoreteam2025LanguageEnvironmentStatistical]. The review package contains the input data, code, random seeds, and intermediate simulation outputs needed to reproduce the workflow without re-running the most expensive calibration steps. On acceptance, these materials will be released through a public GitHub repository and archived on Zenodo with a DOI.
 
 ## 3. Results
 
