@@ -136,7 +136,7 @@ CRediT author statement: B.W.B.: Conceptualization, Methodology, Software, Forma
 
 ## Data accessibility
 
-For peer review, the data and code supporting this study will be supplied in a de-identified repository archive (`rc_review_package.zip`) available through a private-for-review link: [PRIVATE_REVIEW_LINK]. The associated reserved DOI is [RESERVED_DOI]. The archive includes the input data, R code, tests, `{targets}` workflow, and `renv` lockfile needed to inspect and rerun the code-level analysis package outside GitHub; final high-volume simulation artefacts and provenance notes will be locked before repository upload. The repository record will be made public after acceptance.
+For peer review, the data and code supporting this study will be supplied in a de-identified repository archive (`rc_review_package.zip`) available through a private-for-review link: [PRIVATE_REVIEW_LINK]. The associated reserved DOI is [RESERVED_DOI]. The archive includes the de-identified input data, filtered reference table, R code, tests, `{targets}` workflow, and `renv` lockfile needed to inspect and rerun the code-level analysis package outside GitHub; its reviewer notes distinguish the fast verification path from the high-volume production simulations. The repository record will be made public after acceptance.
 
 ## Competing interests
 

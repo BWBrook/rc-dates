@@ -5,6 +5,18 @@ population growth trends in radiocarbon dates of archaeological sites.
 
 ## Quickstart
 
+The default project workflow is a development/demo compendium, not the
+de-identified reviewer archive. For anonymous peer review, build the minimal
+code/data package with:
+
+```sh
+R_PROFILE_USER=/dev/null Rscript scripts/build_review_package.R
+```
+
+That package rewrites the manifest to use a de-identified input table and omits
+manuscript, report, reference, docs, source-control, and author-identifying
+surfaces.
+
 In RStudio Console:
 
 ```r
@@ -24,8 +36,8 @@ pak::pkg_install(project_dependencies(include_optional = TRUE))
 
 ## What’s inside
 
-- Reproducible pipeline (`_targets.R`) with ingest → validation → calibration → summaries →
-  grouped and site-level figures → simulation mode selection (`demo`, `precomputed`, `none`) → report.
+- Reproducible pipeline (`_targets.R`) with ingest -> validation -> calibration -> summaries ->
+  grouped and site-level figures -> simulation mode selection (`demo`, `precomputed`, `none`) -> report.
 - Modular helpers in `R/` with explicit imports; legacy scripts archived in `scripts/legacy/`.
 - Config file `config/config.yml` with calibration, branching, report and simulations knobs.
 - Example report `reports/paper.qmd` reads targets directly and now distinguishes generated demo simulations from precomputed summaries.

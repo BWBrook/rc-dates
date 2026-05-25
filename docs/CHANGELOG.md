@@ -11,6 +11,8 @@ The format is based on Keep a Changelog.
 - Added reviewer-facing `REPRODUCE.md` notes to the de-identified review
   package, including the fast verification path and simulation artefact status.
 - Added a Module 3 completion note for the text-code-caption alignment pass.
+- Added a scripted Module 4 review-package builder and completion note for the
+  de-identified code/data archive lock.
 - Added submission-facing manuscript files for the JAS packet: a separate
   highlights file, title-page draft, Supplementary Information source with two
   SI figures and captions, and a submission checklist based on the live JAS
@@ -29,6 +31,10 @@ The format is based on Keep a Changelog.
   compendium and manuscript workflow from a fresh MacBook clone.
 
 ### Changed
+- Rebuilt the de-identified review package around a trimmed
+  `austarch_input_deidentified.csv` input table and explicit high-volume
+  simulation provenance notes, removing the original free-text raw-data source
+  and notes fields from the reviewer archive.
 - Reconciled manuscript, Supplementary Information, captions, and title-page
   metadata with the active code paths for Module 3 pre-submission review items:
   weighted-mean calibrated ages, 500-20,000 yr BP initial screening,

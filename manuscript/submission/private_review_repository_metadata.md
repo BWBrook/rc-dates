@@ -30,9 +30,9 @@ Archive SHA256:
 
 ## Description
 
-This de-identified archive contains the input data, R code, tests, `{targets}` workflow, and pinned `renv` environment needed to review and rerun the analysis-code package associated with the manuscript. It excludes manuscript sources, author-identifying project documentation, reports, reference-management files, and repository metadata that are not needed for code review.
+This de-identified archive contains the de-identified input data, filtered reference table, R code, tests, `{targets}` workflow, and pinned `renv` environment needed to review and rerun the analysis-code package associated with the manuscript. It excludes manuscript sources, author-identifying project documentation, reports, reference-management files, and repository metadata that are not needed for code review.
 
-The archive is intended to be run outside GitHub. Its reviewer-facing instructions describe a fast verification path and the status of high-volume simulation artefacts used by the manuscript.
+The archive is intended to be run outside GitHub. Its reviewer-facing instructions describe a fast verification path and the scope of the high-volume production simulations used by the manuscript.
 
 ## Keywords
 
@@ -46,4 +46,3 @@ Confirm the final repository licence at upload. The current archive includes an 
 
 - Manuscript DOI: [ARTICLE_DOI_AFTER_ACCEPTANCE]
 - Relationship after acceptance: IsSupplementTo
-

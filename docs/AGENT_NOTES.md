@@ -1,5 +1,17 @@
 # AGENT_NOTES
 
+## 2026-05-25
+- Module 4 review-package lock: added `scripts/build_review_package.R` as the
+  repeatable de-identification builder, rebuilt the review package around a
+  trimmed `austarch_input_deidentified.csv` input table, retained the filtered
+  976-row reference set for audit, and added package-side
+  `SIMULATION_PROVENANCE.md` to separate the fast verification path from the
+  unavailable high-volume production simulation outputs.
+- Local package restore/tests were not run under the intended reviewer runtime
+  because this shell uses R 4.6.0 and no R 4.5.x binary is installed; validation
+  therefore used structural parsing, content/de-identification scans, zip
+  inspection, and the manuscript `submission-build` / `manuscript-check` gates.
+
 ## 2026-05-23
 - Module 2 reproducibility/de-identification pass: replaced promissory
   GitHub/Zenodo-on-acceptance language with a private-for-review link plus
