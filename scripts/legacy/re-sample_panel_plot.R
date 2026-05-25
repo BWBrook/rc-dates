@@ -13,9 +13,9 @@ p_youngest_50 <- plot_rebin(rebin_summary_df(read_csv("data/simulation_summary_y
 p_bracketed_50 <- plot_rebin(rebin_summary_df(read_csv("data/simulation_summary_bracketed_50.csv")), 
                           show_xlabel=F, show_ylabel=T, annot_label="Bracketed")
 p_singleton_50 <- plot_rebin(rebin_summary_df(read_csv("data/simulation_summary_singleton_50.csv")), 
-                          show_xlabel=F, show_ylabel=T, annot_label="Singleton")
+                          show_xlabel=F, show_ylabel=T, annot_label="random-1")
 p_multiton_50 <- plot_rebin(rebin_summary_df(read_csv("data/simulation_summary_multiton_50.csv")), 
-                          show_xlabel=T, show_ylabel=T, annot_label="Multiton")
+                          show_xlabel=T, show_ylabel=T, annot_label="random-5")
 p_oldest_100 <- plot_rebin(rebin_summary_df(read_csv("data/simulation_summary_oldest_100.csv")), 
                           show_xlabel=F, show_ylabel=F, annot_label="Oldest")
 p_youngest_100 <- plot_rebin(rebin_summary_df(read_csv("data/simulation_summary_youngest_100.csv")), 
@@ -23,9 +23,9 @@ p_youngest_100 <- plot_rebin(rebin_summary_df(read_csv("data/simulation_summary_
 p_bracketed_100 <- plot_rebin(rebin_summary_df(read_csv("data/simulation_summary_bracketed_100.csv")), 
                           show_xlabel=F, show_ylabel=F, annot_label="Bracketed")
 p_singleton_100 <- plot_rebin(rebin_summary_df(read_csv("data/simulation_summary_singleton_100.csv")), 
-                          show_xlabel=F, show_ylabel=F, annot_label="Singleton")
+                          show_xlabel=F, show_ylabel=F, annot_label="random-1")
 p_multiton_100 <- plot_rebin(rebin_summary_df(read_csv("data/simulation_summary_multiton_100.csv")), 
-                          show_xlabel=T, show_ylabel=F, annot_label="Multiton")
+                          show_xlabel=T, show_ylabel=F, annot_label="random-5")
 # 1. Build two header “plots” that contain only the text
 p_hdr1 <- ggplot() +
   annotate("text", x = 0.5, y = 0,

@@ -87,4 +87,4 @@ dev.off()
 
 # Create individual plot for combined panel plot
 plot_rebin(rebin_summary_df(read_csv("data/simulation_summary_multiton_50.csv")), 
-           show_xlabel=T, show_ylabel=T, annot_label="Multiton")
+           show_xlabel=T, show_ylabel=T, annot_label="random-5")

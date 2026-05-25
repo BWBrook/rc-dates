@@ -10,6 +10,7 @@ The format is based on Keep a Changelog.
   private-for-review DOI deposit prior to submission.
 - Added reviewer-facing `REPRODUCE.md` notes to the de-identified review
   package, including the fast verification path and simulation artefact status.
+- Added a Module 3 completion note for the text-code-caption alignment pass.
 - Added submission-facing manuscript files for the JAS packet: a separate
   highlights file, title-page draft, Supplementary Information source with two
   SI figures and captions, and a submission checklist based on the live JAS
@@ -28,6 +29,12 @@ The format is based on Keep a Changelog.
   compendium and manuscript workflow from a fresh MacBook clone.
 
 ### Changed
+- Reconciled manuscript, Supplementary Information, captions, and title-page
+  metadata with the active code paths for Module 3 pre-submission review items:
+  weighted-mean calibrated ages, 500-20,000 yr BP initial screening,
+  posterior-overlap Holocene retention, Marine20/no-Delta R caveats, all-dates
+  simulation references, Figure 2/legacy provenance labels, and
+  CRediT/affiliation wording.
 - Updated the manuscript, Supplementary Information, cover letter, and
   submission checklist to use private-for-review link/reserved-DOI placeholders
   and to avoid claiming that unfinished high-volume simulation artefacts are

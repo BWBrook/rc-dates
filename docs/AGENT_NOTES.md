@@ -12,6 +12,12 @@
 - Fresh-restore smoke testing confirmed that the de-identified archive needs the
   documented R 4.5.x runtime; the local default R 4.6.0 path hits the known
   pinned-source `S7` compile failure before tests can run.
+- Module 3 text-code-caption alignment pass: reconciled weighted means versus
+  medians, the 500-20,000 radiocarbon-year initial screen, posterior-overlap
+  Holocene retention, Marine20/no-Delta R wording, all-dates simulation
+  references, Figure 2 labels and legacy provenance labels, CRediT dashes, and
+  the title-page affiliation typo identified in the independent pre-submission
+  review.
 
 ## 2026-05-18
 - Investigated the failing GitHub Actions `compendium-ci / tests` run on
