@@ -29,7 +29,7 @@ The manuscript provides practical guidance for archaeologists, database curators
 
 The manuscript is well suited to *Journal of Archaeological Science* because it addresses a widely used archaeological inference workflow with a combination of empirical analysis, formal modelling and simulation, and provides recommendations that are relevant to field sampling, data compilation and regional demographic analysis.
 
-The manuscript has not been published elsewhere and is not under consideration by any other journal. All authors have approved the submitted version and have no conflicts of interest to declare. All input data, simulation code and analysis scripts are included in the submitted code/data package (`rc_review_package.zip`). On acceptance, these materials will be made publicly available through a GitHub repository and archived on Zenodo with a DOI, thereby supporting full reproducibility.
+The manuscript has not been published elsewhere and is not under consideration by any other journal. All authors have approved the submitted version and have no conflicts of interest to declare. A de-identified code/data package (`rc_review_package.zip`) will be supplied through a private-for-review repository link with a reserved DOI before submission. The package is designed to support reproducibility review outside GitHub, and the repository record will be made public after acceptance.
 
 Thank you for considering our work for publication in *Journal of Archaeological Science*. We hope you will find it suitable for peer review.
 

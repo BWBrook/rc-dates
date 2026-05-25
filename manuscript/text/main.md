@@ -40,7 +40,7 @@ Our inferential approach keeps the uncertainty attached to each radiocarbon dete
 
 ## 2. Methods
 
-Full filtering, calibration, likelihood, and simulation details for reproducibility are provided in the Supplementary Methods; the code and intermediate data objects are supplied as a Zendo bundle (details to confirm after review). Here we summarise the design choices needed to interpret the results.
+Full filtering, calibration, likelihood, and simulation details for reproducibility are provided in the Supplementary Methods; the code and data package will be supplied through a de-identified private-for-review repository record with a reserved DOI before submission. Here we summarise the design choices needed to interpret the results.
 
 ### 2.1 Empirical reference set and descriptive curves
 
@@ -62,7 +62,7 @@ Inference was based on maximum-likelihood fitting to calibrated posteriors rathe
 
 ### 2.4 Reproducibility
 
-All analyses were run in R using rcarbon for calibration and standard tidyverse workflows for data handling [@crema2021InferenceLargeSets; @rcoreteam2025LanguageEnvironmentStatistical]. The review package contains the input data, code, random seeds, and intermediate simulation outputs needed to reproduce the workflow without re-running the most expensive calibration steps. On acceptance, these materials will be released through a public GitHub repository and archived on Zenodo with a DOI.
+All analyses were run in R using rcarbon for calibration and standard tidyverse workflows for data handling [@crema2021InferenceLargeSets; @rcoreteam2025LanguageEnvironmentStatistical]. The review archive contains the input data, analysis code, tests, `{targets}` workflow, and pinned `renv` environment needed to inspect and rerun the code-level analysis package outside GitHub. The final repository record will include the locked review archive, private review link, and reserved DOI before submission, and will be made public after acceptance.
 
 ## 3. Results
 
@@ -136,7 +136,7 @@ CRediT author statement: B.W.B.: Conceptualization, Methodology, Software, Forma
 
 ## Data accessibility
 
-For initial review, all input data, R code, and workflows required for full replication are provided in the submitted de-identified code/data package (`rc_review_package.zip`). On acceptance, these materials will be made publicly available through a GitHub repository and archived on Zenodo with a DOI.
+For peer review, the data and code supporting this study will be supplied in a de-identified repository archive (`rc_review_package.zip`) available through a private-for-review link: [PRIVATE_REVIEW_LINK]. The associated reserved DOI is [RESERVED_DOI]. The archive includes the input data, R code, tests, `{targets}` workflow, and `renv` lockfile needed to inspect and rerun the code-level analysis package outside GitHub; final high-volume simulation artefacts and provenance notes will be locked before repository upload. The repository record will be made public after acceptance.
 
 ## Competing interests
 

@@ -1,5 +1,18 @@
 # AGENT_NOTES
 
+## 2026-05-23
+- Module 2 reproducibility/de-identification pass: replaced promissory
+  GitHub/Zenodo-on-acceptance language with a private-for-review link plus
+  reserved-DOI workflow, retaining the user's manual upload gate before final
+  repository deposition.
+- Added submission-side upload scaffolding under `manuscript/submission/` and
+  reviewer-facing reproduction notes inside the de-identified package, including
+  an explicit distinction between fast code verification and locked production
+  simulation artefacts.
+- Fresh-restore smoke testing confirmed that the de-identified archive needs the
+  documented R 4.5.x runtime; the local default R 4.6.0 path hits the known
+  pinned-source `S7` compile failure before tests can run.
+
 ## 2026-05-18
 - Investigated the failing GitHub Actions `compendium-ci / tests` run on
   `main` with the GitHub plugin and `gh`, tracing the failure to

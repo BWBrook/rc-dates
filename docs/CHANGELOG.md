@@ -6,6 +6,10 @@ The format is based on Keep a Changelog.
 
 ## [Unreleased]
 ### Added
+- Added a manual anonymised repository workflow and metadata template for a
+  private-for-review DOI deposit prior to submission.
+- Added reviewer-facing `REPRODUCE.md` notes to the de-identified review
+  package, including the fast verification path and simulation artefact status.
 - Added submission-facing manuscript files for the JAS packet: a separate
   highlights file, title-page draft, Supplementary Information source with two
   SI figures and captions, and a submission checklist based on the live JAS
@@ -24,6 +28,10 @@ The format is based on Keep a Changelog.
   compendium and manuscript workflow from a fresh MacBook clone.
 
 ### Changed
+- Updated the manuscript, Supplementary Information, cover letter, and
+  submission checklist to use private-for-review link/reserved-DOI placeholders
+  and to avoid claiming that unfinished high-volume simulation artefacts are
+  already supplied.
 - Moved the reproducibility-level Methods detail into the Supplementary
   Information and replaced the main-text Methods with a condensed,
   interpretation-focused version, bringing the manuscript to roughly 4,900

@@ -82,7 +82,7 @@ We evaluated sampling strategy performance using three metrics: i) *accuracy* â€
 
 ### S3. Reproducibility
 
-All code, random seeds, and intermediate results (site subsets, index matrices, re-binned summaries, simulation outputs) are included in the submitted de-identified review package, enabling full reproducibility checks without re-running calibration. On acceptance, these materials will be made publicly available through a GitHub repository and archived on Zenodo with a DOI. High-volume simulation runs were parallelised on institutional high-performance computing.
+The de-identified review archive is organised for use outside GitHub. Its fast verification path restores the pinned `renv` environment, runs the test suite, and executes the default `{targets}` workflow against the included input data. The archive also documents the simulation paths separately: a reduced demo mode exercises the sampling and plotting code on an ordinary machine, while the high-volume population-model simulations were run on institutional high-performance computing and will be represented in the final repository record by locked artefacts and provenance notes before upload. The private-for-review repository link and reserved DOI will be inserted in the main-text Data accessibility statement after the final package lock.
 
 ## Supplementary Figures
 
