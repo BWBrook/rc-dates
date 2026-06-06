@@ -2,7 +2,8 @@
 ##
 ## These helpers read a YAML config (via the {config} package) if present,
 ## and otherwise fall back to sensible defaults suitable for a fast, toy
-## dataset workflow. Paths are resolved via here::here() for portability.
+## dataset workflow. Configured relative paths stay relative so cached targets
+## remain portable across WSL and macOS checkouts.
 
 #' Absolute path resolver
 #'
@@ -45,13 +46,14 @@ default_simulation_config <- function() {
 #'
 #' Reads `config/config.yml` using `{config}` if available; otherwise returns
 #' an internal default configuration suitable for local development and tests.
-#' All relative paths are resolved to absolute paths.
+#' Relative paths are normalised but kept relative for portable target caching.
 #'
 #' @param active Name of the active config (defaults to `Sys.getenv("R_CONFIG_ACTIVE", "default")`).
 #' @return A named list with configuration values.
 #' @export
 cfg_read <- function(active = Sys.getenv("R_CONFIG_ACTIVE", unset = "default")) {
   import::from("here", "here")
+  import::from("fs", "is_absolute_path", "path_norm")
 
   cfg_path <- here("config", "config.yml")
   if (file.exists(cfg_path)) {
@@ -79,9 +81,12 @@ cfg_read <- function(active = Sys.getenv("R_CONFIG_ACTIVE", unset = "default")) 
     )
   }
 
-  # Normalise common path entries if present
+  # Normalise common path entries without baking the checkout root into targets.
   normalise <- function(x) {
-    if (is.character(x) && length(x) == 1L) return(resolve_path(x))
+    if (is.character(x) && length(x) == 1L) {
+      if (is_absolute_path(x)) return(x)
+      return(path_norm(x))
+    }
     x
   }
 

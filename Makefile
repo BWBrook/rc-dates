@@ -7,7 +7,15 @@ MAKEDOC_VENV_BIN ?= $(MAKEDOC_DIR)/.venv/bin
 MAKEDOC_PATH = $(if $(wildcard $(MAKEDOC_VENV_BIN)/python3),$(MAKEDOC_VENV_BIN):$(PATH),$(PATH))
 MAKEDOC_OUTPUT_DIR ?= $(MAKEDOC_DIR)/dist/rc-dates
 SUBMISSION_DIST ?= manuscript/submission/dist
-REVIEW_PACKAGE ?= /home/bwbrook/papers/de_identified_repos/rc_review_package.zip
+
+DEFAULT_RSCRIPT := $(firstword $(wildcard /usr/local/bin/Rscript) Rscript)
+RSCRIPT ?= $(DEFAULT_RSCRIPT)
+R_VERSION_REQUIRED ?= 4.5.
+
+DEFAULT_REVIEW_PACKAGE_PARENT := $(firstword $(wildcard /Users/bwbrook/papers/de_identified_repos) $(wildcard /home/bwbrook/papers/de_identified_repos))
+REVIEW_PACKAGE_PARENT ?= $(if $(DEFAULT_REVIEW_PACKAGE_PARENT),$(DEFAULT_REVIEW_PACKAGE_PARENT),/Users/bwbrook/papers/de_identified_repos)
+REVIEW_PACKAGE ?= $(REVIEW_PACKAGE_PARENT)/rc_review_package.zip
+REVIEW_PACKAGE_ABS := $(abspath $(REVIEW_PACKAGE))
 
 .PHONY: help
 help:
@@ -21,10 +29,27 @@ help:
 	@echo "  make submission-build      Build manuscript, SI, cover letter and packet files"
 	@echo
 	@echo "R compendium:"
+	@echo "  make r-preflight          Confirm Rscript resolves to R 4.5.x"
 	@echo "  make compendium-bootstrap  Restore/install R dependencies"
 	@echo "  make compendium-test       Run testthat harness"
 	@echo "  make compendium-pipeline   Run targets pipeline"
 	@echo "  make compendium-report     Render Quarto report"
+	@echo "  make review-package        Build de-identified review package zip"
+
+.PHONY: r-preflight
+r-preflight:
+	@ver="$$("$(RSCRIPT)" --version 2>&1)"; \
+	case "$$ver" in \
+		*"version $(R_VERSION_REQUIRED)"*) \
+			echo "Using $(RSCRIPT): $$ver"; \
+			;; \
+		*) \
+			echo "Wrong Rscript for rc-dates: $(RSCRIPT) reports '$$ver'"; \
+			echo "This project is locked to R 4.5.3; use RSCRIPT=/usr/local/bin/Rscript or run under rig:"; \
+			echo "  rig run -r 4.5-arm64 make <target>"; \
+			exit 1; \
+			;; \
+	esac
 
 .PHONY: makedoc-preflight
 makedoc-preflight:
@@ -91,18 +116,25 @@ submission-build: manuscript-build
 		echo "Warning: review package not found: $(REVIEW_PACKAGE)"; \
 	fi
 
+.PHONY: review-package
+review-package: r-preflight
+	@command -v zip >/dev/null || { echo "Missing zip"; exit 1; }
+	R_PROFILE_USER=/dev/null "$(RSCRIPT)" scripts/build_review_package.R "$(REVIEW_PACKAGE_PARENT)"
+	cd "$(REVIEW_PACKAGE_PARENT)" && zip -qr "$(REVIEW_PACKAGE_ABS)" rc_review_package
+	@echo "Built review package: $(REVIEW_PACKAGE_ABS)"
+
 .PHONY: compendium-bootstrap
-compendium-bootstrap:
-	Rscript scripts/bootstrap.R
+compendium-bootstrap: r-preflight
+	"$(RSCRIPT)" scripts/bootstrap.R
 
 .PHONY: compendium-test
-compendium-test:
-	Rscript tests/run-tests.R
+compendium-test: r-preflight
+	"$(RSCRIPT)" tests/run-tests.R
 
 .PHONY: compendium-pipeline
-compendium-pipeline:
-	Rscript -e 'targets::tar_make()'
+compendium-pipeline: r-preflight
+	"$(RSCRIPT)" -e 'targets::tar_make()'
 
 .PHONY: compendium-report
-compendium-report:
-	Rscript -e 'quarto::quarto_render("reports/paper.qmd", quiet = FALSE)'
+compendium-report: r-preflight
+	"$(RSCRIPT)" -e 'quarto::quarto_render("reports/paper.qmd", quiet = FALSE)'

@@ -31,15 +31,16 @@ lread <- function(path, ...) {
 #' Read a simple CSV manifest of input files
 #'
 #' Expects a CSV with columns `id` and `path`. Returns a tibble with columns
-#' `id` and `path` (absolute, resolved via `here()`).
+#' `id` and `path`, keeping relative paths relative for portable target stores.
 #' @param manifest_path Path to the manifest CSV.
-#' @return A tibble with `id` and absolute `path`.
+#' @return A tibble with `id` and normalised `path`.
 #' @export
 read_manifest <- function(manifest_path) {
   import::from("vroom", "vroom")
   import::from("rlang", "abort")
   import::from("checkmate", "assert_file_exists")
   import::from("dplyr", "%>%", "mutate")
+  import::from("fs", "is_absolute_path", "path_norm")
 
   mp <- resolve_path(manifest_path)
   assert_file_exists(mp)
@@ -55,7 +56,10 @@ read_manifest <- function(manifest_path) {
   if (length(missing) > 0) {
     abort(paste0("Manifest missing required columns: ", paste(missing, collapse = ", ")), class = "rcdates_io_error")
   }
-  mf %>% mutate(path = vapply(path, resolve_path, character(1)))
+  normalise_manifest_path <- function(path) {
+    if (is_absolute_path(path)) path else path_norm(path)
+  }
+  mf %>% mutate(path = vapply(path, normalise_manifest_path, character(1)))
 }
 
 #' Ensure a data frame contains required columns

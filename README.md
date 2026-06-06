@@ -5,19 +5,25 @@ population growth trends in radiocarbon dates of archaeological sites.
 
 ## Quickstart
 
+This project is locked to the R 4.5.x series used for the final analysis
+environment. On Barry's macOS machine, the root `Makefile` prefers
+`/usr/local/bin/Rscript` and refuses to run compendium targets under a different
+R minor version. With `direnv`, run `direnv allow` once in this checkout so the
+shell also prefers that runtime.
+
 The default project workflow is a development/demo compendium, not the
 de-identified reviewer archive. For anonymous peer review, build the minimal
 code/data package with:
 
 ```sh
-R_PROFILE_USER=/dev/null Rscript scripts/build_review_package.R
+make review-package
 ```
 
 That package rewrites the manifest to use a de-identified input table and omits
 manuscript, report, reference, docs, source-control, and author-identifying
 surfaces.
 
-In RStudio Console:
+In an RStudio Console using R 4.5.x:
 
 ```r
 renv::restore(prompt = FALSE)
@@ -25,6 +31,14 @@ source("dependencies.R")
 pak::pkg_install(project_dependencies())
 targets::tar_make()
 quarto::quarto_render("reports/paper.qmd")
+```
+
+From a shell, prefer the Makefile wrappers so the R 4.5.x preflight is applied:
+
+```sh
+make compendium-test
+make compendium-pipeline
+make compendium-report
 ```
 
 Optional figure montage support uses `{magick}`. If you want that and have the

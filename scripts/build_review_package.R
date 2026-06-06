@@ -6,8 +6,20 @@
 
 args <- commandArgs(trailingOnly = TRUE)
 
+default_package_parent <- function() {
+  candidates <- c(
+    "/Users/bwbrook/papers/de_identified_repos",
+    "/home/bwbrook/papers/de_identified_repos"
+  )
+  existing <- candidates[dir.exists(candidates)]
+  if (length(existing) > 0L) {
+    return(existing[[1L]])
+  }
+  file.path(path.expand("~"), "papers", "de_identified_repos")
+}
+
 repo_root <- normalizePath(getwd(), winslash = "/", mustWork = TRUE)
-default_parent <- "/home/bwbrook/papers/de_identified_repos"
+default_parent <- default_package_parent()
 package_parent <- if (length(args) >= 1L) args[[1L]] else default_parent
 package_parent <- normalizePath(package_parent, winslash = "/", mustWork = FALSE)
 package_name <- "rc_review_package"
@@ -217,10 +229,15 @@ write_text(
 write_text(
   "Makefile",
   c(
-    ".PHONY: help restore test manifest pipeline check clean",
+    "DEFAULT_RSCRIPT := $(firstword $(wildcard /usr/local/bin/Rscript) Rscript)",
+    "RSCRIPT ?= $(DEFAULT_RSCRIPT)",
+    "R_VERSION_REQUIRED ?= 4.5.",
+    "",
+    ".PHONY: help r-preflight restore test manifest pipeline check clean",
     "",
     "help:",
     "\t@echo \"Code review package commands:\"",
+    "\t@echo \"  make r-preflight  Confirm Rscript resolves to R 4.5.x\"",
     "\t@echo \"  make restore   Restore pinned R packages with renv\"",
     "\t@echo \"  make test      Run the testthat suite\"",
     "\t@echo \"  make manifest  Print the targets manifest\"",
@@ -228,23 +245,30 @@ write_text(
     "\t@echo \"  make check     Run restore, tests, manifest, and pipeline\"",
     "\t@echo \"  make clean     Remove generated targets artefacts\"",
     "",
-    "restore:",
-    "\tRscript -e 'source(\"renv/activate.R\"); renv::restore(prompt = FALSE)'",
+    "r-preflight:",
+    "\t@ver=\"$$(\"$(RSCRIPT)\" --version 2>&1)\"; \\",
+    "\tcase \"$$ver\" in \\",
+    "\t\t*\"version $(R_VERSION_REQUIRED)\"*) echo \"Using $(RSCRIPT): $$ver\" ;; \\",
+    "\t\t*) echo \"Wrong Rscript: $(RSCRIPT) reports '$$ver'\"; echo \"Use R 4.5.x for this review package.\"; exit 1 ;; \\",
+    "\tesac",
     "",
-    "test:",
-    "\tRscript tests/run-tests.R",
+    "restore: r-preflight",
+    "\t\"$(RSCRIPT)\" -e 'source(\"renv/activate.R\"); renv::restore(prompt = FALSE)'",
     "",
-    "manifest:",
-    "\tRscript -e 'targets::tar_manifest(script = \"_targets.R\", callr_function = NULL)'",
+    "test: r-preflight",
+    "\t\"$(RSCRIPT)\" tests/run-tests.R",
     "",
-    "pipeline:",
-    "\tRscript -e 'targets::tar_make()'",
+    "manifest: r-preflight",
+    "\t\"$(RSCRIPT)\" -e 'targets::tar_manifest(script = \"_targets.R\", callr_function = NULL)'",
     "",
-    "check:",
-    "\tRscript scripts/run_review_checks.R",
+    "pipeline: r-preflight",
+    "\t\"$(RSCRIPT)\" -e 'targets::tar_make()'",
     "",
-    "clean:",
-    "\tRscript -e 'targets::tar_destroy(destroy = \"all\")'"
+    "check: r-preflight",
+    "\t\"$(RSCRIPT)\" scripts/run_review_checks.R",
+    "",
+    "clean: r-preflight",
+    "\t\"$(RSCRIPT)\" -e 'targets::tar_destroy(destroy = \"all\")'"
   )
 )
 
@@ -328,8 +352,12 @@ write_text(
     "rebuild pinned source packages and fail. Then run from this directory:",
     "",
     "```sh",
-    "Rscript -e 'source(\"renv/activate.R\"); renv::restore(prompt = FALSE)'",
+    "make restore",
     "```",
+    "",
+    "The included Makefile runs an R 4.5.x preflight before restore, test, and",
+    "pipeline commands. Override `RSCRIPT=/path/to/Rscript` if R 4.5.x is not",
+    "the first `Rscript` on PATH.",
     "",
     "On Linux, some spatial/graphics packages may require system libraries before",
     "`renv::restore()` can complete. Typical Ubuntu packages are:",
@@ -342,22 +370,10 @@ write_text(
     "## Run Checks",
     "",
     "```sh",
-    "Rscript tests/run-tests.R",
-    "```",
-    "",
-    "or:",
-    "",
-    "```sh",
     "make test",
     "```",
     "",
     "## Run The Pipeline",
-    "",
-    "```sh",
-    "Rscript -e 'targets::tar_make()'",
-    "```",
-    "",
-    "or:",
     "",
     "```sh",
     "make pipeline",
@@ -390,15 +406,6 @@ write_text(
     "## Fast Verification Path",
     "",
     "From the archive root:",
-    "",
-    "```sh",
-    "Rscript -e 'source(\"renv/activate.R\"); renv::restore(prompt = FALSE)'",
-    "Rscript tests/run-tests.R",
-    "Rscript -e 'targets::tar_manifest(script = \"_targets.R\", callr_function = NULL)'",
-    "Rscript -e 'targets::tar_make()'",
-    "```",
-    "",
-    "The same path is available as:",
     "",
     "```sh",
     "make restore",

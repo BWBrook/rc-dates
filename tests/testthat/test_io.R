@@ -7,17 +7,17 @@ test_that("lread reads the austarch example CSV", {
   expect_gt(nrow(tbl), 0)
 })
 
-test_that("cfg_read returns resolved paths and defaults", {
+test_that("cfg_read returns portable paths and defaults", {
   cfg <- cfg_read(active = "testthat")
   expect_type(cfg, "list")
-  expect_true(file.exists(cfg$data$example))
-  expect_true(file.exists(cfg$data$manifest))
+  expect_true(file.exists(resolve_path(cfg$data$example)))
+  expect_true(file.exists(resolve_path(cfg$data$manifest)))
 })
 
-test_that("read_manifest resolves relative paths and validates columns", {
+test_that("read_manifest keeps relative paths portable and validates columns", {
   mf <- read_manifest("metadata/data_manifest.csv")
   expect_true(all(c("id", "path") %in% names(mf)))
-  expect_true(file.exists(mf$path[[1]]))
+  expect_true(file.exists(resolve_path(mf$path[[1]])))
 })
 
 test_that("interim storage falls back to CSV on macOS", {

@@ -6,6 +6,10 @@ The format is based on Keep a Changelog.
 
 ## [Unreleased]
 ### Added
+- Added a repo-local `.envrc` and R 4.5.x Makefile preflight so macOS shells
+  and helper targets prefer the lockfile-matching R runtime.
+- Added a `make review-package` target that builds the de-identified package
+  directory and zips it at the platform-appropriate review-package path.
 - Added a manual anonymised repository workflow and metadata template for a
   private-for-review DOI deposit prior to submission.
 - Added reviewer-facing `REPRODUCE.md` notes to the de-identified review
@@ -31,6 +35,16 @@ The format is based on Keep a Changelog.
   compendium and manuscript workflow from a fresh MacBook clone.
 
 ### Changed
+- Updated macOS setup docs to use the Makefile wrappers for compendium restore,
+  tests, pipeline, report rendering, and review-package creation.
+- Made the review-package builder choose
+  `/Users/bwbrook/papers/de_identified_repos` on macOS before falling back to
+  the older WSL de-identified-repo path.
+- Kept config and manifest relative paths relative in cached targets so existing
+  `_targets` stores do not carry WSL absolute paths into macOS runs.
+- Disabled `renv` pak delegation by default in `.Rprofile`, while preserving
+  explicit user overrides, to match the known-good restore path.
+- Renamed the Quarto project title from the scaffold placeholder to `rc-dates`.
 - Rebuilt the de-identified review package around a trimmed
   `austarch_input_deidentified.csv` input table and explicit high-volume
   simulation provenance notes, removing the original free-text raw-data source
@@ -186,6 +200,9 @@ The format is based on Keep a Changelog.
   matches the validated local test path.
 
 ### Fixed
+- Guarded `.Rprofile` `renv` activation so WSL R 4.6 probes no longer trigger
+  recursive `renv` bootstrap attempts; project activation now stays on R 4.5.x
+  unless `RC_DATES_ALLOW_NON45_RENV=true` is set.
 - Pinned GitHub Actions R setup to R 4.5.3 so CI restores against the
   lockfile's documented R series instead of floating to R 4.6.0 and failing
   while compiling locked packages.

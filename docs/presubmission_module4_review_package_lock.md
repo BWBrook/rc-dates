@@ -38,9 +38,10 @@ upload and final private-link/DOI replacement.
 
 ## Residual Human-eye Items
 
-- Full reviewer `renv::restore()` and package tests still need to be run under
-  R 4.5.x. The local shell currently uses R 4.6.0, which is the known lockfile
-  mismatch path for this project.
+- Full reviewer `renv::restore()` and package tests still need to be rerun
+  after final editorial lock if the archive contents change. The macOS checkout
+  now has Makefile wrappers that select `/usr/local/bin/Rscript` for the
+  lockfile-matching R 4.5.x path.
 - The high-volume production simulation RDS files were not found locally in the
   repository or broader `/home/bwbrook` search. The package therefore documents
   them as external production artefacts rather than claiming exact numerical

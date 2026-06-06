@@ -1,7 +1,7 @@
 # READ THIS FIRST
 
 This document is a handover note for continuing the `rc-dates` work from a
-fresh clone, especially on Barry's MacBook while the WSL machine is unavailable.
+fresh clone on Barry's macOS machines after the original WSL setup.
 It records where the project is up to, what has already been fixed, and what the
 next agent should do first.
 
@@ -257,11 +257,11 @@ Not yet done:
 - final Zenodo/archive link in Data accessibility;
 - first visual inspection of rendered DOCX/PDF output.
 
-## How To Resume On The MacBook
+## How To Resume On macOS
 
 ### Clone And Restore The R Compendium
 
-From the MacBook:
+From the macOS machine:
 
 ```sh
 git clone git@github.com:BWBrook/rc-dates.git
@@ -271,16 +271,18 @@ cd rc-dates
 Then in R or from shell:
 
 ```sh
-Rscript scripts/bootstrap.R
-Rscript tests/run-tests.R
-Rscript -e 'targets::tar_make()'
-Rscript -e 'quarto::quarto_render("reports/paper.qmd", quiet = FALSE)'
+make compendium-bootstrap
+make compendium-test
+make compendium-pipeline
+make compendium-report
 ```
 
 Notes:
 
 - The project expects R >= 4.5 and currently has a lockfile refreshed for
-  R 4.5.3.
+  R 4.5.3. On Barry's macOS machine, the root `Makefile` prefers
+  `/usr/local/bin/Rscript`, and `.envrc` can put `/usr/local/bin` first for
+  interactive shells after `direnv allow`.
 - If bootstrap asks about optional `{magick}` support, it is useful for montages
   but should not block core work.
 - On macOS, system libraries for packages such as `{magick}` may need Homebrew
@@ -294,8 +296,9 @@ The manuscript build uses Barry's separate `makedoc` repo. On WSL it lived at:
 /home/bwbrook/work/makedoc
 ```
 
-On the MacBook, clone or locate that repo separately. Then run `makedoc` from
-the `makedoc` repo root while pointing `CONFIG` at this repo's build profile.
+On macOS, the default path is `/Users/bwbrook/work/makedoc`. Then run
+`makedoc` from the `makedoc` repo root while pointing `CONFIG` at this repo's
+build profile.
 
 Example shape:
 
@@ -337,11 +340,11 @@ profile's `output_dir`.
 Compendium:
 
 ```sh
-Rscript scripts/bootstrap.R
-Rscript tests/run-tests.R
-Rscript -e 'targets::tar_make()'
-Rscript -e 'quarto::quarto_render("reports/paper.qmd", quiet = FALSE)'
-Rscript -e 'renv::status()'
+make compendium-bootstrap
+make compendium-test
+make compendium-pipeline
+make compendium-report
+/usr/local/bin/Rscript -e 'renv::status()'
 ```
 
 Manuscript source parse check:
@@ -362,7 +365,7 @@ CONFIG=/path/to/rc-dates/settings/build.yaml make check
 CONFIG=/path/to/rc-dates/settings/build.yaml make all
 ```
 
-MacBook helper targets, from this repo root:
+macOS helper targets, from this repo root:
 
 ```sh
 make manuscript-validate

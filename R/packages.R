@@ -14,13 +14,16 @@ core_packages <- function() {
   )
 }
 
-#' Attach core packages quietly for interactive work
+#' Check core packages quietly for interactive work
 #' @keywords internal
 attach_core <- function() {
-  op <- options(stringsAsFactors = FALSE)
-  on.exit(options(op), add = TRUE)
-  suppressPackageStartupMessages({
-    for (pkg in core_packages()) require(pkg, character.only = TRUE)
-  })
+  pkgs <- core_packages()
+  missing <- pkgs[!vapply(pkgs, requireNamespace, logical(1), quietly = TRUE)]
+  if (length(missing) > 0L) {
+    rlang::abort(
+      paste0("Missing core packages: ", paste(missing, collapse = ", ")),
+      class = "rcdates_dependency_error"
+    )
+  }
   invisible(TRUE)
 }

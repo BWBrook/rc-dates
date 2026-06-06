@@ -1,5 +1,39 @@
 # AGENT_NOTES
 
+## 2026-06-06
+- WSL crash recovery and rsync sanity check: verified the checkout is still a
+  normal `main` worktree tracking `origin/main`; `git diff --check` is clean,
+  no macOS sidecar files remain at shallow project depth, and no stale R
+  `00LOCK*` install locks remain under the user or project R libraries.
+- The dirty worktree appears to be real Mac-side portability/reproducibility
+  content rather than Git metadata oddness; `.envrc` is currently untracked but
+  matches the documented Mac hardening changes.
+- Hardened `.Rprofile` so it only activates `renv` automatically under the
+  lockfile-compatible R 4.5 series, or when
+  `RC_DATES_ALLOW_NON45_RENV=true` is set. This prevents WSL's R 4.6.0 from
+  re-entering recursive `renv` bootstrap attempts during simple probes.
+
+## 2026-05-28
+- Mac migration hardening: made the root `Makefile` prefer `/usr/local/bin/Rscript`
+  and reject non-R-4.5.x compendium runs, added `.envrc` so `direnv` shells put
+  `/usr/local/bin` first, and changed `.Rprofile` to disable `renv` pak
+  delegation by default unless the caller overrides it.
+- Added `make review-package`, switched the review-package builder's default
+  parent to `/Users/bwbrook/papers/de_identified_repos` on macOS, and updated
+  the anonymous repository workflow notes away from WSL-only `/home/...`
+  commands.
+- Fixed a stale `_targets` migration failure by keeping config and manifest
+  paths relative inside cached targets instead of storing WSL absolute paths.
+- Updated the development/handoff docs to use Makefile wrappers for local
+  reproducibility and renamed the Quarto project title from the scaffold
+  placeholder to `rc-dates`.
+- Verification after the Mac hardening: `make compendium-bootstrap` restored
+  the lockfile-clean R 4.5.3 library, `renv::status()` reported no issues,
+  `make compendium-test` passed, `make compendium-pipeline` completed 75
+  targets with 6 skipped, and `make review-package` rebuilt
+  `/Users/bwbrook/papers/de_identified_repos/rc_review_package.zip` with SHA256
+  `c3e27f10af685c0f0ee22172ab6b28b7d00a0741e779077cd1a444f9a89246f5`.
+
 ## 2026-05-25
 - Module 4 review-package lock: added `scripts/build_review_package.R` as the
   repeatable de-identification builder, rebuilt the review package around a

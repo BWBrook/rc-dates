@@ -22,10 +22,15 @@ Official references:
 
 Run these checks after the codebase and manuscript revisions are locked:
 
-1. From the repository root, run `R_PROFILE_USER=/dev/null Rscript scripts/build_review_package.R`.
-2. Rebuild `/home/bwbrook/papers/de_identified_repos/rc_review_package.zip` from the generated package directory.
-3. Copy the zip into `manuscript/submission/dist/rc_review_package.zip`.
-4. Record `sha256sum /home/bwbrook/papers/de_identified_repos/rc_review_package.zip`.
+1. From the repository root, run `make review-package`.
+2. Confirm the generated zip at
+   `/Users/bwbrook/papers/de_identified_repos/rc_review_package.zip` on macOS,
+   or override `REVIEW_PACKAGE_PARENT` / `REVIEW_PACKAGE` for another machine.
+3. Copy the zip into `manuscript/submission/dist/rc_review_package.zip` via
+   `make submission-build` or a manual copy after inspection.
+4. Record
+   `shasum -a 256 /Users/bwbrook/papers/de_identified_repos/rc_review_package.zip`
+   on macOS or the equivalent SHA256 command for the active package path.
 5. Confirm `zipinfo -1` contains no `manuscript/`, `csl/`, `docs/`, `references/`, `reports/`, `.git/`, `.github/`, or local agent notes.
 6. Confirm the package README, `REPRODUCE.md`, and `SIMULATION_PROVENANCE.md` describe the fast verification path and high-volume simulation scope.
 7. Search the unzipped archive for identifying author strings, local machine paths, ORCID identifiers, emails, and institution names.

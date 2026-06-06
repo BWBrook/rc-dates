@@ -5,9 +5,17 @@ format: gfm
 
 This project follows a non‑package compendium layout with `{targets}` as the pipeline engine and `renv` for dependency management.
 
+## Runtime
+
+Use R 4.5.x for local work. The lockfile and CI are aligned with R 4.5.3, and
+newer R minor releases can force source rebuilds of pinned packages. On Barry's
+macOS machine, `make` targets use `/usr/local/bin/Rscript` by default and run
+an R-version preflight before compendium commands. If `direnv` is enabled, run
+`direnv allow` once so interactive shells also prefer `/usr/local/bin`.
+
 ## Setup
 
-Run in RStudio Console:
+Run in an RStudio Console using R 4.5.x:
 
 ```r
 renv::restore(prompt = FALSE)
@@ -19,8 +27,8 @@ source("tests/run-tests.R")
 
 ## Running the Pipeline
 
-```r
-targets::tar_make()
+```bash
+make compendium-pipeline
 ```
 
 To visualize the DAG:
@@ -39,12 +47,11 @@ quarto render docs/
 
 ## Quickstart (compendium)
 
-```r
-renv::restore(prompt = FALSE)
-source("dependencies.R")
-pak::pkg_install(project_dependencies())
-targets::tar_make()
-quarto::quarto_render("reports/paper.qmd")
+```bash
+make compendium-bootstrap
+make compendium-test
+make compendium-pipeline
+make compendium-report
 ```
 
 Optional montage support uses `{magick}`. If your system has the ImageMagick
