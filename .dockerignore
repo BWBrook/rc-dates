@@ -1,0 +1,9 @@
+**
+!renv.lock
+!renv/
+!renv/.gitignore
+!renv/activate.R
+!renv/settings.json
+!docker/
+!docker/install-production-packages.R
+!docker/production-simulation.Dockerfile

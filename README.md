@@ -90,7 +90,7 @@ simulate:
     dir: data
     pattern: ^simulation_summary_.*\.csv$
   demo:
-    iterations: 10
+    iterations: 2
     seed: 1234
     site_proportions: [0.5, 1.0]
     strategies: [oldest, youngest, bracketed, singleton, multiton]

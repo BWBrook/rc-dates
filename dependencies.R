@@ -9,7 +9,8 @@ project_dependencies <- function(include_optional = FALSE) {
     # report runtime
     "knitr", "rmarkdown",
     # wrangling & utils
-    "dplyr", "readr", "purrr", "tidyr", "tibble", "stringr", "magrittr", "checkmate", "janitor",
+    "dplyr", "readr", "purrr", "tidyr", "tibble", "stringr", "magrittr",
+    "withr", "digest", "checkmate", "janitor",
     # spatial (if needed later)
     "sf", "terra",
     # modelling / methods

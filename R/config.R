@@ -32,7 +32,7 @@ default_simulation_config <- function() {
       pattern = "^simulation_summary_.*\\.csv$"
     ),
     demo = list(
-      iterations = 10L,
+      iterations = 2L,
       seed = 1234L,
       site_proportions = c(0.5, 1.0),
       strategies = c("oldest", "youngest", "bracketed", "singleton", "multiton"),

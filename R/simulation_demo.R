@@ -84,7 +84,7 @@ build_demo_sim_specs <- function(cfg) {
     proportion = proportions
   ) |>
     mutate(
-      iterations = as.integer(value_or(demo$iterations, 10L)),
+      iterations = as.integer(value_or(demo$iterations, 2L)),
       seed = as.integer(value_or(demo$seed, 1234L)),
       size = as.integer(round(proportion * 100)),
       sampling_strategy = vapply(scenario, scenario_to_sampling_strategy, character(1)),

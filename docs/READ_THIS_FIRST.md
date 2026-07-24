@@ -143,12 +143,25 @@ Default demo shape:
 
 - strategies: `oldest`, `youngest`, `bracketed`, `singleton`, `multiton`
 - site proportions: `0.5`, `1.0`
-- iterations: `10`
+- iterations: `2`
 - output filenames like `simulation_summary_oldest_50.csv`
 
-The full heavy simulation study is intentionally not in the default pipeline.
-The demo workflow is for accessible reproduction and orientation, not numerical
-parity with the original production-scale simulations.
+The full population-model simulation study is intentionally not in the default
+pipeline. The demo workflow is for accessible reproduction and orientation,
+not numerical parity with the production-scale simulations. The production
+path is now executable and documented separately:
+
+```sh
+# Validate supplied RDS artefacts and rebuild manuscript Figures 3-5.
+Rscript scripts/render_population_simulation_figures.R
+
+# Optional expensive Linux/Docker rerun, written away from supplied artefacts.
+RC_DATES_OUTPUT_DIR=out/rerun \
+  bash scripts/run_production_simulation_matrix.sh
+```
+
+See `docs/PRODUCTION_SIMULATIONS.md` for the scenario matrix, seed design,
+checkpoint behaviour, and Figure 5 aggregation rule.
 
 ### 4. CI Repair
 

@@ -1,7 +1,7 @@
 test_that("cfg_read defaults to demo simulation mode", {
   cfg <- cfg_read(active = "testthat")
   expect_identical(cfg$simulate$mode, "demo")
-  expect_equal(cfg$simulate$demo$iterations, 10L)
+  expect_equal(cfg$simulate$demo$iterations, 2L)
   expect_equal(cfg$simulate$demo$multiton_n, 3L)
 })
 

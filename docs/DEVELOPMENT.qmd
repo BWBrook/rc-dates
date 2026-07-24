@@ -7,7 +7,7 @@ This project follows a non‑package compendium layout with `{targets}` as the p
 
 ## Runtime
 
-Use R 4.5.x for local work. The lockfile and CI are aligned with R 4.5.3, and
+Use R 4.5.3 for local work. The lockfile and CI are aligned with that exact release, and
 newer R minor releases can force source rebuilds of pinned packages. On Barry's
 macOS machine, `make` targets use `/usr/local/bin/Rscript` by default and run
 an R-version preflight before compendium commands. If `direnv` is enabled, run
@@ -15,7 +15,7 @@ an R-version preflight before compendium commands. If `direnv` is enabled, run
 
 ## Setup
 
-Run in an RStudio Console using R 4.5.x:
+Run in an RStudio Console using R 4.5.3:
 
 ```r
 renv::restore(prompt = FALSE)

@@ -23,3 +23,18 @@ test_that("subset_caldates_by_adsid drops ids without calibrated grids", {
   expect_true(all(vapply(cds$grids, inherits, logical(1), what = "data.frame")))
   expect_true(all(c("calBP", "PrDens") %in% names(spd_to_tibble(spd_from_caldates(cds)))))
 })
+
+test_that("site SPD is empty when no posterior support remains in range", {
+  site <- data.frame(
+    ADSID = 1L,
+    AGE = 750,
+    ERROR = 80,
+    TIME_SERIES_RELEVANT = "Marine"
+  )
+
+  fit <- calibrate_and_spd(site, time_range = c(651L, 11650L))
+  summary <- spd_to_tibble(fit$spd)
+
+  expect_identical(names(summary), c("calBP", "PrDens"))
+  expect_equal(nrow(summary), 0L)
+})

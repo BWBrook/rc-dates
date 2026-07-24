@@ -32,6 +32,7 @@ inst/extdata/*.gz
 *.csv
 !inst/extdata/*.csv
 !metadata/*.csv
+!out/production/*.csv
 
 # renv
 renv/library/
@@ -70,6 +71,7 @@ AGENTS.md
 !/docs/LEGACY_PARITY.md
 !/docs/PIPELINE.md
 !/docs/READ_THIS_FIRST.md
+!/docs/PRODUCTION_SIMULATIONS.md
 
 # Misc
 .DS_Store

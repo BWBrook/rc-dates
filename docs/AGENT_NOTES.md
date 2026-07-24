@@ -1,5 +1,117 @@
 # AGENT_NOTES
 
+## 2026-07-10
+- Repeated the manuscript review in two passes: first with the
+  `audit-ai-writing` skill for scientific tone and AI-writing surface cues,
+  then as a claim-evidence audit against the data, legacy production scripts,
+  rendered figures, and relevant `references/refs.yaml` records.
+- The prose scan's nominal high score was driven almost entirely by legitimate
+  Markdown section headings. Manual review found very low AI-vocabulary and
+  transition-template density; edits concentrated on formulaic framing,
+  over-neat conclusion structure, and service-template cover-letter prose.
+- Corrected the empirical reference-set description to 976 determinations from
+  116 sites, with a median of 7 and range of 5-33 dates per site, and
+  distinguished the archived 5,288-row source extract from the published
+  AustArch release totals.
+- Removed unsupported claims about duplicate-date combination and
+  `rcarbon::compare_spds`, and aligned empirical oldest/youngest selection with
+  conventional radiocarbon age while documenting the simulation's separate
+  median-calibrated-age rule.
+- Clarified that each synthetic dataset has 116 sites, true calendar ages are
+  uncalibrated and recalibrated, the increasing models rise tenfold towards the
+  present, and each accuracy point pools 3,000 replicates equally across the
+  three generating families.
+- Corrected the Figure 4 legend: its bars are the 2.5th and 97.5th percentiles
+  of replicate-level bias, not bootstrap intervals. Also clarified the
+  deterministic full-site panels in Figure 2 and the two-bin smoothing used to
+  display Figure 1's FD.
+- Found that the legacy Figure 5 summary weighted ambiguous simulations once
+  per retained OSE model. Updated `scripts/legacy/simulation_results.R` to
+  collapse to one Boolean value per simulation before aggregation and added a
+  fixed bootstrap seed. Because the nine production RDS artefacts are absent,
+  the corrected display cannot be regenerated locally; Figure 5 and all claims
+  that depend on it are therefore excluded from the current manuscript.
+- Corrected the embedded Figure 3 title typo without rasterising the vector
+  plot. Replaced bibliography `¹⁴C` glyphs with Pandoc math notation so the
+  superscript survives XeLaTeX conversion.
+- Added a project-specific `makedoc` LaTeX scratch directory after diagnosing a
+  concurrent-build collision that produced a 4 KiB truncated PDF despite a
+  zero exit status. Final PDF integrity is now checked with `qpdf`.
+- Added `scripts/normalize_docx_page_breaks.py` to replace standalone Word page
+  break paragraphs with `pageBreakBefore` formatting on the following
+  paragraph. This removes the blank line-numbered page that appeared between
+  Figures 2 and 3 in an independent LibreOffice render of the required DOCX.
+- Final source count after restoring Figure 5 is about 3,600 words from
+  Abstract through Discussion and about 4,200 including all five display
+  legends, below the 5,000-word limit. The JAS highlights remain at or below
+  85 characters, and the cover letter now renders on one page.
+- Verification: `make submission-build` succeeded; `make manuscript-check`
+  passed manuscript lint, author injection, `Unknown keys: 0`, and all 61
+  makedoc tests; all four PDFs pass `qpdf --check`; all five DOCX files pass
+  `unzip -tq`; the normalized manuscript DOCX renders to 19 complete pages in
+  LibreOffice; and the manuscript/SI/cover PDFs were visually inspected.
+- `scripts/legacy/simulation_results.R` passes base-R parsing. The R compendium
+  and production simulation rerun were not run because this WSL host currently
+  has R 4.6.1 while the project is pinned to R 4.5.3, and the production RDS
+  inputs remain unavailable.
+- Superseding that provisional state, the production simulation matrix was run
+  on the 64-core `deep-server` after the user requested that Figure 5 be
+  restored. All nine model-by-intensity scenarios completed with 1,000
+  replicates each, producing 378,000 result rows; the slowest scenario took
+  about 104 minutes.
+- The run used an exact R 4.5.3 Docker image, deterministic common-random-number
+  replicate seeds, atomic checkpoints, and nine concurrent seven-worker jobs.
+  Unstamped completed artefacts and logs were retained before provenance was
+  added, and the exact generation source is locked under
+  `provenance/production-20260710/`.
+- Validated all nine RDS files and metadata sidecars against embedded source,
+  input, lockfile, container-recipe, image-ID, and SHA-256 evidence. Figure 3
+  model recovery, Figure 4 parameter bias, and corrected Figure 5 unambiguous
+  support were regenerated from the 378,000-row matrix and visually checked.
+- Restored Figure 5 and its exact results to the main text, legend,
+  Supplementary Information, highlights, cover letter, and submission
+  checklist. The all-dates recovery estimate is 0.965; random-3 remains 0.917
+  at full application, while oldest and youngest sampling fall to chance-level
+  recovery at high intensity.
+- Added production parity, provenance, checkpoint, cluster-bootstrap, archive,
+  and empty-site-posterior tests. The empty-site case fixes the Abbot Bay branch
+  that previously had no calibrated support inside the analysis window.
+- Rebuilt the anonymous code-review package with 91 files, including all nine
+  production RDS files and exact source provenance. In a fresh exact-R
+  container, `make check` restored dependencies, passed the packaged tests,
+  rebuilt Figures 3-5, and completed 158 targets with zero failures; total
+  elapsed time was 17 minutes and the pipeline itself took 12m58s.
+- Confirmed the review package contains no manuscript, reference, report, docs,
+  Git metadata, or symlinks. Text and deserialised-RDS scans found no author,
+  affiliation, email, ORCID, or local-path identifiers. The final local ZIP is
+  `/home/bwbrook/papers/de_identified_repos/rc_review_package.zip`, 1,046,659
+  bytes, SHA-256 `88256bf8a93e1b27757c189ae2e959417558ae5e555dafdf5a27c0b76b114d5c`.
+- Left the source workspace, exact generation and maintained images, review
+  validation image, logs, source snapshots, and complete R 4.5.3 `renv` cache
+  in place on `deep-server` for post-review revisions.
+- Final repository gate: the complete root test suite passed under exact R
+  4.5.3, including the production, archive-replacement, and empty-site tests.
+  `make submission-build` succeeded and `make manuscript-check` passed lint,
+  author injection, 54 cited keys with `Unknown keys: 0`, and all 61 makedoc
+  tests. All submission PDFs and Figures 3-5 pass `qpdf --check`; all five DOCX
+  containers pass `unzip -tq`. Visual checks covered every PDF page and
+  LibreOffice renders of the 20-page manuscript DOCX and seven-page SI DOCX,
+  with Figure 5 complete on the final manuscript page.
+
+## 2026-06-29
+- Applied the `audit-ai-writing` skill to the manuscript-facing sources:
+  `manuscript/text/main.md`, `manuscript/text/figures.md`,
+  `manuscript/text/supplementary.md`, `manuscript/submission/draft_cover_letter.md`,
+  and `manuscript/submission/submission_checklist.md`.
+- Treated Markdown headings and required scholarly contrasts as scanner false
+  positives, then made conservative line edits to reduce generic
+  `framework`/`robust`/`valuable` phrasing, service-template cover-letter
+  tone, and over-neat concluding language while preserving claims and
+  citations.
+- Verification after the line edit: `make submission-build` completed, and
+  `make manuscript-check` passed with manuscript lint clean, `Unknown keys: 0`,
+  and 61 makedoc tests passing.
+
 ## 2026-06-06
 - WSL crash recovery and rsync sanity check: verified the checkout is still a
   normal `main` worktree tracking `origin/main`; `git diff --check` is clean,

@@ -6,6 +6,11 @@ The format is based on Keep a Changelog.
 
 ## [Unreleased]
 ### Added
+- Added a deterministic, checkpointed R 4.5.3 production simulation runner and
+  renderer for the complete three-model by three-intensity experiment.
+- Added nine validated 1,000-replicate production RDS files, their runtime
+  metadata, SHA-256 inventory, summary tables, and exact generation-source
+  snapshot for Figures 3-5.
 - Added a repo-local `.envrc` and R 4.5.x Makefile preflight so macOS shells
   and helper targets prefer the lockfile-matching R runtime.
 - Added a `make review-package` target that builds the de-identified package
@@ -35,6 +40,26 @@ The format is based on Keep a Changelog.
   compendium and manuscript workflow from a fresh MacBook clone.
 
 ### Changed
+- Completed a second AI-writing and evidence-alignment pass over the main text,
+  display legends, Supplementary Information, highlights, and cover letter;
+  the main text is about 3,600 words, or about 4,200 including all five figure
+  legends.
+- Reconciled the reported dataset sizes, sampling definitions, simulation
+  design, likelihood interpretation, and uncertainty summaries with the
+  archived data and completed production matrix, and restored five validated
+  main-text figures.
+- Rebuilt the de-identified review package with the production RDS files,
+  exact source provenance, production renderer and resumable full-rerun path;
+  its exact-R clean-room check completes the code-only pipeline independently
+  of GitHub.
+- Reduced the default demo simulation from 10 to 2 iterations and capped only
+  the review package's optional per-site diagnostic branches at 12, while
+  retaining all records in the global analyses and the full production matrix.
+- Condensed the JAS cover letter to one page and dated it 10 July 2026.
+- Lightly edited the main manuscript, figure legends, Supplementary
+  Information, cover letter, and submission checklist to reduce generic
+  AI-writing surface cues while preserving the scientific claims, citations,
+  and JAS submission structure.
 - Updated macOS setup docs to use the Makefile wrappers for compendium restore,
   tests, pipeline, report rendering, and review-package creation.
 - Made the review-package builder choose
@@ -200,6 +225,21 @@ The format is based on Keep a Changelog.
   matches the validated local test path.
 
 ### Fixed
+- Corrected Figure 5 aggregation so ambiguous OSE selections are summarised
+  once per replicate, regenerated the production artefacts, and restored the
+  corrected display and its supported claims to the manuscript.
+- Handled calibrated site subsets with no posterior support in the analysis
+  window as empty SPD grids instead of failing the site-branch pipeline.
+- Made review-package ZIP creation replace the previous archive atomically so
+  stale files cannot survive a rebuild.
+- Corrected Figure 3's embedded title, distinguished bootstrap intervals from
+  replicate quantiles in the legends, restored missing figure-caption
+  superscripts, and prevented a blank/clipped Figure 2 page in the review PDF.
+- Isolated the rc-dates LaTeX scratch directory so concurrent `makedoc` builds
+  cannot collide on a shared `input.pdf` and silently truncate the manuscript.
+- Normalised standalone page-break paragraphs in the submission DOCX to
+  paragraph-level page breaks, preventing an otherwise blank line-numbered page
+  between Figures 2 and 3 when Word or LibreOffice renders the editable source.
 - Guarded `.Rprofile` `renv` activation so WSL R 4.6 probes no longer trigger
   recursive `renv` bootstrap attempts; project activation now stays on R 4.5.x
   unless `RC_DATES_ALLOW_NON45_RENV=true` is set.

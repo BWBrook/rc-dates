@@ -1,0 +1,21 @@
+rc-dates production population simulation
+schema_version: 1
+generation_completed_utc: 2026-07-10 12:24:59 UTC
+metadata_recorded_utc: 2026-07-10 12:42:02 UTC
+r_version: R version 4.5.3 (2026-03-11)
+true_model: lin
+site_subsampling_proportion: 0.5
+replicates: 1000
+master_seed: 1234
+seed_design: common random numbers; replicate seed = master seed + replicate number
+input_md5: 8d30b24e98088a7808c234d6b77ac382
+renv_lock_md5: 96135a2d8be3bbf3d5e6efe11890188f
+production_source_md5: f8cff6c13663ca12083e9dc115b4c3ac
+legacy_helper_md5: 0a55f28d18bab310a68235becb3561ec
+runner_source_md5: 7304d936296129636c087e1dde1cb536
+container_recipe_md5: 5e0643f79bffeaae4d86f98adc034ccb
+container_install_md5: inline-in-recipe
+container_image_id: sha256:15cefece042e56e50ee822bd00c9c400dd6259c7a18cf25d6ff333ccea4aa3bc
+provenance_origin: post-run-stamp
+output_md5: 8659e8e900857ce2d4aea403d7fa2e99
+packages: fitdistrplus=1.2.6; rcarbon=1.5.2; dplyr=1.2.0; ggplot2=4.0.2; testthat=3.3.2

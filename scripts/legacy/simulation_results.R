@@ -52,6 +52,7 @@ res_min <- res %>% filter(min ==1)
 class_metrics <- metric_set(accuracy, mcc, kap, precision,sensitivity, specificity, f_meas)
 
 # calculate metrics with bootstrapping
+set.seed(1234)
 res_boot <- 
   pbmcapply::pbmclapply(1:1000, function(i) {
     res_min %>% 
@@ -73,7 +74,7 @@ res_boot %>%
     .hi = quantile(.estimate, 0.975),
     .estimate = mean(.estimate),
     .groups = "drop"
-  ) %>% 
+  ) %>%
   mutate(strategy_name = strategies[strategy] %>% factor(levels = strategies)) %>% 
   ggplot(aes(x = prop, y = .estimate, col = strategy_name)) +
   geom_point() +
@@ -81,7 +82,7 @@ res_boot %>%
   #geom_linerange(aes(ymin = .estimate - 1.96 * .se, ymax = .estimate + 1.96 * .se), alpha = 0.4) +
   geom_linerange(aes(ymin = .lo, ymax = .hi), alpha = 0.4) +
   #facet_wrap(~.metric) +
-  labs(title = "Accuracy of sampling stategies",
+  labs(title = "Accuracy of sampling strategies",
        x = "Proportion of sites subsampled",
        y = "Accuracy",
        col = "Strategy") +
@@ -104,7 +105,7 @@ res %>%
     sd_bias = sd(bias),
     lo = quantile(bias, 0.025),
     hi = quantile(bias, 0.975),
-  ) %>% 
+  ) %>%
   mutate(strategy = strategies[strategy] %>% factor(levels = rev(strategies))) %>% 
   ggplot(aes(y = strategy, x = mean_bias, col = factor(prop))) +
   #geom_point() +
@@ -153,14 +154,25 @@ res %>%
 #ggsave("figures/bias_2025_05_30_2.pdf", width = 7, height = 5)
 
 
-#--- unambiguous
-res %>% 
+#--- unambiguous model selection
+# Summarise once per simulation. The previous row-weighted calculation counted
+# ambiguous simulations more than once when the OSE rule retained multiple models.
+res_unique_ose <- res %>%
   filter(ose == 1) %>% 
   group_by(prop,strategy,type,sim,truth) %>%
-  mutate(p_unique_ose = !any(predicted != truth[1])) %>% 
+  summarise(
+    p_unique_ose = all(predicted == first(truth)),
+    .groups = "drop"
+  )
+
+res_unique_ose %>%
   group_by(type,prop,strategy) %>% 
-  summarise(p = mean(p_unique_ose),
-            se = sqrt(p*(1-p)/n())) %>% 
+  summarise(
+    p = mean(p_unique_ose),
+    n_simulations = n(),
+    se = sqrt(p * (1 - p) / n_simulations),
+    .groups = "drop"
+  ) %>%
   filter(type == "l1") %>% 
   mutate(strategy = strategies[strategy] %>% factor(levels = (strategies))) %>% 
   ggplot(aes(x = prop, y = p, col = strategy)) +
@@ -176,6 +188,3 @@ res %>%
   theme(plot.title = element_text(hjust = 0.5))
 
 #ggsave("figures/unambiguous_2025_05_30_2.pdf", width = 6, height = 5)
-
-
-

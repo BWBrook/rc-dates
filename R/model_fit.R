@@ -62,5 +62,8 @@ spd_from_caldates <- function(cds, time_range = c(651L, 11650L)) {
   import::from("rcarbon", "spd")
   tr_min <- min(time_range)
   tr_max <- max(time_range)
+  if (length(cds$grids) == 0L) {
+    return(list(grid = data.frame(calBP = numeric(0), PrDens = numeric(0))))
+  }
   spd(cds, timeRange = c(tr_max, tr_min), spdnormalised = TRUE)
 }
