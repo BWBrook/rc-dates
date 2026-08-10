@@ -2,14 +2,13 @@ default_profile: default
 
 profiles:
   default:
-    description: Radiocarbon sampling bias manuscript profile using converted artefacts.
+    description: Double-anonymized JAS manuscript profile using converted artefacts.
     manuscript_sources:
       - ../manuscript/text/main.md
       - ../manuscript/text/figures.md
     lint_sources:
       - ../manuscript/text/main.md
       - ../manuscript/text/figures.md
-    author_metadata: ../manuscript/authors.yaml
     bibliography: ../references/refs.yaml
     csl: ../csl/journal-of-archaeological-science.csl
     journal: Journal of Archaeological Science

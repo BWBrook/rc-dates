@@ -36,8 +36,12 @@ help:
 	@echo "  make compendium-test       Run testthat harness"
 	@echo "  make compendium-pipeline   Run targets pipeline"
 	@echo "  make compendium-report     Render Quarto report"
+	@echo "  make empirical-figures     Rebuild empirical Figures 1-2 and summaries"
 	@echo "  make production-figures    Validate RDS files and rebuild Figures 3-5"
 	@echo "  make production-rerun      Run the full Docker simulation into out/rerun"
+	@echo "  make observation-noise-rerun    Run the paired observation-noise matrix"
+	@echo "  make observation-noise-summary  Summarise and gate the completed matrix"
+	@echo "  make observation-noise-estimand-aligned  Run post-unblinding v2 diagnostic"
 	@echo "  make review-package        Build de-identified review package zip"
 
 .PHONY: r-preflight
@@ -135,9 +139,25 @@ review-package: r-preflight
 production-figures: r-preflight
 	"$(RSCRIPT)" scripts/render_population_simulation_figures.R
 
+.PHONY: empirical-figures
+empirical-figures: r-preflight
+	"$(RSCRIPT)" scripts/render_manuscript_methods_figures.R
+
 .PHONY: production-rerun
 production-rerun:
 	RC_DATES_OUTPUT_DIR="$(PRODUCTION_RERUN_DIR)" bash scripts/run_production_simulation_matrix.sh
+
+.PHONY: observation-noise-rerun
+observation-noise-rerun:
+	bash scripts/run_observation_noise_sensitivity_matrix.sh
+
+.PHONY: observation-noise-summary
+observation-noise-summary: r-preflight
+	"$(RSCRIPT)" scripts/summarise_observation_noise_sensitivity.R
+
+.PHONY: observation-noise-estimand-aligned
+observation-noise-estimand-aligned: r-preflight
+	"$(RSCRIPT)" scripts/summarise_observation_noise_estimand_aligned.R
 
 .PHONY: compendium-bootstrap
 compendium-bootstrap: r-preflight

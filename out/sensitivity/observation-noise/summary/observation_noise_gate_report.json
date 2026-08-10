@@ -1,0 +1,146 @@
+[
+  {
+    "gate": "accuracy_difference_ci",
+    "pass": false,
+    "observed": 0.047,
+    "threshold": 0.05,
+    "details": "Simultaneous paired arm-difference interval.",
+    "recommendation": ""
+  },
+  {
+    "gate": "ose_support_difference_ci",
+    "pass": false,
+    "observed": 0.063,
+    "threshold": 0.05,
+    "details": "Simultaneous paired arm-difference interval.",
+    "recommendation": ""
+  },
+  {
+    "gate": "minimum_aic_discordance",
+    "pass": true,
+    "observed": 0.052,
+    "threshold": 0.1,
+    "details": "Upper simultaneous bound for paired selected-model discordance.",
+    "recommendation": ""
+  },
+  {
+    "gate": "ose_set_discordance",
+    "pass": true,
+    "observed": 0.082,
+    "threshold": 0.1,
+    "details": "Upper simultaneous bound for paired OSE-set discordance.",
+    "recommendation": ""
+  },
+  {
+    "gate": "prop1_random3_random5_accuracy",
+    "pass": true,
+    "observed": 0.912333333333333,
+    "threshold": 0.9,
+    "details": "",
+    "recommendation": ""
+  },
+  {
+    "gate": "prop1_truth_specific_random3_random5_accuracy",
+    "pass": true,
+    "observed": 0.863,
+    "threshold": 0.85,
+    "details": "Truth-specific safeguard against a pooled-accuracy mask.",
+    "recommendation": ""
+  },
+  {
+    "gate": "prop1_truth_specific_random3_random5_lower",
+    "pass": true,
+    "observed": 0.831,
+    "threshold": 0.8,
+    "details": "Truth-specific simultaneous lower-bound safeguard.",
+    "recommendation": ""
+  },
+  {
+    "gate": "prop1_r_3_advantage_over_r1",
+    "pass": true,
+    "observed": 0.0416666666666667,
+    "threshold": 0,
+    "details": "Direct paired realised-arm contrast, target strategy minus random-1.",
+    "recommendation": ""
+  },
+  {
+    "gate": "prop1_r_5_advantage_over_r1",
+    "pass": true,
+    "observed": 0.076,
+    "threshold": 0,
+    "details": "Direct paired realised-arm contrast, target strategy minus random-1.",
+    "recommendation": ""
+  },
+  {
+    "gate": "l1_l2_qualitative_consistency",
+    "pass": true,
+    "observed": 0,
+    "threshold": 0,
+    "details": "Opposite, statistically resolved L1/L2 directions are checked for observation-arm effects, realised strategy contrasts, and bias.",
+    "recommendation": ""
+  },
+  {
+    "gate": "noisy_absolute_mean_bias",
+    "pass": true,
+    "observed": 0.0148508505276325,
+    "threshold": 0.05,
+    "details": "Signed mean relative bias: absolute point estimate <5%; interval within +/-10%.",
+    "recommendation": ""
+  },
+  {
+    "gate": "paired_bias_shift",
+    "pass": true,
+    "observed": 0.0131349127725912,
+    "threshold": 0.1,
+    "details": "",
+    "recommendation": ""
+  },
+  {
+    "gate": "rmse_relative",
+    "pass": true,
+    "observed": 0.0187099262327347,
+    "threshold": 0.15,
+    "details": "Entire simultaneous interval must remain within 0.85-1.15.",
+    "recommendation": ""
+  },
+  {
+    "gate": "boundary_hit_increase",
+    "pass": false,
+    "observed": 0.019,
+    "threshold": 0.01,
+    "details": "Upper simultaneous bound for generating-parameter boundary hits.",
+    "recommendation": ""
+  },
+  {
+    "gate": "strict_window_drop_rate",
+    "pass": true,
+    "observed": 2.67176406443556e-05,
+    "threshold": 0.01,
+    "details": "Upper simultaneous bound for the likelihood's strict-window drop rate.",
+    "recommendation": ""
+  },
+  {
+    "gate": "strict_window_drop_increase",
+    "pass": true,
+    "observed": 2.67176406443556e-05,
+    "threshold": 0.01,
+    "details": "Upper simultaneous bound for the arm increase in strict-window drops.",
+    "recommendation": ""
+  },
+  {
+    "gate": "zero_mass_rate",
+    "pass": true,
+    "observed": 1.08701492809609e-05,
+    "threshold": 0.01,
+    "details": "Inclusive-window mass diagnostic; upper simultaneous bound.",
+    "recommendation": ""
+  },
+  {
+    "gate": "low_mass_arm_increase",
+    "pass": true,
+    "observed": 0.00263642228746311,
+    "threshold": 0.01,
+    "details": "Inclusive-window mass diagnostic; upper simultaneous bound.",
+    "recommendation": ""
+  }
+]

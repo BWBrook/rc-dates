@@ -2,7 +2,7 @@
 
 Barry W. Brook^a,*^, Rebecca Wheatley^a^, Christopher N. Johnson^a^, Alan N. Williams^b,c^, Sean Ulm^c^, Luke A. Yates^a^
 
-^a^ School of Natural Sciences, University of Tasmania, Hobart, TAS 7001, Australia and ARC Centre of Excellence for Australian Biodiversity and Heritage.
+^a^ School of Natural Sciences, University of Tasmania, Hobart, TAS 7001, Australia; ARC Centre of Excellence for Australian Biodiversity and Heritage.
 
 ^b^ EMM Consulting Pty Ltd, 20 Chandos Street, St Leonards, NSW 2065, Australia.
 

@@ -186,7 +186,7 @@ references:
     - year: 2020
   title: >-
     Challenges in sample processing within radiocarbon dating and their impact
-    in $^{14}$C-dates-as-data studies
+    in ¹⁴C-dates-as-data studies
   type: article-journal
   volume: '113'
 
@@ -495,7 +495,7 @@ references:
   page: '3'
   source: DOI.org (Crossref)
   title: >-
-    Towards robust demographic models: A systematic framework to $^{14}$C data
+    Towards robust demographic models: A systematic framework to ¹⁴C data
     aggregation and analysis with lessons from the southern Levant
   title-short: Towards Robust Demographic Models
   type: article-journal
@@ -824,7 +824,7 @@ references:
   issued:
     - year: 2016
   title: >-
-    Summed probability distribution of $^{14}$C dates suggests regional divergences
+    Summed probability distribution of ¹⁴C dates suggests regional divergences
     in the population dynamics of the Jomon period in eastern Japan
   type: article-journal
   volume: '11'
@@ -1679,7 +1679,7 @@ references:
   page: 665–679
   title: >-
     Modeling long-term human population dynamics using kernel density analysis
-    of $^{14}$C data in the Atacama desert (18°-21°S)
+    of ¹⁴C data in the Atacama desert (18°-21°S)
   type: article-journal
   volume: '65'
 
@@ -2729,7 +2729,7 @@ references:
   page: 199–202
   title: >-
     Inferential mistakes in population proxies: A response to Torfing's
-    "Neolithic population and summed probability distribution of $^{14}$C-dates"
+    "Neolithic population and summed probability distribution of ¹⁴C-dates"
   type: article-journal
   volume: '63'
 
@@ -2772,7 +2772,7 @@ references:
   source: DOI.org (Crossref)
   title: >-
     Directly modelling population dynamics in the South American Arid Diagonal
-    using $^{14}$C dates
+    using ¹⁴C dates
   type: article-journal
   URL: https://royalsocietypublishing.org/doi/10.1098/rstb.2019.0723
   volume: '376'
@@ -2829,7 +2829,7 @@ references:
   issued:
     - year: 2015
   page: 193–198
-  title: Neolithic population and summed probability distribution of $^{14}$C-dates
+  title: Neolithic population and summed probability distribution of ¹⁴C-dates
   type: article-journal
   volume: '63'
 
@@ -3006,7 +3006,7 @@ references:
     - year: 2014
   source: DOI.org (Crossref)
   title: >-
-    AustArch: A database of $^{14}$C and Non-$^{14}$C Ages from archaeological sites in
+    AustArch: A database of ¹⁴C and Non-¹⁴C Ages from archaeological sites in
     Australia - composition, compilation and review
   title-short: AustArch
   type: article-journal

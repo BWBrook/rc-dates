@@ -43,8 +43,12 @@ spd_to_tibble <- function(spd_obj) {
 fd_from_weighted_means <- function(df, bin_width = 100, min_age = 651, max_age = 11650) {
   import::from("dplyr", "mutate", "filter", "count", "arrange", "select")
   df |>
+    filter(
+      is.finite(.data$weighted_mean_calBP),
+      .data$weighted_mean_calBP >= min_age,
+      .data$weighted_mean_calBP <= max_age
+    ) |>
     mutate(bin = floor(.data$weighted_mean_calBP / bin_width) * bin_width) |>
-    filter(bin >= min_age & bin <= max_age) |>
     count(bin, name = "n") |>
     mutate(value = n / sum(n) / bin_width) |>
     select(bin, value) |>
@@ -63,7 +67,8 @@ kde_from_weighted_means <- function(df, from = 651, to = 11650, bw = 100, n = 51
   import::from("stats", "density")
   import::from("tibble", "tibble")
   x <- df$weighted_mean_calBP
-  if (length(x) < 2 || all(is.na(x))) {
+  x <- x[is.finite(x) & x >= from & x <= to]
+  if (length(x) < 2) {
     return(tibble(calBP = numeric(0), density = numeric(0)))
   }
   kd <- density(x, from = from, to = to, bw = bw, n = n)

@@ -1,0 +1,27 @@
+rc-dates paired observation-noise sensitivity
+schema_version: 1
+generation_completed_utc: 2026-07-26 09:48:13 UTC
+r_version: R version 4.5.3 (2026-03-11)
+rcarbon_version: 1.5.2
+true_model: uni
+site_subsampling_proportion: 0.75
+paired_replicates: 1000
+master_seed: 1234
+strategies: r_all,r_1,r_3,r_5
+sensitivity_design: paired_curve_mean_vs_realised_v1
+assay_equation: rCRA=round(ccCRA+Z*sqrt(ccError^2+quoted_error^2))
+window_exclusion_rule: drop selected observations with zero posterior mass in 651-11650
+rng_kind: L'Ecuyer-CMRG
+stream_mapping: structural=current; realised_assay=nextRNGStream(structural)
+input_md5: 8d30b24e98088a7808c234d6b77ac382
+renv_lock_md5: 96135a2d8be3bbf3d5e6efe11890188f
+production_source_md5: 88b1108daa88581ebb444eea73752f65
+sensitivity_source_md5: 215747272785a98f6480987b40a586ff
+legacy_helper_md5: 0a55f28d18bab310a68235becb3561ec
+runner_source_md5: 2ee72940869356d9054b5e4b7c6e19fe
+container_recipe_md5: 3b2b85ce72c4b7cd30200607d9ae8da9
+container_install_md5: c6f9e069f1cd8d54883d08cd30f76487
+container_image_id: sha256:01f5e221d0f3b70ccb3edd0fd6556ffd1c645784e98e147e81034866b9137777
+output_md5: 0c4dddfdb87c3cda2ca94e664f253281
+pair_manifest_md5: 1811569885e96b1c44d162245f624ed3
+packages: digest=0.6.39; fitdistrplus=1.2.6; rcarbon=1.5.2; readr=2.2.0

@@ -21,6 +21,26 @@ test_that("fd_from_weighted_means produces a density by bins", {
   expect_true(all(fd$value >= 0))
 })
 
+test_that("fd_from_weighted_means filters raw ages before legacy-anchored binning", {
+  ages <- tibble::tibble(
+    weighted_mean_calBP = c(
+      650, 650.9, 651, 699, 700,
+      11649.9, 11650, 11650.1
+    )
+  )
+
+  fd <- fd_from_weighted_means(
+    ages,
+    bin_width = 100,
+    min_age = 651,
+    max_age = 11650
+  )
+
+  expect_equal(fd$bin, c(600, 700, 11600))
+  expect_equal(fd$value, c(2, 1, 2) / 5 / 100)
+  expect_equal(sum(fd$value * 100), 1)
+})
+
 test_that("kde_from_weighted_means returns a smooth density", {
   df <- load_austarch_data("inst/extdata/austarch_example.csv") |>
     filter_austarch_initial() |>
@@ -33,3 +53,39 @@ test_that("kde_from_weighted_means returns a smooth density", {
   expect_true(all(kd$density >= 0))
 })
 
+test_that("kde_from_weighted_means uses only finite ages inside the requested window", {
+  ages <- tibble::tibble(
+    weighted_mean_calBP = c(
+      650, 650.9, 651, 699, 700,
+      11649.9, 11650, 11650.1, NA_real_, Inf
+    )
+  )
+  valid_ages <- c(651, 699, 700, 11649.9, 11650)
+  expected <- stats::density(
+    valid_ages,
+    from = 651,
+    to = 11650,
+    bw = 100,
+    n = 64
+  )
+
+  observed <- kde_from_weighted_means(
+    ages,
+    from = 651,
+    to = 11650,
+    bw = 100,
+    n = 64
+  )
+
+  expect_equal(observed$calBP, expected$x)
+  expect_equal(observed$density, expected$y)
+})
+
+test_that("kde_from_weighted_means returns empty when fewer than two in-window ages remain", {
+  ages <- tibble::tibble(weighted_mean_calBP = c(650, 651, 11650.1, NA_real_))
+
+  observed <- kde_from_weighted_means(ages, from = 651, to = 11650)
+
+  expect_equal(nrow(observed), 0)
+  expect_equal(names(observed), c("calBP", "density"))
+})

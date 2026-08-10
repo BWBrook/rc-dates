@@ -26,6 +26,7 @@ inst/extdata/*.gz
 
 # build / checks
 .Rcheck/
+tmp/final-review-package-*/
 
 # Global CSV ignore was masking versioned examples. Keep data/ ignored but
 # explicitly allow tracked sample/manifests.
@@ -33,6 +34,26 @@ inst/extdata/*.gz
 !inst/extdata/*.csv
 !metadata/*.csv
 !out/production/*.csv
+!out/empirical-sampling/*.csv
+
+# Keep final manuscript-repair evidence visible while excluding run logs.
+!out/empirical-sampling/*.txt
+!out/sensitivity/observation-noise/*.rds
+!out/sensitivity/observation-noise/*.csv
+!out/sensitivity/observation-noise/*.txt
+!out/sensitivity/observation-noise/*.json
+!out/sensitivity/observation-noise/*.md
+!out/sensitivity/observation-noise/summary/*.rds
+!out/sensitivity/observation-noise/summary/*.csv
+!out/sensitivity/observation-noise/summary/*.txt
+!out/sensitivity/observation-noise/summary/*.json
+!out/sensitivity/observation-noise/summary/*.md
+!out/sensitivity/observation-noise/estimand-aligned-v2/*.rds
+!out/sensitivity/observation-noise/estimand-aligned-v2/*.csv
+!out/sensitivity/observation-noise/estimand-aligned-v2/*.txt
+!out/sensitivity/observation-noise/estimand-aligned-v2/*.json
+!out/sensitivity/observation-noise/estimand-aligned-v2/*.md
+out/sensitivity/observation-noise/logs/
 
 # renv
 renv/library/

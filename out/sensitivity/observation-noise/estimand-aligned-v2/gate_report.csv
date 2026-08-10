@@ -1,0 +1,4 @@
+gate,pass,pooled_max,truth_max,threshold_pooled,threshold_truth,pooled_margin,truth_margin,details
+accuracy_difference,TRUE,0.020333333333333335,0.03,0.03,0.05,0.009666666666666664,0.020000000000000004,Two-sided max-deviation interval on paired difference estimands only.
+ose_difference,TRUE,0.024,0.038,0.03,0.05,0.005999999999999998,0.012000000000000004,Two-sided max-deviation interval on paired difference estimands only.
+boundary_difference,TRUE,0.008,0.008,0.01,0.01,0.002,0.002,One-sided upper bound on maximum positive boundary difference.

@@ -6,6 +6,24 @@ The format is based on Keep a Changelog.
 
 ## [Unreleased]
 ### Added
+- **2026-08-09:** Archived the cold external peer-review report verbatim under
+  `manuscript/reviews/` so its scientific recommendations and line edits can be
+  triaged against the source and evidence before revision.
+- **2026-08-09:** Added a source-component external peer-review bundle with an
+  explicit anonymous/editor-only boundary, a cold-review brief, an expanded
+  validated reproducibility repository, and file-level checksums.
+- **2026-07-26:** Added exact-R entry points for rebuilding empirical Figures
+  1-2 and for running and summarising the paired observation-noise sensitivity,
+  with final evidence outputs made visible while transient logs remain ignored.
+- **2026-07-26:** Added modular empirical-figure, observation-noise, and
+  sensitivity-summary sources with resumable 3-model x 3-intensity runners.
+  The completed 1,000-pair matrix produced small point shifts but a formal
+  15/18 FAIL because three simultaneous gates did not pass.
+- **2026-07-26:** Added a separately versioned, explicitly post-unblinding v2
+  diagnostic for the three v1 failures. It uses difference-only within-metric
+  intervals, 50,000 bootstrap resamples, an independent stability seed, exact
+  checksum inventories, and retains the original v1 FAIL. All three v2
+  diagnostic gates passed under both seeds.
 - Added a deterministic, checkpointed R 4.5.3 production simulation runner and
   renderer for the complete three-model by three-intensity experiment.
 - Added nine validated 1,000-replicate production RDS files, their runtime
@@ -40,6 +58,32 @@ The format is based on Keep a Changelog.
   compendium and manuscript workflow from a fresh MacBook clone.
 
 ### Changed
+- **2026-07-26:** Regenerated empirical Figures 1-2 from the repaired
+  651-11,650 cal BP boundary logic; the 1,000-realisation primary run and
+  independent-seed/nested convergence checks passed.
+- **2026-07-26:** Scoped realised observation-noise comparisons to all dates
+  and random-1, random-3, and random-5; oldest, youngest, and bracketed
+  extremes remain expectation-only scenarios.
+- **2026-07-26:** Reconciled the manuscript, Supplementary Information,
+  figure captions, cover letter, highlights, and submission checklist with the
+  completed paired sensitivity. The text retains the v1 15/18 FAIL and reports
+  the post-unblinding v2 PASS as qualified, estimand-aligned evidence rather
+  than as a retroactive robustness pass.
+- Completed a submission-level scientific and editorial hard review of the
+  manuscript, Supplementary Information, cover letter, highlights, captions,
+  and submission checklist. The revised text now describes the implemented
+  independent-within-site and curve-mean observation design, removes the
+  unsupported universal three-date and "span-preserving" claims, distinguishes
+  visual summaries from inferential results, and corrects the
+  bracketed-versus-random-1 comparison.
+- Updated the JAS packet for the journal's current double-anonymized review
+  process: the manuscript build omits identifying author, funding, and CRediT
+  material while the separate title page retains it. The checklist now reflects
+  the journal's initial Word-or-PDF submission policy and records the remaining
+  scientific and repository-release blockers.
+- Tightened the cover letter so its editable DOCX remains one page, and
+  replaced empty-base superscript mathematics with Unicode in text and cited
+  titles so `¹⁴C`, `yr⁻¹`, and `yr⁻²` render cleanly in both PDF and DOCX.
 - Completed a second AI-writing and evidence-alignment pass over the main text,
   display legends, Supplementary Information, highlights, and cover letter;
   the main text is about 3,600 words, or about 4,200 including all five figure
@@ -225,6 +269,20 @@ The format is based on Keep a Changelog.
   matches the validated local test path.
 
 ### Fixed
+- **2026-07-26:** Hardened the estimand-aligned bootstrap to require identical
+  ordered simulation identifiers in every cell, exercised genuinely distinct
+  seeds in the stability tests, and regenerated the checksum-locked v2
+  evidence without changing its numerical results.
+- **2026-07-26:** Extended the reviewer-package builder to require, validate,
+  and distribute the complete v2 evidence and rebuild path while independently
+  preserving the original v1 decision.
+- **2026-07-26:** Isolated reviewer-package validation exposed and fixed a
+  recursive directory-inventory bug in `scripts/build_review_package.R`;
+  `include.dirs = TRUE` now enforces the exact frozen-source and summary
+  directory boundaries.
+- **2026-07-26:** Harmonised empirical FD and KDE inputs by filtering finite
+  raw weighted means inclusively to 651-11,650 cal BP before binning or kernel
+  construction.
 - Corrected Figure 5 aggregation so ambiguous OSE selections are summarised
   once per replicate, regenerated the production artefacts, and restored the
   corrected display and its supported claims to the manuscript.

@@ -1,0 +1,11 @@
+strategy,strategy_label,proportion,n_samples,iterations,seed
+oldest,oldest,0.5,1,1000,1234
+oldest,oldest,1,1,1,1234
+youngest,youngest,0.5,1,1000,1234
+youngest,youngest,1,1,1,1234
+bracketed,bracketed,0.5,2,1000,1234
+bracketed,bracketed,1,2,1,1234
+random,random-1,0.5,1,1000,1234
+random,random-1,1,1,1000,1234
+random,random-5,0.5,5,1000,1234
+random,random-5,1,5,1000,1234

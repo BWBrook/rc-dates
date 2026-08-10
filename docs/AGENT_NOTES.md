@@ -1,5 +1,136 @@
 # AGENT_NOTES
 
+## 2026-08-09
+- Created a cold external peer-review dress-rehearsal bundle containing the
+  anonymous manuscript, captions, Supplementary Information, display items,
+  highlights, build/reference inputs, and the expanded validated reviewer
+  repository. Identifying cover-letter, title-page, author, and deposit
+  materials are isolated in a clearly marked editor-only directory.
+- Excluded assembled manuscript and Supplementary Information PDF/DOCX files;
+  the only included PDFs are native figure assets. The reviewer-facing
+  directories passed an identifying-string scan, and the final 201-file ZIP
+  passed archive integrity and internal SHA-256-manifest verification.
+- Imported the resulting adversarial external review verbatim at
+  `manuscript/reviews/rc-dates_external_review_report_2026-08-09.md` for
+  author triage. Its source and repository copy have identical SHA-256
+  `fc40f74a7b8b32c44610ae426a60e904917db4cadc4c733e91ceb1958451bb94`;
+  no recommended manuscript or analysis changes were applied during intake.
+
+## 2026-07-26
+- Initially integrated the empirical Figure 1-2 renderer and paired
+  observation-noise
+  sensitivity into the root Makefile, README, pipeline summary, and development
+  guide without changing manuscript prose or the package builder.
+- Recorded the repaired empirical boundary contract: finite raw weighted means
+  are filtered inclusively to 651-11,650 cal BP before FD binning and KDE
+  construction. The 1,000-realisation primary render and independent-seed/nested
+  convergence checks passed.
+- Documented the focused paired sensitivity scope (all dates and random-1,
+  random-3, and random-5). Oldest, youngest, and bracketed extremes remain
+  expectation-only production scenarios.
+- Reconciled the manuscript, Supplementary Information, figure captions, cover
+  letter, highlights, and checklist with the completed 3-model x 3-intensity x
+  1,000-pair matrix. Accuracy and support point shifts were small and the
+  substantive ranking, bias, RMSE, mass, strategy-contrast, and likelihood
+  gates passed. Three simultaneous gates did not pass, so the formal decision
+  remains FAIL (15/18), not an overall robustness pass; no 2,000-pair extension
+  was run.
+- Independently reviewed the v1 inferential family and retained its 15/18 FAIL.
+  Added a separately versioned, explicitly post-unblinding v2 diagnostic over
+  the 96 accuracy differences, 96 support differences, and 72 directional
+  boundary differences. Under exact R 4.5.3, primary and independent
+  50,000-resample bootstraps gave identical critical widths and passed all
+  three aligned gates. v2 is reported as qualified supporting evidence, not as
+  a replacement for v1.
+- Hardened the v2 implementation after independent review: every bootstrap
+  cell must now share identical ordered simulation IDs, and the stability test
+  constructs genuinely distinct seed-specific metric objects. The refreshed
+  exact-R evidence retained the same widths, margins, and gate decisions.
+- The complete R suite passed under R 4.5.3 in the validated p2 container.
+  `make manuscript-check` also passed lint, citation, author-injection, and
+  document-build checks. The 15-page PDF and 20-page LibreOffice rendering of
+  the DOCX were inspected without blank or clipped pages.
+- Isolated reviewer-package validation exposed and fixed a recursive
+  directory-inventory bug in `scripts/build_review_package.R`;
+  `include.dirs = TRUE` now enforces the exact frozen-source and summary
+  directory boundaries. The builder now also enforces the exact v2
+  files/schema/checksums and supplies a non-destructive rebuild target.
+- Built and independently validated the final 178-file de-identified review
+  package under exact R 4.5.3. Package tests, the 38-target manifest, a clean
+  158-target pipeline rerun, checksum verification, anonymity scanning, and
+  the packaged v2 rebuild all passed. The supplied archive SHA-256 is
+  `ba732e9c326757843112b4ccf49be26ff396982c413de9ff23e8a76ea6b95822`.
+- Rebuilt the complete submission packet from that validated archive and
+  checked every PDF, DOCX, and ZIP. PDF and LibreOffice renders had no blank or
+  clipped pages; the cover letter was tightened so its editable DOCX remains
+  one page.
+- Narrowed ignore rules so empirical summaries and final observation-noise
+  evidence can be versioned while sensitivity run logs and the local validated
+  review-package handoff directory remain ignored.
+
+## 2026-07-24
+- Performed a final submission-level review using independent scientific,
+  editorial, and submission/reproducibility passes, followed by direct checks
+  against the manuscript source, production code, archived empirical table,
+  locked simulation outputs, and current JAS author guidance.
+- Found that `simulate_population_data_set()` groups independent regional age
+  draws into arbitrary site bundles: site identity controls date count and
+  sub-sampling but not occupation onset, duration, stratigraphy, or temporal
+  dependence. The random-3 result therefore does not test an
+  oldest + youngest + intermediate field design or establish a universal
+  three-date minimum.
+- Found that the simulation converts latent calendar ages to the SHCal20
+  central conventional age (`ccCRA`), assigns a simulated reported error, and
+  recalibrates without drawing a realised noisy conventional age. This
+  suppresses between-assay variation and makes the absolute recovery and
+  support values conditional on assays at the calibration-curve expectation.
+- Verified directly from all nine production RDS files that 100% oldest
+  sampling always selects uniform, 100% youngest always selects exponential,
+  and 100% bracketed selects exponential for both increasing truths. Corrected
+  the false claim that bracketed sampling generally recovers models more
+  reliably than random-1 and disclosed the deterministic classification
+  collapse hidden by pooled one-third/two-thirds values.
+- Verified from `data/austarch_filtered.csv` and the summary functions that the
+  empirical KDE uses 87 weighted means outside 651-11,650 cal BP, while the FD
+  drops 17 valid means in 651-699 and admits two above 11,650. The submission
+  checklist now blocks release until common-window filtering, boundary tests,
+  and regeneration of Figures 1-2 are complete.
+- Applied a surgical prose revision across the main manuscript, SI, cover
+  letter, highlights, and Figure 2 caption. The text now separates visual from
+  inferential findings, discloses the conditional simulation design and
+  optimiser saturation, and retains the locked figures and numerical outputs
+  unchanged pending analysis repair.
+- Rechecked the live JAS Guide for Authors: review is double-anonymized, new
+  submissions may use one Word or PDF file, highlights require 3-5 bullets of
+  at most 85 characters, and manuscripts require line numbering. Removed
+  identifying author, funding, and CRediT content from the manuscript build,
+  retaining it in the separate title page.
+- The revised abstract is 202 words; the source is approximately 3,700 words
+  from Abstract through Discussion and 4,868 including all five figure
+  legends. All five revised highlight bullets are 77 characters or fewer.
+- Shortened the cover letter after LibreOffice showed that the editable DOCX
+  spilled only the signature block onto a second page. The rebuilt PDF and
+  DOCX render as one page.
+- Replaced empty-base inline superscript mathematics in the manuscript, SI,
+  and cited reference titles with Unicode superscripts. This removed visible
+  hollow-square glyphs before `¹⁴C`, `yr⁻¹`, and `yr⁻²` in the editable DOCX
+  while preserving the direct PDF rendering.
+- Final verification: `make manuscript-check` passed config validation, lint,
+  the citation audit (`Unknown keys: 0`), author-metadata checks, the DOCX
+  build, and all 61 tests; `make submission-build` passed. Direct and
+  LibreOffice-rendered PDFs passed `qpdf --check`, every DOCX passed
+  `unzip -tq`, the editable cover/highlights/title files rendered as one page,
+  and visual inspection found no blank pages or clipped display items.
+- Rechecked the immutable inputs to the review: every entry in
+  `out/production/SHA256SUMS` passed, and both copies of
+  `rc_review_package.zip` passed `unzip -tq` with the same SHA-256
+  (`88256bf8a93e1b27757c189ae2e959417558ae5e555dafdf5a27c0b76b114d5c`).
+- The AI-writing scanner's nominal high risk for the manuscript and SI was
+  driven by legitimate Markdown headings and scientific list structure:
+  vocabulary hits were 1 in 3,666 main-text words and 0 in 2,087 SI words,
+  with no transition-template hits. Manual review found no material
+  AI-writing signature requiring further stylistic alteration.
+
 ## 2026-07-10
 - Repeated the manuscript review in two passes: first with the
   `audit-ai-writing` skill for scientific tone and AI-writing surface cues,

@@ -5,6 +5,70 @@ abort_population_simulation <- function(message, class) {
   abort(message, class = class)
 }
 
+#' Normalize the synthetic radiocarbon observation model
+#' @param observation_model Either `"curve_mean"` or `"realised"`.
+#' @return A validated observation-model label.
+#' @export
+normalize_population_observation_model <- function(observation_model) {
+  observation_model <- as.character(observation_model)
+  valid <- c("curve_mean", "realised")
+  if (length(observation_model) != 1L || is.na(observation_model) ||
+      !observation_model %in% valid) {
+    abort_population_simulation(
+      paste(
+        "Population observation model must be one of:",
+        paste(valid, collapse = ", ")
+      ),
+      "rcdates_sim_spec_error"
+    )
+  }
+  observation_model
+}
+
+#' Draw realised conventional radiocarbon ages on an isolated RNG stream
+#' @param calendar_age Latent calendar ages in cal BP.
+#' @param errors Simulated quoted one-sigma laboratory errors.
+#' @param structure_rng_state L'Ecuyer-CMRG state to preserve for sampling.
+#' @return Integer realised conventional radiocarbon ages.
+#' @export
+draw_realised_population_cra <- function(
+  calendar_age,
+  errors,
+  structure_rng_state
+) {
+  if (length(structure_rng_state) != 7L) {
+    abort_population_simulation(
+      "Realised assays require an L'Ecuyer-CMRG structural RNG state.",
+      "rcdates_sim_spec_error"
+    )
+  }
+  assay_rng_state <- tryCatch(
+    parallel::nextRNGStream(structure_rng_state),
+    error = function(error) {
+      abort_population_simulation(
+        paste("Could not derive the realised-assay RNG stream:", conditionMessage(error)),
+        "rcdates_sim_spec_error"
+      )
+    }
+  )
+
+  draw_on_assay_stream <- function() {
+    assign(".Random.seed", assay_rng_state, envir = .GlobalEnv)
+    on.exit(
+      assign(".Random.seed", structure_rng_state, envir = .GlobalEnv),
+      add = TRUE
+    )
+    rcarbon::uncalibrate(
+      calendar_age,
+      CRAerrors = errors,
+      roundyear = TRUE,
+      calCurves = "shcal20"
+    )$rCRA
+  }
+
+  as.numeric(draw_on_assay_stream())
+}
+
 #' Validate the provenance fingerprint attached to a simulation checkpoint
 #' @param results Checkpoint data frame.
 #' @param expected Named provenance list for the requested production run.
@@ -294,13 +358,19 @@ prepare_population_simulation <- function(
   )
 }
 
-prepare_population_likelihood_data <- function(grids, low, up) {
+prepare_population_likelihood_data <- function(
+  grids,
+  low,
+  up,
+  drop_empty = FALSE
+) {
   trimmed <- lapply(grids, function(grid) {
     keep <- grid$calBP > low & grid$calBP < up
     ages <- grid$calBP[keep]
     probabilities <- grid$PrDens[keep]
     total <- sum(probabilities)
     if (length(ages) == 0L || !is.finite(total) || total <= 0) {
+      if (isTRUE(drop_empty)) return(NULL)
       abort_population_simulation(
         "A calibrated date has no probability within the analysis window.",
         "rcdates_sim_result_error"
@@ -308,12 +378,21 @@ prepare_population_likelihood_data <- function(grids, low, up) {
     }
     list(age = ages, probability = probabilities / total)
   })
+  dropped <- vapply(trimmed, is.null, logical(1))
+  trimmed <- trimmed[!dropped]
+  if (length(trimmed) < 2L) {
+    abort_population_simulation(
+      "Fewer than two calibrated dates retain probability inside the analysis window.",
+      "rcdates_sim_result_error"
+    )
+  }
   lengths <- vapply(trimmed, function(x) length(x$age), integer(1))
   list(
     age = unlist(lapply(trimmed, `[[`, "age"), use.names = FALSE),
     probability = unlist(lapply(trimmed, `[[`, "probability"), use.names = FALSE),
     group = rep.int(seq_along(trimmed), lengths),
-    n_dates = length(trimmed)
+    n_dates = as.integer(length(trimmed)),
+    n_dropped = as.integer(sum(dropped))
   )
 }
 
@@ -397,7 +476,13 @@ population_pointwise_aic <- function(
   )
 }
 
-simulate_population_data_set <- function(true_model, prop, specification) {
+simulate_population_data_set <- function(
+  true_model,
+  prop,
+  specification,
+  observation_model = "curve_mean"
+) {
+  observation_model <- normalize_population_observation_model(observation_model)
   n_sites <- specification$n_sites
   dates_per_site <- rtnbinom(
     n_sites,
@@ -424,8 +509,19 @@ simulate_population_data_set <- function(true_model, prop, specification) {
     ),
     uni = stats::runif(n_dates, min = specification$min_age, max = specification$max_age)
   )
-  uncalibrated <- rcarbon::uncalibrate(calendar_age, calCurves = "shcal20")$ccCRA
-  errors <- simulate_error(uncalibrated, specification$fit_age_to_error)
+  uncalibration <- rcarbon::uncalibrate(calendar_age, calCurves = "shcal20")
+  expected_uncalibrated <- uncalibration$ccCRA
+  errors <- simulate_error(expected_uncalibrated, specification$fit_age_to_error)
+  structure_rng_state <- get(".Random.seed", envir = .GlobalEnv, inherits = FALSE)
+  uncalibrated <- if (identical(observation_model, "realised")) {
+    draw_realised_population_cra(
+      calendar_age = calendar_age,
+      errors = errors,
+      structure_rng_state = structure_rng_state
+    )
+  } else {
+    expected_uncalibrated
+  }
   calibrated <- rcarbon::calibrate(
     x = uncalibrated,
     errors = errors,
@@ -464,10 +560,13 @@ simulate_population_data_set <- function(true_model, prop, specification) {
 
   tibble::tibble(
     site = paste0("site_", site_index),
+    site_treated = as.integer(is_subsampled),
     age_calendar = calendar_age,
+    age_uncalibrated_expected = expected_uncalibrated,
     age_uncalibrated = uncalibrated,
     error = errors,
     age_calibrated_median = median_age,
+    observation_model = observation_model,
     r_1 = selected$r_1,
     r_3 = selected$r_3,
     r_5 = selected$r_5,
@@ -485,12 +584,18 @@ evaluate_population_models <- function(
   strategy,
   prop,
   sim,
-  specification
+  specification,
+  drop_empty = FALSE
 ) {
   grids <- simulated_data$grid[as.logical(simulated_data[[strategy]])]
   low <- specification$min_age
   up <- specification$max_age
-  likelihood_data <- prepare_population_likelihood_data(grids, low, up)
+  likelihood_data <- prepare_population_likelihood_data(
+    grids,
+    low,
+    up,
+    drop_empty = drop_empty
+  )
   linear_bounds <- c(1e-12, 2 / (up - low)^2) * 1e6
   exponential_bounds <- c(1e-10, 1e-3) * 1e3
 
@@ -567,7 +672,12 @@ evaluate_population_models <- function(
   selected$true <- true_model
   selected$prop <- prop
   selected$strategy <- strategy
-  selected[, c("sim", "true", "prop", "strategy", "type", "model", "min", "ose", "bias")]
+  selected$n_observations <- likelihood_data$n_dates
+  selected$n_dropped <- likelihood_data$n_dropped
+  selected[, c(
+    "sim", "true", "prop", "strategy", "type", "model", "min", "ose", "bias",
+    "n_observations", "n_dropped"
+  )]
 }
 
 #' Run one deterministic production population-model simulation replicate
@@ -585,6 +695,7 @@ run_population_simulation_replicate <- function(
   specification,
   master_seed = 1234L
 ) {
+  requireNamespace("rcarbon", quietly = TRUE)
   seed <- production_simulation_seed(true_model, prop, sim, master_seed)
   set.seed(seed, kind = "L'Ecuyer-CMRG")
   simulated_data <- simulate_population_data_set(true_model, prop, specification)

@@ -1,0 +1,4 @@
+gate,primary_pass,stability_pass,status,primary_width,stability_width,primary_pooled_max,stability_pooled_max,primary_truth_max,stability_truth_max,primary_pooled_margin,stability_pooled_margin,primary_truth_margin,stability_truth_margin
+accuracy_difference,TRUE,TRUE,AGREE,0.015,0.015,0.020333333333333335,0.020333333333333335,0.03,0.03,0.009666666666666664,0.009666666666666664,0.020000000000000004,0.020000000000000004
+ose_difference,TRUE,TRUE,AGREE,0.019,0.019,0.024,0.024,0.038,0.038,0.005999999999999998,0.005999999999999998,0.012000000000000004,0.012000000000000004
+boundary_difference,TRUE,TRUE,AGREE,0.008,0.008,0.008,0.008,0.008,0.008,0.002,0.002,0.002,0.002

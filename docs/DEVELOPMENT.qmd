@@ -37,6 +37,63 @@ To visualize the DAG:
 targets::tar_visnetwork()
 ```
 
+## Manuscript-scale reproducibility
+
+These opt-in workflows are outside the default `{targets}` demo pipeline.
+
+### Empirical Figures 1-2
+
+Under R 4.5.3, run:
+
+```bash
+make empirical-figures
+```
+
+This uses `scripts/render_manuscript_methods_figures.R` and
+`R/manuscript_methods_figures.R` to replace
+`manuscript/figures/fig_1.png` and `fig_2.png` and to write summary CSVs and
+metadata under `out/empirical-sampling/`. Finite raw weighted means are
+filtered inclusively to 651-11,650 cal BP before either FD binning or KDE
+construction. The default is 1,000 stochastic realisations with seed 1234; the
+primary run and independent-seed/nested convergence checks passed.
+
+### Paired observation-noise sensitivity
+
+The full Docker-backed matrix is resumable but expensive:
+
+```bash
+make observation-noise-rerun
+make observation-noise-summary
+make observation-noise-estimand-aligned
+```
+
+The rerun target launches three generating models x proportions 0.5, 0.75,
+and 1, with 1,000 paired curve-mean and realised-noise replicates by default.
+Its Docker wrapper independently verifies that the selected image provides R
+4.5.3. Runtime settings can be overridden with the documented
+`RC_DATES_SENSITIVITY_*` environment variables in
+`scripts/run_observation_noise_sensitivity_matrix.sh`.
+
+The paired replicate design lives in `R/observation_noise_sensitivity.R`; the
+validated gate summaries live in `R/observation_noise_summaries.R`. The matrix
+wrapper invokes `scripts/run_observation_noise_sensitivity.R` once per
+model-by-proportion scenario.
+
+The focused comparison covers all dates and random-1, random-3, and random-5
+only. Oldest, youngest, and bracketed extreme strategies remain
+expectation-only production scenarios. Run the summary target only after all
+nine checkpoints are complete; it validates the matrix, writes final
+CSV/RDS/JSON/Markdown gate evidence under
+`out/sensitivity/observation-noise/summary/`, and exits non-zero when a
+scientific gate fails. The completed original v1 screen remains FAIL (15/18).
+The estimand-aligned target retains v1 and writes a separately labelled,
+explicitly post-unblinding v2 diagnostic under
+`out/sensitivity/observation-noise/estimand-aligned-v2/`. It uses two-sided
+within-metric intervals over the accuracy and support differences and a
+one-sided upper bound over boundary differences. At 50,000 resamples, both the
+primary and independent bootstrap seeds passed the three aligned v2 gates;
+this does not retroactively change v1.
+
 ## Docs
 
 Render all documents in `docs/`:
@@ -98,7 +155,9 @@ still giving fresh clones a visible reproduction path.
 - Pure functions; no `setwd()` or global state. Use `here()` for paths.
 - Explicit imports via `import::from()` inside each function, or fully qualified calls.
 - Errors via `rlang::abort()` with typed classes; user messages via `cli`.
-- Use `{targets}` for all pipelines; no ad‑hoc scripts writing files.
+- Use `{targets}` for the default compendium DAG. Keep manuscript-scale
+  evidence generation in the validated opt-in entry points documented above,
+  rather than untracked ad-hoc scripts.
 
 ## Testing (non‑package compendium)
 

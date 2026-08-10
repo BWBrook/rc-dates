@@ -1,0 +1,5 @@
+metric,scope,true,prop,strategy,reference_strategy,type,arm,estimate,ci_low,ci_high,n_clusters
+accuracy_advantage_over_r1,pooled,NA,1,r_3,r_1,l1,difference,0.08000000000000002,0.04300000000000001,0.11700000000000002,1000
+accuracy_advantage_over_r1,pooled,NA,1,r_5,r_1,l1,difference,0.11433333333333334,0.07733333333333334,0.15133333333333335,1000
+accuracy_advantage_over_r1,pooled,NA,1,r_3,r_1,l2,difference,0.07866666666666668,0.04166666666666667,0.11566666666666668,1000
+accuracy_advantage_over_r1,pooled,NA,1,r_5,r_1,l2,difference,0.11300000000000002,0.07600000000000001,0.15000000000000002,1000

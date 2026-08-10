@@ -27,6 +27,25 @@ test_that("production simulation seeds are stable common-random-number pairs", {
   )
 })
 
+test_that("the production simulation module carries its observation-model dependencies", {
+  module <- new.env(parent = globalenv())
+  sys.source(
+    file.path("..", "..", "R", "population_simulation_production.R"),
+    envir = module
+  )
+
+  expect_true(exists(
+    "normalize_population_observation_model",
+    envir = module,
+    inherits = FALSE
+  ))
+  expect_true(exists(
+    "draw_realised_population_cra",
+    envir = module,
+    inherits = FALSE
+  ))
+})
+
 test_that("production result validation enforces one complete 42-row block per simulation", {
   results <- expand.grid(
     sim = 1:2,

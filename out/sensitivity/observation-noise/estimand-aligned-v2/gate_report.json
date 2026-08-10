@@ -1,0 +1,35 @@
+[
+  {
+    "gate": "accuracy_difference",
+    "pass": true,
+    "pooled_max": 0.0203333333333333,
+    "truth_max": 0.03,
+    "threshold_pooled": 0.03,
+    "threshold_truth": 0.05,
+    "pooled_margin": 0.00966666666666666,
+    "truth_margin": 0.02,
+    "details": "Two-sided max-deviation interval on paired difference estimands only."
+  },
+  {
+    "gate": "ose_difference",
+    "pass": true,
+    "pooled_max": 0.024,
+    "truth_max": 0.038,
+    "threshold_pooled": 0.03,
+    "threshold_truth": 0.05,
+    "pooled_margin": 0.006,
+    "truth_margin": 0.012,
+    "details": "Two-sided max-deviation interval on paired difference estimands only."
+  },
+  {
+    "gate": "boundary_difference",
+    "pass": true,
+    "pooled_max": 0.008,
+    "truth_max": 0.008,
+    "threshold_pooled": 0.01,
+    "threshold_truth": 0.01,
+    "pooled_margin": 0.002,
+    "truth_margin": 0.002,
+    "details": "One-sided upper bound on maximum positive boundary difference."
+  }
+]

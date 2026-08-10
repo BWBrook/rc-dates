@@ -1,0 +1,29 @@
+rc-dates empirical manuscript Figures 1-2
+generation_completed_utc: 2026-07-26 08:49:49 UTC
+r_version: R version 4.5.3 (2026-03-11)
+package_versions: digest=0.6.39;dplyr=1.2.0;ggplot2=4.0.2;rcarbon=1.5.2;readr=2.2.0;rlang=1.1.7;scales=1.4.0;withr=3.0.2
+seed: 1234
+stochastic_iterations: 1000
+analysis_window_cal_bp: 651-11650 inclusive
+fd_window_rule: raw weighted means filtered before legacy-anchored 100-year bins
+fd_display_smoothing: two-bin centred running mean in Figures 1 and 2
+kde_window_rule: finite weighted means filtered before Gaussian KDE
+kde_boundary_rule: Gaussian kernels are not edge-corrected; aggregate mass is renormalised
+spd_smoothing: 100-year centred running mean with unsmoothed edge fill
+fd_figure1_smoothing: two-bin centred running mean with unsmoothed edge fill
+kde_bandwidth_years: 100
+weighted_means_outside_window: 87
+kde_included_kernel_mass_min: 0.536180988102726
+kde_included_kernel_mass_mean: 0.983054476028142
+kde_included_kernel_mass_below_0.95: 60
+input_md5: 8d30b24e98088a7808c234d6b77ac382
+austarch_filter_source_md5: 83b975cf029420e81c4c72985fe4801a
+model_fit_source_md5: d6b94ad17f27d6a24925cb4ba9b30897
+figure_source_md5: 860e6ccca97cbd1601a03803cb09881c
+runner_source_md5: a381856e51da86b16329b58862fc7f8e
+figure1_md5: f15ad2377d4757611c03be16f7914ed4
+figure2_md5: c750d8dffe1123ac244687a1c6453879
+baseline_summary_md5: b387ce43f0cfe42937329dab374fb7c1
+sampling_summary_md5: 4185a373492f37f1f40c55b2c39eebb0
+scenario_summary_md5: db6c51f87b67628b90f45f1710e8e0b2
+effective_count_summary_md5: 0b79cd28239dc0545fc49b2942f71846

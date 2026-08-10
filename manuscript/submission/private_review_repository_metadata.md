@@ -1,6 +1,7 @@
 # Private Review Repository Metadata
 
-Status: draft template for the final manual upload. Replace bracketed fields after the archive is locked.
+Status: draft template for the final manual upload. Replace the repository
+fields after deposit.
 
 ## Core metadata
 
@@ -26,7 +27,7 @@ Archive file:
 : `rc_review_package.zip`
 
 Archive SHA256:
-: [ARCHIVE_SHA256]
+: ba732e9c326757843112b4ccf49be26ff396982c413de9ff23e8a76ea6b95822
 
 ## Description
 

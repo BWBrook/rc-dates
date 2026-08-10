@@ -46,7 +46,9 @@ Run these checks after the codebase and manuscript revisions are locked:
 6. Open the private link in a fresh browser session where you are not logged in.
 7. Confirm the private-link page hides author identity and allows the zip to be downloaded.
 8. Download the zip from the private link and confirm its SHA256 hash matches the local locked package.
-9. Replace `[PRIVATE_REVIEW_LINK]`, `[RESERVED_DOI]`, and `[ARCHIVE_SHA256]` in the manuscript/submission files.
+9. Replace `[PRIVATE_REVIEW_LINK]` and `[RESERVED_DOI]` in the
+   manuscript/submission files; the locked archive SHA256 is already recorded
+   in the metadata template.
 10. Submit the private link and reserved DOI with the manuscript.
 
 After acceptance, update the record metadata with full author details, add the article DOI as a related material, review the licence and files one last time, then publish the repository record.
