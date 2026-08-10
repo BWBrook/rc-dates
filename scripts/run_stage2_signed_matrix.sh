@@ -4,10 +4,11 @@ set -euo pipefail
 project_root=$(CDPATH='' cd -- "$(dirname -- "$0")/.." && pwd)
 image=${RC_DATES_SIM_IMAGE:-rc-dates-sim:r4.5.3}
 nsim=${RC_DATES_NSIM:-1000}
-cores_per_job=${RC_DATES_CORES_PER_JOB:-7}
-batch_size=${RC_DATES_BATCH_SIZE:-70}
+cores_per_job=${RC_DATES_CORES_PER_JOB:-4}
+batch_size=${RC_DATES_BATCH_SIZE:-40}
 master_seed=${RC_DATES_MASTER_SEED:-1234}
-output_relative=${RC_DATES_OUTPUT_DIR:-out/production}
+ratio=${RC_DATES_RATIO:-10}
+output_relative=${RC_DATES_OUTPUT_DIR:-out/revision/signed-models}
 output_dir="$project_root/$output_relative"
 log_dir="$output_dir/logs"
 skip_image_build=${RC_DATES_SKIP_IMAGE_BUILD:-false}
@@ -22,16 +23,17 @@ case "$skip_image_build" in
     fi
     ;;
   false)
-  docker build \
-    --file "$project_root/docker/production-simulation.Dockerfile" \
-    --tag "$image" \
-    "$project_root"
+    docker build \
+      --file "$project_root/docker/production-simulation.Dockerfile" \
+      --tag "$image" \
+      "$project_root"
     ;;
   *)
     printf 'RC_DATES_SKIP_IMAGE_BUILD must be true or false\n' >&2
     exit 1
     ;;
 esac
+
 image_id=$(docker image inspect --format '{{.Id}}' "$image")
 r_version=$(docker run --rm "$image" Rscript --version 2>&1)
 case "$r_version" in
@@ -48,15 +50,15 @@ docker_environment=(
   --env "RC_DATES_IMAGE_ID=$image_id"
 )
 
-models=(uni lin exp)
+truths=(uni lin_inc lin_dec exp_inc exp_dec)
 proportions=(0.5 0.75 1)
 pids=()
 labels=()
 
 for prop in "${proportions[@]}"; do
-  for model in "${models[@]}"; do
-    label="${model}_p${prop}"
-    output="$output_relative/results_${model}_p${prop}_ratio10_nsim${nsim}_seed${master_seed}.rds"
+  for truth in "${truths[@]}"; do
+    label="${truth}_p${prop}"
+    output="$output_relative/results_${truth}_p${prop}_ratio${ratio}_nsim${nsim}_seed${master_seed}.rds"
     log="$log_dir/${label}.log"
     printf 'Launching %s -> %s\n' "$label" "$log"
     docker run --rm \
@@ -66,8 +68,9 @@ for prop in "${proportions[@]}"; do
       --workdir /workspace \
       "$image" \
       Rscript --vanilla scripts/run_population_simulation.R \
-        "--model=$model" \
+        "--truth=$truth" \
         "--prop=$prop" \
+        "--ratio=$ratio" \
         "--nsim=$nsim" \
         "--cores=$cores_per_job" \
         "--batch-size=$batch_size" \
@@ -90,4 +93,17 @@ for index in "${!pids[@]}"; do
   fi
 done
 
-exit "$status"
+if ((status != 0)); then
+  exit "$status"
+fi
+
+docker run --rm \
+  "${docker_environment[@]}" \
+  --volume "$project_root:/workspace" \
+  --workdir /workspace \
+  "$image" \
+  Rscript --vanilla scripts/summarise_stage2_signed_models.R \
+    "--input-dir=$output_relative" \
+    "--nsim=$nsim" \
+    "--ratio=$ratio" \
+    "--seed=$master_seed"

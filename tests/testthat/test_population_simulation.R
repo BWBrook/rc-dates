@@ -1,13 +1,56 @@
+make_stage2_result_fixture <- function(nsim = 2L) {
+  contract <- population_simulation_contract("signed-v1")
+  results <- expand.grid(
+    sim = seq_len(nsim),
+    strategy = contract$strategies,
+    type = contract$types,
+    model = contract$models,
+    KEEP.OUT.ATTRS = FALSE,
+    stringsAsFactors = FALSE
+  )
+  results$true <- "lin_inc"
+  results$true_family <- "lin"
+  results$true_direction <- "increase"
+  results$true_log_ratio <- log(10)
+  results$prop <- 0.5
+  selected_model <- ifelse(
+    results$strategy == "r_old",
+    "lin",
+    ifelse(results$strategy == "r_young", "exp", "lin")
+  )
+  results$min <- as.integer(results$model == selected_model)
+  results$ose <- results$min
+  results$estimate <- ifelse(results$model == "uni", 0, 1e-4)
+  results$estimate_log_ratio <- ifelse(
+    results$model == "uni",
+    0,
+    ifelse(results$strategy == "r_old", -2, ifelse(results$model == "exp", 3, 2))
+  )
+  results$bias_log_ratio <- ifelse(
+    results$model == "lin",
+    results$estimate_log_ratio - results$true_log_ratio,
+    NA_real_
+  )
+  results$boundary <- FALSE
+  results$n_observations <- 100L
+  results$n_dropped <- 0L
+  results[, c(
+    "sim", "true", "true_family", "true_direction", "true_log_ratio", "prop",
+    "strategy", "type", "model", "min", "ose", "estimate", "estimate_log_ratio",
+    "bias_log_ratio", "boundary", "n_observations", "n_dropped"
+  )]
+}
+
 test_that("production simulation seeds are stable common-random-number pairs", {
   scenarios <- expand.grid(
-    true_model = c("uni", "lin", "exp"),
+    truth = population_simulation_contract("signed-v1")$truths,
     prop = c(0.5, 0.75, 1),
     stringsAsFactors = FALSE
   )
 
   seeds <- mapply(
     production_simulation_seed,
-    true_model = scenarios$true_model,
+    truth = scenarios$truth,
     prop = scenarios$prop,
     MoreArgs = list(sim = 1L, master_seed = 1234L)
   )
@@ -18,13 +61,75 @@ test_that("production simulation seeds are stable common-random-number pairs", {
     1235L
   )
   expect_identical(
-    production_simulation_seed("exp", 1, sim = 2L, master_seed = 1234L),
+    production_simulation_seed("exp_dec", 1, sim = 2L, master_seed = 1234L),
     1236L
   )
   expect_error(
     production_simulation_seed("quadratic", 0.5, sim = 1L),
     class = "rcdates_sim_spec_error"
   )
+})
+
+test_that("signed generating densities are normalised with the frozen endpoint ratios", {
+  low <- 651
+  up <- 11650
+  grid <- seq(low, up, length.out = 20001)
+  for (truth in population_simulation_contract("signed-v1")$truths) {
+    specification <- population_truth_specification(truth, 10, low, up)
+    density <- switch(
+      specification$family,
+      uni = rep(1 / (up - low), length(grid)),
+      lin = dtlin(grid, specification$parameter, low, up),
+      exp = dtexp(grid, specification$parameter, low, up)
+    )
+    integral <- sum(diff(grid) * (density[-1L] + density[-length(density)]) / 2)
+    expect_equal(integral, 1, tolerance = 1e-8)
+    expect_equal(
+      log(density[[1L]] / density[[length(density)]]),
+      specification$log_density_ratio,
+      tolerance = 1e-10
+    )
+  }
+  expect_equal(dtlin(grid, 0, low, up), rep(1 / (up - low), length(grid)))
+  expect_equal(dtexp(grid, 0, low, up), rep(1 / (up - low), length(grid)))
+})
+
+test_that("positive signed densities reproduce the former positive-only formulas", {
+  low <- 651
+  up <- 11650
+  ages <- c(700, 2000, 6000, 11000)
+  slope <- 1e-8
+  rate <- 2e-4
+  intercept <- (1 + slope * (up - low)^2 / 2) / (up - low)
+  historical_linear <- intercept - slope * (ages - low)
+  historical_exponential <- stats::dexp(ages, rate) /
+    (stats::pexp(up, rate) - stats::pexp(low, rate))
+  expect_equal(dtlin(ages, slope, low, up), historical_linear, tolerance = 1e-14)
+  expect_equal(dtexp(ages, rate, low, up), historical_exponential, tolerance = 1e-14)
+})
+
+test_that("signed random generators follow their corresponding CDFs", {
+  low <- 651
+  up <- 11650
+  span <- up - low
+  set.seed(4321)
+  for (sign in c(-1, 1)) {
+    slope <- sign * 1e-8
+    linear_draws <- rtlin(10000L, slope, low, up)
+    y_linear <- linear_draws - low
+    intercept <- (1 + slope * span^2 / 2) / span
+    linear_cdf <- intercept * y_linear - slope * y_linear^2 / 2
+    expect_equal(mean(linear_cdf), 0.5, tolerance = 0.01)
+    expect_equal(stats::var(linear_cdf), 1 / 12, tolerance = 0.005)
+
+    rate <- sign * 2e-4
+    exponential_draws <- rtexp(10000L, rate, low, up)
+    y_exponential <- exponential_draws - low
+    exponential_cdf <- (1 - exp(-rate * y_exponential)) /
+      (1 - exp(-rate * span))
+    expect_equal(mean(exponential_cdf), 0.5, tolerance = 0.01)
+    expect_equal(stats::var(exponential_cdf), 1 / 12, tolerance = 0.005)
+  }
 })
 
 test_that("production result validation enforces one complete 42-row block per simulation", {
@@ -45,6 +150,23 @@ test_that("production result validation enforces one complete 42-row block per s
   expect_invisible(validate_population_simulation_results(results, nsim = 2L))
   expect_error(
     validate_population_simulation_results(results[-1, ], nsim = 2L),
+    class = "rcdates_sim_result_error"
+  )
+})
+
+test_that("Stage 2 result validation enforces complete 48-row signed blocks", {
+  results <- make_stage2_result_fixture(nsim = 2L)
+  expect_invisible(validate_population_simulation_results(
+    results,
+    nsim = 2L,
+    design = "signed-v1"
+  ))
+  expect_error(
+    validate_population_simulation_results(
+      results[-1L, ],
+      nsim = 2L,
+      design = "signed-v1"
+    ),
     class = "rcdates_sim_result_error"
   )
 })
@@ -77,21 +199,21 @@ test_that("production output filenames encode the complete scenario", {
   )
 })
 
-test_that("AIC selection retains equally supported models without duplicating the minimum", {
-  pointwise_aic <- data.frame(
+test_that("criterion selection retains equally supported models without duplicating the minimum", {
+  pointwise_criterion <- data.frame(
     uni = c(10, 10),
     lin = c(9, 9),
     exp = c(9.5, 8.5)
   )
 
-  selected <- select_population_models_from_aic(pointwise_aic, type = "l1")
+  selected <- select_population_models_from_criterion(pointwise_criterion, type = "l1")
 
   expect_identical(selected$model, c("uni", "lin", "exp"))
   expect_identical(selected$min, c(0L, 1L, 0L))
   expect_identical(selected$ose, c(0L, 1L, 1L))
 })
 
-test_that("one production replicate returns a complete model-selection block", {
+test_that("one Stage 2 replicate returns a complete signed-model block", {
   skip_if_not_installed("rcarbon")
   skip_if_not_installed("fitdistrplus")
 
@@ -105,35 +227,84 @@ test_that("one production replicate returns a complete model-selection block", {
   specification$n_sites <- 4L
   result <- run_population_simulation_replicate(
     sim = 1L,
-    true_model = "uni",
+    truth = "uni",
     prop = 0.5,
     specification = specification,
     master_seed = 1234L
   )
 
-  expect_equal(nrow(result), 42L)
-  expect_invisible(validate_population_simulation_results(result, nsim = 1L))
+  expect_equal(nrow(result), 48L)
+  expect_invisible(validate_population_simulation_results(
+    result,
+    nsim = 1L,
+    design = "signed-v1"
+  ))
+})
+
+test_that("random-2 does not perturb the locked structural draws or RNG state", {
+  skip_if_not_installed("rcarbon")
+  skip_if_not_installed("fitdistrplus")
+  skip_if_not_installed("import")
+
+  data <- readr::read_csv(
+    file.path("..", "..", "data", "austarch_filtered.csv"),
+    show_col_types = FALSE
+  )
+  specification <- prepare_population_simulation(data)
+  specification$n_sites <- 4L
+  legacy <- new.env(parent = globalenv())
+  sys.source(
+    file.path(
+      "..", "..", "provenance", "production-20260710", "R",
+      "legacy_simulation_helpers.R"
+    ),
+    envir = legacy
+  )
+  sys.source(
+    file.path(
+      "..", "..", "provenance", "production-20260710", "R",
+      "population_simulation_production.R"
+    ),
+    envir = legacy
+  )
+
+  set.seed(1235L, kind = "L'Ecuyer-CMRG")
+  locked <- legacy$simulate_population_data_set("uni", 0.5, specification)
+  locked_rng <- get(".Random.seed", envir = .GlobalEnv, inherits = FALSE)
+  set.seed(1235L, kind = "L'Ecuyer-CMRG")
+  signed <- simulate_population_data_set("uni", 0.5, specification)
+  signed_rng <- get(".Random.seed", envir = .GlobalEnv, inherits = FALSE)
+
+  protected_columns <- c(
+    "site", "age_calendar", "age_uncalibrated", "error", "age_calibrated_median",
+    "r_1", "r_3", "r_5", "r_old", "r_young", "r_bracket", "r_all"
+  )
+  expect_identical(signed[protected_columns], locked[protected_columns])
+  expect_identical(signed$age_uncalibrated_expected, locked$age_uncalibrated)
+  expect_identical(signed_rng, locked_rng)
 })
 
 test_that("production runner arguments have stable defaults and strict validation", {
   parsed <- parse_population_simulation_args(c(
-    "--model=lin",
+    "--truth=lin_dec",
     "--prop=0.75",
+    "--ratio=10",
     "--nsim=25",
     "--cores=4",
     "--batch-size=8",
     "--output=out/test.rds"
   ))
 
-  expect_identical(parsed$true_model, "lin")
+  expect_identical(parsed$truth, "lin_dec")
   expect_identical(parsed$prop, 0.75)
+  expect_identical(parsed$ratio, 10)
   expect_identical(parsed$nsim, 25L)
   expect_identical(parsed$cores, 4L)
   expect_identical(parsed$batch_size, 8L)
   expect_identical(parsed$master_seed, 1234L)
   expect_identical(parsed$output, "out/test.rds")
   expect_error(
-    parse_population_simulation_args(c("--model=lin", "--prop=0.6")),
+    parse_population_simulation_args(c("--truth=lin_inc", "--prop=0.6")),
     class = "rcdates_sim_spec_error"
   )
 })
@@ -198,7 +369,7 @@ test_that("flattened likelihood grids preserve both historical likelihoods", {
   }
 })
 
-test_that("flattened optimisation preserves historical L1 and L2 estimates", {
+test_that("flattened optimisation matches direct signed L1 and L2 objectives", {
   grids <- list(
     data.frame(calBP = c(700, 800, 1000), PrDens = c(0.15, 0.65, 0.2)),
     data.frame(calBP = c(2000, 2500, 3000), PrDens = c(0.2, 0.5, 0.3)),
@@ -224,38 +395,41 @@ test_that("flattened optimisation preserves historical L1 and L2 estimates", {
     }, numeric(1)))
   }
 
+  bounds <- population_fit_bounds(low, up)
   for (type in c("l1", "l2")) {
-    linear_bounds <- c(1e-12, 2 / (up - low)^2) * 1e6
     historical_linear <- stats::optimize(
       direct_nll,
-      linear_bounds,
+      bounds$lin,
       model = "lin",
-      type = type
+      type = type,
+      tol = bounds$tolerance
     )
     flattened_linear <- stats::optimize(
       population_nll_linear,
-      linear_bounds,
+      bounds$lin,
       likelihood_data = prepared,
       low = low,
       up = up,
-      type = type
+      type = type,
+      tol = bounds$tolerance
     )
     expect_equal(flattened_linear, historical_linear, tolerance = 1e-10)
 
-    exponential_bounds <- c(1e-10, 0.001) * 1000
     historical_exponential <- stats::optimize(
       direct_nll,
-      exponential_bounds,
+      bounds$exp,
       model = "exp",
-      type = type
+      type = type,
+      tol = bounds$tolerance
     )
     flattened_exponential <- stats::optimize(
       population_nll_exponential,
-      exponential_bounds,
+      bounds$exp,
       likelihood_data = prepared,
       low = low,
       up = up,
-      type = type
+      type = type,
+      tol = bounds$tolerance
     )
     expect_equal(flattened_exponential, historical_exponential, tolerance = 1e-10)
   }
@@ -320,6 +494,33 @@ test_that("accuracy and OSE intervals bootstrap paired replicate clusters", {
   expect_equal(ose$p, 0.5)
   expect_equal(ose$n_clusters, 4L)
   expect_gte(ose$ci_high - ose$ci_low, 0.75)
+})
+
+test_that("Stage 2 summaries separate family, direction, bias, and paired contrasts", {
+  results <- make_stage2_result_fixture(nsim = 2L)
+  confusion <- summarise_stage2_confusion(results)
+  selection <- summarise_stage2_selection(results)
+  bias <- summarise_stage2_log_ratio_bias(results)
+  boundaries <- summarise_stage2_boundaries(results)
+  paired <- summarise_stage2_paired_contrasts(results)
+
+  oldest <- selection[
+    selection$type == "l1" & selection$strategy == "r_old",
+  ]
+  youngest <- confusion[
+    confusion$type == "l1" & confusion$strategy == "r_young",
+  ]
+  expect_equal(oldest$family_selection_rate, 1)
+  expect_equal(oldest$direction_selection_rate, 0)
+  expect_equal(oldest$direction_reversal_rate, 1)
+  expect_identical(youngest$selected_state, "exp_inc")
+  expect_true(all(is.finite(bias$mean_bias_log_ratio)))
+  expect_true(all(boundaries$boundary_rate == 0))
+  expect_true(any(
+    paired$strategy == "r_old" &
+      paired$metric == "direction_selection_rate" &
+      paired$difference_from_all == -1
+  ))
 })
 
 test_that("checkpoint provenance rejects unstamped or incompatible results", {

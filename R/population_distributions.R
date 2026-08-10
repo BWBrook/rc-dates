@@ -9,19 +9,30 @@ simulate_error <- function(dates, fit, unlog = TRUE) {
 }
 
 dtexp <- function(x, rate, low, upp) {
-  p_upper <- stats::pexp(upp, rate = rate)
-  p_lower <- stats::pexp(low, rate = rate)
-  stats::dexp(x, rate) / (p_upper - p_lower) * (x >= low) * (x <= upp)
+  if (low >= upp || length(rate) != 1L || !is.finite(rate)) {
+    rlang::abort("Invalid signed-exponential interval or rate", class = "rcdates_sim_error")
+  }
+  density <- numeric(length(x))
+  valid <- x >= low & x <= upp
+  if (!any(valid)) return(density)
+
+  span <- upp - low
+  if (rate == 0) {
+    density[valid] <- 1 / span
+  } else {
+    normalizer <- -expm1(-rate * span)
+    density[valid] <- rate * exp(-rate * (x[valid] - low)) / normalizer
+  }
+  density
 }
 
 rtexp <- function(n, rate, low, up) {
-  if (low >= up) {
-    rlang::abort("Upper must be greater than lower", class = "rcdates_sim_error")
+  if (low >= up || length(rate) != 1L || !is.finite(rate)) {
+    rlang::abort("Invalid signed-exponential interval or rate", class = "rcdates_sim_error")
   }
   u <- stats::runif(n)
-  p_lower <- stats::pexp(low, rate = rate)
-  p_upper <- stats::pexp(up, rate = rate)
-  stats::qexp(u * (p_upper - p_lower) + p_lower, rate = rate)
+  if (rate == 0) return(low + (up - low) * u)
+  low - log1p(u * expm1(-rate * (up - low))) / rate
 }
 
 dtnbinom <- function(x, mu, size, low) {
@@ -45,29 +56,31 @@ rtnbinom <- function(n, mu, size, low) {
 }
 
 dtlin <- function(x, slope, low, up) {
-  if (low >= up) {
-    rlang::abort("Upper bound must be greater than lower bound", class = "rcdates_sim_error")
+  span <- up - low
+  slope_limit <- 2 / span^2
+  if (low >= up || length(slope) != 1L || !is.finite(slope) ||
+      abs(slope) > slope_limit * (1 + 10 * .Machine$double.eps)) {
+    rlang::abort("Invalid signed-linear interval or slope", class = "rcdates_sim_error")
   }
   density <- numeric(length(x))
   valid <- x >= low & x <= up
   if (any(valid)) {
-    intercept <- (1 + slope * (up - low)^2 / 2) / (up - low)
+    intercept <- (1 + slope * span^2 / 2) / span
     density[valid] <- intercept - slope * (x[valid] - low)
-    if (any(density < 0)) {
-      rlang::abort("Slope too large; negative density", class = "rcdates_sim_error")
-    }
+    density[valid] <- pmax(density[valid], 0)
   }
   density
 }
 
 rtlin <- function(n, slope, low, up) {
-  if (low >= up) {
-    rlang::abort("Upper bound must be greater than lower bound", class = "rcdates_sim_error")
+  span <- up - low
+  slope_limit <- 2 / span^2
+  if (low >= up || length(slope) != 1L || !is.finite(slope) ||
+      abs(slope) > slope_limit * (1 + 10 * .Machine$double.eps)) {
+    rlang::abort("Invalid signed-linear interval or slope", class = "rcdates_sim_error")
   }
-  intercept <- (1 + slope * (up - low)^2 / 2) / (up - low)
-  if (intercept - slope * (up - low) < 0) {
-    rlang::abort("Slope too large; negative density", class = "rcdates_sim_error")
-  }
+  intercept <- (1 + slope * span^2 / 2) / span
   u <- stats::runif(n)
-  low + (intercept - sqrt(intercept^2 - 2 * slope * u)) / slope
+  discriminant <- pmax(intercept^2 - 2 * slope * u, 0)
+  low + 2 * u / (intercept + sqrt(discriminant))
 }

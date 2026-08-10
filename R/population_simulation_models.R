@@ -1,29 +1,34 @@
 # Population likelihoods and model selection --------------------------------
 
-#' Apply minimum-AIC and modified one-standard-error model selection
-#' @param pointwise_aic Data frame with `uni`, `lin`, and `exp` AIC contributions.
-#' @param type Likelihood label carried into the result.
+#' Apply minimum-criterion and modified one-standard-error model selection
+#' @param pointwise_criterion Penalized contributions for `uni`, `lin`, and `exp`.
+#' @param type Primary-likelihood or scoring-sensitivity label.
 #' @return Three-row model-selection table.
-select_population_models_from_aic <- function(pointwise_aic, type) {
+select_population_models_from_criterion <- function(pointwise_criterion, type) {
   models <- c("uni", "lin", "exp")
-  if (!is.data.frame(pointwise_aic) || nrow(pointwise_aic) < 2L ||
-      !all(models %in% names(pointwise_aic))) {
+  if (!is.data.frame(pointwise_criterion) || nrow(pointwise_criterion) < 2L ||
+      !all(models %in% names(pointwise_criterion))) {
     abort_population_simulation(
-      "Pointwise AIC input must contain at least two rows for all three models.",
+      "Pointwise criterion input must contain at least two rows for all three models.",
       "rcdates_sim_result_error"
     )
   }
-  pointwise_aic <- pointwise_aic[, models, drop = FALSE]
-  if (any(!is.finite(as.matrix(pointwise_aic)))) {
+  pointwise_criterion <- pointwise_criterion[, models, drop = FALSE]
+  if (any(!is.finite(as.matrix(pointwise_criterion)))) {
     abort_population_simulation(
-      "Pointwise AIC values must all be finite.",
+      "Pointwise criterion values must all be finite.",
       "rcdates_sim_result_error"
     )
   }
 
-  totals <- colSums(pointwise_aic)
+  totals <- colSums(pointwise_criterion)
   minimum_model <- names(which.min(totals))
-  delta <- sweep(pointwise_aic, 1L, pointwise_aic[[minimum_model]], FUN = "-")
+  delta <- sweep(
+    pointwise_criterion,
+    1L,
+    pointwise_criterion[[minimum_model]],
+    FUN = "-"
+  )
   delta_total <- colSums(delta)
   delta_se <- vapply(delta, stats::sd, numeric(1)) * sqrt(nrow(delta))
   dimensions <- c(uni = 0L, lin = 1L, exp = 1L)
@@ -95,8 +100,28 @@ prepare_population_simulation <- function(
     rate = log(ratio) / span,
     fit_n_dates = fit_n_dates,
     fit_age_to_error = fit_age_to_error,
-    strategies = c("r_1", "r_3", "r_5", "r_old", "r_young", "r_bracket", "r_all")
+    strategies = population_simulation_contract("signed-v1")$strategies
   )
+}
+
+population_fit_bounds <- function(low, up) {
+  if (length(low) != 1L || length(up) != 1L || !is.finite(low) ||
+      !is.finite(up) || low >= up) {
+    abort_population_simulation(
+      "Fitted population models require a valid analysis interval.",
+      "rcdates_sim_spec_error"
+    )
+  }
+  span <- up - low
+  list(
+    lin = c(-2 / span^2, 2 / span^2) * 1e6,
+    exp = c(-1e-3, 1e-3) * 1e3,
+    tolerance = 1e-6
+  )
+}
+
+population_fit_at_boundary <- function(estimate, bounds, tolerance) {
+  min(abs(estimate - bounds)) <= 5 * tolerance
 }
 
 prepare_population_likelihood_data <- function(
@@ -187,7 +212,7 @@ population_nll_exponential <- function(
   if (summed) sum(pointwise) else pointwise
 }
 
-population_pointwise_aic <- function(
+population_pointwise_criterion <- function(
   estimate_linear,
   estimate_exponential,
   type,

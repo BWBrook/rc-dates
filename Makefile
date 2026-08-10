@@ -12,7 +12,7 @@ SUBMISSION_DIST ?= manuscript/submission/dist
 DEFAULT_RSCRIPT := $(firstword $(wildcard /usr/local/bin/Rscript) Rscript)
 RSCRIPT ?= $(DEFAULT_RSCRIPT)
 R_VERSION_REQUIRED ?= 4.5.3
-PRODUCTION_RERUN_DIR ?= out/rerun
+STAGE2_OUTPUT_DIR ?= out/revision/signed-models
 
 .PHONY: help
 help:
@@ -25,7 +25,8 @@ help:
 	@echo "Evidence:"
 	@echo "  make empirical-figures     Rebuild empirical Figures 1-2 and audit summaries"
 	@echo "  make production-figures    Validate accepted simulations and rebuild Figures 3-5"
-	@echo "  make production-rerun      Run the full containerised simulation into out/rerun"
+	@echo "  make stage2-rerun          Run the signed-model matrix and acceptance summary"
+	@echo "  make stage2-summarise      Revalidate completed Stage 2 evidence"
 	@echo
 	@echo "Manuscript:"
 	@echo "  make manuscript-validate   Validate the makedoc profile"
@@ -60,9 +61,18 @@ empirical-figures: r-preflight
 production-figures: r-preflight
 	"$(RSCRIPT)" scripts/render_population_simulation_figures.R
 
-.PHONY: production-rerun
-production-rerun:
-	RC_DATES_OUTPUT_DIR="$(PRODUCTION_RERUN_DIR)" bash scripts/run_production_simulation_matrix.sh
+.PHONY: stage2-rerun
+stage2-rerun:
+	RC_DATES_OUTPUT_DIR="$(STAGE2_OUTPUT_DIR)" bash scripts/run_stage2_signed_matrix.sh
+
+.PHONY: stage2-summarise
+stage2-summarise:
+	docker run --rm \
+		--env R_LIBS_USER=/opt/rc-dates-library/linux-ubuntu-noble/R-4.5/x86_64-pc-linux-gnu \
+		--env "RC_DATES_IMAGE_ID=$$(cat $(STAGE2_OUTPUT_DIR)/container_image_id.txt)" \
+		--volume "$(CURDIR):/workspace" --workdir /workspace rc-dates-sim:r4.5.3 \
+		Rscript --vanilla scripts/summarise_stage2_signed_models.R \
+			--input-dir="$(STAGE2_OUTPUT_DIR)"
 
 .PHONY: makedoc-preflight
 makedoc-preflight:

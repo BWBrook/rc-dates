@@ -3,16 +3,24 @@
 #' Validate production population-simulation results
 #' @param results Data frame produced by the production simulation runner.
 #' @param nsim Optional expected number of replicates in each scenario.
+#' @param design Result-block contract: locked legacy evidence or Stage 2 signed models.
 #' @return `TRUE`, invisibly, or an error for an incomplete result block.
-validate_population_simulation_results <- function(results, nsim = NULL) {
-  required <- c(
-    "sim", "true", "prop", "strategy", "type", "model", "min", "ose", "bias"
-  )
-  expected_strategies <- c(
-    "r_1", "r_3", "r_5", "r_old", "r_young", "r_bracket", "r_all"
-  )
-  expected_types <- c("l1", "l2")
-  expected_models <- c("uni", "lin", "exp")
+validate_population_simulation_results <- function(
+  results,
+  nsim = NULL,
+  design = c("legacy", "signed-v1")
+) {
+  design <- match.arg(design)
+  contract <- population_simulation_contract(design)
+  required <- if (design == "legacy") {
+    c("sim", "true", "prop", "strategy", "type", "model", "min", "ose", "bias")
+  } else {
+    c(
+      "sim", "true", "true_family", "true_direction", "true_log_ratio", "prop",
+      "strategy", "type", "model", "min", "ose", "estimate", "estimate_log_ratio",
+      "bias_log_ratio", "boundary", "n_observations", "n_dropped"
+    )
+  }
 
   fail <- function(message) {
     abort_population_simulation(message, "rcdates_sim_result_error")
@@ -27,18 +35,46 @@ validate_population_simulation_results <- function(results, nsim = NULL) {
   if (any(!results$min %in% c(0, 1)) || any(!results$ose %in% c(0, 1))) {
     fail("Production result selection columns must contain only zeroes and ones.")
   }
+  if (any(!results$true %in% contract$truths)) {
+    fail("Production results contain a truth outside the frozen design.")
+  }
+  if (design == "signed-v1") {
+    expected_family <- sub("_.*$", "", results$true)
+    expected_direction <- ifelse(
+      results$true == "uni",
+      "constant",
+      ifelse(grepl("_inc$", results$true), "increase", "decrease")
+    )
+    finite_values <- is.finite(results$true_log_ratio) & is.finite(results$estimate) &
+      is.finite(results$estimate_log_ratio)
+    valid_counts <- is.finite(results$n_observations) & results$n_observations >= 2 &
+      results$n_observations == as.integer(results$n_observations) &
+      is.finite(results$n_dropped) & results$n_dropped >= 0 &
+      results$n_dropped == as.integer(results$n_dropped)
+    valid_bias <- is.na(results$bias_log_ratio) | is.finite(results$bias_log_ratio)
+    if (!all(results$true_family == expected_family) ||
+        !all(results$true_direction == expected_direction) ||
+        !all(finite_values) || !all(valid_counts) || !all(valid_bias) ||
+        !is.logical(results$boundary) || anyNA(results$boundary)) {
+      fail("Stage 2 results contain malformed truth, estimate, boundary, or count values.")
+    }
+  }
 
   scenario <- interaction(results$true, results$prop, drop = TRUE, lex.order = TRUE)
   block <- interaction(scenario, results$sim, drop = TRUE, lex.order = TRUE)
   complete_block <- vapply(split(results, block), function(x) {
-    nrow(x) == 42L &&
-      identical(sort(unique(x$strategy)), sort(expected_strategies)) &&
-      identical(sort(unique(x$type)), expected_types) &&
-      identical(sort(unique(x$model)), sort(expected_models)) &&
+    nrow(x) == contract$rows_per_replicate &&
+      identical(sort(unique(x$strategy)), sort(contract$strategies)) &&
+      identical(sort(unique(x$type)), sort(contract$types)) &&
+      identical(sort(unique(x$model)), sort(contract$models)) &&
       !anyDuplicated(interaction(x$strategy, x$type, x$model, drop = TRUE))
   }, logical(1))
   if (!all(complete_block)) {
-    fail("Each production replicate must contain one complete 42-row result block.")
+    fail(sprintf(
+      "Each production replicate must contain one complete %s-row %s result block.",
+      contract$rows_per_replicate,
+      design
+    ))
   }
 
   selection_group <- interaction(
@@ -52,7 +88,7 @@ validate_population_simulation_results <- function(results, nsim = NULL) {
   one_minimum <- vapply(split(results$min, selection_group), sum, numeric(1)) == 1
   one_or_more_ose <- vapply(split(results$ose, selection_group), sum, numeric(1)) >= 1
   if (!all(one_minimum) || !all(one_or_more_ose)) {
-    fail("Every fitted result must have one minimum-AIC model and at least one OSE model.")
+    fail("Every fitted result must have one minimum-criterion model and at least one OSE model.")
   }
 
   if (!is.null(nsim)) {
@@ -104,19 +140,28 @@ validate_population_simulation_artifact <- function(path, nsim = NULL) {
   results <- readRDS(path)
   provenance <- attr(results, "production_provenance", exact = TRUE)
   schema_version <- if (is.null(provenance)) NULL else provenance$schema_version
-  if (!identical(schema_version, 1L) && !identical(schema_version, 2L)) {
+  supported_schema <- vapply(1:3, function(version) {
+    identical(schema_version, as.integer(version))
+  }, logical(1))
+  if (!any(supported_schema)) {
     abort_population_simulation(
       "Production artifact has an unsupported provenance schema.",
       "rcdates_sim_provenance_error"
     )
   }
+  is_stage2 <- identical(schema_version, 3L)
   source_fields <- if (identical(schema_version, 1L)) {
     c("production_source_md5", "legacy_helper_md5")
   } else {
     c("model_source_md5", "distribution_source_md5")
   }
+  scenario_fields <- if (is_stage2) {
+    c("truth", "prop", "ratio", "design", "observation_model")
+  } else {
+    c("true_model", "prop")
+  }
   required_provenance <- c(
-    "schema_version", "true_model", "prop", "nsim", "master_seed",
+    "schema_version", scenario_fields, "nsim", "master_seed",
     "input_md5", "renv_lock_md5", source_fields, "runner_source_md5",
     "container_recipe_md5", "container_install_md5", "container_image_id",
     "r_version"
@@ -151,7 +196,6 @@ validate_population_simulation_artifact <- function(path, nsim = NULL) {
   }
   valid_header <- positive_integer(provenance$nsim) &&
     positive_integer(provenance$master_seed) &&
-    valid_string(provenance$true_model, "^(uni|lin|exp)$") &&
     length(provenance$prop) == 1L && is.finite(provenance$prop) &&
     any(abs(provenance$prop - c(0.5, 0.75, 1)) < sqrt(.Machine$double.eps)) &&
     valid_string(
@@ -160,6 +204,19 @@ validate_population_simulation_artifact <- function(path, nsim = NULL) {
     ) &&
     valid_string(provenance$container_image_id, "^sha256:[0-9a-f]{64}$") &&
     valid_string(provenance$r_version, "^R version 4\\.5\\.3 \\(")
+  if (is_stage2) {
+    valid_header <- valid_header &&
+      valid_string(
+        provenance$truth,
+        "^(uni|lin_inc|lin_dec|exp_inc|exp_dec)$"
+      ) &&
+      length(provenance$ratio) == 1L && is.finite(provenance$ratio) &&
+      provenance$ratio > 1 &&
+      identical(provenance$design, "signed-v1") &&
+      identical(provenance$observation_model, "curve_mean")
+  } else {
+    valid_header <- valid_header && valid_string(provenance$true_model, "^(uni|lin|exp)$")
+  }
   if (identical(schema_version, 1L)) {
     valid_header <- valid_header && valid_string(
       provenance$provenance_origin,
@@ -180,10 +237,26 @@ validate_population_simulation_artifact <- function(path, nsim = NULL) {
       "rcdates_sim_provenance_error"
     )
   }
-  validate_population_simulation_results(results, nsim = expected_nsim)
-  result_scenario_matches <- identical(unique(results$true), provenance$true_model) &&
+  validate_population_simulation_results(
+    results,
+    nsim = expected_nsim,
+    design = if (is_stage2) "signed-v1" else "legacy"
+  )
+  expected_truth <- if (is_stage2) provenance$truth else provenance$true_model
+  result_scenario_matches <- identical(unique(results$true), expected_truth) &&
     length(unique(results$prop)) == 1L &&
     abs(unique(results$prop) - provenance$prop) < sqrt(.Machine$double.eps)
+  if (is_stage2) {
+    expected_log_ratio <- population_truth_specification(
+      provenance$truth,
+      provenance$ratio,
+      651,
+      11650
+    )$log_density_ratio
+    result_scenario_matches <- result_scenario_matches &&
+      length(unique(results$true_log_ratio)) == 1L &&
+      abs(unique(results$true_log_ratio) - expected_log_ratio) < 1e-12
+  }
   if (!result_scenario_matches) {
     abort_population_simulation(
       "Production result values conflict with their scenario provenance.",
@@ -195,8 +268,7 @@ validate_population_simulation_artifact <- function(path, nsim = NULL) {
   metadata_map <- c(
     schema_version = "schema_version",
     r_version = "r_version",
-    true_model = "true_model",
-    site_subsampling_proportion = "prop",
+    site_treatment_proportion = "prop",
     replicates = "nsim",
     master_seed = "master_seed",
     input_md5 = "input_md5",
@@ -206,6 +278,19 @@ validate_population_simulation_artifact <- function(path, nsim = NULL) {
     container_install_md5 = "container_install_md5",
     container_image_id = "container_image_id"
   )
+  if (is_stage2) {
+    metadata_map <- c(
+      metadata_map,
+      truth = "truth",
+      effect_ratio = "ratio",
+      design = "design",
+      observation_model = "observation_model"
+    )
+  } else {
+    names(metadata_map)[names(metadata_map) == "site_treatment_proportion"] <-
+      "site_subsampling_proportion"
+    metadata_map <- c(metadata_map, true_model = "true_model")
+  }
   metadata_map <- c(metadata_map, stats::setNames(source_fields, source_fields))
   if (identical(schema_version, 1L)) {
     metadata_map <- c(metadata_map, provenance_origin = "provenance_origin")
@@ -243,7 +328,10 @@ validate_population_simulation_artifact <- function(path, nsim = NULL) {
 }
 
 population_summary_seed <- function(strategy, type, prop, seed) {
-  strategy_levels <- c("r_all", "r_1", "r_3", "r_5", "r_bracket", "r_old", "r_young")
+  # Random-2 is appended so accepted legacy bootstrap streams remain unchanged.
+  strategy_levels <- c(
+    "r_all", "r_1", "r_3", "r_5", "r_bracket", "r_old", "r_young", "r_2"
+  )
   strategy_index <- match(strategy, strategy_levels)
   type_index <- match(type, c("l1", "l2"))
   prop_index <- if (strategy == "r_all") 0L else match(prop, c(0.5, 0.75, 1))
@@ -430,4 +518,229 @@ summarise_unique_ose <- function(results, n_boot = 1000L, seed = 1234L) {
   out <- do.call(rbind, summaries)
   rownames(out) <- NULL
   out[order(out$type, out$prop, out$strategy), , drop = FALSE]
+}
+
+stage2_selected_population_results <- function(results) {
+  validate_population_simulation_results(results, design = "signed-v1")
+  selected <- results[results$min == 1L, , drop = FALSE]
+  selected$selected_direction <- ifelse(
+    selected$model == "uni",
+    "constant",
+    ifelse(selected$estimate_log_ratio > 0, "increase", "decrease")
+  )
+  selected$selected_state <- ifelse(
+    selected$model == "uni",
+    "uni",
+    paste0(
+      selected$model,
+      ifelse(selected$selected_direction == "increase", "_inc", "_dec")
+    )
+  )
+  selected$family_correct <- selected$model == selected$true_family
+  selected$direction_correct <- selected$selected_direction == selected$true_direction
+  selected$direction_reversed <- selected$true_direction != "constant" &
+    ((selected$true_direction == "increase" & selected$selected_direction == "decrease") |
+      (selected$true_direction == "decrease" & selected$selected_direction == "increase"))
+  selected
+}
+
+summarise_stage2_confusion <- function(results) {
+  selected <- stage2_selected_population_results(results)
+  groups <- interaction(
+    selected$type,
+    selected$true,
+    selected$prop,
+    selected$strategy,
+    selected$selected_state,
+    drop = TRUE,
+    lex.order = TRUE
+  )
+  summaries <- lapply(split(selected, groups), function(x) {
+    data.frame(
+      type = x$type[[1L]],
+      true = x$true[[1L]],
+      true_family = x$true_family[[1L]],
+      true_direction = x$true_direction[[1L]],
+      prop = x$prop[[1L]],
+      strategy = x$strategy[[1L]],
+      selected_state = x$selected_state[[1L]],
+      n = nrow(x),
+      rate = nrow(x) / length(unique(selected$sim)),
+      stringsAsFactors = FALSE
+    )
+  })
+  out <- do.call(rbind, summaries)
+  rownames(out) <- NULL
+  out[order(out$type, out$true, out$prop, out$strategy, out$selected_state), , drop = FALSE]
+}
+
+summarise_stage2_selection <- function(results) {
+  selected <- stage2_selected_population_results(results)
+  groups <- interaction(
+    selected$type,
+    selected$true,
+    selected$prop,
+    selected$strategy,
+    drop = TRUE,
+    lex.order = TRUE
+  )
+  summaries <- lapply(split(selected, groups), function(x) {
+    data.frame(
+      type = x$type[[1L]],
+      true = x$true[[1L]],
+      true_family = x$true_family[[1L]],
+      true_direction = x$true_direction[[1L]],
+      true_log_ratio = x$true_log_ratio[[1L]],
+      prop = x$prop[[1L]],
+      strategy = x$strategy[[1L]],
+      n = nrow(x),
+      family_selection_rate = mean(x$family_correct),
+      direction_selection_rate = mean(x$direction_correct),
+      direction_reversal_rate = mean(x$direction_reversed),
+      mean_selected_log_ratio = mean(x$estimate_log_ratio),
+      selected_boundary_rate = mean(x$boundary),
+      stringsAsFactors = FALSE
+    )
+  })
+  out <- do.call(rbind, summaries)
+  rownames(out) <- NULL
+  out[order(out$type, out$true, out$prop, out$strategy), , drop = FALSE]
+}
+
+summarise_stage2_log_ratio_bias <- function(results) {
+  validate_population_simulation_results(results, design = "signed-v1")
+  fitted_truth <- results[
+    results$true_family != "uni" & results$model == results$true_family,
+    ,
+    drop = FALSE
+  ]
+  groups <- interaction(
+    fitted_truth$type,
+    fitted_truth$true,
+    fitted_truth$prop,
+    fitted_truth$strategy,
+    drop = TRUE,
+    lex.order = TRUE
+  )
+  summaries <- lapply(split(fitted_truth, groups), function(x) {
+    interval <- stats::quantile(x$bias_log_ratio, c(0.025, 0.975), names = FALSE)
+    data.frame(
+      type = x$type[[1L]],
+      true = x$true[[1L]],
+      true_family = x$true_family[[1L]],
+      true_direction = x$true_direction[[1L]],
+      true_log_ratio = x$true_log_ratio[[1L]],
+      prop = x$prop[[1L]],
+      strategy = x$strategy[[1L]],
+      n = nrow(x),
+      mean_estimate_log_ratio = mean(x$estimate_log_ratio),
+      mean_bias_log_ratio = mean(x$bias_log_ratio),
+      bias_q025 = interval[[1L]],
+      bias_q975 = interval[[2L]],
+      boundary_rate = mean(x$boundary),
+      stringsAsFactors = FALSE
+    )
+  })
+  out <- do.call(rbind, summaries)
+  rownames(out) <- NULL
+  out[order(out$type, out$true, out$prop, out$strategy), , drop = FALSE]
+}
+
+summarise_stage2_boundaries <- function(results) {
+  validate_population_simulation_results(results, design = "signed-v1")
+  fitted <- results[results$model != "uni", , drop = FALSE]
+  groups <- interaction(
+    fitted$type,
+    fitted$true,
+    fitted$prop,
+    fitted$strategy,
+    fitted$model,
+    drop = TRUE,
+    lex.order = TRUE
+  )
+  summaries <- lapply(split(fitted, groups), function(x) {
+    data.frame(
+      type = x$type[[1L]],
+      true = x$true[[1L]],
+      prop = x$prop[[1L]],
+      strategy = x$strategy[[1L]],
+      fitted_family = x$model[[1L]],
+      n = nrow(x),
+      boundary_rate = mean(x$boundary),
+      stringsAsFactors = FALSE
+    )
+  })
+  out <- do.call(rbind, summaries)
+  rownames(out) <- NULL
+  out[order(out$type, out$true, out$prop, out$strategy, out$fitted_family), , drop = FALSE]
+}
+
+summarise_stage2_paired_contrasts <- function(results) {
+  selected <- stage2_selected_population_results(results)
+  baseline <- selected[selected$strategy == "r_all", c(
+    "sim", "true", "prop", "type", "family_correct", "direction_correct",
+    "estimate_log_ratio"
+  )]
+  names(baseline)[5:7] <- c(
+    "baseline_family_correct", "baseline_direction_correct", "baseline_log_ratio"
+  )
+  compared <- selected[selected$strategy != "r_all", ]
+  paired <- merge(
+    compared,
+    baseline,
+    by = c("sim", "true", "prop", "type"),
+    all.x = TRUE,
+    sort = FALSE
+  )
+  if (anyNA(paired$baseline_log_ratio)) {
+    abort_population_simulation(
+      "Stage 2 paired contrasts are missing an all-dates match.",
+      "rcdates_sim_result_error"
+    )
+  }
+  paired$family_difference <-
+    as.numeric(paired$family_correct) - as.numeric(paired$baseline_family_correct)
+  paired$direction_difference <-
+    as.numeric(paired$direction_correct) - as.numeric(paired$baseline_direction_correct)
+  paired$selected_log_ratio_difference <-
+    paired$estimate_log_ratio - paired$baseline_log_ratio
+
+  groups <- interaction(
+    paired$type,
+    paired$true,
+    paired$prop,
+    paired$strategy,
+    drop = TRUE,
+    lex.order = TRUE
+  )
+  summaries <- lapply(split(paired, groups), function(x) {
+    metrics <- c(
+      family_selection_rate = "family_difference",
+      direction_selection_rate = "direction_difference",
+      selected_log_ratio = "selected_log_ratio_difference"
+    )
+    do.call(rbind, lapply(names(metrics), function(metric) {
+      values <- x[[metrics[[metric]]]]
+      estimate <- mean(values)
+      mcse <- stats::sd(values) / sqrt(length(values))
+      data.frame(
+        type = x$type[[1L]],
+        true = x$true[[1L]],
+        true_family = x$true_family[[1L]],
+        true_direction = x$true_direction[[1L]],
+        prop = x$prop[[1L]],
+        strategy = x$strategy[[1L]],
+        metric = metric,
+        n_pairs = length(values),
+        difference_from_all = estimate,
+        mcse = mcse,
+        ci_low = estimate - 1.96 * mcse,
+        ci_high = estimate + 1.96 * mcse,
+        stringsAsFactors = FALSE
+      )
+    }))
+  })
+  out <- do.call(rbind, summaries)
+  rownames(out) <- NULL
+  out[order(out$type, out$true, out$prop, out$strategy, out$metric), , drop = FALSE]
 }

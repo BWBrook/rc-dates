@@ -1,12 +1,18 @@
 # Dataset generation and replicate evaluation --------------------------------
 
 simulate_population_data_set <- function(
-  true_model,
+  truth,
   prop,
   specification,
   observation_model = "curve_mean"
 ) {
   observation_model <- normalize_population_observation_model(observation_model)
+  truth_spec <- population_truth_specification(
+    truth,
+    specification$ratio,
+    specification$min_age,
+    specification$max_age
+  )
   n_sites <- specification$n_sites
   dates_per_site <- rtnbinom(
     n_sites,
@@ -18,20 +24,24 @@ simulate_population_data_set <- function(
   n_dates <- length(site_index)
 
   calendar_age <- switch(
-    true_model,
+    truth_spec$family,
     lin = rtlin(
       n_dates,
-      slope = specification$slope,
+      slope = truth_spec$parameter,
       low = specification$min_age,
       up = specification$max_age
     ),
     exp = rtexp(
       n_dates,
-      rate = specification$rate,
+      rate = truth_spec$parameter,
       low = specification$min_age,
       up = specification$max_age
     ),
-    uni = stats::runif(n_dates, min = specification$min_age, max = specification$max_age)
+    uni = stats::runif(
+      n_dates,
+      min = specification$min_age,
+      max = specification$max_age
+    )
   )
   uncalibration <- rcarbon::uncalibrate(calendar_age, calCurves = "shcal20")
   expected_uncalibrated <- uncalibration$ccCRA
@@ -82,6 +92,21 @@ simulate_population_data_set <- function(
   is_subsampled <- site_index %in% subsampled_sites
   for (strategy in names(selected)) selected[[strategy]][!is_subsampled] <- 1L
 
+  # Random-2 is appended on an isolated RNG state so it cannot perturb the
+  # original dates, treated sites, or seven retained strategies.
+  draw_random_two <- function() {
+    preserved_state <- get(".Random.seed", envir = .GlobalEnv, inherits = FALSE)
+    on.exit(assign(".Random.seed", preserved_state, envir = .GlobalEnv), add = TRUE)
+    retained <- integer(n_dates)
+    for (site in seq_len(n_sites)) {
+      rows <- which(site_index == site)
+      retained[rows[sample.int(length(rows), 2L)]] <- 1L
+    }
+    retained[!is_subsampled] <- 1L
+    retained
+  }
+  selected$r_2 <- draw_random_two()
+
   tibble::tibble(
     site = paste0("site_", site_index),
     site_treated = as.integer(is_subsampled),
@@ -92,6 +117,7 @@ simulate_population_data_set <- function(
     age_calibrated_median = median_age,
     observation_model = observation_model,
     r_1 = selected$r_1,
+    r_2 = selected$r_2,
     r_3 = selected$r_3,
     r_5 = selected$r_5,
     r_old = selected$r_old,
@@ -104,7 +130,7 @@ simulate_population_data_set <- function(
 
 evaluate_population_models <- function(
   simulated_data,
-  true_model,
+  truth,
   strategy,
   prop,
   sim,
@@ -114,118 +140,121 @@ evaluate_population_models <- function(
   grids <- simulated_data$grid[as.logical(simulated_data[[strategy]])]
   low <- specification$min_age
   up <- specification$max_age
+  truth_spec <- population_truth_specification(truth, specification$ratio, low, up)
   likelihood_data <- prepare_population_likelihood_data(
     grids,
     low,
     up,
     drop_empty = drop_empty
   )
-  linear_bounds <- c(1e-12, 2 / (up - low)^2) * 1e6
-  exponential_bounds <- c(1e-10, 1e-3) * 1e3
+  bounds <- population_fit_bounds(low, up)
 
-  linear_l1 <- stats::optimize(
-    population_nll_linear,
-    linear_bounds,
-    likelihood_data = likelihood_data,
-    low = low,
-    up = up,
-    type = "l1"
-  )
-  linear_l2 <- stats::optimize(
-    population_nll_linear,
-    linear_bounds,
-    likelihood_data = likelihood_data,
-    low = low,
-    up = up,
-    type = "l2"
-  )
-  exponential_l1 <- stats::optimize(
-    population_nll_exponential,
-    exponential_bounds,
-    likelihood_data = likelihood_data,
-    low = low,
-    up = up,
-    type = "l1"
-  )
-  exponential_l2 <- stats::optimize(
-    population_nll_exponential,
-    exponential_bounds,
-    likelihood_data = likelihood_data,
-    low = low,
-    up = up,
-    type = "l2"
+  fit_model <- function(objective, interval, type) {
+    stats::optimize(
+      objective,
+      interval,
+      likelihood_data = likelihood_data,
+      low = low,
+      up = up,
+      type = type,
+      tol = bounds$tolerance
+    )
+  }
+  fits <- list(
+    l1 = list(
+      lin = fit_model(population_nll_linear, bounds$lin, "l1"),
+      exp = fit_model(population_nll_exponential, bounds$exp, "l1")
+    ),
+    l2 = list(
+      lin = fit_model(population_nll_linear, bounds$lin, "l2"),
+      exp = fit_model(population_nll_exponential, bounds$exp, "l2")
+    )
   )
 
-  selected_l1 <- select_population_models_from_aic(
-    population_pointwise_aic(
-      linear_l1,
-      exponential_l1,
-      "l1",
-      likelihood_data,
-      low,
-      up
-    ),
-    type = "l1"
-  )
-  selected_l2 <- select_population_models_from_aic(
-    population_pointwise_aic(
-      linear_l2,
-      exponential_l2,
-      "l2",
-      likelihood_data,
-      low,
-      up
-    ),
-    type = "l2"
-  )
-  selected <- rbind(selected_l1, selected_l2)
-  selected$bias <- NA_real_
-  if (true_model == "lin") {
-    selected$bias[selected$model == "lin" & selected$type == "l1"] <-
-      linear_l1$minimum / 1e6 - specification$slope
-    selected$bias[selected$model == "lin" & selected$type == "l2"] <-
-      linear_l2$minimum / 1e6 - specification$slope
-  } else if (true_model == "exp") {
-    selected$bias[selected$model == "exp" & selected$type == "l1"] <-
-      exponential_l1$minimum / 1e3 - specification$rate
-    selected$bias[selected$model == "exp" & selected$type == "l2"] <-
-      exponential_l2$minimum / 1e3 - specification$rate
+  select_for_type <- function(type) {
+    fit <- fits[[type]]
+    selected <- select_population_models_from_criterion(
+      population_pointwise_criterion(
+        fit$lin,
+        fit$exp,
+        type,
+        likelihood_data,
+        low,
+        up
+      ),
+      type = type
+    )
+    estimates <- c(uni = 0, lin = fit$lin$minimum / 1e6, exp = fit$exp$minimum / 1e3)
+    at_boundary <- c(
+      uni = FALSE,
+      lin = population_fit_at_boundary(
+        fit$lin$minimum,
+        bounds$lin,
+        bounds$tolerance
+      ),
+      exp = population_fit_at_boundary(
+        fit$exp$minimum,
+        bounds$exp,
+        bounds$tolerance
+      )
+    )
+    selected$estimate <- unname(estimates[selected$model])
+    selected$estimate_log_ratio <- vapply(seq_len(nrow(selected)), function(index) {
+      population_log_density_ratio(
+        selected$model[[index]],
+        selected$estimate[[index]],
+        low,
+        up
+      )
+    }, numeric(1))
+    selected$boundary <- unname(at_boundary[selected$model])
+    selected
   }
 
+  selected <- rbind(select_for_type("l1"), select_for_type("l2"))
+  selected$bias_log_ratio <- NA_real_
+  generating_family <- selected$model == truth_spec$family & truth_spec$family != "uni"
+  selected$bias_log_ratio[generating_family] <-
+    selected$estimate_log_ratio[generating_family] - truth_spec$log_density_ratio
+
   selected$sim <- as.integer(sim)
-  selected$true <- true_model
+  selected$true <- truth
+  selected$true_family <- truth_spec$family
+  selected$true_direction <- truth_spec$direction
+  selected$true_log_ratio <- truth_spec$log_density_ratio
   selected$prop <- prop
   selected$strategy <- strategy
   selected$n_observations <- likelihood_data$n_dates
   selected$n_dropped <- likelihood_data$n_dropped
   selected[, c(
-    "sim", "true", "prop", "strategy", "type", "model", "min", "ose", "bias",
-    "n_observations", "n_dropped"
+    "sim", "true", "true_family", "true_direction", "true_log_ratio", "prop",
+    "strategy", "type", "model", "min", "ose", "estimate", "estimate_log_ratio",
+    "bias_log_ratio", "boundary", "n_observations", "n_dropped"
   )]
 }
 
-#' Run one deterministic production population-model simulation replicate
+#' Run one deterministic Stage 2 signed-model simulation replicate
 #' @param sim Positive replicate number.
-#' @param true_model Generating population model.
-#' @param prop Proportion of sites subjected to within-site subsampling.
+#' @param truth Generating truth.
+#' @param prop Proportion of sites subjected to within-site retention.
 #' @param specification Output of [prepare_population_simulation()].
 #' @param master_seed Master seed for the production matrix.
-#' @return A complete 42-row model-selection result block.
+#' @return A complete 48-row signed-model result block.
 run_population_simulation_replicate <- function(
   sim,
-  true_model,
+  truth,
   prop,
   specification,
   master_seed = 1234L
 ) {
   requireNamespace("rcarbon", quietly = TRUE)
-  seed <- production_simulation_seed(true_model, prop, sim, master_seed)
+  seed <- production_simulation_seed(truth, prop, sim, master_seed)
   set.seed(seed, kind = "L'Ecuyer-CMRG")
-  simulated_data <- simulate_population_data_set(true_model, prop, specification)
+  simulated_data <- simulate_population_data_set(truth, prop, specification)
   result <- do.call(rbind, lapply(specification$strategies, function(strategy) {
     evaluate_population_models(
       simulated_data,
-      true_model = true_model,
+      truth = truth,
       strategy = strategy,
       prop = prop,
       sim = sim,
@@ -233,6 +262,6 @@ run_population_simulation_replicate <- function(
     )
   }))
   rownames(result) <- NULL
-  validate_population_simulation_results(result)
+  validate_population_simulation_results(result, design = "signed-v1")
   result
 }

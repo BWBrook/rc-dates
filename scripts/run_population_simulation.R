@@ -3,15 +3,15 @@
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) == 1L && args[[1L]] %in% c("--help", "-h")) {
   writeLines(c(
-    "Run one resumable production population-simulation scenario.",
+    "Run one resumable Stage 2 signed-model scenario.",
     "",
     "Required:",
-    "  --model=uni|lin|exp",
+    "  --truth=uni|lin_inc|lin_dec|exp_inc|exp_dec",
     "  --prop=0.5|0.75|1",
     "",
     "Optional:",
-    "  --nsim=1000 --cores=1 --batch-size=20 --seed=1234",
-    "  --output=out/rerun/results_...rds"
+    "  --ratio=10 --nsim=1000 --cores=1 --batch-size=20 --seed=1234",
+    "  --output=out/revision/signed-models/results_...rds"
   ))
   quit(status = 0L)
 }
@@ -42,7 +42,7 @@ if (.Platform$OS.type == "windows" && settings$cores > 1L) {
 
 dir.create(dirname(settings$output), recursive = TRUE, showWarnings = FALSE)
 input <- readr::read_csv("data/austarch_filtered.csv", show_col_types = FALSE)
-specification <- prepare_population_simulation(input)
+specification <- prepare_population_simulation(input, ratio = settings$ratio)
 metadata_path <- paste0(settings$output, ".metadata.txt")
 generation_completed_utc <- NULL
 if (file.exists(metadata_path)) {
@@ -70,9 +70,12 @@ atomic_save_rds <- function(object, path) {
 }
 
 provenance <- list(
-  schema_version = 2L,
-  true_model = settings$true_model,
+  schema_version = 3L,
+  truth = settings$truth,
   prop = settings$prop,
+  ratio = settings$ratio,
+  design = "signed-v1",
+  observation_model = "curve_mean",
   nsim = settings$nsim,
   master_seed = settings$master_seed,
   input_md5 = unname(tools::md5sum("data/austarch_filtered.csv")),
@@ -93,8 +96,8 @@ provenance <- list(
 existing <- NULL
 if (file.exists(settings$output)) {
   existing <- readRDS(settings$output)
-  validate_population_simulation_results(existing)
-  same_scenario <- all(existing$true == settings$true_model) &&
+  validate_population_simulation_results(existing, design = "signed-v1")
+  same_scenario <- all(existing$true == settings$truth) &&
     all(abs(existing$prop - settings$prop) < sqrt(.Machine$double.eps))
   if (!same_scenario || max(existing$sim) > settings$nsim) {
     abort_population_simulation(
@@ -114,7 +117,7 @@ message(
   sprintf(
     "[%s] %s p=%s: %s/%s replicates already complete; using %s cores",
     format(started, "%Y-%m-%d %H:%M:%S %Z"),
-    settings$true_model,
+    settings$truth,
     settings$prop,
     length(completed),
     settings$nsim,
@@ -132,7 +135,7 @@ if (length(remaining) > 0L) {
           sim = sim,
           result = run_population_simulation_replicate(
             sim = sim,
-            true_model = settings$true_model,
+            truth = settings$truth,
             prop = settings$prop,
             specification = specification,
             master_seed = settings$master_seed
@@ -163,7 +166,7 @@ if (length(remaining) > 0L) {
     existing <- if (is.null(existing)) new_rows else rbind(existing, new_rows)
     existing <- existing[order(existing$sim, existing$strategy, existing$type, existing$model), ]
     rownames(existing) <- NULL
-    validate_population_simulation_results(existing)
+    validate_population_simulation_results(existing, design = "signed-v1")
     attr(existing, "production_provenance") <- provenance
     atomic_save_rds(existing, settings$output)
     message(
@@ -178,7 +181,11 @@ if (length(remaining) > 0L) {
 }
 
 final <- readRDS(settings$output)
-validate_population_simulation_results(final, nsim = settings$nsim)
+validate_population_simulation_results(
+  final,
+  nsim = settings$nsim,
+  design = "signed-v1"
+)
 validate_population_checkpoint_provenance(final, provenance)
 package_names <- c("digest", "fitdistrplus", "rcarbon", "readr", "rlang", "tibble")
 package_versions <- vapply(package_names, function(package) {
@@ -189,13 +196,16 @@ if (is.null(generation_completed_utc)) {
   generation_completed_utc <- metadata_recorded_utc
 }
 writeLines(c(
-  "rc-dates production population simulation",
+  "rc-dates Stage 2 signed-model simulation",
   paste("schema_version:", provenance$schema_version),
   paste("generation_completed_utc:", generation_completed_utc),
   paste("metadata_recorded_utc:", metadata_recorded_utc),
   paste("r_version:", provenance$r_version),
-  paste("true_model:", settings$true_model),
-  paste("site_subsampling_proportion:", settings$prop),
+  paste("truth:", settings$truth),
+  paste("effect_ratio:", format(settings$ratio, scientific = FALSE, trim = TRUE)),
+  paste("design:", provenance$design),
+  paste("observation_model:", provenance$observation_model),
+  paste("site_treatment_proportion:", settings$prop),
   paste("replicates:", settings$nsim),
   paste("master_seed:", settings$master_seed),
   "seed_design: common random numbers; replicate seed = master seed + replicate number",

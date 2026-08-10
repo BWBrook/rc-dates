@@ -1,6 +1,6 @@
 # rc-dates
 
-Scientific analysis and manuscript sources for testing how archaeological sampling strategies and
+Scientific analysis and manuscript sources for testing how within-site date-retention rules and
 model choice affect inference from radiocarbon-date distributions.
 
 This is a private, paper-specific repository. Its current contract is the evidence used by the
@@ -24,7 +24,8 @@ empirical transformations.
 
 ```text
 archaeological dates ──> validate/filter/calibrate ──> empirical Figures 1-2
-simulation design ─────> resumable container runs ──> validate accepted RDS ──> Figures 3-5
+locked simulation evidence ──> independent validation ──> current Figures 3-5
+Stage 2 signed design ────────> resumable container runs ──> decision tables
 manuscript sources + accepted evidence ─────────────> makedoc ────────────────> submission files
 ```
 
@@ -40,15 +41,18 @@ source data. The second independently validates the accepted production artefact
 Figures 3-5. It can use the immutable 2026-07-10 source snapshot when the active simulation code has
 subsequently changed.
 
-The full stochastic matrix is intentionally outside the fast gate:
+The Stage 2 signed-model audit is intentionally outside the fast gate:
 
 ```sh
-make production-rerun
+make stage2-rerun
 ```
 
-Run that target on `deep-server` inside `tmux`; it writes to `out/rerun` by default and preserves
-atomic, resumable checkpoints. See [docs/PRODUCTION_SIMULATIONS.md](docs/PRODUCTION_SIMULATIONS.md)
-for the run contract and acceptance checks.
+Run that target on `deep-server` inside `tmux`; it writes to `out/revision/signed-models` and
+preserves atomic, resumable checkpoints. The prespecified scientific gate is in
+[docs/STAGE2_SIGNED_MODELS.md](docs/STAGE2_SIGNED_MODELS.md), and
+[docs/PRODUCTION_SIMULATIONS.md](docs/PRODUCTION_SIMULATIONS.md) gives the runtime and acceptance
+contract. The locked 2026 production evidence remains untouched until the signed-model result has
+been interpreted.
 
 ## Historical sensitivity decisions
 

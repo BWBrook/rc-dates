@@ -1,73 +1,79 @@
-# Production population simulations
+# Population simulations
 
-The manuscript's model-recovery, parameter-bias, and evidential-strength displays use a 3 x 3
-simulation matrix: three generating models (`uni`, `lin`, `exp`) crossed with three proportions of
-sites subjected to within-site subsampling (`0.5`, `0.75`, `1`). Each scenario has 1,000 replicates;
-each replicate contains seven sampling strategies, two likelihood definitions, and three fitted
-models (42 result rows).
+## Locked 2026 production evidence
 
-## Accepted evidence
+The manuscript's current Figures 3–5 use the accepted 3 × 3 matrix under `out/production/`: uniform,
+linear-increase and exponential-increase truths crossed with site-treatment proportions 0.50, 0.75
+and 1.00. Each scenario contains 1,000 replicates, seven retention rules, two fitted criteria and
+three fitted families (42 rows per replicate).
 
-`out/production/` contains the nine accepted RDS files, their metadata sidecars, display summaries,
-container image identifier, and checksum manifest. The matrix was generated on 10 July 2026 with R
-4.5.3 on a 64-core Linux host. All 9,000 replicates completed (378,000 rows); the slowest scenario
-took about 104 minutes.
+Those nine RDS files were generated on 10 July 2026 with R 4.5.3 on a 64-core Linux host. All 9,000
+replicates completed (378,000 rows); the slowest scenario took about 104 minutes. Their exact sources
+are immutable under `provenance/production-20260710/`. The original evidence remains a scientific
+record while the Stage 2 revision is evaluated.
 
-The exact sources loaded for that run are immutable under
-`provenance/production-20260710/`. The accepted files use provenance schema 1 because their stamps
-were attached after preserving the completed raw RDS files. That historical fact is retained; it is
-not a template for future runs.
-
-Validate all accepted artefacts and rebuild Figures 3-5 with:
+Validate the locked artefacts and rebuild the current figures with:
 
 ```sh
 make production-figures
 ```
 
-The renderer verifies every complete result block, RDS/metadata checksums, scenario identity,
-replicate coverage, one common runtime, the frozen generation-source hashes, and the exact
-common-random-number equality of the all-dates reference across sampling intensities. It then writes
-the three manuscript summaries and figures.
+The renderer verifies complete result blocks, RDS and metadata hashes, scenario identity, replicate
+coverage, a common runtime, the frozen generation-source fingerprints, and exact all-dates pairing
+across treatment proportions.
 
-## Active implementation
+## Stage 2 signed-model audit
+
+The frozen question, estimand, truth matrix, effect scale and claim gates are in
+`docs/STAGE2_SIGNED_MODELS.md`. The new matrix contains five truths crossed with three treatment
+proportions. Each replicate contains eight retention rules, the primary `l1` likelihood, the `l2`
+scoring sensitivity, and three signed fitted families (48 rows).
 
 The active engine is separated by scientific responsibility:
 
-- `R/population_distributions.R` — fitted error and truncated generating distributions;
-- `R/population_simulation_design.R` — arguments, seeds, observation model, and checkpoint contract;
-- `R/population_simulation_models.R` — likelihoods, optimisation, AIC and OSE selection;
-- `R/population_simulation_run.R` — data generation and one-replicate evaluation;
-- `R/population_simulation_artifacts.R` — accepted-artifact validation and display summaries.
+- `R/population_distributions.R` — signed generating densities and random generators;
+- `R/population_simulation_design.R` — truth contract, common effect scale, seeds and CLI;
+- `R/population_simulation_models.R` — fitted scores, signed optimisation and parsimony selection;
+- `R/population_simulation_run.R` — data generation, isolated random-2 and replicate evaluation;
+- `R/population_simulation_artifacts.R` — locked-artifact validation and Stage 2 summaries;
+- `scripts/run_population_simulation.R` — one resumable scenario with schema-3 provenance;
+- `scripts/summarise_stage2_signed_models.R` — matrix-wide independent acceptance checks.
 
-`scripts/source_population_simulation.R` is the single ordered loader. New runs use provenance
-schema 2, which fingerprints the model-source bundle and distribution module directly. They accept
-only native checkpoints with an exact matching fingerprint; the former unstamped-checkpoint
-migration and provenance overrides have been removed.
+`scripts/source_population_simulation.R` is the single ordered loader. Stage 2 checkpoints resume
+only when truth, effect ratio, treatment proportion, seeds, source/input/lock/container hashes,
+runtime and image ID match exactly.
 
-## Full rerun
+## Running Stage 2
 
-Run the expensive matrix on `deep-server` in `tmux`, writing away from the accepted evidence:
+Run the expensive matrix on `deep-server` inside `tmux`:
 
 ```sh
-RC_DATES_OUTPUT_DIR=out/rerun \
-  bash scripts/run_production_simulation_matrix.sh
+make stage2-rerun
 ```
 
-The launcher builds the digest-pinned R 4.5.3 image, checks the runtime, launches the nine scenario
-jobs, and records the image ID. Outputs are checkpointed atomically after each batch and resume only
-when scenario, seeds, source/input/lock/container hashes, runtime, and image ID match exactly.
+The default output is `out/revision/signed-models/`, separate from the locked manuscript evidence.
+The launcher builds the digest-pinned R 4.5.3 image, verifies the runtime, launches the 15 scenarios,
+waits for every resumable job, and then runs the independent matrix summariser in the same container.
+It allocates four cores per scenario by default, for at most 60 of the server's 64 CPUs.
 
-Useful explicit overrides are `RC_DATES_NSIM`, `RC_DATES_CORES_PER_JOB`,
-`RC_DATES_BATCH_SIZE`, and `RC_DATES_MASTER_SEED`. `RC_DATES_SKIP_IMAGE_BUILD=true` is reserved for
-deliberate reuse of an already inspected image.
+Useful explicit overrides are `RC_DATES_NSIM`, `RC_DATES_CORES_PER_JOB`, `RC_DATES_BATCH_SIZE`,
+`RC_DATES_MASTER_SEED`, `RC_DATES_RATIO` and `RC_DATES_OUTPUT_DIR`.
+`RC_DATES_SKIP_IMAGE_BUILD=true` is reserved for deliberate reuse of an inspected image.
+
+The accepted Stage 2 directory must contain:
+
+- 15 RDS checkpoints and 15 metadata sidecars;
+- a scenario manifest and container image record;
+- truth-state confusion, selection, log-ratio bias, boundary and paired-contrast tables;
+- `VALIDATION.txt` recording all-dates pairing and provenance acceptance;
+- `SHA256SUMS` covering every accepted evidence file.
+
+Revalidate an already completed matrix with:
+
+```sh
+make stage2-summarise
+```
 
 The master seed is 1234. Replicate `i` uses seed `1234 + i` under `L'Ecuyer-CMRG`; the same seed is
-used across all nine scenarios. This pairing is part of the design, not an implementation detail.
-
-## Figure 5 aggregation
-
-The modified one-standard-error rule may retain more than one model. Figure 5 first reduces each
-`(truth, proportion, strategy, likelihood, replicate)` group to one Boolean: success requires every
-retained model to be the generating model. It then averages those replicate-level values and uses
-paired cluster-bootstrap intervals over replicate identifiers, retaining the three generating-family
-outcomes together. Ambiguous replicates therefore receive no extra weight.
+used across all 15 scenarios. Random-2 is generated on an isolated deterministic state after the
+locked structural draws, so adding it cannot alter the other seven retention rules.
