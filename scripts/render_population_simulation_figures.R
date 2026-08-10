@@ -33,10 +33,10 @@ parse_arguments <- function(args) {
   settings
 }
 
-if (!file.exists("R/population_simulation_production.R")) {
+if (!file.exists("scripts/source_population_simulation.R")) {
   stop("Run this script from the rc-dates repository root.", call. = FALSE)
 }
-source("R/population_simulation_production.R")
+source("scripts/source_population_simulation.R")
 settings <- parse_arguments(commandArgs(trailingOnly = TRUE))
 
 models <- c("uni", "lin", "exp")
@@ -63,12 +63,22 @@ invisible(lapply(
 ))
 result_list <- lapply(result_paths, readRDS)
 provenance_list <- lapply(result_list, attr, which = "production_provenance", exact = TRUE)
+schema_version <- provenance_list[[1L]]$schema_version
+source_hash_fields <- if (identical(schema_version, 1L)) {
+  c("production_source_md5", "legacy_helper_md5")
+} else if (identical(schema_version, 2L)) {
+  c("model_source_md5", "distribution_source_md5")
+} else {
+  stop("Unsupported production provenance schema.", call. = FALSE)
+}
 common_provenance_fields <- c(
   "schema_version", "nsim", "master_seed", "input_md5", "renv_lock_md5",
-  "production_source_md5", "legacy_helper_md5", "runner_source_md5",
-  "container_recipe_md5", "container_install_md5", "container_image_id",
-  "provenance_origin", "r_version"
+  source_hash_fields, "runner_source_md5", "container_recipe_md5",
+  "container_install_md5", "container_image_id", "r_version"
 )
+if (identical(schema_version, 1L)) {
+  common_provenance_fields <- c(common_provenance_fields, "provenance_origin")
+}
 canonical_provenance <- provenance_list[[1L]][common_provenance_fields]
 same_provenance <- vapply(provenance_list, function(provenance) {
   identical(provenance[common_provenance_fields], canonical_provenance)
@@ -76,42 +86,49 @@ same_provenance <- vapply(provenance_list, function(provenance) {
 if (!all(same_provenance)) {
   stop("Production artifacts were not generated under one common runtime.", call. = FALSE)
 }
-source_fields <- c(
-  production_source_md5 = "R/population_simulation_production.R",
-  legacy_helper_md5 = "R/legacy_simulation_helpers.R",
-  runner_source_md5 = "scripts/run_population_simulation.R",
-  container_recipe_md5 = "docker/production-simulation.Dockerfile",
-  container_install_md5 = "docker/install-production-packages.R",
+snapshot_paths <- c(
+  production_source_md5 = paste0(
+    "provenance/production-20260710/",
+    "R/population_simulation_production.R"
+  ),
+  legacy_helper_md5 = paste0(
+    "provenance/production-20260710/",
+    "R/legacy_simulation_helpers.R"
+  ),
+  runner_source_md5 = paste0(
+    "provenance/production-20260710/",
+    "scripts/run_population_simulation.R"
+  ),
+  container_recipe_md5 = paste0(
+    "provenance/production-20260710/",
+    "docker/production-simulation.Dockerfile"
+  ),
   renv_lock_md5 = "renv.lock",
   input_md5 = "data/austarch_filtered.csv"
 )
-source_sets <- list(
-  active = source_fields,
-  `production-20260710` = c(
-    production_source_md5 = paste0(
-      "provenance/production-20260710/",
-      "R/population_simulation_production.R"
-    ),
-    legacy_helper_md5 = paste0(
-      "provenance/production-20260710/",
-      "R/legacy_simulation_helpers.R"
-    ),
-    runner_source_md5 = paste0(
-      "provenance/production-20260710/",
-      "scripts/run_population_simulation.R"
-    ),
-    container_recipe_md5 = paste0(
-      "provenance/production-20260710/",
+source_fingerprints <- list(
+  active = c(
+    model_source_md5 = population_model_source_md5(),
+    distribution_source_md5 = unname(tools::md5sum(population_distribution_source)),
+    runner_source_md5 = unname(tools::md5sum("scripts/run_population_simulation.R")),
+    container_recipe_md5 = unname(tools::md5sum(
       "docker/production-simulation.Dockerfile"
-    ),
-    renv_lock_md5 = "renv.lock",
-    input_md5 = "data/austarch_filtered.csv"
+    )),
+    container_install_md5 = unname(tools::md5sum(
+      "docker/install-production-packages.R"
+    )),
+    renv_lock_md5 = unname(tools::md5sum("renv.lock")),
+    input_md5 = unname(tools::md5sum("data/austarch_filtered.csv"))
+  ),
+  `production-20260710` = stats::setNames(
+    unname(tools::md5sum(snapshot_paths)),
+    names(snapshot_paths)
   )
 )
-matching_source_sets <- vapply(source_sets, function(paths) {
-  all(file.exists(paths)) && identical(
-    unname(tools::md5sum(paths)),
-    unname(unlist(canonical_provenance[names(paths)]))
+matching_source_sets <- vapply(source_fingerprints, function(fingerprints) {
+  all(names(fingerprints) %in% names(canonical_provenance)) && identical(
+    unname(fingerprints),
+    unname(unlist(canonical_provenance[names(fingerprints)]))
   )
 }, logical(1))
 if (!any(matching_source_sets)) {

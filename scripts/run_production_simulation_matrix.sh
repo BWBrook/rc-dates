@@ -47,22 +47,6 @@ docker_environment=(
   --env R_LIBS_USER=/opt/rc-dates-library/linux-ubuntu-noble/R-4.5/x86_64-pc-linux-gnu
   --env "RC_DATES_IMAGE_ID=$image_id"
 )
-provenance_variables=(
-  RC_DATES_ALLOW_UNSTAMPED_COMPLETE
-  RC_DATES_PROVENANCE_ORIGIN
-  RC_DATES_PROVENANCE_INPUT_MD5
-  RC_DATES_PROVENANCE_RENV_LOCK_MD5
-  RC_DATES_PROVENANCE_PRODUCTION_SOURCE_MD5
-  RC_DATES_PROVENANCE_LEGACY_HELPER_MD5
-  RC_DATES_PROVENANCE_RUNNER_SOURCE_MD5
-  RC_DATES_PROVENANCE_CONTAINER_RECIPE_MD5
-  RC_DATES_PROVENANCE_CONTAINER_INSTALL_MD5
-)
-for variable in "${provenance_variables[@]}"; do
-  if [[ -n ${!variable:-} ]]; then
-    docker_environment+=(--env "$variable=${!variable}")
-  fi
-done
 
 models=(uni lin exp)
 proportions=(0.5 0.75 1)

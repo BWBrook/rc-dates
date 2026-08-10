@@ -1,4 +1,4 @@
-name: compendium-ci
+name: scientific-tests
 
 on:
   push:
@@ -36,15 +36,5 @@ jobs:
           if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
           source("renv/activate.R")
           renv::restore(prompt = FALSE)
-      - name: Run tests
-        shell: Rscript {0}
-        run: |
-          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
-          source("renv/activate.R")
-          source("tests/run-tests.R")
-      - name: Check targets manifest
-        shell: Rscript {0}
-        run: |
-          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
-          source("renv/activate.R")
-          print(targets::tar_manifest(script = "_targets.R"))
+      - name: Run consequential scientific tests
+        run: Rscript tests/run-tests.R

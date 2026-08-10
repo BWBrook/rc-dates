@@ -15,7 +15,7 @@ Within-site sampling changes the normalised empirical displays more than the cho
 
 The manuscript motivates recording per-site date counts, stratigraphic span and selection criteria, and testing plausible selection rules. It states the limits of its idealised simulations rather than proposing a universal dating minimum. We consider this combination of empirical analysis, formal modelling and simulation well matched to *Journal of Archaeological Science*.
 
-The manuscript is original, is not under consideration elsewhere, has been approved by all authors, and has no conflicts of interest. A de-identified code/data package (`rc_review_package.zip`) will be supplied through a private-for-review link with a reserved DOI and made public after acceptance.
+The manuscript is original, is not under consideration elsewhere, has been approved by all authors, and has no conflicts of interest. A reviewer-facing code and evidence archive will be supplied through a private link with a reserved DOI and made public after acceptance; data inclusion and licensing will be confirmed before deposit.
 
 Thank you for considering the manuscript for publication in *Journal of Archaeological Science*.
 

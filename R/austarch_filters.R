@@ -7,42 +7,45 @@
 #'
 #' @param filepath Path to the CSV file.
 #' @return A tibble containing the cleaned dataset.
-#' @export
 load_austarch_data <- function(filepath) {
-  import::from("readr", "read_csv", "cols_only", "col_integer", "col_double", "col_character")
-  import::from("dplyr", "rename", "mutate", "across")
-  import::from("stringr", "str_replace_all")
-
-  fp <- resolve_path(filepath)
+  if (length(filepath) != 1L || !file.exists(filepath)) {
+    rlang::abort(
+      paste("AustArch input file does not exist:", filepath),
+      class = "rcdates_data_error"
+    )
+  }
   suppressWarnings({
-    austarch_df <- read_csv(
-      fp,
+    austarch_df <- readr::read_csv(
+      filepath,
       num_threads = 1,
       show_col_types = FALSE,
-      col_types = cols_only(
-        ADSID = col_integer(),
-        LONGITUDE = col_double(),
-        LATITUDE = col_double(),
-        SITE = col_character(),
-        SITE_TYPE = col_character(),
-        LAB_CODE = col_character(),
-        AGE = col_double(),
-        ERROR = col_double(),
-        MATERIAL = col_character(),
-        METHOD = col_character(),
-        `Data pertinent for time-series analysis or calibration` = col_character(),
-        `Open or Closed Site` = col_character(),
-        `Directly Related to occupation? Yes/Unknown` = col_character(),
-        RECORD_SOURCE = col_character(),
-        DATE_ISSUES = col_character()
+      col_types = readr::cols_only(
+        ADSID = readr::col_integer(),
+        LONGITUDE = readr::col_double(),
+        LATITUDE = readr::col_double(),
+        SITE = readr::col_character(),
+        SITE_TYPE = readr::col_character(),
+        LAB_CODE = readr::col_character(),
+        AGE = readr::col_double(),
+        ERROR = readr::col_double(),
+        MATERIAL = readr::col_character(),
+        METHOD = readr::col_character(),
+        `Data pertinent for time-series analysis or calibration` = readr::col_character(),
+        `Open or Closed Site` = readr::col_character(),
+        `Directly Related to occupation? Yes/Unknown` = readr::col_character(),
+        RECORD_SOURCE = readr::col_character(),
+        DATE_ISSUES = readr::col_character()
       )
     ) |>
-      rename(
+      dplyr::rename(
         TIME_SERIES_RELEVANT = `Data pertinent for time-series analysis or calibration`,
         SITE_STATUS = `Open or Closed Site`,
         OCCUPATION_RELATED = `Directly Related to occupation? Yes/Unknown`
       ) |>
-      mutate(across(c(SITE, SITE_TYPE, MATERIAL), ~str_replace_all(., "\\s+", "_")))
+      dplyr::mutate(dplyr::across(
+        c(SITE, SITE_TYPE, MATERIAL),
+        ~ stringr::str_replace_all(., "\\s+", "_")
+      ))
   })
   austarch_df
 }
@@ -53,11 +56,9 @@ load_austarch_data <- function(filepath) {
 #'
 #' @param df Dataframe of AustArch records.
 #' @return A filtered dataframe excluding problematic or invalid records.
-#' @export
 filter_austarch_initial <- function(df) {
-  import::from("dplyr", "filter", "select")
   df |>
-    filter(
+    dplyr::filter(
       METHOD == "Radiocarbon",
       OCCUPATION_RELATED != "N",
       AGE >= 500 & AGE <= 20000,
@@ -67,7 +68,7 @@ filter_austarch_initial <- function(df) {
         "Date not associated with human activity, or is problematic for time-series analysis - see Notes"
       ))
     ) |>
-    select(-DATE_ISSUES)
+    dplyr::select(-DATE_ISSUES)
 }
 
 #' Filter AustArch data by material type and site context
@@ -76,10 +77,7 @@ filter_austarch_initial <- function(df) {
 #'
 #' @param df Dataframe of filtered AustArch records.
 #' @return A cleaned dataframe restricted to valid materials and site types.
-#' @export
 filter_austarch_material_site <- function(df) {
-  import::from("dplyr", "filter")
-
   valid_materials <- c(
     "Charcoal", "Charcoal_from_hearth", "Scattered_charcoal",
     "Wood_charcoal", "Carbonised_wood", "Burnt_wood", "Charred_wood", "Wood",
@@ -105,7 +103,7 @@ filter_austarch_material_site <- function(df) {
   )
 
   df |>
-    filter(
+    dplyr::filter(
       MATERIAL %in% valid_materials,
       SITE_TYPE %in% valid_site_types,
       TIME_SERIES_RELEVANT != "Unusuable",
@@ -119,7 +117,6 @@ filter_austarch_material_site <- function(df) {
 #' @param min_calBP Minimum calendar BP (default = 100).
 #' @param max_calBP Maximum calendar BP (default = 20000).
 #' @return A CalDates object containing only dates overlapping the defined range.
-#' @export
 filter_calibrated_dates_by_range <- function(calibrated_dates, min_calBP = 100, max_calBP = 20000) {
   pick_time_col <- function(df) {
     nms <- names(df)
@@ -158,65 +155,4 @@ filter_calibrated_dates_by_range <- function(calibrated_dates, min_calBP = 100, 
   )
   class(filtered) <- "CalDates"
   filtered
-}
-
-#' Retain sites with a minimum number of calibrated dates
-#' @param original_df Original filtered dataset.
-#' @param calibrated_dates A CalDates object.
-#' @param min_dates Minimum number of dates per site (default = 5).
-#' @return A dataframe with only robustly sampled sites.
-#' @export
-filter_sites_min_calibrated_dates <- function(original_df, calibrated_dates, min_dates = 5) {
-  import::from("dplyr", "filter", "mutate", "select", "count", "inner_join")
-  retained_ids <- as.numeric(calibrated_dates$metadata$DateID)
-  df_filtered <- original_df |>
-    filter(ADSID %in% retained_ids)
-
-  pick_cols <- function(df) {
-    nms <- names(df); nms_low <- tolower(nms)
-    tcol <- if ("calbp" %in% nms_low) nms[[which(nms_low == "calbp")[1]]] else nms[[1]]
-    dcol <- if ("prdens" %in% nms_low) nms[[which(nms_low == "prdens")[1]]] else nms[[max(2, length(nms))]]
-    list(t = tcol, d = dcol)
-  }
-  weighted_means <- vapply(
-    calibrated_dates$grids,
-    function(grid) {
-      cols <- pick_cols(grid)
-      sum(grid[[cols$t]] * grid[[cols$d]])
-    },
-    numeric(1)
-  )
-
-  df_filtered <- df_filtered |>
-    mutate(weighted_mean_calBP = weighted_means[as.character(ADSID)]) |>
-    select(-RECORD_SOURCE)
-
-  df_filtered |>
-    count(SITE) |>
-    filter(n >= min_dates) |>
-    inner_join(df_filtered, by = "SITE")
-}
-
-#' Subset a CalDates object using a vector of ADSIDs
-#' @param cal_dates A CalDates object (from rcarbon)
-#' @param adsids A character or numeric vector of ADSIDs to retain
-#' @return A subset CalDates object containing only the specified dates
-#' @export
-subset_caldates_by_adsid <- function(cal_dates, adsids) {
-  adsids <- as.character(adsids)
-  metadata_ids <- as.character(cal_dates$metadata$DateID)
-  grid_ids <- names(cal_dates$grids)
-  retained_ids <- unique(adsids[adsids %in% metadata_ids & adsids %in% grid_ids])
-
-  subset_metadata <- cal_dates$metadata[match(retained_ids, metadata_ids), , drop = FALSE]
-  subset_grids <- cal_dates$grids[retained_ids]
-  subset_calmatrix <- if (!is.null(cal_dates$calmatrix) && is.matrix(cal_dates$calmatrix)) {
-    cols <- retained_ids[retained_ids %in% colnames(cal_dates$calmatrix)]
-    cal_dates$calmatrix[, cols, drop = FALSE]
-  } else {
-    NULL
-  }
-  out <- list(metadata = subset_metadata, grids = subset_grids, calmatrix = subset_calmatrix)
-  class(out) <- "CalDates"
-  out
 }

@@ -30,7 +30,7 @@ Our inferential approach keeps the uncertainty attached to each radiocarbon dete
 
 ## 2. Methods
 
-Full filtering, calibration, likelihood, and simulation details are given in the Supplementary Methods. The code and data package will be supplied through a de-identified private-for-review repository record with a reserved DOI before submission. Here we summarise the design choices needed to interpret the results.
+Full filtering, calibration, likelihood, and simulation details are given in the Supplementary Methods. A reviewer-facing repository record will be locked after the revised outputs and data-sharing conditions have been checked. Here we summarise the design choices needed to interpret the results.
 
 ### 2.1 Empirical reference set and descriptive curves
 
@@ -52,7 +52,7 @@ Inference was based on maximum-likelihood fitting to calibrated posteriors rathe
 
 ### 2.4 Reproducibility
 
-All analyses were run in R using rcarbon for calibration and standard tidyverse workflows for data handling [@crema2021InferenceLargeSets; @rcoreteam2025LanguageEnvironmentStatistical]. The review archive contains the input data, analysis code, tests, `{targets}` workflow, and pinned `renv` environment needed to inspect and rerun the code-level analysis package outside GitHub. The final repository record will include the locked review archive, private review link, and reserved DOI before submission, and will be made public after acceptance.
+All analyses were run in R using rcarbon for calibration and standard tidyverse workflows for data handling [@crema2021InferenceLargeSets; @rcoreteam2025LanguageEnvironmentStatistical]. The analysis repository pins R 4.5.3 and its package environment, tests the consequential scientific transformations, and binds accepted high-volume outputs to checksums and frozen generation sources. A reviewer-facing archive will be assembled after the revised outputs are frozen; inclusion and licensing of source and filtered data will be confirmed before deposit. The final record will include a private review link and reserved DOI before submission and will be made public after acceptance, subject to those data-sharing conditions.
 
 ## 3. Results
 
@@ -126,7 +126,7 @@ Within-site sampling belongs at the start, not the end, of radiocarbon-based dem
 
 ## Data availability
 
-For peer review, the data and code supporting this study will be supplied in a de-identified repository archive (`rc_review_package.zip`) available through a private-for-review link: [PRIVATE_REVIEW_LINK]. The associated reserved DOI is [RESERVED_DOI]. The archive includes the de-identified input data, filtered reference table, R code, tests, `{targets}` workflow, `renv` lockfile, paired sensitivity checkpoints, and gate reports needed to inspect the analysis outside GitHub; its reviewer notes distinguish fast verification from high-volume simulation. The repository record will be made public after acceptance.
+For peer review, the supporting code, permitted data, and accepted evidence will be supplied through a private-for-review repository link: [PRIVATE_REVIEW_LINK]. The associated reserved DOI is [RESERVED_DOI]. The final archive will include the pinned R environment, scientific tests, accepted simulation and sensitivity evidence, and source snapshots needed to inspect their provenance; source and filtered data will be included only where licensing and data-governance conditions permit. Its instructions will distinguish fast verification from optional high-volume reruns. The repository record will be made public after acceptance, subject to the same conditions.
 
 ## Competing interests
 

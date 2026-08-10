@@ -11,14 +11,13 @@ if (length(args) == 1L && args[[1L]] %in% c("--help", "-h")) {
     "",
     "Optional:",
     "  --nsim=1000 --cores=1 --batch-size=20 --seed=1234",
-    "  --output=out/production/results_...rds"
+    "  --output=out/rerun/results_...rds"
   ))
   quit(status = 0L)
 }
 
 required_files <- c(
-  "R/legacy_simulation_helpers.R",
-  "R/population_simulation_production.R",
+  "scripts/source_population_simulation.R",
   "data/austarch_filtered.csv",
   "docker/production-simulation.Dockerfile",
   "docker/install-production-packages.R",
@@ -33,8 +32,7 @@ if (length(missing_files) > 0L) {
   )
 }
 
-source("R/legacy_simulation_helpers.R")
-source("R/population_simulation_production.R")
+source("scripts/source_population_simulation.R")
 
 settings <- parse_population_simulation_args(args)
 if (.Platform$OS.type == "windows" && settings$cores > 1L) {
@@ -71,61 +69,24 @@ atomic_save_rds <- function(object, path) {
   invisible(path)
 }
 
-allow_unstamped_complete <- identical(
-  tolower(Sys.getenv("RC_DATES_ALLOW_UNSTAMPED_COMPLETE", unset = "false")),
-  "true"
-)
-provenance_md5 <- function(path, override_name) {
-  override <- Sys.getenv(override_name, unset = "")
-  if (allow_unstamped_complete && nzchar(override)) override else unname(tools::md5sum(path))
-}
-provenance_origin <- Sys.getenv(
-  "RC_DATES_PROVENANCE_ORIGIN",
-  unset = "native-checkpoint"
-)
-if (!provenance_origin %in% c("native-checkpoint", "post-run-stamp") ||
-    (provenance_origin == "post-run-stamp" && !allow_unstamped_complete)) {
-  abort_population_simulation(
-    "Invalid production provenance origin or migration settings.",
-    "rcdates_sim_provenance_error"
-  )
-}
 provenance <- list(
-  schema_version = 1L,
+  schema_version = 2L,
   true_model = settings$true_model,
   prop = settings$prop,
   nsim = settings$nsim,
   master_seed = settings$master_seed,
-  input_md5 = provenance_md5(
-    "data/austarch_filtered.csv",
-    "RC_DATES_PROVENANCE_INPUT_MD5"
-  ),
-  renv_lock_md5 = provenance_md5(
-    "renv.lock",
-    "RC_DATES_PROVENANCE_RENV_LOCK_MD5"
-  ),
-  production_source_md5 = provenance_md5(
-    "R/population_simulation_production.R",
-    "RC_DATES_PROVENANCE_PRODUCTION_SOURCE_MD5"
-  ),
-  legacy_helper_md5 = provenance_md5(
-    "R/legacy_simulation_helpers.R",
-    "RC_DATES_PROVENANCE_LEGACY_HELPER_MD5"
-  ),
-  runner_source_md5 = provenance_md5(
-    "scripts/run_population_simulation.R",
-    "RC_DATES_PROVENANCE_RUNNER_SOURCE_MD5"
-  ),
-  container_recipe_md5 = provenance_md5(
-    "docker/production-simulation.Dockerfile",
-    "RC_DATES_PROVENANCE_CONTAINER_RECIPE_MD5"
-  ),
-  container_install_md5 = provenance_md5(
-    "docker/install-production-packages.R",
-    "RC_DATES_PROVENANCE_CONTAINER_INSTALL_MD5"
-  ),
+  input_md5 = unname(tools::md5sum("data/austarch_filtered.csv")),
+  renv_lock_md5 = unname(tools::md5sum("renv.lock")),
+  model_source_md5 = population_model_source_md5(),
+  distribution_source_md5 = unname(tools::md5sum(population_distribution_source)),
+  runner_source_md5 = unname(tools::md5sum("scripts/run_population_simulation.R")),
+  container_recipe_md5 = unname(tools::md5sum(
+    "docker/production-simulation.Dockerfile"
+  )),
+  container_install_md5 = unname(tools::md5sum(
+    "docker/install-production-packages.R"
+  )),
   container_image_id = Sys.getenv("RC_DATES_IMAGE_ID", unset = "not-recorded"),
-  provenance_origin = provenance_origin,
   r_version = R.version.string
 )
 
@@ -142,18 +103,7 @@ if (file.exists(settings$output)) {
     )
   }
 
-  observed_provenance <- attr(existing, "production_provenance", exact = TRUE)
-  complete_checkpoint <- identical(
-    sort(unique(existing$sim)),
-    seq_len(settings$nsim)
-  )
-  if (is.null(observed_provenance) && allow_unstamped_complete && complete_checkpoint) {
-    attr(existing, "production_provenance") <- provenance
-    atomic_save_rds(existing, settings$output)
-    message("Stamped a complete legacy checkpoint with its recorded generation provenance.")
-  } else {
-    validate_population_checkpoint_provenance(existing, provenance)
-  }
+  validate_population_checkpoint_provenance(existing, provenance)
 }
 
 completed <- if (is.null(existing)) integer() else sort(unique(existing$sim))
@@ -230,7 +180,7 @@ if (length(remaining) > 0L) {
 final <- readRDS(settings$output)
 validate_population_simulation_results(final, nsim = settings$nsim)
 validate_population_checkpoint_provenance(final, provenance)
-package_names <- c("fitdistrplus", "rcarbon", "dplyr", "ggplot2", "testthat")
+package_names <- c("digest", "fitdistrplus", "rcarbon", "readr", "rlang", "tibble")
 package_versions <- vapply(package_names, function(package) {
   as.character(utils::packageVersion(package))
 }, character(1))
@@ -251,13 +201,12 @@ writeLines(c(
   "seed_design: common random numbers; replicate seed = master seed + replicate number",
   paste("input_md5:", provenance$input_md5),
   paste("renv_lock_md5:", provenance$renv_lock_md5),
-  paste("production_source_md5:", provenance$production_source_md5),
-  paste("legacy_helper_md5:", provenance$legacy_helper_md5),
+  paste("model_source_md5:", provenance$model_source_md5),
+  paste("distribution_source_md5:", provenance$distribution_source_md5),
   paste("runner_source_md5:", provenance$runner_source_md5),
   paste("container_recipe_md5:", provenance$container_recipe_md5),
   paste("container_install_md5:", provenance$container_install_md5),
   paste("container_image_id:", provenance$container_image_id),
-  paste("provenance_origin:", provenance$provenance_origin),
   paste("output_md5:", unname(tools::md5sum(settings$output))),
   paste(
     "packages:",

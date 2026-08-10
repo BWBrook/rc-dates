@@ -1,106 +1,43 @@
 # R / RStudio
-.Rproj.user
+.Rproj.user/
 .Rhistory
 .RData
 .Ruserdata
 .Rprofile.user
-.DS_Store
 
-# renv
-renv/library/
-renv/staging/
-
-# targets
-_targets/
-# optional frozen outputs from Quarto later
-.quarto/_freeze/
-.quarto/
-docs/_site/
-
-# data
-data/
-data-raw/
-data-raw/cache/
-inst/extdata/*.zip
-inst/extdata/*.gz
-
-# build / checks
-.Rcheck/
-tmp/final-review-package-*/
-
-# Global CSV ignore was masking versioned examples. Keep data/ ignored but
-# explicitly allow tracked sample/manifests.
-*.csv
-!inst/extdata/*.csv
-!metadata/*.csv
-!out/production/*.csv
-!out/empirical-sampling/*.csv
-
-# Keep final manuscript-repair evidence visible while excluding run logs.
-!out/empirical-sampling/*.txt
-!out/sensitivity/observation-noise/*.rds
-!out/sensitivity/observation-noise/*.csv
-!out/sensitivity/observation-noise/*.txt
-!out/sensitivity/observation-noise/*.json
-!out/sensitivity/observation-noise/*.md
-!out/sensitivity/observation-noise/summary/*.rds
-!out/sensitivity/observation-noise/summary/*.csv
-!out/sensitivity/observation-noise/summary/*.txt
-!out/sensitivity/observation-noise/summary/*.json
-!out/sensitivity/observation-noise/summary/*.md
-!out/sensitivity/observation-noise/estimand-aligned-v2/*.rds
-!out/sensitivity/observation-noise/estimand-aligned-v2/*.csv
-!out/sensitivity/observation-noise/estimand-aligned-v2/*.txt
-!out/sensitivity/observation-noise/estimand-aligned-v2/*.json
-!out/sensitivity/observation-noise/estimand-aligned-v2/*.md
-out/sensitivity/observation-noise/logs/
-
-# renv
+# Frozen environment working directories
 renv/library/
 renv/staging/
 renv/sandbox/
 
-# output files
-outputs/
-dist/
-manuscript/submission/dist/
+# Source-data and heavy-run boundaries
+data/
+data-raw/
+out/rerun/
+out/**/logs/
 
+# Generated submission/build artefacts
+manuscript/submission/dist/
+dist/
+tmp/
 /*.tar.gz
 /*.zip
-
-vignettes/*.html
-vignettes/*.pdf
-
-# Quarto / rmarkdown artefacts
 *.html
 *.knit.md
-/report_files
-reports/_targets.yaml
 *.tex
 *.log
 *.aux
 *.toc
 *.pdf
 !manuscript/figures/*.pdf
-AGENTS.md
+*.png
+!manuscript/figures/*.png
 
-# _targets
-/_targets/*
-/docs/*.md 
-!/docs/AGENT_NOTES.md
-!/docs/CHANGELOG.md
-!/docs/LEGACY_PARITY.md
-!/docs/PIPELINE.md
-!/docs/READ_THIS_FIRST.md
-!/docs/PRODUCTION_SIMULATIONS.md
+# Retained local presubmission notes (superseded in the active repository)
+/docs/presubmission_module1_baseline.md
+/docs/rc_dates_presub_review.md
 
-# Misc
+# Editors and operating-system noise
 .DS_Store
 .vscode/
 .idea/
-*.html
-*.png
-!manuscript/figures/*.png
-*.js
-*.css
-*.woff

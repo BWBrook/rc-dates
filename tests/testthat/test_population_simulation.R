@@ -27,25 +27,6 @@ test_that("production simulation seeds are stable common-random-number pairs", {
   )
 })
 
-test_that("the production simulation module carries its observation-model dependencies", {
-  module <- new.env(parent = globalenv())
-  sys.source(
-    file.path("..", "..", "R", "population_simulation_production.R"),
-    envir = module
-  )
-
-  expect_true(exists(
-    "normalize_population_observation_model",
-    envir = module,
-    inherits = FALSE
-  ))
-  expect_true(exists(
-    "draw_realised_population_cra",
-    envir = module,
-    inherits = FALSE
-  ))
-})
-
 test_that("production result validation enforces one complete 42-row block per simulation", {
   results <- expand.grid(
     sim = 1:2,
@@ -406,7 +387,7 @@ test_that("production artifacts require matching checkpoint metadata", {
     legacy_helper_md5 = paste(rep("c", 32), collapse = ""),
     runner_source_md5 = paste(rep("d", 32), collapse = ""),
     container_recipe_md5 = paste(rep("e", 32), collapse = ""),
-    container_install_md5 = paste(rep("2", 32), collapse = ""),
+    container_install_md5 = "inline-in-recipe",
     container_image_id = paste0("sha256:", paste(rep("f", 64), collapse = "")),
     provenance_origin = "native-checkpoint",
     r_version = "R version 4.5.3 (2026-03-11)"
@@ -439,6 +420,48 @@ test_that("production artifacts require matching checkpoint metadata", {
   writeLines(metadata, paste0(path, ".metadata.txt"))
 
   expect_invisible(validate_population_simulation_artifact(path, nsim = 1L))
+
+  v2_provenance <- provenance
+  v2_provenance$schema_version <- 2L
+  v2_provenance$model_source_md5 <- v2_provenance$production_source_md5
+  v2_provenance$distribution_source_md5 <- v2_provenance$legacy_helper_md5
+  v2_provenance$container_install_md5 <- paste(rep("2", 32), collapse = "")
+  v2_provenance$production_source_md5 <- NULL
+  v2_provenance$legacy_helper_md5 <- NULL
+  v2_provenance$provenance_origin <- NULL
+  v2_results <- results
+  attr(v2_results, "production_provenance") <- v2_provenance
+  saveRDS(v2_results, path)
+  v2_metadata <- c(
+    "rc-dates production population simulation",
+    "schema_version: 2",
+    "generation_completed_utc: 2026-07-10 00:00:00 UTC",
+    "metadata_recorded_utc: 2026-07-10 00:01:00 UTC",
+    paste("r_version:", v2_provenance$r_version),
+    "true_model: uni",
+    "site_subsampling_proportion: 0.5",
+    "replicates: 1",
+    "master_seed: 1234",
+    paste("input_md5:", v2_provenance$input_md5),
+    paste("renv_lock_md5:", v2_provenance$renv_lock_md5),
+    paste("model_source_md5:", v2_provenance$model_source_md5),
+    paste("distribution_source_md5:", v2_provenance$distribution_source_md5),
+    paste("runner_source_md5:", v2_provenance$runner_source_md5),
+    paste("container_recipe_md5:", v2_provenance$container_recipe_md5),
+    paste("container_install_md5:", v2_provenance$container_install_md5),
+    paste("container_image_id:", v2_provenance$container_image_id),
+    paste("output_md5:", unname(tools::md5sum(path)))
+  )
+  writeLines(v2_metadata, paste0(path, ".metadata.txt"))
+  expect_invisible(validate_population_simulation_artifact(path, nsim = 1L))
+
+  saveRDS(results, path)
+  metadata <- sub(
+    "output_md5: .*",
+    paste("output_md5:", unname(tools::md5sum(path))),
+    metadata
+  )
+  writeLines(metadata, paste0(path, ".metadata.txt"))
 
   mismatched_results <- results
   mismatched_results$true <- "lin"

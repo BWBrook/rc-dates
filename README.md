@@ -1,139 +1,91 @@
 # rc-dates
 
-Testing the impact of sampling bias and estimation method on inferring
-population growth trends in radiocarbon dates of archaeological sites.
+Scientific analysis and manuscript sources for testing how archaeological sampling strategies and
+model choice affect inference from radiocarbon-date distributions.
 
-## Quickstart
+This is a private, paper-specific repository. Its current contract is the evidence used by the
+manuscript—not a general R package or demonstration compendium.
 
-This project is locked to R 4.5.3, the exact release used for the final
-analysis environment. On Barry's macOS machine, the root `Makefile` prefers
-`/usr/local/bin/Rscript` and refuses to run direct R targets under a different
-release. With `direnv`, run `direnv allow` once in this checkout so the shell
-also prefers that runtime.
+## Start here
 
-The default project workflow is a development/demo compendium, not the
-de-identified reviewer archive. For anonymous peer review, build the minimal
-code/data package with:
+The analysis environment is locked to R 4.5.3. The root `Makefile` rejects other R releases for
+direct analysis commands.
 
 ```sh
-make review-package
+make renv-restore
+make test
 ```
 
-That package rewrites the manifest to use a de-identified input table and omits
-manuscript, report, reference, docs, source-control, and author-identifying
-surfaces.
+`renv.lock` is the authoritative dependency record. The fast test gate protects the scientific
+maths, sampling semantics, stochastic pairing, accepted-artifact structure, and manuscript-facing
+empirical transformations.
 
-In an RStudio Console using R 4.5.3:
+## Current evidence flow
 
-```r
-renv::restore(prompt = FALSE)
-source("dependencies.R")
-pak::pkg_install(project_dependencies())
-targets::tar_make()
-quarto::quarto_render("reports/paper.qmd")
+```text
+archaeological dates ──> validate/filter/calibrate ──> empirical Figures 1-2
+simulation design ─────> resumable container runs ──> validate accepted RDS ──> Figures 3-5
+manuscript sources + accepted evidence ─────────────> makedoc ────────────────> submission files
 ```
 
-From a shell, prefer the Makefile wrappers so the R 4.5.3 preflight is applied:
+Rebuild the inexpensive or already-computed evidence with:
 
 ```sh
-make compendium-test
-make compendium-pipeline
-make compendium-report
+make empirical-figures
+make production-figures
 ```
 
-Two opt-in manuscript reproducibility surfaces sit outside the default demo
-pipeline:
+The first command reconstructs empirical Figures 1-2 and the associated audit summaries from the
+source data. The second independently validates the accepted production artefacts before rebuilding
+Figures 3-5. It can use the immutable 2026-07-10 source snapshot when the active simulation code has
+subsequently changed.
 
-- `make empirical-figures` rebuilds `manuscript/figures/fig_1.png` and
-  `fig_2.png`, plus audit summaries under `out/empirical-sampling/`. The
-  renderer filters finite raw weighted means inclusively to 651-11,650 cal BP
-  before either FD binning or KDE construction.
-- `make observation-noise-rerun` launches the resumable paired
-  curve-mean-versus-realised observation-noise matrix, and
-  `make observation-noise-summary` validates and summarises a complete matrix
-  under `out/sensitivity/observation-noise/`. After v1, `make
-  observation-noise-estimand-aligned` reproduces the separately versioned,
-  post-unblinding v2 difference diagnostic. This focused sensitivity covers all
-  dates and random-1, random-3, and random-5 only; oldest, youngest, and
-  bracketed extremes remain expectation-only production scenarios.
+The full stochastic matrix is intentionally outside the fast gate:
 
-The empirical 1,000-realisation run and independent-seed/nested convergence
-checks passed. The 3-model x 3-intensity x 1,000-pair observation-noise matrix
-is also complete. Accuracy and support point shifts were small and substantive
-ranking, bias, RMSE, mass, strategy, and likelihood gates passed, but the
-original v1 full-family decision remains FAIL (15/18). The separately labelled
-v2 diagnostic used 50,000 resamples over paired differences only and passed all
-three aligned gates under both bootstrap seeds; it does not replace v1.
-Complete evidence is under `out/sensitivity/observation-noise/summary/` and
-`out/sensitivity/observation-noise/estimand-aligned-v2/`.
-
-Optional figure montage support uses `{magick}`. If you want that and have the
-system ImageMagick development libraries installed, run:
-
-```r
-pak::pkg_install(project_dependencies(include_optional = TRUE))
+```sh
+make production-rerun
 ```
 
-## What’s inside
+Run that target on `deep-server` inside `tmux`; it writes to `out/rerun` by default and preserves
+atomic, resumable checkpoints. See [docs/PRODUCTION_SIMULATIONS.md](docs/PRODUCTION_SIMULATIONS.md)
+for the run contract and acceptance checks.
 
-- Reproducible pipeline (`_targets.R`) with ingest -> validation -> calibration -> summaries ->
-  grouped and site-level figures -> simulation mode selection (`demo`, `precomputed`, `none`) -> report.
-- Modular helpers in `R/` with explicit imports; legacy scripts archived in `scripts/legacy/`.
-- Config file `config/config.yml` with calibration, branching, report and simulations knobs.
-- Example report `reports/paper.qmd` reads targets directly and now distinguishes generated demo simulations from precomputed summaries.
-- `{magick}`-backed montages are optional; the pipeline writes placeholder montage images when it is unavailable.
-- Manuscript-scale empirical and observation-noise modules are exposed through
-  focused scripts and Make targets rather than folded into the demo pipeline.
+## Historical sensitivity decisions
 
-See `docs/DEVELOPMENT.qmd` for configuration details and common commands.
+The completed observation-noise work is a frozen scientific record:
 
-## Configuration
+- v1 is the prespecified full-family sensitivity and remains **FAIL** (15/18 gates).
+- v2 is a separately labelled post-unblinding diagnostic over paired differences; it passed its
+  aligned gates and does not replace v1.
 
-Edit `config/config.yml` to control calibration curves, branching, report figures,
-and simulations. Example defaults:
+Accepted evidence is under `out/sensitivity/observation-noise/`; exact generation sources are under
+`provenance/observation-noise-20260726/`. These historical decisions must not be silently redefined
+by later model development.
 
-```yaml
-calibration:
-  terrestrial_curve: shcal20
-  marine_curve: marine20
-  time_range: [651, 11650]
+## Manuscript and submission files
 
-branching:
-  site:
-    include: []     # regex patterns to include SITE names
-    exclude: []     # regex patterns to exclude SITE names
-    limit: null     # optional integer to limit number of SITE branches
+The manuscript is built through the neighbouring `makedoc` project:
 
-report:
-  site_figures:
-    include: []
-    exclude: []
-    limit: 12
-    montage: true
-    ncol: 3
-
-simulate:
-  mode: demo
-  precomputed:
-    dir: data
-    pattern: ^simulation_summary_.*\.csv$
-  demo:
-    iterations: 2
-    seed: 1234
-    site_proportions: [0.5, 1.0]
-    strategies: [oldest, youngest, bracketed, singleton, multiton]
-    singleton_n: 1
-    multiton_n: 3
+```sh
+make manuscript-check
+make submission-build
 ```
 
-After updating config, rebuild the relevant targets:
+`submission-build` assembles the manuscript, supplementary information, cover letter, title page,
+and highlights under `manuscript/submission/dist/`. The previous reviewer-repository builder has
+been retired; a smaller replacement will be designed only after the revised scientific outputs are
+frozen, so it cannot package stale evidence or overstate data shareability.
 
-```r
-targets::tar_make()
-quarto::quarto_render("reports/paper.qmd")
-```
+## Repository map
 
-Default fresh-clone behavior is `simulate.mode: demo`, which generates a
-reduced legacy-style simulation matrix under `outputs/simulations/demo/`.
-Switch to `precomputed` to read external `simulation_summary_*.csv` files, or
-to `none` to skip simulations entirely.
+- `R/` — active scientific functions.
+- `scripts/` — focused empirical, simulation, validation, figure, and manuscript utilities.
+- `tests/testthat/` — consequential scientific checks.
+- `data/` — source and filtered archaeological inputs; inspect large files conservatively.
+- `out/` — accepted machine-readable evidence and run artefacts.
+- `provenance/` — immutable source snapshots tied to accepted outputs.
+- `manuscript/` — article, supplementary, figure, review, and submission sources.
+- `docker/` — the exact production-simulation runtime recipe.
+
+The frozen production snapshot is `provenance/production-20260710/`. Git history contains superseded
+demo, compatibility, and packaging machinery; it is intentionally absent from the active tree.

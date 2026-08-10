@@ -92,7 +92,7 @@ test_that("precomputed SPD basis reproduces rcarbon aggregation exactly", {
   skip_if_not_installed("rcarbon")
 
   data <- load_austarch_data(
-    file.path("inst", "extdata", "austarch_example.csv")
+    file.path("..", "..", "inst", "extdata", "austarch_example.csv")
   ) |>
     filter_austarch_initial() |>
     filter_austarch_material_site()

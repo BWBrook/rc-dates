@@ -4,7 +4,6 @@
 #' @param iterations Monte Carlo iterations for stochastic scenarios.
 #' @param seed Master seed.
 #' @return Ten-row scenario data frame.
-#' @export
 manuscript_empirical_scenarios <- function(iterations = 1000L, seed = 1234L) {
   valid_iterations <- length(iterations) == 1L && is.finite(iterations) &&
     iterations >= 1L && iterations == as.integer(iterations)
@@ -46,7 +45,6 @@ manuscript_empirical_scenarios <- function(iterations = 1000L, seed = 1234L) {
 #' @param max_age Old boundary in cal BP.
 #' @param bin_width Bin width in years.
 #' @return Data frame with bin labels and clipped integration bounds.
-#' @export
 manuscript_calendar_bins <- function(
   min_age = 651,
   max_age = 11650,
@@ -80,7 +78,6 @@ manuscript_calendar_bins <- function(
 #' @param iterations Number of columns to generate.
 #' @param seed Master site-selection seed.
 #' @return Logical site-by-iteration matrix.
-#' @export
 manuscript_treated_site_matrix <- function(
   sites,
   proportion,
@@ -128,7 +125,6 @@ manuscript_treated_site_matrix <- function(
 #' @param treated_site_matrix Logical site-by-iteration treatment matrix.
 #' @param seed Strategy-specific seed.
 #' @return Logical date-by-iteration selection matrix.
-#' @export
 manuscript_selection_matrix <- function(
   data,
   strategy,
@@ -212,7 +208,6 @@ manuscript_selection_matrix <- function(
 #' @param values Numeric matrix.
 #' @param width Positive integer running-mean width.
 #' @return Smoothed matrix with unsmoothed edge cells.
-#' @export
 manuscript_running_mean_matrix <- function(values, width) {
   values <- as.matrix(values)
   valid_width <- length(width) == 1L && is.finite(width) && width >= 1L &&
@@ -239,7 +234,6 @@ manuscript_running_mean_matrix <- function(values, width) {
 #' @param bins Output of [manuscript_calendar_bins()].
 #' @param bandwidth Gaussian bandwidth in years.
 #' @return Bin-by-date kernel-mass matrix.
-#' @export
 manuscript_gaussian_bin_basis <- function(
   weighted_means,
   bins,
@@ -319,7 +313,6 @@ manuscript_spd_bin_basis <- function(
 #' @param bandwidth KDE bandwidth.
 #' @param spd_runm SPD running-mean width.
 #' @return Named list of SPD, FD, KDE bases and bins.
-#' @export
 prepare_manuscript_curve_bases <- function(
   data,
   calibrated,
@@ -414,7 +407,6 @@ summarise_manuscript_effective_counts <- function(
 #' @param bins Calendar-bin labels.
 #' @param method Method label.
 #' @return Data frame with mean and central 95% interval.
-#' @export
 summarise_manuscript_curve_matrix <- function(curve_matrix, bins, method) {
   curve_matrix <- as.matrix(curve_matrix)
   if (nrow(curve_matrix) != length(bins) || ncol(curve_matrix) < 1L) {
@@ -455,7 +447,6 @@ summarise_manuscript_curve_matrix <- function(curve_matrix, bins, method) {
 #' @param bases Reusable curve bases.
 #' @param n_dates Number of reference dates.
 #' @return Long-form baseline curve summary.
-#' @export
 build_manuscript_baseline_curves <- function(bases, n_dates) {
   selected <- matrix(TRUE, nrow = n_dates, ncol = 1L)
   curves <- manuscript_curve_matrices(bases, selected)
@@ -473,7 +464,6 @@ build_manuscript_baseline_curves <- function(bases, n_dates) {
 #' @param bases Reusable curve bases.
 #' @param specs Output of [manuscript_empirical_scenarios()].
 #' @return Long-form scenario summary.
-#' @export
 run_manuscript_empirical_sampling <- function(data, bases, specs) {
   results <- vector("list", nrow(specs))
   effective_counts <- vector("list", nrow(specs))
@@ -529,7 +519,6 @@ manuscript_method_palette <- function() {
 #' @param curves Output of [build_manuscript_baseline_curves()].
 #' @param bin_width Display bin width.
 #' @return ggplot object.
-#' @export
 manuscript_methods_plot <- function(curves, bin_width = 100) {
   curves$method <- factor(curves$method, levels = c("FD", "KDE", "SPD"))
   curves$display_density <- curves$mean / bin_width
@@ -556,7 +545,6 @@ manuscript_methods_plot <- function(curves, bin_width = 100) {
 #' Plot the 5-by-2 empirical sampling panel for manuscript Figure 2
 #' @param curves Output of [run_manuscript_empirical_sampling()].
 #' @return Faceted ggplot object.
-#' @export
 manuscript_sampling_panel_plot <- function(curves) {
   strategy_levels <- c("oldest", "youngest", "bracketed", "random-1", "random-5")
   curves$strategy_label <- factor(curves$strategy_label, levels = strategy_levels)

@@ -1,27 +1,29 @@
-# Helper to load project functions for non-package compendium tests
+# Load the paper's active scientific functions for non-package tests.
 
-# Source all scripts in R/ so test files can call helpers like `lread()`
 local({
   find_project_root <- function() {
-    candidates <- c(".", "..", "../..")
-    for (candidate in candidates) {
+    for (candidate in c(".", "..", "../..")) {
       root <- normalizePath(candidate, winslash = "/", mustWork = FALSE)
-      if (dir.exists(file.path(root, "R")) && file.exists(file.path(root, "_targets.R"))) {
+      if (file.exists(file.path(root, "Makefile")) &&
+          file.exists(file.path(root, "R", "population_simulation_design.R"))) {
         return(root)
       }
     }
-    normalizePath(".", winslash = "/", mustWork = FALSE)
+    stop("Could not find the rc-dates repository root.", call. = FALSE)
   }
 
   root <- find_project_root()
-  invisible(lapply(
-    c("parallel", "grid", "splines", "stats", "graphics", "grDevices", "targets", "tarchetypes"),
-    requireNamespace,
-    quietly = TRUE
-  ))
-  r_dir <- file.path(root, "R")
-  if (dir.exists(r_dir)) {
-    r_files <- list.files(r_dir, pattern = "\\.R$", full.names = TRUE)
-    for (f in r_files) sys.source(f, envir = topenv())
+  source_files <- c(
+    "R/austarch_filters.R",
+    "R/model_fit.R",
+    "R/manuscript_methods_figures.R",
+    "R/population_distributions.R",
+    "R/population_simulation_design.R",
+    "R/population_simulation_models.R",
+    "R/population_simulation_run.R",
+    "R/population_simulation_artifacts.R"
+  )
+  for (source_file in source_files) {
+    sys.source(file.path(root, source_file), envir = topenv())
   }
 })
