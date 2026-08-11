@@ -29,6 +29,10 @@ The frozen question, estimand, truth matrix, effect scale and claim gates are in
 proportions. Each replicate contains eight retention rules, the primary `l1` likelihood, the `l2`
 scoring sensitivity, and three signed fitted families (48 rows).
 
+The matrix completed and passed its acceptance gates on 10 August 2026. The scientific decision and
+bounded interpretation are recorded in `docs/STAGE2_SIGNED_MODELS_RESULTS.md`; the accepted evidence
+is under `out/revision/signed-models/`.
+
 The active engine is separated by scientific responsibility:
 
 - `R/population_distributions.R` — signed generating densities and random generators;

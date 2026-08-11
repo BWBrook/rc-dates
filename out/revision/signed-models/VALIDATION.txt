@@ -1,0 +1,14 @@
+rc-dates Stage 2 signed-model evidence: ACCEPTED
+validated_utc: 2026-08-10 09:11:20 UTC
+design: signed-v1
+truths: uni,lin_inc,lin_dec,exp_inc,exp_dec
+site_treatment_proportions: 0.5,0.75,1
+effect_ratio: 10
+replicates_per_scenario: 1000
+scenarios: 15
+rows: 720000
+all_dates_common_random_numbers: PASS
+artifact_and_metadata_fingerprints: PASS
+single_runtime_and_design: PASS
+r_version: R version 4.5.3 (2026-03-11)
+container_image_id: sha256:01f5e221d0f3b70ccb3edd0fd6556ffd1c645784e98e147e81034866b9137777
