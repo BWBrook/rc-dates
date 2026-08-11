@@ -20,7 +20,7 @@ all-rule realised-noise run.
 | M6. Random-*n*, total sample size and site weighting were conflated | Partly addressed | Random-2 was added on an isolated RNG stream. Main outcomes distinguish direction from family recovery, and random retention is described only as a representative strong-signal benchmark. | No matched-total-date control or crossed resource allocation was added; no per-site minimum is claimed. |
 | M7. Only a strong monotonic signal was generated | Partly addressed | Decreasing truths were added and the ten-fold signal is stated in the abstract, methods, discussion, SI and cover letter. | Weaker, pulsed, changepoint and spatial/site-heterogeneous truths are deferred. |
 | M8. `l2` is not a likelihood and the parsimony outcome was overstated | Addressed in analysis presentation | Likelihood and AIC language is reserved for primary `l1`. `l2` is an expected-log-density scoring sensitivity. Main Figures 3 and 5 use signed-state and minimum-AIC generating-family selection; the custom parsimony outcome is confined to the retained earlier sensitivity record. | No Akaike-weight, BIC or predictive comparison was added because it would not alter the signed-direction decision. |
-| M9. Review archive licensing, identifiers and governance | Partly addressed | Data availability and checklist distinguish code/evidence from data requiring licensing, sensitive-location and Indigenous data-governance review. “De-identified” is not claimed. | The replacement reviewer archive, link, DOI and final file-by-file governance audit remain pending. |
+| M9. Review archive licensing, identifiers and governance | Partly addressed | The replacement author-anonymized archive contains code, synthetic artefacts and aggregate empirical evidence, with a file-by-file audit excluding raw and record-level AustArch data. Code licensing is separated from the unresolved source-data release decision; “de-identified” is not claimed. | Private-link/DOI creation and any later public release of archaeological data remain subject to licensing, sensitive-location and Indigenous data-governance decisions. |
 | M10. Journal anonymisation statement | Reviewer correction rejected after live check | The current official Guide for Authors states double-anonymised review; the anonymous manuscript and separate title page are retained. | Recheck the portal-built PDF at submission because journal workflows can change. |
 
 ## New evidence and display items
@@ -47,13 +47,13 @@ all-rule realised-noise run.
    before submission or is adequately disclosed as residual scope.
 4. Whether the ten-fold design is now qualified often enough that readers cannot mistake random
    multi-date performance for a general field recommendation.
-5. Whether the repository and data-governance plan is adequate once the actual replacement archive
-   is assembled.
+5. Whether the assembled replacement archive is adequate for scientific review despite its explicit
+   exclusion of raw and record-level AustArch data.
 
 ## Remaining submission actions
 
-- Build the replacement author-anonymised review archive, audit its data inventory, insert the
-  private review link and reserved DOI, and rebuild the submission packet.
+- Upload the replacement author-anonymised review archive, reserve the DOI, verify the private link
+  in a fresh browser session, insert both identifiers and rebuild the submission packet.
 - Recheck live journal instructions at submission. As of 11 August 2026, the official
   [Guide for Authors](https://www.sciencedirect.com/journal/journal-of-archaeological-science/publish/guide-for-authors)
   states double-anonymised review and an article limit of 5,000 words excluding tables and

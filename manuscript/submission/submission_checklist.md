@@ -39,7 +39,7 @@ Checked against the *Journal of Archaeological Science* Guide for Authors and cu
 
 ## Archive and final human gate
 
-- [ ] Build the replacement reviewer-facing archive; the earlier dress-rehearsal bundle is superseded by the signed and common-membership revision.
-- [ ] Audit every bundled data file for redistribution rights, sensitive locations and Indigenous data-governance constraints.
+- [x] Build and audit the replacement reviewer-facing archive; it contains the signed and common-membership revision while excluding raw and record-level AustArch data.
+- [ ] Record the final redistribution decision for aggregate empirical files and any later public data release; the current review archive excludes source and record-level data.
 - [ ] Upload the archive to the selected private-for-review repository, reserve the DOI and verify the anonymous link in a fresh browser session.
 - [ ] Rebuild the submission packet after inserting the private link and DOI, then inspect manuscript, SI, title page, cover letter and highlights in their portal-ready formats.
