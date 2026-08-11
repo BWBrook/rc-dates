@@ -413,7 +413,7 @@ ggplot2::ggsave(
   figure_2_temporary,
   manuscript_sampling_panel_plot(deviations),
   width = 7.5,
-  height = 10.5,
+  height = 8.5,
   dpi = 320
 )
 if (!file.rename(figure_1_temporary, figure_1_path) ||

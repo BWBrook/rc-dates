@@ -86,3 +86,32 @@ test_that("signed-model manuscript plots build from accepted summaries", {
   expect_true(all(vapply(plots, inherits, logical(1), what = "ggplot")))
   expect_silent(lapply(plots, ggplot2::ggplot_build))
 })
+
+test_that("supplementary truth curves reproduce the frozen signed design", {
+  curves <- prepare_manuscript_signed_truth_curves()
+
+  expect_equal(nrow(curves), 5005L)
+  expect_setequal(unique(curves$truth), c(
+    "uni", "lin_inc", "lin_dec", "exp_inc", "exp_dec"
+  ))
+  expect_true(all(is.finite(curves$density) & curves$density > 0))
+
+  endpoint_ratio <- vapply(split(curves, curves$truth), function(rows) {
+    rows$density[rows$cal_bp == 651] / rows$density[rows$cal_bp == 11650]
+  }, numeric(1))
+  expect_equal(endpoint_ratio[["uni"]], 1, tolerance = 1e-12)
+  expect_equal(
+    unname(endpoint_ratio[c("lin_inc", "exp_inc")]),
+    c(10, 10),
+    tolerance = 1e-10
+  )
+  expect_equal(
+    unname(endpoint_ratio[c("lin_dec", "exp_dec")]),
+    c(0.1, 0.1),
+    tolerance = 1e-10
+  )
+
+  plot <- manuscript_signed_truth_plot(curves)
+  expect_s3_class(plot, "ggplot")
+  expect_silent(ggplot2::ggplot_build(plot))
+})

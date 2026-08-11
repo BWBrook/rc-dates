@@ -1,62 +1,45 @@
 # JAS Submission Checklist
 
-Checked against the Journal of Archaeological Science Guide for Authors and
-reproducibility guidance on 26 July 2026.
+Checked against the *Journal of Archaeological Science* Guide for Authors and current editorial listing on 11 August 2026.
 
-## Ready for submission packet
+## Manuscript packet
 
-- Initial manuscript: JAS permits a single Word or PDF file for a new
-  submission; editable source files are required at revision or acceptance.
-- Reviewer manuscript: the current build omits authors, affiliations, funding,
-  and CRediT details and remains available if the portal requests it; continuous
-  line numbering and page numbering are enabled.
-- Title page: separate title-page file contains author names, affiliations,
-  corresponding-author contact, declaration of competing interest, funding
-  statement, and CRediT-style author contributions.
-- Cover letter: dated 26 July 2026 and matched to the current manuscript and review-package data plan.
-- Highlights: separate editable highlights file created, with five bullets under the 85-character limit.
-- Supplementary Information: separate SI source includes two SI figures and the paired realised-observation-noise design, outcome, and gate-table reference.
-- Data/code package: the previous dress-rehearsal bundle is superseded. Build and inspect the replacement only after revised scientific outputs and data-sharing conditions are locked.
+- [x] Article title is identical in the anonymous manuscript, title page, highlights and cover letter.
+- [x] Anonymous manuscript omits authors, affiliations, funding and CRediT details; continuous line and page numbering are enabled by the build profile.
+- [x] Separate title page contains author names, affiliations, corresponding-author contact, competing-interest declaration, funding and CRediT contributions.
+- [x] Cover letter is dated 11 August 2026 and addressed to the current Editors-in-Chief.
+- [x] Five editable highlights are each within the journal's 85-character limit.
+- [x] Seven keywords satisfy the guide's 3–7 keyword range.
+- [x] Main manuscript contains five source-controlled figures; Supplementary Information contains two.
+- [x] Generative-AI use is declared before the references.
+- [ ] Replace `[PRIVATE_REVIEW_LINK]` and `[RESERVED_DOI]` after the final reviewer archive is locked.
 
-## Scientific status after the final hard review
+## Scientific reconciliation
 
-- The paired realised-observation-noise sensitivity is complete at 1,000 pairs
-  per model-intensity cell. Its original v1 full-family screen remains FAIL
-  (15/18). A separately labelled, explicitly post-unblinding v2 diagnostic
-  aligned to the three failed difference estimands passed with stable
-  50,000-resample results; it is not described as retroactively passing v1.
-  No 2,000-pair precision extension was run.
-- Site-specific occupation histories and a genuine stratified strategy remain
-  outside scope. The manuscript states that independent regional ages are
-  grouped into exchangeable sites, does not claim a universal three-date
-  minimum, and does not equate random-3 with field-stratified sampling.
-- Empirical FD/KDE boundary handling was repaired and Figures 1-2 regenerated
-  under the common 651-11,650 cal BP contract; primary and convergence checks
-  passed.
-- Main text, SI, captions, cover letter, and highlights have been reconciled
-  with the curve-expectation production results and both versioned sensitivity
-  assessments. Oldest, youngest, and bracketed remain expectation-only
-  scenarios.
+- [x] Primary empirical claims use the 540-date, 68-site terrestrial charcoal/wood common-membership benchmark.
+- [x] The retention-versus-method ordering is restricted to full-site oldest, youngest and bracketed retention; half-site and random scenarios are not overgeneralised.
+- [x] Signed simulations include uniform, linear and exponential truths in both temporal directions, all eight retention rules, three site-treatment proportions and 1,000 replicates per cell.
+- [x] The headline is retention-induced directional distortion: full oldest and youngest retention impose their respective directions, including reversal of adverse non-uniform truths.
+- [x] Direction selection is distinguished from linear-versus-exponential generating-family selection.
+- [x] Post hoc retention is not equated with prospective context selection, occupation histories, site onset or site termination.
+- [x] Random multi-date retention is described as a representative strong-signal benchmark, not a field protocol or universal minimum.
+- [x] The calibration-curve-mean observation model and optimiser-bound censoring are stated.
+- [x] The earlier realised-observation-noise v1 screen remains FAIL (15/18); the later v2 result is labelled post-unblinding and neither is used to validate untested one-sided rules.
 
-## Items to double-check in the submission portal
+## Journal-facing checks
 
-- JAS currently uses double-anonymised review. Upload the anonymous manuscript
-  and identified title page separately, and inspect the portal-built review PDF
-  for author-identifying text or file metadata.
-- Enter the corresponding author's phone number in Editorial Manager if requested; the local title-page draft includes email and postal address but not a phone number.
-- The guide says article submissions should not normally exceed 5,000 words
-  excluding tables and references. Under the same conservative source-count
-  convention used at checkpoint `1ba8eb0`, the current alignment edits move the
-  count from 4,960 to approximately 4,991 including all five figure legends.
-  Recount after the scientific revision and final prose lock.
-- The five-figure manuscript uses the regenerated production RDS set and
-  corrected one-row-per-replicate Figure 5 summary. The replacement reviewer
-  archive has not yet been built; its bounded redesign follows the scientific
-  revision and supersedes the earlier dress-rehearsal package.
-- JAS research-data guidance asks for repository deposition and article citation/linking. The current manuscript has placeholders for a private-for-review link and reserved DOI; replace `[PRIVATE_REVIEW_LINK]` and `[RESERVED_DOI]` after the final package lock and before submission.
-- Final repository upload remains a manual human-eye gate: inspect the reviewer bundle for identity, licensing, sensitive-location and Indigenous data-governance issues; upload it to the selected private-for-review repository; reserve the DOI; and verify the link from a fresh browser session before submission.
-- The journal requires a declaration if generative AI tools were used in manuscript preparation. A draft statement has been added before the references.
-- Ensure all five main figures are included with the initial manuscript or uploaded
-  separately as the portal requests; verify that figure citations and captions
-  remain paired in the generated review PDF.
-- Confirm whether to opt in to a graphical abstract or Research Elements/Data in Brief co-submission; neither is required for the current packet.
+- [x] The current guide specifies double-anonymised review; upload the anonymous manuscript and identified title page separately.
+- [x] The article is below the 5,000-word limit: 3,662 source words including all five figure legends under the repository's conservative count.
+- [x] The anonymous manuscript PDF is 13 A4 pages and well below the 10 MB review-file limit.
+- [x] Figure captions define effective sample sizes, estimands, replicate ranges and the primary likelihood where relevant.
+- [x] Data availability distinguishes code/evidence from data whose release depends on licensing, sensitive-location review and Indigenous data governance.
+- [ ] Inspect the portal-built review PDF for author-identifying text and file metadata.
+- [ ] Enter the corresponding author's telephone number in Editorial Manager if requested.
+- [ ] Confirm whether to opt into a graphical abstract or a Research Elements/Data in Brief co-submission; neither is required.
+
+## Archive and final human gate
+
+- [ ] Build the replacement reviewer-facing archive; the earlier dress-rehearsal bundle is superseded by the signed and common-membership revision.
+- [ ] Audit every bundled data file for redistribution rights, sensitive locations and Indigenous data-governance constraints.
+- [ ] Upload the archive to the selected private-for-review repository, reserve the DOI and verify the anonymous link in a fresh browser session.
+- [ ] Rebuild the submission packet after inserting the private link and DOI, then inspect manuscript, SI, title page, cover letter and highlights in their portal-ready formats.

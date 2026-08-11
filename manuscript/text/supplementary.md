@@ -1,129 +1,172 @@
 # Supplementary Information
 
-The Supplementary Methods give the detail needed to reproduce the analyses, followed by supporting simulation figures and a likelihood-sensitivity note.
+## S1. Common-membership AustArch benchmark
 
-## Supplementary Methods
+### S1.1 Source data and filtering
 
-### S1. AustArch data analysis
+AustArch is a continental radiocarbon compilation for Sahul [@williams2014AustArchDatabase14C]. The published release reports 5,044 determinations from 1,748 sites; the archived source extract used in this project contains 5,288 age records, including 4,828 records labelled as radiocarbon determinations from 1,704 named sites. Initial screening retained conventional or accelerator-mass-spectrometry radiocarbon determinations with reported ages and one-sigma errors, removed records flagged as erroneous or unrelated to human activity, and restricted conventional ages to 500–20,000 ¹⁴C yr BP. The resulting tracked reference contains 976 determinations from 116 sites, each with at least five dates.
 
-#### S1.1 Study context and empirical reference set
+The primary empirical display analysis then applied a narrower, prespecified common-membership filter. We retained records classified as terrestrial whose material was `Charcoal`, `Charcoal_from_hearth`, `Scattered_charcoal`, `Wood_charcoal`, `Carbonised_wood`, `Burnt_wood`, `Charred_wood` or `Wood`. Shell determinations were excluded because appropriate local reservoir corrections were unavailable, and human bone was excluded because dietary reservoir effects and data-governance considerations require separate treatment. Records coded `Y` (occupation-related) or `U` (uncertain) were retained. All were calibrated with SHCal20 [@hogg2020SHCal20SouthernHemisphere].
 
-Our aim was to quantify how deliberate or inadvertent decisions about the within-site temporal distribution of radiocarbon dates distort regional “dates-as-data” inference. We used AustArch [@williams2014AustArchDatabase14C], a continental-scale compilation for Sahul, to parameterise realistic site structures. The published database release reports 5,044 radiocarbon determinations from 1,748 sites. The archived source extract used here contains 5,288 age records, of which 4,828 are labelled radiocarbon determinations from 1,704 named sites. To reduce long-term taphonomic contrast while retaining a large regional dataset, we constrained the analysis to Holocene data through three phases of selection.
+For each posterior, we recorded its median, weighted mean and probability mass within 651–11,650 cal BP. A determination was calendar-eligible when its median lay within the one-bandwidth-buffered interval 751–11,550 cal BP and at least 0.80 of its posterior mass lay inside the analysis window. Sites then required at least five eligible dates. The flow was:
 
-1. Initial screening. We retained radiocarbon determinations (both conventional and AMS) with reported ages and one-sigma errors; records flagged as erroneous or unrelated to human activity were removed. Ages were initially restricted to 500-20,000 ¹⁴C yr BP so that all possible Holocene observations lay within the SHCal20 or Marine20 calibration ranges [@heaton2020Marine20TheMarineRadiocarbon; @hogg2020SHCal20SouthernHemisphere; @ramsey2024DevelopmentINTCALDatabase; @reimer2020INTCAL20NorthernHemisphere].
+| Filter stage | Dates | Sites |
+|---|---:|---:|
+| Tracked filtered reference | 976 | 116 |
+| Terrestrial charcoal or wood | 737 | 106 |
+| Common calendar membership | 645 | 106 |
+| At least five eligible dates per site | 540 | 68 |
 
-2. Material and context filtering. To reduce laboratory and reservoir idiosyncrasies we accepted charcoal/wood, human bone collagen, and well-attested freshwater or marine shells from clearly anthropogenic contexts (e.g., rock shelters, middens, hearths, earth mounds). Ambiguous contexts and “unusable” designations were excluded.
+The final 540 dates comprised 497 `Charcoal`, 28 `Charcoal_from_hearth`, 10 `Scattered_charcoal`, four `Wood_charcoal` and one `Charred_wood` record. Occupation-relation codes were `Y` for 181 dates and `U` for 359. The benchmark is deliberately conditioned on well-replicated sites and is not an unbiased sample of Sahul occupation.
 
-3. Holocene restriction and site eligibility. Dates were first calibrated, and records were retained when their posterior grids overlapped the Holocene analysis window, 11,650-651 cal BP; the 651 cal BP cutoff avoids near-modern boundary effects. We kept only sites contributing five or more overlap-eligible determinations, yielding a reference set of 976 determinations from 116 sites (median 7 dates per site; range 5-33). SPD summaries and likelihood calculations used posterior mass inside the analysis window from all 976 dates. For the point-summary displays, finite weighted-mean calibrated ages were filtered against the same inclusive bounds before FD binning or KDE construction; 889 of the 976 weighted means were inside the window. This method-specific effective membership was retained rather than redefining site eligibility around a point estimate. The threshold excludes sparsely dated sites from the empirical baseline because they do not contain enough within-site chronological information to benchmark what a sampling rule has removed. Their consequences are instead assessed experimentally by down-sampling the better-dated sites into sparse-site analogues, including random-1, random-5, oldest, youngest, and bracketed scenarios. Weighted means were used for descriptive plots only; all inference used the calibrated posteriors.
+### S1.2 Curve construction
 
-Production analyses were run under R 4.5.3 [@rcoreteam2025LanguageEnvironmentStatistical], using the tidyverse for data handling and rcarbon [@crema2021InferenceLargeSets] for calibration. Production simulations and empirical Monte Carlo sampling used seed 1234, as did the bootstrap post-processing.
+Every curve method received exactly the same selected determinations on the same 100-year bins. The summed probability distribution (SPD) used posterior probability mass within the analysis window, followed by a centred 100-year running mean with unsmoothed edge cells. The frequency distribution (FD) assigned each posterior median to a 100-year bin and applied a centred two-bin running mean for display. The kernel density estimate (KDE) placed Gaussian kernels of 100-year bandwidth on the same posterior medians and reflected them at 651 and 11,650 cal BP. Each resulting curve was normalised to unit integral. Thus, the estimand is relative temporal shape, not total date abundance.
 
-#### S1.2 Baseline demographic curves
+The all-date pairwise total-variation distances were 0.0459 for SPD–KDE, 0.0884 for FD–KDE and 0.1015 for SPD–FD. These values compare construction methods on identical dates; they are not sampling-error estimates.
 
-The curated AustArch set defines an “all-dates” baseline (Fig. 1) for comparison with sub-sampling scenarios (Fig. 2). We constructed three familiar summaries on a common 100-yr calendar grid:
+### S1.3 Retention rules and realisations
 
-1. Summed probability distribution (SPD). Calibrated posterior grids were summed and then smoothed with a 100-yr running mean.
+We compared all dates with random-1, random-5, oldest, youngest and bracketed (oldest plus youngest) retention. A rule treated either 34 of 68 sites (50%) or all 68 sites (100%); untreated sites retained every eligible date. Treated-site subsets were paired across rules. Random retention and half-site treatment used 1,000 realisations from master seed 1234. Full-site oldest, youngest and bracketed retention were deterministic.
 
-2. Frequency distribution (FD). Simple counts in 100-yr bins were computed using each in-window weighted-mean calibrated age and displayed with a centred two-bin running mean.
+Oldest and youngest refer to the greatest and least calibrated posterior median within a site. Median ties were resolved by the posterior weighted mean in the same direction and then by ascending AustArch record identifier. No site had an oldest-median tie. Two sites had youngest ties at both the median and mean stages, so the stable identifier supplied the final decision. These extrema were defined after calibration and should not be interpreted as site onsets or terminations.
 
-3. Kernel density estimate (KDE). A Gaussian KDE (bandwidth 100 yr) was centred on each in-window weighted-mean calibrated age. Kernels were not edge-corrected at the analysis bounds, and the aggregate curve was re-normalised within the window.
-
-Each curve was normalised to unit area; for joint display the SPD and KDE were re-binned to the FD grid to avoid visual aliasing. These curves provide descriptive context only and do not enter the likelihood-based inference.
-
-#### S1.3 Within-site sub-sampling experiments
-
-To mimic field and budget constraints, we imposed five within-site rules on the AustArch reference set: i) random-1: one random determination per treated site; ii) random-5: five random determinations per treated site (see Fig. 2); iii) oldest: the determination with the greatest conventional radiocarbon age; iv) youngest: the determination with the least conventional radiocarbon age; v) bracketed: that oldest-youngest pair.
-
-Each rule was applied at two intensities: 50% of sites treated (with the remainder contributing all dates) or 100% treated; the all-dates baseline (Fig. 1) is equivalent to 0% in this framing. We ran 1,000 Monte Carlo realisations for the random rules and for the 50% site-subset draws. The full-site oldest, youngest, and bracketed rules are deterministic and therefore yield one curve apiece.
-
-Determinations were calibrated once with SHCal20 or Marine20 according to each record's marine-context classification, without regional marine offsets or site-specific $\Delta R$ corrections. A realisation then comprised: i) sampling the treated sites (if intensity < 100%); ii) selecting date indices within treated sites according to the rule; iii) appending all dates from untreated sites; and iv) subsetting the fixed calibration grids and computing unit-area SPD, FD, and KDE curves. Where a scenario had repeated realisations, we calculated the mean and pointwise 2.5th/97.5th percentiles at each calendar bin. These are conditional realisation quantiles, not confidence intervals over sites, archive inclusion, or calibration curves. Figure 1 supplies the separately plotted all-dates reference; deterministic full-site rules are shown as single curves.
-
-These empirical experiments are used diagnostically to show how within-site rules deform regional aggregates, rather than as demographic reconstructions.
-
-### S2. Simulation study
-
-#### S2.1 Sample-size and age-error models based on empirical data
-
-We parameterised the simulations from the cleaned and filtered AustArch dataset (section S1.1), so that each synthetic dataset had 116 sites and the same broad date-count and reported-error structure as the empirical reference set. We fitted a truncated negative binomial distribution (minimum 5 dates per site) to the site-level sample sizes to reproduce variation in dating intensity among sites. We also regressed logged standard errors against radiocarbon ages to model how reported uncertainty varies with sample age.
-
-#### S2.2 Growth models, synthetic-data generation, and sampling strategies
-
-For the Holocene-restricted date range (11650-651 cal BP), we defined three population growth models as unit normalised, truncated probability densities: constant (uniform), linearly increasing, and exponentially increasing. Unit normalisation completely determines the uniform density, and it constrains the truncated linear and exponential distributions to one-parameter models which can be uniquely characterised by specifying the proportionate increase in population over the restricted date range.
-
-We generated each synthetic radiocarbon dataset under one of the three growth models. For the linear and exponential models, we specified a 10-fold increase towards the present as a strong Holocene-scale growth signal, consistent with the qualitative increase inferred for Sahul by @johnson2011ReconstructingDynamicsAncient. We drew site sample sizes from the negative-binomial model and then drew every true calendar age independently from the chosen regional growth distribution. Site identity determined the number of dates and the subsequent selection rule, but not an occupation window, duration, stratigraphic sequence, or within-site temporal dependence.
-
-For the production analysis, we converted each calendar age to the central conventional radiocarbon age expected from SHCal20 (`ccCRA` from `rcarbon::uncalibrate()`), simulated a one-sigma error from the age-error model, and recalibrated that central age with rcarbon. This assigned posterior uncertainty but did not draw a realised conventional age from the observation-error distribution. Figures 3-5 therefore condition on assays at the calibration-curve expectation.
-
-We evaluated seven sampling strategies across three levels of application intensity (50%, 75%, or 100% of sites): all dates (using every available radiocarbon determination); random-1, random-3, and random-5 (selecting dates randomly without replacement from each site); oldest and youngest (selecting the greatest and least median calibrated age, respectively); and bracketed (selecting both extremes). Sites not selected for the sampling strategy (i.e., at the 50% and 75% intensities) contributed all their dates.
-
-The fitted linear slope was constrained to $[10^{-12}, 1.653 \times 10^{-8}]$ yr⁻² and the exponential rate to $[10^{-10}, 10^{-3}]$ yr⁻¹. Under 100% oldest or youngest sampling, estimates of the generating growth parameter reached these bounds; the corresponding extreme-bias magnitudes are therefore censored by the fitting domain.
-
-#### S2.3 Likelihood calculation, model fitting and model selection
-
-Rather than fitting models to aggregate summaries, we fitted the normalised population growth distributions directly to the calibrated dates. Given the distributional nature of the calibrated dates, we considered two possible definitions for the pointwise log-likelihood $\ell_i$:
+For each method and realisation, we calculated total variation from its all-date baseline,
 
 $$
-\ell_i^1 = \log \int f(x \mid \theta)\, p_i(x)\, dx
+D_{\mathrm{TV}}(p,q)=\frac{1}{2}\sum_t |p_t-q_t|,
 $$
 
-and
+and all three between-method distances on the retained dates. The conservative ordering contrast was
 
 $$
-\ell_i^2 = \int \log\!\bigl(f(x \mid \theta)\bigr)\, p_i(x)\, dx
+C=\min_m D_{\mathrm{TV}}(p_{m,\mathrm{retained}},p_{m,\mathrm{all}})
+-\max_{m\ne m'}D_{\mathrm{TV}}(p_{m,\mathrm{retained}},p_{m',\mathrm{retained}}).
 $$
 
-where $f(x \mid \theta)$ is the probability density of the growth model, $p_i(x)$ is the posterior probability density of the calibrated age, and $\theta$ is the distributional parameter to be estimated. In practice, $p_i(x)$ is represented on a discrete calendar grid and the integrals are finite sums. The $\ell^1$ definition is the marginal likelihood used in direct population modelling by @timpson2021DirectlyModellingPopulation. The $\ell^2$ definition is the posterior expectation of the model log density and is included here as a sensitivity score. Under this study's discretisation it resembles an SPD-weighted grid calculation, but it does not fit a model to a smoothed aggregate SPD.
+A deterministic scenario passed the retention-versus-method gate when $C>0$; a stochastic scenario required the 2.5th percentile of $C$ to exceed zero. Temporal displacement was the change in mean cal BP, using bin midpoints. An older result required positive shifts for all methods (positive 2.5th percentiles when stochastic); a younger result required negative shifts (negative 97.5th percentiles).
 
-We fitted all models by maximum likelihood estimation under each likelihood definition. We then computed the Akaike Information Criterion ($\mathrm{AIC} = -2\ell + 2k$), where $\ell = \sum_{i=1}^N \ell_i$ is the total log likelihood and $k$ is the number of estimated parameters [@akaike1974NewLookStatistical]. The minimum-AIC model was used for the model-recovery analysis. To distinguish a nominal winner from clear model support, we also used a parsimony rule motivated by one-standard-error selection [cf. @yates2021ParsimoniousModelSelection]. For each model $m$, we calculated its total $\Delta\mathrm{AIC}_m$ from the minimum-AIC model and estimated the standard error of this total as $s_m\sqrt{N}$, where $s_m$ is the standard deviation of the $N$ pointwise AIC differences. Models satisfying $\Delta\mathrm{AIC}_m \leq s_m\sqrt{N}$ were treated as similarly supported, and only those with the smallest parameter dimension in that set were retained. Linear and exponential models have equal dimension, so both could remain when they were not distinguishable. @timpson2021DirectlyModellingPopulation instead use BIC for comparison; the shared point is that the population model is evaluated against the calibrated determinations rather than against a plotted SPD.
+Only the three deterministic full-site boundary scenarios passed the ordering gate:
 
-#### S2.4 Simulation design and performance evaluation
+| Rule | Retention $D_{\mathrm{TV}}$ across methods | Largest method $D_{\mathrm{TV}}$ | $C$ | Mean-cal-BP shift across methods |
+|---|---:|---:|---:|---:|
+| Oldest | 0.455–0.535 | 0.263 | +0.193 | +3,133 to +3,136 yr |
+| Youngest | 0.524–0.554 | 0.154 | +0.370 | -2,447 to -2,439 yr |
+| Bracketed | 0.279–0.326 | 0.195 | +0.084 | +344 to +352 yr |
 
-We generated 1,000 simulated datasets for each of the three population models (uniform, linear, exponential). Applying seven sampling strategies at three intensities produced 63,000 strategy-intensity dataset combinations, including the repeated all-dates reference. Common random numbers paired replicate $i$ across all model-intensity scenarios; consequently, the all-dates result for a generating model was identical at 50%, 75%, and 100%. For every combination, we fitted all three candidate models under both likelihood definitions and applied both minimum-AIC and one-standard-error-style selection.
+Neither half-site extremum, either random rule at either proportion, nor half-site bracketed retention passed. Pointwise 2.5th–97.5th percentile envelopes in Figure 2 therefore describe conditional retention realisations only; they are not confidence intervals over sites, archive inclusion, calibration uncertainty or population history.
 
-We evaluated sampling strategy performance using three metrics: i) *accuracy*, the proportion of simulations in which minimum AIC identified the generating population model; ii) *parameter bias*, the difference between fitted and generating parameters for the linear and exponential models; and iii) *unambiguous support*, the proportion of replicates in which the parsimony rule retained only the generating family. Each estimate pooled the three generating models equally ($n = 3{,}000$). Accuracy and unambiguous support used 1,000 paired cluster-bootstrap resamples of replicate identifiers for their 95% intervals; all three generating-family outcomes remained together within each resampled cluster. Parameter-bias summaries report the mean and central 95% of replicate-level biases. Ambiguous replicates were reduced to one Boolean outcome before aggregation, so retaining two models could not give a replicate extra weight.
+### S1.4 Prespecified sensitivities
 
-Pooled fractions of approximately one-third or two-thirds need not represent uncertain classification. At 100% application under the $\ell^1$ likelihood, oldest selected uniform and youngest selected exponential in every replicate. Bracketed selected exponential for every linear and exponential replicate, and uniform for 999 of 1,000 uniform replicates. Its pooled accuracy of 0.666 therefore masks complete failure to distinguish the two increasing families.
+The full-site oldest and youngest decisions were repeated under nine configurations: calendar buffers of 0, 100 and 200 years; posterior-mass thresholds of 0.50, 0.80 and 0.95; reflected KDE bandwidths of 50, 100 and 200 years; an unreflected 100-year KDE; and the occupation-related `Y`-only subset. The configurations retained 496–576 dates from 62–73 sites, except the `Y`-only set, which retained 154 dates from 24 sites. Every configuration preserved a positive ordering contrast and older shift for oldest retention, and a positive contrast and younger shift for youngest retention. These decisions were unchanged across the named specifications but remain conditional on the benchmark design.
 
-#### S2.5 Paired realised-observation-noise sensitivity
+## S2. Signed simulation study
 
-We assessed the omitted assay variation in a focused paired sensitivity covering all-dates, random-1, random-3, and random-5. For each of the three generating models and three application intensities, 1,000 replicate pairs shared the latent population, site treatment, selected dates, and structural random-number state. The curve-mean arm retained `ccCRA`; in the realised arm,
+### S2.1 Empirical site-count and reported-error models
+
+Simulation parameterisation used the tracked 976-date, 116-site reference rather than the narrower display benchmark. The empirical number of dates per site had mean 8.414, median 7 and range 5–33. A negative-binomial distribution left-truncated at five dates was fitted by maximum likelihood. In the `fitdistrplus` parameterisation before conditioning, the estimates were `size = 0.0002577` and `mu = 0.001448`; after conditioning at five, the fitted mean was 8.412 (Supplementary Fig. S2). Each synthetic replicate drew 116 site counts from this distribution.
+
+Reported uncertainty was modelled as
 
 $$
-r_{\mathrm{CRA}} =
-\operatorname{round}\!\left(
-ccCRA + Z\sqrt{ccError^2 + \sigma_{\mathrm{quoted}}^2}
-\right), \qquad Z \sim N(0,1),
+\log(\sigma_{\mathrm{quoted}})=4.0992+8.5643\times10^{-5}\,\mathrm{CRA}+\varepsilon,
 $$
 
-where `ccError` is the SHCal20 curve error and $\sigma_{\mathrm{quoted}}$ is the simulated laboratory error. Realised ages were then recalibrated. Selected observations with zero posterior mass inside the strict 651-11,650 cal BP likelihood window were dropped and recorded. Both likelihood definitions were fitted. Oldest, youngest, and bracketed were not rerun with realised assays.
+with residual standard deviation 0.4719 and $R^2=0.170$. This regression reproduces the broad age–error relation; it is not a laboratory-performance model.
 
-The original v1 summary used 5,000 paired cluster-bootstrap resamples of simulation identifiers and simultaneous 95% max-deviation intervals. Its 18 gates covered paired accuracy and unambiguous-support differences, model and support-set discordance, absolute and truth-specific random-3/random-5 performance, their advantage over random-1, $\ell^1$/$\ell^2$ consistency, parameter bias and RMSE, optimiser boundaries, dropped observations, and posterior mass. For each metric, v1 calibrated one width over marginal curve-mean and realised arms as well as paired differences: 288 cells for accuracy and support and 216 for boundary. The complete 18-row decision table is supplied in the review archive at `out/sensitivity/observation-noise/summary/observation_noise_gate_report.md`.
+### S2.2 Generating truths and observation model
 
-Observed accuracy differences ranged from -0.015 to +0.008 and unambiguous-support differences from -0.019 to +0.009. Accuracy's v1 pooled maximum absolute simultaneous endpoint was 0.03733 against a 0.03 bound, although the truth-specific maximum was 0.047 against 0.05. For support, the pooled and truth-specific maxima were 0.049 and 0.063 against bounds of 0.03 and 0.05. Boundary-rate differences ranged from -0.005 to 0: none of 72 was positive (58 were zero and 14 negative), but the symmetric simultaneous upper endpoint was 0.019 against a threshold below 0.01. The v1 result therefore remains FAIL, with 15 of 18 gates passing. The substantive ranking, bias, RMSE, posterior-mass, strategy-contrast, and $\ell^1$/$\ell^2$ gates passed, but the two equivalence gates and boundary-interval gate did not.
+Five unit-integral regional event-age densities were defined over 651–11,650 cal BP: uniform, linear increase, linear decrease, exponential increase and exponential decrease (Supplementary Fig. S1). “Increase” means greater density at the recent, low-cal-BP boundary. Every non-uniform truth had a ten-fold endpoint ratio, summarised on the common scale
 
-After inspecting v1, we retained all its outputs and added a separately versioned, explicitly post-unblinding v2 diagnostic aligned to those three failed estimands. Accuracy and support used two-sided within-metric max-deviation intervals over their 96 paired-difference cells; boundary used a one-sided maximum-positive-deviation upper bound over 72 cells. The pooled/truth-specific v2 endpoints were 0.02033/0.030 for accuracy and 0.024/0.038 for support, within respective bounds of 0.03/0.05. The boundary endpoints were 0.008/0.008 against the strict 0.01 threshold. All three v2 diagnostic gates passed. Two independent 50,000-resample bootstrap seeds produced identical critical widths (0.015, 0.019, and 0.008), endpoints, margins, and decisions. v2 supports interpreting the point shifts as small but does not replace or retroactively pass v1. No 2,000-pair precision extension was run.
+$$
+\theta=\log\!\left\{\frac{f(651)}{f(11650)}\right\}.
+$$
 
-### S3. Reproducibility
+Thus $\theta=\log(10)$ for increasing truths, $-\log(10)$ for decreasing truths and 0 for uniform truth. Linear slopes and exponential rates were signed, so both fitted families could represent either temporal direction.
 
-The reviewer-facing archive will be assembled after the revised outputs are frozen and the data-sharing conditions are confirmed. Its fast verification path will restore the pinned R 4.5.3 environment, run the scientific test suite, and validate the accepted artefacts against their checksums and frozen generation sources. The evidence set will include the nine production RDS files, nine paired observation-noise checkpoints, retained v1 and post-unblinding v2 gate reports, and runtime metadata. The deterministic production runner, atomic checkpoint contract, checksum inventories, and R 4.5.3 Docker recipe support optional reruns on a multicore Linux host. The private-review link and reserved DOI will be inserted in the main-text Data availability statement after that final package lock.
+For each replicate, all calendar ages were independent draws from the regional truth. Site labels determined only how many dates were grouped together and which observations were subsequently retained. They did not impose occupation windows, durations, stratigraphic order or within-site dependence.
+
+The primary observation model mapped each calendar age to the central conventional radiocarbon age expected from SHCal20 (`ccCRA` from `rcarbon::uncalibrate()`), drew a quoted one-sigma error from the empirical regression and recalibrated the central age. It therefore propagated posterior width and calibration-curve structure but conditioned on the calibration-curve-mean conventional age.
+
+### S2.3 Retention design and stochastic control
+
+Eight rules were evaluated: all dates; random-1, random-2, random-3 and random-5 without replacement; oldest and youngest by calibrated posterior median; and bracketed retention of both extrema. Each rule treated 50%, 75% or 100% of the 116 sites, with untreated sites retaining all dates. All counts were at least five, so every random rule was feasible. We generated 1,000 replicates for each of five truths at each of three proportions. Replicate $i$ used deterministic seed $1234+i$ under `L'Ecuyer-CMRG`, with common random numbers preserving paired comparisons. Random-2 was drawn on an isolated RNG state so that adding it could not change dates, errors, treated sites or any previously implemented rule.
+
+The accepted matrix comprises 15 scenario files, 15,000 complete data-generating replicates and 720,000 fitted-result rows. The all-dates result for a truth is exactly identical across the three treatment files.
+
+### S2.4 Model fitting and selection
+
+The fitted regional density $f(x\mid\theta)$ was evaluated against each calibrated posterior $p_i(x)$. The primary marginal log likelihood was
+
+$$
+\ell_i^1=\log\int f(x\mid\theta)p_i(x)\,dx.
+$$
+
+The secondary score was
+
+$$
+\ell_i^2=\int\log\!\{f(x\mid\theta)\}p_i(x)\,dx.
+$$
+
+The first integrates over calibrated-age uncertainty and supports ordinary likelihood and AIC inference [@akaike1974NewLookStatistical; @timpson2021DirectlyModellingPopulation]. The second is the posterior expected log density; we applied the same parameter penalty as a scoring sensitivity but do not describe it as a marginal likelihood or its criterion as AIC. Integrals were finite sums on the calibrated calendar grids.
+
+Signed uniform, linear and exponential candidates were fitted by bounded numerical optimisation. Minimum AIC under $\ell^1$ supplied the primary selected family. We recorded the signed state, generating-family selection, direction reversal, fitted generating-family $\theta$ and boundary frequency. Truth-consistent state means uniform selection under uniform truth and the correct direction under a non-uniform truth, irrespective of functional family. Central 95% ranges in Figure 4 are empirical replicate quantiles, not confidence intervals for a historical parameter.
+
+### S2.5 Primary signed results
+
+The full-site results below report “family; state” percentages under the primary marginal likelihood. For uniform truth, state is uniform; for non-uniform truth, state is the correct direction. An adverse one-sided rule is oldest for increasing truths and youngest for decreasing truths.
+
+| Truth | All dates | Oldest | Youngest | Bracketed |
+|---|---:|---:|---:|---:|
+| Uniform | 84.8; 84.8 | 0.0; 0.0 | 0.0; 0.0 | 99.9; 99.9 |
+| Linear increase | 97.6; 100 | 19.5; 0.0 | 0.0; 100 | 0.0; 100 |
+| Exponential increase | 99.6; 100 | 41.6; 0.0 | 100; 100 | 100; 100 |
+| Linear decrease | 97.4; 100 | 0.0; 100 | 16.8; 0.0 | 0.0; 100 |
+| Exponential decrease | 99.8; 100 | 100; 100 | 43.3; 0.0 | 100; 100 |
+
+Full oldest retention selected a decreasing signed state and full youngest retention an increasing state in every replicate under every truth. When the rule opposed a non-uniform truth, the directional-reversal rate was 1.000. Under uniform truth, oldest and youngest selected the corresponding exponential direction in all replicates. Concordant one-sided retention frequently drove fitted effects to their bounds. Bracketed retention preserved direction but selected exponential in every full-treatment linear-truth replicate.
+
+The full-treatment reversal should not be extrapolated to partial treatment. At proportions 0.50 and 0.75, no non-uniform replicate selected the opposite direction under the adverse rule; at 0.75, uniform was instead selected in 18.1% of linear-increase and 21.2% of linear-decrease replicates. Uniform truth was affected sooner: half-site oldest and youngest retention selected a directional model in 97.3% and 97.9% of replicates.
+
+Across random-1, random-2, random-3 and random-5, all four non-uniform truths and all three treatment proportions, direction selection was 1.000. Generating-family selection ranged from 0.754 to 0.995 as information was discarded. The $\ell^1$ and $\ell^2$ analyses agreed on the selected signed state in 99.75% of 120,000 paired selections, including all deterministic headline cells.
+
+## S3. Earlier realised-observation-noise sensitivity
+
+The signed revision retained, but did not extend, an earlier paired sensitivity based on uniform, linear-increase and exponential-increase truths. It covered all dates, random-1, random-3 and random-5 at the three treatment proportions, with 1,000 pairs per truth-by-proportion cell. Each pair shared the latent ages, site treatment, retained observations and structural random-number state. In the realised arm,
+
+$$
+r_{\mathrm{CRA}}=\operatorname{round}\!\left[
+ccCRA+Z\sqrt{ccError^2+\sigma_{\mathrm{quoted}}^2}
+\right],\qquad Z\sim N(0,1),
+$$
+
+where `ccError` is SHCal20 curve error and $\sigma_{\mathrm{quoted}}$ is the simulated laboratory error. Realised ages were recalibrated. Observations with zero posterior mass inside the strict likelihood window were dropped and recorded. Oldest, youngest and bracketed retention were not included.
+
+This earlier analysis also recorded unique generating-family selection under a prespecified parsimony rule. Models whose total criterion difference from the minimum did not exceed the estimated standard error of their pointwise differences were treated as similarly supported, after which only the lowest-dimensional supported model or models were retained. A replicate counted as unique support only when the generating family alone remained. This outcome is retained for audit continuity but is not used for the signed headline.
+
+The prespecified v1 screen used 5,000 paired cluster-bootstrap resamples and simultaneous 95% max-deviation intervals over marginal arms and paired differences. It passed 15 of 18 gates and therefore remains **FAIL**. Observed accuracy differences ranged from -0.015 to +0.008 and unique-support differences from -0.019 to +0.009. The pooled v1 maximum absolute endpoints were 0.0373 for accuracy and 0.049 for support against 0.03 margins; truth-specific endpoints were 0.047 and 0.063 against 0.05 margins. None of 72 realised-minus-mean boundary-rate differences was positive, but the symmetric simultaneous upper endpoint was 0.019 against a threshold below 0.01.
+
+After v1 was inspected, an explicitly post-unblinding v2 diagnostic recalibrated intervals over only the paired-difference estimands implicated by those failures. Its pooled/truth-specific endpoints were 0.0203/0.030 for accuracy, 0.024/0.038 for unique support and 0.008/0.008 for the one-sided boundary metric, within the respective 0.03, 0.05 and 0.01 margins. Two independent 50,000-resample seeds gave identical critical widths, endpoints and decisions. v2 supports describing the tested point shifts as small; it neither replaces the v1 failure nor validates the untested one-sided rules. No 2,000-pair extension was run.
+
+## S4. Reproducibility and archive status
+
+All accepted empirical and signed-simulation evidence was generated under R 4.5.3 in one digest-recorded container image. The signed simulation has one metadata record per scenario, exact common-random-number checks, and SHA-256 manifests covering raw checkpoints and machine-readable summaries. The empirical evidence similarly records filters, effective counts, curve distances, tie resolution, sensitivity decisions, figures, source fingerprints and checksums. The fast verification path runs the consequential scientific tests and validates accepted artefacts without repeating the high-volume simulation. Optional reruns use the documented container and resumable atomic checkpoints.
+
+The reviewer-facing archive will be rebuilt after the revised manuscript and data-sharing conditions are locked. Its data inventory will distinguish source data, redistributable derived data, metadata and code. Release remains conditional on licensing, sensitive-location review and Indigenous data-governance requirements. The private review link and reserved DOI will replace the placeholders in the main manuscript before submission.
 
 ## Supplementary Figures
 
-### Data-generating distributions
+### Signed data-generating densities
 
 ![](../figures/SI_data_generating_distributions.png){#fig-si-s1 width=95%}
 
-**Supplementary Figure S1.** Data-generating distributions and example simulated data used in the simulation study. Panel A shows the three unit-normalised growth models over the Holocene analysis window: uniform, linear, and exponential. Panel B shows example simulated radiocarbon-date distributions generated from those models after applying the empirical site-count, per-site sample-size, and age-error structure used in the simulations.
+**Supplementary Figure S1.** The five unit-normalised regional event-age densities used in the signed simulation. Increasing trajectories have greater density at the recent (low-cal-BP) boundary; decreasing trajectories have greater density at the old boundary. Each non-uniform trajectory has a ten-fold end-to-end ratio, $|\theta|=\log(10)$, over 651–11,650 cal BP. Colour and line type jointly identify the truth.
 
 ### Empirical dates-per-site model
 
 ![](../figures/SI_dates_per_site_in_austarch_holocene.png){#fig-si-s2 width=75%}
 
-**Supplementary Figure S2.** Empirical and fitted distribution of radiocarbon determinations per eligible AustArch site. Points show the observed number of dates per site after Holocene filtering; the line shows the truncated negative-binomial model used to generate per-site sample sizes in the simulation study. The full horizontal range is retained to show the long right tail of heavily dated sites.
-
-### Likelihood-sensitivity check
-
-The main manuscript reports the curve-expectation results for the $\ell^1$ likelihood because it is the direct marginal likelihood used in related population modelling. The $\ell^2$ runs recovered the same broad ranking: all-dates and multi-date random strategies performed best; oldest and youngest produced severe classification failures; random-1 lost performance as application increased; and bracketed sampling was intermediate on pooled metrics while failing to distinguish the increasing families at 100% application. The paired realised-assay sensitivity also passed its v1 $\ell^1$/$\ell^2$ consistency gate; this does not alter the retained 15/18 v1 decision.
+**Supplementary Figure S2.** Empirical and fitted distribution of radiocarbon determinations per site in the tracked 976-date, 116-site reference. Points show the observed frequency; the line is the fitted negative-binomial distribution left-truncated at five dates. The empirical and fitted conditional means are 8.414 and 8.412 dates per site, respectively; the empirical range is 5–33.
 
 ## References
 

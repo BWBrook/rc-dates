@@ -23,6 +23,52 @@ manuscript_signed_strategy_labels <- function() {
   )
 }
 
+#' Prepare the five frozen signed generating densities for Supplementary Figure S1
+#' @param low Young analysis-window boundary in cal BP.
+#' @param up Old analysis-window boundary in cal BP.
+#' @param ratio End-to-end density ratio for non-uniform truths.
+#' @param points Number of calendar-age points per truth.
+#' @return Long data frame of the five unit-integral generating densities.
+prepare_manuscript_signed_truth_curves <- function(
+  low = 651,
+  up = 11650,
+  ratio = 10,
+  points = 1001L
+) {
+  if (length(points) != 1L || !is.finite(points) || points < 2L ||
+      points != as.integer(points)) {
+    rlang::abort(
+      "Signed truth curves require at least two calendar-age points.",
+      class = "rcdates_manuscript_figure_error"
+    )
+  }
+  ages <- seq(low, up, length.out = as.integer(points))
+  truths <- names(manuscript_signed_truth_labels())
+  curves <- do.call(rbind, lapply(truths, function(truth) {
+    specification <- population_truth_specification(truth, ratio, low, up)
+    density <- switch(
+      specification$family,
+      uni = rep(1 / (up - low), length(ages)),
+      lin = dtlin(ages, specification$parameter, low, up),
+      exp = dtexp(ages, specification$parameter, low, up)
+    )
+    data.frame(
+      truth = truth,
+      cal_bp = ages,
+      density = density,
+      stringsAsFactors = FALSE
+    )
+  }))
+  labels <- manuscript_signed_truth_labels()
+  curves$truth_label <- factor(
+    curves$truth,
+    levels = names(labels),
+    labels = unname(labels)
+  )
+  rownames(curves) <- NULL
+  curves
+}
+
 assert_manuscript_signed_grid <- function(data, context) {
   truths <- names(manuscript_signed_truth_labels())
   strategies <- names(manuscript_signed_strategy_labels())
@@ -302,4 +348,40 @@ manuscript_family_selection_plot <- function(data) {
     rate = "family_rate",
     fill_label = "Generating-family\nselection"
   )
+}
+
+#' Plot the signed data-generating densities for Supplementary Figure S1
+#' @param data Output of [prepare_manuscript_signed_truth_curves()].
+#' @return ggplot object.
+manuscript_signed_truth_plot <- function(data) {
+  ggplot2::ggplot(
+    data,
+    ggplot2::aes(
+      x = cal_bp,
+      y = density,
+      colour = truth_label,
+      linetype = truth_label
+    )
+  ) +
+    ggplot2::geom_line(linewidth = 0.75) +
+    ggplot2::scale_x_reverse(
+      limits = c(11650, 651),
+      breaks = c(11000, 9000, 7000, 5000, 3000, 1000)
+    ) +
+    ggplot2::scale_colour_manual(
+      values = c("black", "#0072B2", "#D55E00", "#56B4E9", "#E69F00")
+    ) +
+    ggplot2::scale_linetype_manual(
+      values = c("solid", "solid", "solid", "22", "22")
+    ) +
+    ggplot2::labs(
+      x = "Calendar age (cal BP)",
+      y = "Unit-normalised density",
+      colour = NULL,
+      linetype = NULL
+    ) +
+    ggplot2::theme_classic(base_size = 10) +
+    ggplot2::theme(
+      legend.position = "bottom"
+    )
 }

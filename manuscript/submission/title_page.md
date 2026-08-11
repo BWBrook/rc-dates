@@ -1,4 +1,4 @@
-# Within-site sampling influences radiocarbon "dates-as-data" demographic reconstructions
+# Within-site date-retention rules can distort radiocarbon “dates-as-data” inference
 
 Barry W. Brook^a,*^, Rebecca Wheatley^a^, Christopher N. Johnson^a^, Alan N. Williams^b,c^, Sean Ulm^c^, Luke A. Yates^a^
 

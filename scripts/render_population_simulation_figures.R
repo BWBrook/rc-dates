@@ -19,7 +19,12 @@ parse_arguments <- function(args) {
   settings
 }
 
-if (!file.exists("R/manuscript_signed_figures.R")) {
+source_files <- c(
+  "R/population_distributions.R",
+  "R/population_simulation_design.R",
+  "R/manuscript_signed_figures.R"
+)
+if (any(!file.exists(source_files))) {
   stop("Run from the rc-dates repository root.", call. = FALSE)
 }
 if (!identical(as.character(getRversion()), "4.5.3")) {
@@ -42,7 +47,7 @@ missing_packages <- required_packages[!vapply(
 if (length(missing_packages) > 0L) {
   stop("Missing figure packages: ", paste(missing_packages, collapse = ", "))
 }
-sys.source("R/manuscript_signed_figures.R", envir = .GlobalEnv)
+invisible(lapply(source_files, sys.source, envir = .GlobalEnv))
 
 required_files <- c(
   "SHA256SUMS", "VALIDATION.txt", "selection_performance.csv", "log_ratio_bias.csv"
@@ -85,6 +90,7 @@ theta <- prepare_manuscript_theta_panel(readr::read_csv(
   file.path(settings$input_dir, "log_ratio_bias.csv"),
   show_col_types = FALSE
 ))
+truth_curves <- prepare_manuscript_signed_truth_curves()
 
 plots <- list(
   fig_3 = manuscript_signed_state_plot(performance),
@@ -120,6 +126,23 @@ for (index in seq_along(final_paths)) {
   }
 }
 
+si_temporary <- file.path(
+  settings$figure_dir,
+  "SI_data_generating_distributions.tmp.png"
+)
+si_final <- file.path(settings$figure_dir, "SI_data_generating_distributions.png")
+on.exit(unlink(si_temporary), add = TRUE)
+ggplot2::ggsave(
+  filename = si_temporary,
+  plot = manuscript_signed_truth_plot(truth_curves),
+  width = 8,
+  height = 5.2,
+  dpi = 320
+)
+if (!file.rename(si_temporary, si_final)) {
+  stop("Could not atomically replace Supplementary Figure S1.")
+}
+
 message(
-  "Validated accepted Stage 2 summaries and rendered truth-specific Figures 3-5."
+  "Validated accepted Stage 2 summaries and rendered Figures 3-5 plus signed Supplementary Figure S1."
 )
