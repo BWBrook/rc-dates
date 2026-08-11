@@ -1,5 +1,5 @@
 rc-dates empirical manuscript Figures 1-2
-generation_completed_utc: 2026-08-11 04:54:18 UTC
+generation_completed_utc: 2026-08-11 04:58:19 UTC
 r_version: R version 4.5.3 (2026-03-11)
 package_versions: digest=0.6.39;dplyr=1.2.0;ggplot2=4.0.2;rcarbon=1.5.2;readr=2.2.0;rlang=1.1.7;scales=1.4.0;withr=3.0.2
 seed: 1234
@@ -27,7 +27,7 @@ model_fit_source_md5: 4fd3212fcd325284b3134e7b092e81b3
 empirical_reference_source_md5: 7834b5cbd91da56327503f6b44113bee
 empirical_distance_source_md5: 45a6e1339615d5d2bcd59ff65e2949ff
 figure_source_md5: 2f202d8ff29b72a54fb43bbe31c26a96
-runner_source_md5: 473ab8429106458a43c7707d3961bb3b
+runner_source_md5: c7596b9c71a226b840b1c0c53da750dc
 figure1_md5: 23d9102108ebea565c2560f06b4d7198
 figure2_md5: bfefa3835f22315a47a9c9f8341a8d19
 design_source_md5: 728c77dad76ddb623ce7c9d82a9d6d43

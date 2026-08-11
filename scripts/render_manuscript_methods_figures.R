@@ -288,6 +288,13 @@ material_composition <- material_composition[
   ,
   drop = FALSE
 ]
+occupation_composition <- as.data.frame(table(primary$reference$OCCUPATION_RELATED))
+names(occupation_composition) <- c("occupation_status", "dates")
+occupation_composition <- occupation_composition[
+  occupation_composition$dates > 0L,
+  ,
+  drop = FALSE
+]
 extreme_ties <- summarise_manuscript_extreme_ties(primary$reference)
 
 extrema_specs <- specs[
@@ -429,6 +436,10 @@ distance_path <- file.path(settings$summary_dir, "curve_distance_summaries.csv")
 gate_path <- file.path(settings$summary_dir, "scenario_claim_gates.csv")
 flow_path <- file.path(settings$summary_dir, "reference_flow.csv")
 composition_path <- file.path(settings$summary_dir, "primary_material_composition.csv")
+occupation_composition_path <- file.path(
+  settings$summary_dir,
+  "primary_occupation_composition.csv"
+)
 tie_path <- file.path(settings$summary_dir, "extreme_tie_audit.csv")
 sensitivity_distance_path <- file.path(
   settings$summary_dir,
@@ -455,6 +466,7 @@ readr::write_csv(distance_summaries, distance_path)
 readr::write_csv(claim_gates, gate_path)
 readr::write_csv(reference_flow, flow_path)
 readr::write_csv(material_composition, composition_path)
+readr::write_csv(occupation_composition, occupation_composition_path)
 readr::write_csv(extreme_ties, tie_path)
 readr::write_csv(sensitivity_distances, sensitivity_distance_path)
 readr::write_csv(sensitivity_gates, sensitivity_gate_path)
