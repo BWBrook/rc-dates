@@ -67,6 +67,9 @@ manuscript_calendar_bins <- function(
     bin = labels,
     lower = pmax(labels, min_age),
     upper = pmin(labels + bin_width, max_age),
+    midpoint = (
+      pmax(labels, min_age) + pmin(labels + bin_width, max_age)
+    ) / 2,
     width = pmax(0, pmin(labels + bin_width, max_age) - pmax(labels, min_age)),
     stringsAsFactors = FALSE
   )
@@ -119,7 +122,7 @@ manuscript_treated_site_matrix <- function(
 }
 
 #' Build date-selection indicators for one empirical sampling scenario
-#' @param data Reference data containing `SITE` and `AGE`.
+#' @param data Reference data containing calibrated posterior summaries.
 #' @param strategy One of random, oldest, youngest, or bracketed.
 #' @param n_samples Dates retained per treated site for random sampling.
 #' @param treated_site_matrix Logical site-by-iteration treatment matrix.
@@ -132,11 +135,15 @@ manuscript_selection_matrix <- function(
   treated_site_matrix,
   seed
 ) {
-  required <- c("SITE", "AGE")
+  required <- c(
+    "SITE", "ADSID", "calibrated_median_calBP", "weighted_mean_calBP"
+  )
   if (!is.data.frame(data) || !all(required %in% names(data)) ||
-      any(!is.finite(data$AGE))) {
+      anyDuplicated(data$ADSID) ||
+      any(!is.finite(data$calibrated_median_calBP)) ||
+      any(!is.finite(data$weighted_mean_calBP))) {
     rlang::abort(
-      "Empirical selection requires finite SITE and AGE columns.",
+      "Empirical selection requires unique IDs and finite calibrated summaries.",
       class = "rcdates_manuscript_figure_error"
     )
   }
@@ -183,9 +190,11 @@ manuscript_selection_matrix <- function(
     } else {
       lapply(treated_sites, function(site) {
         rows <- site_rows[[site]]
-        ages <- data$AGE[rows]
-        oldest <- rows[[which.max(ages)]]
-        youngest <- rows[[which.min(ages)]]
+        median_age <- data$calibrated_median_calBP[rows]
+        mean_age <- data$weighted_mean_calBP[rows]
+        stable_id <- as.character(data$ADSID[rows])
+        oldest <- rows[order(-median_age, -mean_age, stable_id)][[1L]]
+        youngest <- rows[order(median_age, mean_age, stable_id)][[1L]]
         switch(
           strategy,
           oldest = oldest,
@@ -202,6 +211,42 @@ manuscript_selection_matrix <- function(
     }
   }
   selected
+}
+
+#' Report ties encountered by calibrated extrema rules
+#' @param data Common-membership empirical reference.
+#' @return One row for oldest and youngest retention.
+summarise_manuscript_extreme_ties <- function(data) {
+  required <- c(
+    "SITE", "ADSID", "calibrated_median_calBP", "weighted_mean_calBP"
+  )
+  if (!all(required %in% names(data))) {
+    rlang::abort(
+      "Tie audit requires calibrated empirical summaries.",
+      class = "rcdates_manuscript_figure_error"
+    )
+  }
+  site_rows <- split(seq_len(nrow(data)), as.character(data$SITE))
+  do.call(rbind, lapply(c("oldest", "youngest"), function(strategy) {
+    tie_counts <- vapply(site_rows, function(rows) {
+      medians <- data$calibrated_median_calBP[rows]
+      target_median <- if (strategy == "oldest") max(medians) else min(medians)
+      median_rows <- rows[medians == target_median]
+      means <- data$weighted_mean_calBP[median_rows]
+      target_mean <- if (strategy == "oldest") max(means) else min(means)
+      c(
+        median = length(median_rows),
+        mean = sum(means == target_mean)
+      )
+    }, numeric(2L))
+    data.frame(
+      strategy = strategy,
+      sites = length(site_rows),
+      posterior_median_tie_sites = sum(tie_counts["median", ] > 1L),
+      posterior_mean_tie_sites = sum(tie_counts["mean", ] > 1L),
+      stringsAsFactors = FALSE
+    )
+  }))
 }
 
 #' Apply rcarbon's centred running-mean edge-fill convention by column
@@ -230,40 +275,62 @@ manuscript_running_mean_matrix <- function(values, width) {
 }
 
 #' Build a Gaussian-kernel probability-mass basis on common calendar bins
-#' @param weighted_means Per-date weighted-mean calibrated ages.
+#' @param point_ages Per-date calibrated point summaries.
 #' @param bins Output of [manuscript_calendar_bins()].
 #' @param bandwidth Gaussian bandwidth in years.
+#' @param boundary Either reflected boundary correction or no correction.
 #' @return Bin-by-date kernel-mass matrix.
 manuscript_gaussian_bin_basis <- function(
-  weighted_means,
+  point_ages,
   bins,
-  bandwidth = 100
+  bandwidth = 100,
+  boundary = c("reflect", "none")
 ) {
-  weighted_means <- as.numeric(weighted_means)
-  basis <- matrix(0, nrow = nrow(bins), ncol = length(weighted_means))
-  valid <- is.finite(weighted_means) &
-    weighted_means >= min(bins$lower) &
-    weighted_means <= max(bins$upper)
-  if (any(valid)) {
-    means <- weighted_means[valid]
+  boundary <- match.arg(boundary)
+  point_ages <- as.numeric(point_ages)
+  min_age <- min(bins$lower)
+  max_age <- max(bins$upper)
+  if (length(point_ages) == 0L || any(!is.finite(point_ages)) ||
+      any(point_ages < min_age | point_ages > max_age) ||
+      length(bandwidth) != 1L || !is.finite(bandwidth) || bandwidth <= 0) {
+    rlang::abort(
+      "KDE inputs must be finite point ages inside the analysis window.",
+      class = "rcdates_manuscript_figure_error"
+    )
+  }
+  kernel_mass <- function(means) {
     upper <- outer(bins$upper, means, function(bound, mean_age) {
       stats::pnorm((bound - mean_age) / bandwidth)
     })
     lower <- outer(bins$lower, means, function(bound, mean_age) {
       stats::pnorm((bound - mean_age) / bandwidth)
     })
-    basis[, valid] <- upper - lower
+    upper - lower
+  }
+  basis <- kernel_mass(point_ages)
+  if (boundary == "reflect") {
+    basis <- basis +
+      kernel_mass(2 * min_age - point_ages) +
+      kernel_mass(2 * max_age - point_ages)
+    totals <- colSums(basis)
+    if (any(!is.finite(totals) | totals <= 0)) {
+      rlang::abort(
+        "Reflected KDE basis has invalid probability mass.",
+        class = "rcdates_manuscript_figure_error"
+      )
+    }
+    basis <- sweep(basis, 2L, totals, FUN = "/")
   }
   basis
 }
 
-manuscript_frequency_bin_basis <- function(weighted_means, bins, bin_width = 100) {
-  weighted_means <- as.numeric(weighted_means)
-  basis <- matrix(0, nrow = nrow(bins), ncol = length(weighted_means))
-  valid <- is.finite(weighted_means) &
-    weighted_means >= min(bins$lower) &
-    weighted_means <= max(bins$upper)
-  labels <- floor(weighted_means[valid] / bin_width) * bin_width
+manuscript_frequency_bin_basis <- function(point_ages, bins, bin_width = 100) {
+  point_ages <- as.numeric(point_ages)
+  basis <- matrix(0, nrow = nrow(bins), ncol = length(point_ages))
+  valid <- is.finite(point_ages) &
+    point_ages >= min(bins$lower) &
+    point_ages <= max(bins$upper)
+  labels <- floor(point_ages[valid] / bin_width) * bin_width
   row_index <- match(labels, bins$bin)
   basis[cbind(row_index, which(valid))] <- 1
   basis
@@ -307,23 +374,26 @@ manuscript_spd_bin_basis <- function(
 }
 
 #' Prepare reusable per-date curve bases for Figures 1 and 2
-#' @param data Reference data with ADSID and weighted means.
+#' @param data Reference data with ADSID and calibrated medians.
 #' @param calibrated CalDates object aligned to `data`.
 #' @param bins Common calendar-bin definition.
 #' @param bandwidth KDE bandwidth.
 #' @param spd_runm SPD running-mean width.
+#' @param kde_boundary KDE boundary treatment.
 #' @return Named list of SPD, FD, KDE bases and bins.
 prepare_manuscript_curve_bases <- function(
   data,
   calibrated,
   bins = manuscript_calendar_bins(),
   bandwidth = 100,
-  spd_runm = 100L
+  spd_runm = 100L,
+  kde_boundary = c("reflect", "none")
 ) {
-  required <- c("ADSID", "weighted_mean_calBP")
+  kde_boundary <- match.arg(kde_boundary)
+  required <- c("ADSID", "calibrated_median_calBP")
   if (!all(required %in% names(data))) {
     rlang::abort(
-      "Reference data lack ADSID or weighted calibrated means.",
+      "Reference data lack ADSID or calibrated posterior medians.",
       class = "rcdates_manuscript_figure_error"
     )
   }
@@ -334,8 +404,13 @@ prepare_manuscript_curve_bases <- function(
       bins = bins,
       runm = spd_runm
     ),
-    FD = manuscript_frequency_bin_basis(data$weighted_mean_calBP, bins),
-    KDE = manuscript_gaussian_bin_basis(data$weighted_mean_calBP, bins, bandwidth),
+    FD = manuscript_frequency_bin_basis(data$calibrated_median_calBP, bins),
+    KDE = manuscript_gaussian_bin_basis(
+      data$calibrated_median_calBP,
+      bins,
+      bandwidth,
+      boundary = kde_boundary
+    ),
     bins = bins
   )
 }
@@ -366,6 +441,16 @@ manuscript_curve_matrices <- function(
   curves$FD <- normalise_manuscript_curve_matrix(
     manuscript_running_mean_matrix(curves$FD, width = fd_smooth_width)
   )
+  valid <- vapply(curves, function(curve) {
+    all(is.finite(curve)) && all(curve >= 0) &&
+      all(abs(colSums(curve) - 1) <= 1e-10)
+  }, logical(1))
+  if (!all(valid)) {
+    rlang::abort(
+      "Empirical curves failed finite, non-negative, or unit-mass gates.",
+      class = "rcdates_manuscript_figure_error"
+    )
+  }
   curves
 }
 
@@ -377,15 +462,28 @@ summarise_manuscript_effective_counts <- function(
 ) {
   selected <- as.matrix(selection_matrix)
   if (!is.logical(selected)) selected <- selected != 0
-  do.call(rbind, lapply(c("SPD", "FD", "KDE"), function(method) {
+  effective_by_method <- vapply(c("SPD", "FD", "KDE"), function(method) {
     effective_date <- colSums(bases[[method]]) > 0
-    effective <- colSums(
+    colSums(
       selected & matrix(
         effective_date,
         nrow = length(effective_date),
         ncol = ncol(selected)
       )
     )
+  }, numeric(ncol(selected)))
+  if (is.null(dim(effective_by_method))) {
+    effective_by_method <- matrix(effective_by_method, nrow = 1L)
+  }
+  colnames(effective_by_method) <- c("SPD", "FD", "KDE")
+  if (any(apply(effective_by_method, 1L, function(x) length(unique(x)) != 1L))) {
+    rlang::abort(
+      "Curve methods do not have identical effective membership.",
+      class = "rcdates_manuscript_figure_error"
+    )
+  }
+  do.call(rbind, lapply(c("SPD", "FD", "KDE"), function(method) {
+    effective <- effective_by_method[, method]
     data.frame(
       strategy_label = strategy_label,
       proportion = as.numeric(proportion),
@@ -443,13 +541,21 @@ summarise_manuscript_curve_matrix <- function(curve_matrix, bins, method) {
   )
 }
 
+#' Compute all-date curve matrices
+#' @param bases Reusable curve bases.
+#' @param n_dates Number of reference dates.
+#' @return Named list of unit-mass curve matrices.
+build_manuscript_baseline_matrices <- function(bases, n_dates) {
+  selected <- matrix(TRUE, nrow = n_dates, ncol = 1L)
+  manuscript_curve_matrices(bases, selected)
+}
+
 #' Compute the all-dates Figure 1 curve summaries
 #' @param bases Reusable curve bases.
 #' @param n_dates Number of reference dates.
 #' @return Long-form baseline curve summary.
 build_manuscript_baseline_curves <- function(bases, n_dates) {
-  selected <- matrix(TRUE, nrow = n_dates, ncol = 1L)
-  curves <- manuscript_curve_matrices(bases, selected)
+  curves <- build_manuscript_baseline_matrices(bases, n_dates)
   do.call(rbind, lapply(names(curves), function(method) {
     summarise_manuscript_curve_matrix(
       curves[[method]],
@@ -463,12 +569,16 @@ build_manuscript_baseline_curves <- function(bases, n_dates) {
 #' @param data Empirical reference data.
 #' @param bases Reusable curve bases.
 #' @param specs Output of [manuscript_empirical_scenarios()].
-#' @return Long-form scenario summary.
+#' @return Named summaries, common-membership counts, distances, and claim gates.
 run_manuscript_empirical_sampling <- function(data, bases, specs) {
   results <- vector("list", nrow(specs))
+  deviations <- vector("list", nrow(specs))
   effective_counts <- vector("list", nrow(specs))
+  distance_summaries <- vector("list", nrow(specs))
+  gates <- vector("list", nrow(specs))
   sites <- unique(as.character(data$SITE))
   strategy_order <- c("oldest", "youngest", "bracketed", "random-1", "random-5")
+  baseline <- build_manuscript_baseline_matrices(bases, nrow(data))
 
   for (index in seq_len(nrow(specs))) {
     spec <- specs[index, , drop = FALSE]
@@ -505,10 +615,41 @@ run_manuscript_empirical_sampling <- function(data, bases, specs) {
     scenario_summary$proportion <- spec$proportion[[1L]]
     scenario_summary$iterations <- spec$iterations[[1L]]
     results[[index]] <- scenario_summary
+    deviation_summary <- do.call(rbind, lapply(names(curves), function(method) {
+      deviation <- sweep(
+        curves[[method]],
+        1L,
+        baseline[[method]][, 1L],
+        FUN = "-"
+      )
+      summarise_manuscript_curve_matrix(
+        deviation,
+        bins = bases$bins$bin,
+        method = method
+      )
+    }))
+    deviation_summary$strategy <- spec$strategy[[1L]]
+    deviation_summary$strategy_label <- spec$strategy_label[[1L]]
+    deviation_summary$proportion <- spec$proportion[[1L]]
+    deviation_summary$iterations <- spec$iterations[[1L]]
+    deviations[[index]] <- deviation_summary
+    distances <- summarise_manuscript_scenario_distances(
+      curves = curves,
+      baseline = baseline,
+      midpoints = bases$bins$midpoint,
+      strategy_label = spec$strategy_label[[1L]],
+      proportion = spec$proportion[[1L]]
+    )
+    distance_summaries[[index]] <- distances$summary
+    gates[[index]] <- distances$gate
   }
-  out <- do.call(rbind, results)
-  attr(out, "effective_counts") <- do.call(rbind, effective_counts)
-  out
+  list(
+    curves = do.call(rbind, results),
+    deviations = do.call(rbind, deviations),
+    effective_counts = do.call(rbind, effective_counts),
+    distances = do.call(rbind, distance_summaries),
+    gates = do.call(rbind, gates)
+  )
 }
 
 manuscript_method_palette <- function() {
@@ -542,8 +683,8 @@ manuscript_methods_plot <- function(curves, bin_width = 100) {
     ggplot2::theme_minimal(base_size = 11)
 }
 
-#' Plot the 5-by-2 empirical sampling panel for manuscript Figure 2
-#' @param curves Output of [run_manuscript_empirical_sampling()].
+#' Plot the 5-by-2 empirical retention-deformation panel for Figure 2
+#' @param curves Deviation summaries from [run_manuscript_empirical_sampling()].
 #' @return Faceted ggplot object.
 manuscript_sampling_panel_plot <- function(curves) {
   strategy_levels <- c("oldest", "youngest", "bracketed", "random-1", "random-5")
@@ -551,7 +692,7 @@ manuscript_sampling_panel_plot <- function(curves) {
   curves$proportion_label <- factor(
     curves$proportion,
     levels = c(0.5, 1),
-    labels = c("50% of sites re-sampled", "100% of sites re-sampled")
+    labels = c("50% of sites treated", "100% of sites treated")
   )
   curves$method <- factor(curves$method, levels = c("FD", "KDE", "SPD"))
   curves$display_mean <- curves$mean / 100
@@ -567,6 +708,7 @@ manuscript_sampling_panel_plot <- function(curves) {
       group = method
     )
   ) +
+    ggplot2::geom_hline(yintercept = 0, linewidth = 0.25, colour = "grey45") +
     ggplot2::geom_ribbon(
       ggplot2::aes(ymin = display_lower, ymax = display_upper),
       alpha = 0.14,
@@ -586,9 +728,9 @@ manuscript_sampling_panel_plot <- function(curves) {
       expand = c(0, 0)
     ) +
     ggplot2::scale_y_continuous(
-      name = expression("Scaled density (" * 10^-4 * ")"),
+      name = expression("Density difference from all dates (" * 10^-4 * ")"),
       labels = scales::label_number(scale = 10000, accuracy = 1),
-      expand = c(0, 0)
+      expand = ggplot2::expansion(mult = 0.03)
     ) +
     ggplot2::labs(x = "Years cal BP") +
     ggplot2::theme_minimal(base_size = 9) +

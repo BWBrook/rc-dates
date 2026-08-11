@@ -16,6 +16,8 @@ local({
   source_files <- c(
     "R/austarch_filters.R",
     "R/model_fit.R",
+    "R/manuscript_empirical_reference.R",
+    "R/manuscript_empirical_distances.R",
     "R/manuscript_methods_figures.R",
     "R/population_distributions.R",
     "R/population_simulation_design.R",

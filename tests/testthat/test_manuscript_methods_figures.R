@@ -23,7 +23,15 @@ test_that("manuscript empirical scenario matrix preserves the published design",
 test_that("treated-site and within-site selection matrices are deterministic", {
   data <- data.frame(
     SITE = rep(LETTERS[1:4], each = 5L),
-    AGE = unlist(lapply(seq_len(4L), function(site) site * 100 + seq_len(5L))),
+    ADSID = seq_len(20L),
+    calibrated_median_calBP = unlist(lapply(
+      seq_len(4L),
+      function(site) site * 100 + seq_len(5L)
+    )),
+    weighted_mean_calBP = unlist(lapply(
+      seq_len(4L),
+      function(site) site * 100 + seq_len(5L) + 0.25
+    )),
     stringsAsFactors = FALSE
   )
   treated <- manuscript_treated_site_matrix(
@@ -62,6 +70,53 @@ test_that("treated-site and within-site selection matrices are deterministic", {
   expect_equal(unname(colSums(bracketed)), rep(14L, 3L))
 })
 
+test_that("primary membership excludes reservoir-sensitive records and sparse sites", {
+  data <- data.frame(
+    ADSID = seq_len(14L),
+    SITE = rep(c("A", "B"), each = 7L),
+    MATERIAL = c(rep("Charcoal", 6L), "Marine_shell", rep("Charcoal", 7L)),
+    TIME_SERIES_RELEVANT = c(rep("Terrestrial", 6L), "Marine", rep("Terrestrial", 7L)),
+    OCCUPATION_RELATED = c(rep("Y", 7L), rep("U", 7L)),
+    AGE = rep(1000, 14L),
+    ERROR = rep(30, 14L),
+    stringsAsFactors = FALSE
+  )
+  primary <- filter_manuscript_primary_reference(data)
+  expect_equal(nrow(primary), 13L)
+  expect_false(any(primary$MATERIAL == "Marine_shell"))
+
+  primary$calibrated_median_calBP <- c(rep(1000, 5L), 700, rep(2000, 7L))
+  primary$weighted_mean_calBP <- primary$calibrated_median_calBP
+  primary$posterior_mass_in_window <- c(rep(1, 5L), 0.7, rep(1, 7L))
+  common <- filter_manuscript_common_membership(
+    primary,
+    buffer = 100,
+    mass_threshold = 0.8,
+    min_dates = 5L
+  )
+  expect_identical(names(table(common$SITE)), c("A", "B"))
+  expect_equal(as.integer(table(common$SITE)), c(5L, 7L))
+})
+
+test_that("calibrated extrema use posterior mean and stable ID tie breaks", {
+  data <- data.frame(
+    SITE = rep("A", 5L),
+    ADSID = c(20L, 10L, 30L, 40L, 50L),
+    calibrated_median_calBP = c(1000, 1000, 500, 500, 750),
+    weighted_mean_calBP = c(990, 1010, 510, 510, 750),
+    stringsAsFactors = FALSE
+  )
+  treated <- matrix(TRUE, nrow = 1L, ncol = 1L, dimnames = list("A", "iteration_1"))
+  oldest <- manuscript_selection_matrix(data, "oldest", 1L, treated, 1L)
+  youngest <- manuscript_selection_matrix(data, "youngest", 1L, treated, 1L)
+
+  expect_identical(which(oldest[, 1L]), 2L)
+  expect_identical(which(youngest[, 1L]), 3L)
+  ties <- summarise_manuscript_extreme_ties(data)
+  expect_equal(ties$posterior_median_tie_sites, c(1L, 1L))
+  expect_equal(ties$posterior_mean_tie_sites, c(0L, 1L))
+})
+
 test_that("running-mean matrix exactly matches the rcarbon edge-fill convention", {
   values <- cbind(a = seq_len(12), b = seq_len(12)^2)
   observed <- manuscript_running_mean_matrix(values, width = 4L)
@@ -74,18 +129,29 @@ test_that("running-mean matrix exactly matches the rcarbon edge-fill convention"
   expect_equal(observed, expected)
 })
 
-test_that("Gaussian KDE basis excludes out-of-window weighted means", {
+test_that("reflected Gaussian KDE preserves per-date mass at both boundaries", {
   bins <- manuscript_calendar_bins(min_age = 651, max_age = 11650, bin_width = 100)
-  basis <- manuscript_gaussian_bin_basis(
-    weighted_means = c(650, 651, 700, 11650, 11651),
+  reflected <- manuscript_gaussian_bin_basis(
+    point_ages = c(651, 700, 11650),
     bins = bins,
-    bandwidth = 100
+    bandwidth = 100,
+    boundary = "reflect"
+  )
+  unreflected <- manuscript_gaussian_bin_basis(
+    point_ages = c(651, 700, 11650),
+    bins = bins,
+    bandwidth = 100,
+    boundary = "none"
   )
 
-  expect_equal(dim(basis), c(nrow(bins), 5L))
-  expect_equal(colSums(basis)[c(1, 5)], c(0, 0))
-  expect_true(all(colSums(basis)[2:4] > 0))
-  expect_true(all(colSums(basis)[2:4] <= 1))
+  expect_equal(dim(reflected), c(nrow(bins), 3L))
+  expect_equal(colSums(reflected), rep(1, 3L), tolerance = 1e-12)
+  expect_true(colSums(unreflected)[[1L]] < 0.51)
+  expect_true(colSums(unreflected)[[3L]] < 0.51)
+  expect_error(
+    manuscript_gaussian_bin_basis(c(650, 700), bins),
+    class = "rcdates_manuscript_figure_error"
+  )
 })
 
 test_that("precomputed SPD basis reproduces rcarbon aggregation exactly", {
@@ -186,7 +252,7 @@ test_that("Figures 1 and 2 use the same FD smoothing and density units", {
   expect_equal(as.numeric(plot$theme$panel.spacing.x), 3)
 })
 
-test_that("effective-date summaries expose method-specific membership", {
+test_that("effective-date summaries enforce common membership", {
   selected <- matrix(
     c(
       TRUE, TRUE,
@@ -198,8 +264,8 @@ test_that("effective-date summaries expose method-specific membership", {
   )
   bases <- list(
     SPD = matrix(1, nrow = 2L, ncol = 3L),
-    FD = matrix(c(1, 0, 1, 0, 0, 0), nrow = 2L),
-    KDE = matrix(c(1, 0, 0, 0, 0, 0), nrow = 2L)
+    FD = matrix(1, nrow = 2L, ncol = 3L),
+    KDE = matrix(1, nrow = 2L, ncol = 3L)
   )
   counts <- summarise_manuscript_effective_counts(
     selected,
@@ -209,6 +275,47 @@ test_that("effective-date summaries expose method-specific membership", {
   )
 
   expect_equal(counts$selected_dates_mean, c(2.5, 2.5, 2.5))
-  expect_equal(counts$effective_dates_mean, c(2.5, 1.5, 1))
-  expect_equal(counts$effective_dates_min, c(2, 1, 1))
+  expect_equal(counts$effective_dates_mean, rep(2.5, 3L))
+  expect_equal(counts$effective_dates_min, rep(2, 3L))
+
+  bases$KDE[, 2L] <- 0
+  expect_error(
+    summarise_manuscript_effective_counts(
+      selected,
+      bases,
+      strategy_label = "fixture",
+      proportion = 0.5
+    ),
+    class = "rcdates_manuscript_figure_error"
+  )
+})
+
+test_that("distance gate is conservative and directionally explicit", {
+  baseline <- list(
+    SPD = matrix(c(0.5, 0.5), ncol = 1L),
+    FD = matrix(c(0.5, 0.5), ncol = 1L),
+    KDE = matrix(c(0.5, 0.5), ncol = 1L)
+  )
+  curves <- list(
+    SPD = matrix(c(0.2, 0.8), ncol = 1L),
+    FD = matrix(c(0.21, 0.79), ncol = 1L),
+    KDE = matrix(c(0.19, 0.81), ncol = 1L)
+  )
+  result <- summarise_manuscript_scenario_distances(
+    curves,
+    baseline,
+    midpoints = c(100, 200),
+    strategy_label = "oldest",
+    proportion = 1
+  )
+
+  expect_true(result$gate$retention_larger_than_method)
+  expect_identical(result$gate$temporal_direction, "older")
+  expect_equal(
+    result$summary$mean[
+      result$summary$comparison == "minimum_retention_minus_maximum_method"
+    ],
+    0.27,
+    tolerance = 1e-12
+  )
 })

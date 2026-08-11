@@ -77,7 +77,9 @@ For each scenario realisation:
 
 Signed temporal displacement is the change in the curve's mean cal BP relative to its method-
 specific all-date baseline, using calendar-bin midpoints. Positive values are older and negative
-values younger. A directional statement requires all three methods to have the same sign.
+values younger. An older-direction statement requires the 2.5th percentile to be positive for all
+three methods; a younger-direction statement requires the 97.5th percentile to be negative for all
+three. Deterministic scenarios use the exact shifts.
 
 A scenario may be described as having a larger retention effect than method effect only if the
 2.5th percentile of this conservative contrast is greater than zero. For a deterministic scenario,

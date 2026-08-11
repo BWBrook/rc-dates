@@ -1,0 +1,10 @@
+configuration,occupation_status,buffer,mass_threshold,kde_bandwidth,kde_boundary,dates,sites
+primary,Y+U,100,0.8,100,reflect,540,68
+buffer-0,Y+U,0,0.8,100,reflect,576,73
+buffer-200,Y+U,200,0.8,100,reflect,496,62
+mass-0.50,Y+U,100,0.5,100,reflect,545,69
+mass-0.95,Y+U,100,0.95,100,reflect,537,68
+kde-bandwidth-50,Y+U,100,0.8,50,reflect,540,68
+kde-bandwidth-200,Y+U,100,0.8,200,reflect,540,68
+kde-unreflected,Y+U,100,0.8,100,none,540,68
+occupation-Y-only,Y,100,0.8,100,reflect,154,24

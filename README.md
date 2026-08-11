@@ -23,9 +23,9 @@ empirical transformations.
 ## Current evidence flow
 
 ```text
-archaeological dates ──> validate/filter/calibrate ──> empirical Figures 1-2
+archaeological dates ──> common-membership empirical evidence ──> revised Figures 1-2
 locked simulation evidence ──> independent validation ──> current Figures 3-5
-Stage 2 signed design ────────> resumable container runs ──> decision tables
+Stage 2 signed design ────────> accepted 720,000-row evidence ──> decision tables
 manuscript sources + accepted evidence ─────────────> makedoc ────────────────> submission files
 ```
 
@@ -41,18 +41,23 @@ source data. The second independently validates the accepted production artefact
 Figures 3-5. It can use the immutable 2026-07-10 source snapshot when the active simulation code has
 subsequently changed.
 
-The Stage 2 signed-model audit is intentionally outside the fast gate:
+The accepted Stage 2 signed-model audit remains outside the fast gate:
 
 ```sh
 make stage2-rerun
 ```
 
-Run that target on `deep-server` inside `tmux`; it writes to `out/revision/signed-models` and
-preserves atomic, resumable checkpoints. The prespecified scientific gate is in
+Run that target only for a deliberate expensive reproduction on `deep-server` inside `tmux`; its
+accepted evidence is in `out/revision/signed-models`. The prespecified scientific gate is in
 [docs/STAGE2_SIGNED_MODELS.md](docs/STAGE2_SIGNED_MODELS.md), and
 [docs/PRODUCTION_SIMULATIONS.md](docs/PRODUCTION_SIMULATIONS.md) gives the runtime and acceptance
-contract. The locked 2026 production evidence remains untouched until the signed-model result has
-been interpreted.
+contract. The result is interpreted in
+[docs/STAGE2_SIGNED_MODELS_RESULTS.md](docs/STAGE2_SIGNED_MODELS_RESULTS.md).
+
+The common-membership empirical repair is specified and interpreted in
+[docs/STAGE3_EMPIRICAL_REPAIR.md](docs/STAGE3_EMPIRICAL_REPAIR.md) and
+[docs/STAGE3_EMPIRICAL_RESULTS.md](docs/STAGE3_EMPIRICAL_RESULTS.md). Its accepted summaries and
+claim gates are under `out/empirical-sampling/`.
 
 ## Historical sensitivity decisions
 
