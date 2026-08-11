@@ -75,6 +75,10 @@ For each scenario realisation:
 3. the conservative contrast is the smallest retention distance minus the largest between-method
    distance.
 
+Signed temporal displacement is the change in the curve's mean cal BP relative to its method-
+specific all-date baseline, using calendar-bin midpoints. Positive values are older and negative
+values younger. A directional statement requires all three methods to have the same sign.
+
 A scenario may be described as having a larger retention effect than method effect only if the
 2.5th percentile of this conservative contrast is greater than zero. For a deterministic scenario,
 the exact contrast must be greater than zero. Otherwise the manuscript reports the distances but
@@ -91,8 +95,9 @@ The full headline oldest and youngest scenarios are checked under:
 - an unreflected KDE at bandwidth 100 years; and
 - the occupation-related `Y`-only subset.
 
-The primary directional conclusion is called robust only if its sign and scenario-level claim gate
-are unchanged across these sensitivities. Sensitivity results are reported rather than tuned.
+The primary directional conclusion is called robust only if the signs of the three method-specific
+mean-cal-BP shifts and the scenario-level claim gate are unchanged across these sensitivities.
+Sensitivity results are reported rather than tuned.
 
 ## Acceptance gates
 
