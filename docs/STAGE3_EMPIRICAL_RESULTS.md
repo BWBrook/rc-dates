@@ -71,3 +71,11 @@ They are not site onsets, terminations, or prospective stratigraphic choices. Ma
 evidence is in `out/empirical-sampling/`; manuscript Figures 1--2 should be regenerated from this
 accepted source when the Stage 2 signed-simulation figures and manuscript claims are revised
 together.
+
+## Stage 5 bracketed extension
+
+On 12 August 2026, before inspecting new outputs, the same nine-configuration gate was extended to
+full-site bracketed retention. Its older shift persisted in every configuration and its ordering
+contrast was positive in eight. The occupation-related `Y`-only subset instead gave a contrast of
+-0.054, so bracketed retention failed the frozen all-nine robustness rule. It is consequently
+reported as primary-specification-only; oldest and youngest retain the nine-configuration claim.

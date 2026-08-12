@@ -298,7 +298,7 @@ occupation_composition <- occupation_composition[
 extreme_ties <- summarise_manuscript_extreme_ties(primary$reference)
 
 extrema_specs <- specs[
-  specs$proportion == 1 & specs$strategy %in% c("oldest", "youngest"),
+  specs$proportion == 1 & specs$strategy %in% c("oldest", "youngest", "bracketed"),
   ,
   drop = FALSE
 ]
@@ -332,13 +332,14 @@ sensitivity_results <- lapply(sensitivity_specs, function(specification) {
   gates <- configuration$analysis$gates
   if (label == "primary") {
     distances <- distances[
-      distances$strategy_label %in% c("oldest", "youngest") &
+      distances$strategy_label %in% c("oldest", "youngest", "bracketed") &
         distances$proportion == 1,
       ,
       drop = FALSE
     ]
     gates <- gates[
-      gates$strategy_label %in% c("oldest", "youngest") & gates$proportion == 1,
+      gates$strategy_label %in% c("oldest", "youngest", "bracketed") &
+        gates$proportion == 1,
       ,
       drop = FALSE
     ]
@@ -367,9 +368,10 @@ primary_sensitivity_gate <- sensitivity_gates[
   c("strategy_label", "retention_larger_than_method", "temporal_direction"),
   drop = FALSE
 ]
-sensitivity_decision <- do.call(rbind, lapply(c("oldest", "youngest"), function(strategy) {
+sensitivity_directions <- c(oldest = "older", youngest = "younger", bracketed = "older")
+sensitivity_decision <- do.call(rbind, lapply(names(sensitivity_directions), function(strategy) {
   observed <- sensitivity_gates[sensitivity_gates$strategy_label == strategy, , drop = FALSE]
-  expected_direction <- if (strategy == "oldest") "older" else "younger"
+  expected_direction <- sensitivity_directions[[strategy]]
   primary_row <- primary_sensitivity_gate[
     primary_sensitivity_gate$strategy_label == strategy,
     ,

@@ -1,5 +1,5 @@
 rc-dates Stage 3 common-membership empirical evidence: ACCEPTED
-validated_utc: 2026-08-11 05:19:04 UTC
+validated_utc: 2026-08-12 05:32:21 UTC
 r_version: R version 4.5.3 (2026-03-11)
 primary_dates: 540
 primary_sites: 68
@@ -8,4 +8,4 @@ finite_nonnegative_unit_mass_curves: PASS
 scenario_iteration_contracts: PASS
 total_variation_bounds: PASS
 scenario_claim_gates: 10
-headline_sensitivity_robustness: PASS
+headline_sensitivity_robustness: QUALIFIED

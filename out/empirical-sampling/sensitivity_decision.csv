@@ -1,3 +1,4 @@
 strategy_label,configurations,primary_retention_larger_than_method,primary_temporal_direction,distance_gate_stable,direction_robust,robust
 oldest,9,TRUE,older,TRUE,TRUE,TRUE
 youngest,9,TRUE,younger,TRUE,TRUE,TRUE
+bracketed,9,TRUE,older,FALSE,TRUE,FALSE

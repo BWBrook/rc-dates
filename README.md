@@ -57,7 +57,8 @@ contract. The result is interpreted in
 The common-membership empirical repair is specified and interpreted in
 [docs/STAGE3_EMPIRICAL_REPAIR.md](docs/STAGE3_EMPIRICAL_REPAIR.md) and
 [docs/STAGE3_EMPIRICAL_RESULTS.md](docs/STAGE3_EMPIRICAL_RESULTS.md). Its accepted summaries and
-claim gates are under `out/empirical-sampling/`.
+claim gates are under `out/empirical-sampling/`. The final bracketed-retention extension and frozen
+decision are in [docs/STAGE5_FINAL_REVISION.md](docs/STAGE5_FINAL_REVISION.md).
 
 ## Historical sensitivity decisions
 
@@ -98,3 +99,9 @@ frozen, so it cannot package stale evidence or overstate data shareability.
 
 The frozen production snapshot is `provenance/production-20260710/`. Git history contains superseded
 demo, compatibility, and packaging machinery; it is intentionally absent from the active tree.
+
+The deposited AustArch object, the project's non-pristine working derivative and the accepted
+976-row analysis reference are reconciled in
+[data/AUSTARCH_PROVENANCE.md](data/AUSTARCH_PROVENANCE.md). Raw or record-level AustArch data must
+not be redistributed without a separate licensing, sensitive-location and Indigenous
+data-governance decision.
