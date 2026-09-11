@@ -15,7 +15,7 @@ Official sources: [JAS Guide for Authors](https://www.sciencedirect.com/journal/
 - [x] Main manuscript contains five source-controlled figures; Supplementary Information contains two.
 - [x] AI assistance with analysis development and manuscript preparation is disclosed together before the references, following Barry’s requested placement; rerunning the analyses requires no AI tools or prompts.
 - [ ] At submission, reconcile this placement with Elsevier’s Methods disclosure wording for research-process and data-visualisation assistance; the use itself is fully disclosed.
-- [x] The data-availability statement contains no unresolved repository placeholders; the author-anonymized archive is supplied as review material.
+- [x] The data-availability statement contains no unresolved repository placeholders; the named scientific archive is supplied as review material.
 
 ## Scientific reconciliation
 
@@ -56,6 +56,6 @@ Official sources: [JAS Guide for Authors](https://www.sciencedirect.com/journal/
 
 - [x] Build and audit the replacement reviewer-facing archive; it contains the signed and common-membership revision while excluding raw and record-level AustArch data.
 - [ ] Record the final redistribution decision for aggregate empirical files and any later public data release; the current review archive excludes source and record-level data.
-- [x] Include the existing locked author-anonymized archive with the co-author packet; its accepted signed and empirical manifests match the checkout. Recheck inclusion when assembling the journal upload.
+- [x] Replace the earlier author-anonymized archive in the co-author packet with the named minimal scientific repository ZIP; its bytes and release checksums match the standalone checkout. Recheck the chosen file before journal upload.
 - [ ] Select the permanent public repository, mint its citable identifier and release permitted materials no later than publication.
 - [ ] Inspect manuscript, SI, title page, cover letter and highlights in the portal-generated review packet.

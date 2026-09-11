@@ -14,6 +14,7 @@ renv/sandbox/
 data/
 data-raw/
 out/rerun/
+out/reproduced/
 out/**/logs/
 
 # Generated submission/build artefacts
@@ -36,6 +37,9 @@ tmp/
 # Retained local presubmission notes (superseded in the active repository)
 /docs/presubmission_module1_baseline.md
 /docs/rc_dates_presub_review.md
+
+# Python bytecode
+__pycache__/
 
 # Editors and operating-system noise
 .DS_Store

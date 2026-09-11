@@ -137,3 +137,8 @@ submission-build: manuscript-build
 		--csl ../../csl/journal-of-archaeological-science.csl \
 		--resource-path=.:../figures \
 		-o ../submission/dist/supplementary_information.docx
+
+SCIENTIFIC_RELEASE_DIR ?= dist/rc-dates-scientific-reproducibility-2026-09-11
+.PHONY: scientific-release
+scientific-release:
+	python3 scripts/release/build_package.py --destination="$(SCIENTIFIC_RELEASE_DIR)"

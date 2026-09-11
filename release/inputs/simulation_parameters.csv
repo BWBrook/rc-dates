@@ -1,0 +1,2 @@
+schema_version,n_sites,lower_truncation,nb_size,nb_mu,error_intercept,error_slope,error_sigma,error_r_squared,error_residual_df,min_age,max_age,ratio,observed_mean,observed_median,observed_min,observed_max,fitted_conditional_mean
+1,116,5,0.00025770960414354331,0.0014481200858808014,4.0992001582836517,8.5643345890110018e-05,0.47193295168145216,0.16956074296142604,974,651,11650,10,8.4137931034482758,7,5,33,8.4124011509873675

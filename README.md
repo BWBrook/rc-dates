@@ -82,9 +82,16 @@ make submission-build
 ```
 
 `submission-build` assembles the manuscript, supplementary information, cover letter, title page,
-and highlights under `manuscript/submission/dist/`. The previous reviewer-repository builder has
-been retired; a smaller replacement will be designed only after the revised scientific outputs are
-frozen, so it cannot package stale evidence or overstate data shareability.
+and highlights under `manuscript/submission/dist/`.
+
+`make scientific-release` assembles the named minimal scientific repository and matching ZIP
+under `dist/`. It includes the accepted evidence, exact-value summary rebuilds, seven figure
+renderers, simulation rerun commands, and hash-gated reconstruction from separately acquired
+AustArch source. The explicit allowlist in `scripts/release/build_package.py` excludes working
+notes, development history and governed record-level data. See `release/templates/README.md`
+and `release/templates/VALIDATION.md` for commands and the verified reproduction boundary.
+The builder refuses to overwrite an existing assembly; set `SCIENTIFIC_RELEASE_DIR` to a new
+destination for another candidate. Publication and licensing remain author decisions.
 
 ## Repository map
 
