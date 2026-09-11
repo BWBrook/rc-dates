@@ -1,6 +1,6 @@
 # rc-dates: co-author review, 10 September 2026
 
-*Updated 11 September after Fable’s direct editorial pass and Astra’s final check; the packet retains its original circulation date.*
+*Updated 11 September after Fable’s direct editorial pass, Astra’s final check and the historical-draft clarity comparison; the packet retains its original circulation date.*
 
 ## Assessment
 
@@ -11,6 +11,8 @@ My recommendation is to keep this focused argument for *Journal of Archaeologica
 This fresh review used GPT-6 Astra, with an independent scientific review by GPT-5.6 Sol and a subsequent outsider text review by Claude Fable 5.1. Fable correctly challenged the initial text-readiness verdict; this version incorporates Fable’s direct editorial edits and a final scientific wording check before circulation. It began from commit `6cbd5c5` and preserves the accepted analysis, figures and prespecified decisions.
 
 ## Changes in this version
+
+- **Restored two brief explanations from the historical draft.** The Introduction now spells out the dates-as-data premise, and Methods explicitly separates empirical descriptive curves from simulation fits to individual calibrated age distributions. A duplicated bracketed-retention comparison was removed. These agreed edits add a net 38 words and change no scientific result.
 
 - **Made the result easier to read.** The abstract, highlights and Results now lead with the retention mechanism and the constant-history result. The empirical comparison reports the same 68-date count for oldest, youngest and random-1: SPD mean shifts of +3,133, −2,439 and +103 years, respectively, with a random-1 central 95% range of −433 to +594. Repeated caveats and internal revision labels have been reduced, and the SI separates methodological explanation from archive commands and hashes.
 - **Preserved the consequential disagreements.** Bracketed retention's +352-year SPD shift is inside the random-1 shift range, but its SPD total variation exceeds the corresponding random-1 range; random-1 also retains half as many dates. This does not establish equivalence to random subsampling. Nor does the independent-age experiment establish a lower bound on prospective selection bias. The abstract retains a brief observation-model qualification because the headline extrema rules remain untested under realised noise. The response to Fable records these decisions and their evidence. Fable subsequently withdrew the bracketed and lower-bound claims and agreed the text is ready to circulate. Section 4.3 now explains why independent per-date noise preserves the median-selection mechanism while leaving the AIC response untested.
@@ -29,7 +31,7 @@ This fresh review used GPT-6 Astra, with an independent scientific review by GPT
 
 ## Verification and files
 
-The strict manuscript checks passed, including 37 makedoc builder tests, manuscript/SI lint and citation checks. The revised manuscript and supplement were rebuilt as PDF and editable DOCX and visually inspected. The Word build now replaces embedded PDF figures with 300-dpi PNG copies at the source-specified proportions: the previous embedding squeezed the figures into fallback dimensions. The accepted figure files are unchanged; image count, aspect ratios and repeat-run stability were checked. The source count is 4,338 whitespace-delimited words including the abstract, declarations and captions but excluding bibliography entries; the abstract is 229 words. This is a preparation count, not a claim about the journal's exact counting convention.
+The strict manuscript checks passed, including 37 makedoc builder tests, manuscript/SI lint and citation checks. The revised manuscript and supplement were rebuilt as PDF and editable DOCX and visually inspected. The Word build now replaces embedded PDF figures with 300-dpi PNG copies at the source-specified proportions: the previous embedding squeezed the figures into fallback dimensions. The accepted figure files are unchanged; image count, aspect ratios and repeat-run stability were checked. The source count is 4,376 whitespace-delimited words including the abstract, declarations and captions but excluding bibliography entries; the abstract is 229 words. This is a preparation count, not a claim about the journal's exact counting convention.
 
 Read-only Python inspection of all 15 accepted RDS files checked 720,000 fitted rows, exact count matching at every treatment proportion, zero dropped dates, all full-treatment one-sided directional outcomes, random-retention direction recovery and the reported family-selection range. The two scoring methods agreed on family and direction in 119,698/120,000 selections (99.7483%, reported as 99.75%); direction alone agreed in 119,987/120,000. The stricter joint comparison is retained in the manuscript. All 38 signed-evidence and 17 empirical-manifest entries passed SHA-256 verification. No new R analysis or simulation was run.
 
