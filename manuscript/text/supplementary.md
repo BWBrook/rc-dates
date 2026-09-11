@@ -6,7 +6,7 @@
 
 AustArch is a continental radiocarbon and luminescence-age compilation for Australia [@williams2014AustArchDataset; @williams2014AustArchDatabase14C]. The source object is the Archaeology Data Service (ADS) collection 1661, DOI `10.5284/1027216`, file `Austarch_1-3_and_IDASQ_28Nov13-1.csv`. A fresh ADS download on 12 August 2026 contained 5,522 rows: 5,044 labelled `Radiocarbon` and 478 assigned to other dating methods. This reconciles the published count of 5,044 radiocarbon determinations with the larger deposited multi-method table.
 
-The project began from a working derivative of the same-named ADS file, introduced to the repository on 2 April 2025 and edited on 3 April 2025. It has SHA-256 `7e8e053389830e8ec56657feb1bbbfdd5dba5f9ed8bc13d7f0634f1aa66d28cb` and 5,288 rows after the header, of which 17 are blank; the 5,271 nonblank records include 4,828 radiocarbon determinations from 1,704 named radiocarbon sites. Relative to the current ADS file, this derivative omits 251 record identifiers and changes fields in 239 retained records, principally depth and coordinate fields. The historical rationale for every pre-analysis edit is not recoverable, so the derivative is not described as a pristine deposited release. This provenance issue does not alter the analysed reference: every one of its 976 record identifiers occurs in the ADS download, with matching conventional ages, errors, methods, laboratory codes and analysis-status fields; site, site-type and material labels differ only by replacement of spaces with underscores. The tracked 976-row reference has SHA-256 `2f1b5ccc40038f9e30bce643d57191c545c98448266fcaab3b11c9a33059c70a`.
+The analysis used a project working derivative rather than a pristine ADS release. Its pre-analysis edit history is incomplete, but all 976 analysed identifiers occur in the ADS download with matching conventional ages, errors, methods, laboratory codes and analysis-status fields; differences in site, site-type and material labels are confined to spaces replaced by underscores. The full source reconciliation, historical differences and checksums are documented in `data/AUSTARCH_PROVENANCE.md` in the review archive. These checks establish the provenance of the analysed reference, without resolving the rationale for every historical change to the larger working file.
 
 Initial screening retained conventional or accelerator-mass-spectrometry radiocarbon determinations with reported ages and one-sigma errors, removed records flagged as erroneous or unrelated to human activity, and restricted conventional ages to 500–20,000 14C yr BP. The resulting tracked reference contains 976 determinations from 116 sites, each with at least five dates.
 
@@ -41,7 +41,7 @@ $$
 D_{\mathrm{TV}}(p,q)=\frac{1}{2}\sum_t |p_t-q_t|,
 $$
 
-and all three between-method distances on the retained dates. The conservative ordering contrast was
+where $p_t$ and $q_t$ are normalised bin probability masses. We also calculated all three between-method distances on the retained dates. The conservative ordering contrast was
 
 $$
 C=\min_m D_{\mathrm{TV}}(p_{m,\mathrm{retained}},p_{m,\mathrm{all}})
@@ -50,25 +50,29 @@ $$
 
 A deterministic scenario passed the retention-versus-method gate when $C>0$; a stochastic scenario required the 2.5th percentile of $C$ to exceed zero. Temporal displacement was the change in mean cal BP, using bin midpoints. An older result required positive shifts for all methods (positive 2.5th percentiles when stochastic); a younger result required negative shifts (negative 97.5th percentiles).
 
-Only the three deterministic full-site boundary scenarios passed the ordering gate:
+The following full-site SPD comparisons show retention effects at a fixed retained count for oldest, youngest and random-1. Random-rule entries are means followed by central 95% ranges across 1,000 conditional retention realisations.
 
-| Rule | Retention $D_{\mathrm{TV}}$ across methods | Largest method $D_{\mathrm{TV}}$ | $C$ | Mean-cal-BP shift across methods |
-|---|---:|---:|---:|---:|
-| Oldest | 0.455–0.535 | 0.263 | +0.193 | +3,133 to +3,136 yr |
-| Youngest | 0.524–0.554 | 0.154 | +0.370 | -2,447 to -2,439 yr |
-| Bracketed | 0.279–0.326 | 0.195 | +0.084 | +344 to +352 yr |
+| Rule | Dates | SPD $D_{\mathrm{TV}}$ | SPD mean-cal-BP shift (yr) |
+|---|---:|---:|---:|
+| Oldest | 68 | 0.455 | +3,133 |
+| Youngest | 68 | 0.524 | −2,439 |
+| Random-1 | 68 | 0.204 (0.158–0.256) | +103 (−433 to +594) |
+| Bracketed | 136 | 0.279 | +352 |
+| Random-5 | 340 | 0.065 (0.052–0.080) | +95 (−37 to +227) |
 
-Neither half-site extremum, either random rule at either proportion, nor half-site bracketed retention passed. Pointwise 2.5th–97.5th percentile envelopes in Figure 2 therefore describe conditional retention realisations only; they are not confidence intervals over sites, archive inclusion, calibration uncertainty or population history.
+These are descriptive comparisons of the accepted outputs, not a new hypothesis test. The bracketed mean shift falls within the random-1 shift range, but its SPD distance exceeds the 97.5th percentile of random-1 distances. Moreover, random-1 retains half as many dates as bracketed retention; no empirical random-2 comparison was made.
+
+The prespecified retention-versus-method criterion is a separate comparison. Only all-site oldest, youngest and bracketed retention met it, with contrasts of +0.193, +0.370 and +0.084, respectively. Their method-specific distances were 0.455–0.535, 0.524–0.554 and 0.279–0.326; the largest between-method distances were 0.263, 0.154 and 0.195. Neither half-site extremum, either random rule at either proportion, nor half-site bracketed retention met the criterion. Figure 2 envelopes describe conditional retention realisations; they do not estimate uncertainty over sites, archive inclusion or population history.
 
 ### S1.4 Frozen sensitivity suite
 
 The nine configurations were prespecified for oldest and youngest retention. Before the bracketed extension was run, the same configurations and all-nine decision gate were frozen for that rule. The suite comprised calendar buffers of 0, 100 and 200 years; posterior-mass thresholds of 0.50, 0.80 and 0.95; reflected KDE bandwidths of 50, 100 and 200 years; an unreflected 100-year KDE; and the occupation-related `Y`-only subset. The configurations retained 496–576 dates from 62–73 sites, except the `Y`-only set, which retained 154 dates from 24 sites. Every configuration preserved a positive ordering contrast and older shift for oldest retention, and a positive contrast and younger shift for youngest retention. Bracketed retention shifted older in all nine configurations and had a positive ordering contrast in eight, ranging from +0.060 to +0.089; the `Y`-only contrast was -0.054. Oldest and youngest are therefore sensitivity-robust within this suite, whereas bracketed retention is reported as a primary-specification result.
 
-## S2. Signed simulation study
+## S2. Simulation of constant and changing histories
 
 ### S2.1 Empirical site-count and reported-error models
 
-Simulation parameterisation used the tracked 976-date, 116-site reference rather than the narrower display benchmark. The empirical number of dates per site had mean 8.414, median 7 and range 5–33. A negative-binomial distribution left-truncated at five dates was fitted by maximum likelihood. In the `fitdistrplus` parameterisation before conditioning, the estimates were `size = 0.0002577` and `mu = 0.001448`; after conditioning at five, the fitted mean was 8.412 (Supplementary Fig. S2). Each synthetic replicate drew 116 site counts from this distribution.
+Simulation parameterisation used the tracked 976-date, 116-site reference rather than the narrower display benchmark. The empirical number of dates per site had mean 8.414, median 7 and range 5–33. A negative-binomial distribution left-truncated at five dates was fitted by maximum likelihood. After conditioning at five, the fitted mean was 8.412 (Supplementary Fig. S2). The untruncated parameter estimates lie near the boundary: their conditional shape approaches a truncated logarithmic-series distribution with mass proportional to $q^k/k$ for $k\geq5$, where $q=0.8489$. This is a well-defined conditional count model used to reproduce the observed count shape; we attach no interpretation to the untruncated parameters, which are retained in the code and provenance records. Each synthetic replicate drew 116 site counts from this distribution.
 
 Reported uncertainty was modelled as
 
@@ -96,7 +100,7 @@ The primary observation model mapped each calendar age to the central convention
 
 Eight rules were evaluated: all dates; random-1, random-2, random-3 and random-5 without replacement; oldest and youngest by calibrated posterior median; and bracketed retention of both extrema. Each rule treated 50%, 75% or 100% of the 116 sites, with untreated sites retaining all dates. All counts were at least five, so every random rule was feasible. We generated 1,000 replicates for each of five truths at each of three proportions. Replicate $i$ used deterministic seed $1234+i$ under `L'Ecuyer-CMRG`, with common random numbers preserving paired comparisons. Random-2 was drawn on an isolated RNG state so that adding it could not change dates, errors, treated sites or any previously implemented rule.
 
-The accepted matrix comprises 15 scenario files, 15,000 complete data-generating replicates and 720,000 fitted-result rows. The all-dates result for a truth is exactly identical across the three treatment files.
+The accepted matrix comprises 15 scenario files, 1,000 replicates in each truth-by-proportion cell and 720,000 fitted-result rows. Replicates are paired across proportions: the all-dates result for a truth is exactly identical across the three treatment files. The 15,000 scenario-replicate combinations should therefore not be interpreted as independent simulated datasets. At full treatment, random-1, oldest and youngest each retain 116 dates; random-2 and bracketed retain 232, random-3 retains 348 and random-5 retains 580. Untreated sites retain all their dates, so a site-treatment proportion is not a retained-date proportion.
 
 ### S2.4 Model fitting and selection
 
@@ -114,9 +118,9 @@ $$
 
 Calibration used a uniform calendar-age prior. Each calibrated posterior was restricted to the strict interior of the 651–11,650 cal BP analysis window and renormalised before fitting. Conditional on posterior mass within this window, the first criterion is the observed-data marginal log likelihood up to a date-specific additive constant independent of $\theta$; these constants cancel in within-dataset AIC comparisons [@akaike1974NewLookStatistical; @timpson2021DirectlyModellingPopulation]. The second is the posterior expected log density; we applied the same parameter penalty as a scoring sensitivity but do not describe it as a marginal likelihood or its criterion as AIC. Integrals were finite sums on the calibrated calendar grids.
 
-Signed uniform, linear and exponential candidates were fitted by bounded numerical optimisation. Minimum AIC under $\ell^1$ supplied the primary selected family. For bracketed retention, the oldest and youngest observations retained from a site are dependent; the product criterion treats their posteriors under working independence. Bracketed AIC and family-selection results therefore describe this analysis workflow rather than likelihood support under a joint paired-order-statistic model. We recorded the signed state, generating-family selection, direction reversal, fitted generating-family $\theta$ and boundary frequency. Truth-consistent state means uniform selection under uniform truth and the correct direction under a non-uniform truth, irrespective of functional family. Central 95% ranges in Figure 4 are empirical replicate quantiles, not confidence intervals for a historical parameter.
+A uniform candidate and signed linear and exponential candidates were fitted by bounded numerical optimisation. Minimum AIC under $\ell^1$ supplied the primary selected family. The criterion assumes independent regional draws and does not include retention probabilities. For bracketed retention, the oldest and youngest observations retained from a site are dependent; the product criterion treats their posteriors under working independence. Bracketed AIC and family-selection results therefore describe this analysis workflow rather than likelihood support under a joint paired-order-statistic model. We recorded the signed state, generating-family selection, direction reversal, fitted generating-family $\theta$ and boundary frequency. Truth-consistent state means uniform selection under uniform truth and the correct direction under a non-uniform truth, irrespective of functional family. Central 95% ranges in Figure 4 are empirical replicate quantiles, not confidence intervals for a historical parameter.
 
-### S2.5 Primary signed results
+### S2.5 Direction and family selection
 
 The full-site results below report “family; state” percentages under the primary marginal likelihood. For uniform truth, state is uniform; for non-uniform truth, state is the correct direction. An adverse one-sided rule is oldest for increasing truths and youngest for decreasing truths.
 
@@ -128,11 +132,28 @@ The full-site results below report “family; state” percentages under the pri
 | Linear decrease | 97.4; 100 | 0.0; 100 | 16.8; 0.0 | 0.0; 100 |
 | Exponential decrease | 99.8; 100 | 100; 100 | 43.3; 0.0 | 100; 100 |
 
-Full oldest retention selected a decreasing signed state and full youngest retention an increasing state in every replicate under every truth. When the rule opposed a non-uniform truth, the directional-reversal rate was 1.000. Under uniform truth, oldest and youngest selected the corresponding exponential direction in all replicates. Concordant one-sided retention frequently drove fitted effects to their bounds. Under the working-independence criterion, bracketed retention preserved direction but selected exponential in every full-treatment linear-truth replicate.
+Full oldest retention selected a decreasing direction and full youngest retention an increasing direction in every replicate under every truth. When the rule opposed a non-uniform truth, the directional-reversal rate was 1.000. Under uniform truth, oldest and youngest selected the corresponding exponential direction in all replicates. Concordant one-sided retention frequently drove fitted effects to their bounds. Under the working-independence criterion, bracketed retention preserved direction but selected exponential in every full-treatment linear-truth replicate.
 
 The full-treatment reversal should not be extrapolated to partial treatment. At proportions 0.50 and 0.75, no non-uniform replicate selected the opposite direction under the adverse rule; at 0.75, uniform was instead selected in 18.1% of linear-increase and 21.2% of linear-decrease replicates. Uniform truth was affected sooner: half-site oldest and youngest retention selected a directional model in 97.3% and 97.9% of replicates.
 
-Across random-1, random-2, random-3 and random-5, all four non-uniform truths and all three treatment proportions, direction selection was 1.000. Generating-family selection ranged from 0.754 to 0.995 as information was discarded. The $\ell^1$ and $\ell^2$ analyses agreed on the selected signed state in 99.75% of 120,000 paired selections, including all deterministic headline cells.
+Across random-1, random-2, random-3 and random-5, all four non-uniform truths and all three treatment proportions, direction selection was 1.000. Generating-family selection ranged from 0.754 to 0.995 as information was discarded. The $\ell^1$ and $\ell^2$ analyses agreed on the selected family-and-direction combination in 99.75% of 120,000 paired selections, including all full-treatment one-sided cells.
+
+### S2.6 Order statistics and the limits of model selection
+
+For an idealised site containing $n$ independent, exactly observed calendar ages with density $f(x)$ and cumulative distribution $F(x)$, the maximum (oldest cal-BP age) has cumulative distribution $F(x)^n$, because every age must be at most $x$. The minimum has cumulative distribution $1-\{1-F(x)\}^n$. Differentiating gives
+
+$$
+g_{\mathrm{old}}(x)=nF(x)^{n-1}f(x),\qquad
+g_{\mathrm{young}}(x)=n\{1-F(x)\}^{n-1}f(x).
+$$
+
+The pooled marginal density of bracketed dates is $\{g_{\mathrm{old}}(x)+g_{\mathrm{young}}(x)\}/2$. For uniform ages on $[a,b]$, writing $u=(x-a)/(b-a)$ gives
+
+$$
+g_{\mathrm{bracket}}(x)=\frac{n}{2(b-a)}\left[u^{n-1}+(1-u)^{n-1}\right].
+$$
+
+This density is exactly uniform for $n=2$, when both observations are retained, and symmetric and U-shaped for every $n\geq3$. All site counts used here satisfy $n\geq5$, and mixing over these counts preserves symmetry and the U-shape. The fitted uniform, linear and exponential families cannot represent this shape. Thus, selecting uniform under bracketed uniform truth need not indicate that the retained age distribution is uniform: it may indicate only that neither monotonic alternative fits better after the parameter penalty. Similarly, generating-family selection under non-uniform truth is a comparison within the candidate set, not an absolute goodness-of-fit test. These formulae describe exact-age selection. The simulation instead selects extrema by calibrated posterior median and fits their full posteriors; the formulae explain the mechanism without replacing that observation model or its empirical results.
 
 ## S3. Earlier realised-observation-noise sensitivity
 
@@ -148,23 +169,23 @@ where `ccError` is SHCal20 curve error and $\sigma_{\mathrm{quoted}}$ is the sim
 
 This earlier analysis also recorded unique generating-family selection under a prespecified parsimony rule. Models whose total criterion difference from the minimum did not exceed the estimated standard error of their pointwise differences were treated as similarly supported, after which only the lowest-dimensional supported model or models were retained. A replicate counted as unique support only when the generating family alone remained. This outcome is retained for audit continuity but is not used for the signed headline.
 
-The prespecified v1 screen used 5,000 paired cluster-bootstrap resamples and simultaneous 95% max-deviation intervals over marginal arms and paired differences. It passed 15 of 18 gates and therefore remains **FAIL**. Observed accuracy differences ranged from -0.015 to +0.008 and unique-support differences from -0.019 to +0.009. The pooled v1 maximum absolute endpoints were 0.0373 for accuracy and 0.049 for support against 0.03 margins; truth-specific endpoints were 0.047 and 0.063 against 0.05 margins. None of 72 realised-minus-mean boundary-rate differences was positive, but the symmetric simultaneous upper endpoint was 0.019 against a threshold below 0.01.
+The prespecified v1 screen used 5,000 paired cluster-bootstrap resamples and simultaneous 95% max-deviation intervals over marginal arms and paired differences. It met 15 of 18 prespecified criteria and therefore is not treated as passed. Observed accuracy differences ranged from -0.015 to +0.008 and unique-support differences from -0.019 to +0.009. The pooled v1 maximum absolute endpoints were 0.0373 for accuracy and 0.049 for support against 0.03 margins; truth-specific endpoints were 0.047 and 0.063 against 0.05 margins. None of 72 realised-minus-mean boundary-rate differences was positive, but the symmetric simultaneous upper endpoint was 0.019 against a threshold below 0.01.
 
-After v1 was inspected, an explicitly post-unblinding v2 diagnostic recalibrated intervals over only the paired-difference estimands implicated by those failures. Its pooled/truth-specific endpoints were 0.0203/0.030 for accuracy, 0.024/0.038 for unique support and 0.008/0.008 for the one-sided boundary metric, within the respective 0.03, 0.05 and 0.01 margins. Two independent 50,000-resample seeds gave identical critical widths, endpoints and decisions. v2 supports describing the tested point shifts as small; it neither replaces the v1 failure nor validates the untested one-sided rules. No 2,000-pair extension was run.
+After that assessment was inspected, a post-unblinding diagnostic (labelled v2 in the archive) recalibrated intervals over only the paired-difference estimands implicated by those failures. Its pooled/truth-specific endpoints were 0.0203/0.030 for accuracy, 0.024/0.038 for unique support and 0.008/0.008 for the one-sided boundary metric, within the respective 0.03, 0.05 and 0.01 margins. Two independent 50,000-resample seeds gave identical critical widths, endpoints and decisions. The diagnostic supports describing the tested point shifts as small. It neither replaces the failed prespecified assessment nor validates the untested oldest, youngest and bracketed rules.
 
 ## S4. Reproducibility and archive status
 
-All accepted empirical and signed-simulation evidence was generated under R 4.5.3 in one digest-recorded container image. The signed simulation has one metadata record per scenario, exact common-random-number checks, and SHA-256 manifests covering raw checkpoints and machine-readable summaries. The empirical evidence similarly records filters, effective counts, curve distances, tie resolution, sensitivity decisions, figures, source fingerprints and checksums. Fast verification separates execution from artefact integrity: `make test` runs the consequential scientific tests, while each evidence directory's `SHA256SUMS` file is checked separately with `sha256sum --check --strict SHA256SUMS`. Optional high-volume reruns use the documented container and resumable atomic checkpoints.
+The accepted empirical and simulation evidence was generated under R 4.5.3 in a recorded container image. Scenario metadata, deterministic seeds and checksums connect the results to their generation sources. The empirical records document filters, effective counts, curve distances, tie resolution and sensitivity decisions. Scientific tests protect density calculations, retention, stochastic pairing and manuscript-facing transformations; separate checksum checks verify artefact integrity. The archive README gives the commands for these checks and for resumable reruns.
 
 The author-anonymized supplementary review archive contains the active code, pinned environment, focused tests, synthetic simulation artefacts, aggregate empirical evidence and provenance snapshots. It excludes raw and record-level AustArch data, including source site identities, coordinates, laboratory identifiers and human-remains records. A citable repository record containing code, synthetic artefacts and permitted aggregate evidence will be made public no later than publication. Any release of source or record-level archaeological data remains conditional on licensing, sensitive-location review and Indigenous data-governance requirements.
 
 ## Supplementary Figures
 
-### Signed data-generating densities
+### Data-generating densities
 
 ![](../figures/SI_data_generating_distributions.png){#fig-si-s1 width=95%}
 
-**Supplementary Figure S1.** The five unit-normalised regional event-age densities used in the signed simulation. Increasing trajectories have greater density at the recent (low-cal-BP) boundary; decreasing trajectories have greater density at the old boundary. Each non-uniform trajectory has a ten-fold end-to-end ratio, $|\theta|=\log(10)$, over 651–11,650 cal BP. Colour and line type jointly identify the truth.
+**Supplementary Figure S1.** The five unit-normalised regional event-age densities used in the simulation. Increasing trajectories have greater density at the recent (low-cal-BP) boundary; decreasing trajectories have greater density at the old boundary. Each non-uniform trajectory has a ten-fold end-to-end ratio, $|\theta|=\log(10)$, over 651–11,650 cal BP. Colour and line type jointly identify the truth.
 
 ### Empirical dates-per-site model
 

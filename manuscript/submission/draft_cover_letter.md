@@ -1,28 +1,23 @@
-12 August 2026
+*Draft for co-author review — 10 September 2026. Update the date, confirm declarations and record all authors' approval before submission.*
 
 Editors-in-Chief\
 *Journal of Archaeological Science*
 
-Dear Professors Martinón-Torres and Nikita,
+Dear Editors,
 
-I am pleased to submit our manuscript, *Within-site date-retention rules can distort radiocarbon “dates-as-data” inference*, for consideration as a Research Article in the *Journal of Archaeological Science*.
+Please consider our manuscript, *Within-site date-retention rules can distort radiocarbon “dates-as-data” inference*, as a Research Article in the *Journal of Archaeological Science*.
 
-Radiocarbon dates-as-data methods inherit a consequential but rarely quantified decision: which completed determinations each archaeological site contributes to a regional dataset. Our study isolates this dataset-formation mechanism without treating post hoc retention as prospective field sampling or its extrema as site histories.
+Regional radiocarbon analyses inherit decisions about which dates each archaeological site contributes. Our AustArch benchmark and controlled simulations show that retaining each site's oldest or youngest date can manufacture a temporal trend from a constant history or reverse an opposing trend. Comparing these rules with random retention at the same date count separates age-based selection from sample size.
 
-In a common-membership benchmark of 540 terrestrial charcoal or wood determinations from 68 well-replicated AustArch sites, full-site oldest and youngest retention changed temporal shape more than the remaining differences among SPD, FD and KDE summaries across all nine sensitivity configurations. Full-site bracketed retention passed this gate under the primary specification but not the `Y`-only sensitivity. We then fitted signed regional event-age-density models directly to calibrated posteriors from controlled simulations. Under full treatment, oldest retention selected a decreasing direction and youngest retention an increasing direction under every truth: the opposing rule reversed every simulated ten-fold non-uniform truth, and either one-sided rule manufactured a trend under uniform truth. Random retention preserved direction under the simulated ten-fold monotonic truths, although sparse retention weakened linear-versus-exponential family recovery.
+The paper fits the journal's archaeological-methods remit by quantifying a dataset-formation problem that precedes the choice of radiocarbon summary or population model. It offers a practical response: document site contributions and assess whether conclusions survive plausible alternative retention rules. The experiment isolates post hoc selection among completed determinations; it does not model occupation histories or prospective context selection.
 
-The manuscript is deliberately bounded. The simulations use exchangeable regional ages, a ten-fold monotonic signal and a calibration-curve-mean observation model; they do not include occupation histories, stratigraphy or prospective context selection. An earlier realised-observation-noise screen remains transparently failed under its original prespecified gate and did not test the one-sided rules. We therefore recommend auditable site contributions and sensitivity analysis, not a universal minimum number of dates or a field protocol.
+An author-anonymized code and evidence archive accompanies the manuscript so reviewers can inspect the accepted analyses. It excludes raw and record-level AustArch data. A citable repository record containing permitted materials will be released no later than publication, with archaeological source data governed separately.
 
-We believe this combination of archaeological database analysis, formal radiocarbon modelling and a clearly identified inferential failure mode is well matched to the methodological scope of the *Journal of Archaeological Science*.
-
-The manuscript is original, is not under consideration elsewhere, has been approved by all authors and has no conflicts of interest. An author-anonymized code and evidence archive is supplied as supplementary review material; it contains code, aggregate empirical evidence and accepted synthetic artefacts but no raw or record-level AustArch data. A citable repository record containing the permitted materials will be made public no later than publication. Release of source archaeological records remains subject to source licensing, sensitive-location review and Indigenous data-governance requirements.
-
-Thank you for considering the manuscript for publication in the *Journal of Archaeological Science*.
+Thank you for considering the manuscript.
 
 Yours sincerely,
 
 *Barry W. Brook*, on behalf of all authors\
-School of Natural Sciences\
-University of Tasmania\
+School of Natural Sciences, University of Tasmania\
 Hobart, Australia\
 Email: barry.brook@utas.edu.au

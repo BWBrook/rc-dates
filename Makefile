@@ -104,12 +104,14 @@ manuscript-profile: makedoc-preflight
 submission-build: manuscript-build
 	@command -v pandoc >/dev/null || { echo "Missing pandoc"; exit 1; }
 	@command -v xelatex >/dev/null || { echo "Missing xelatex"; exit 1; }
+	@command -v pdftoppm >/dev/null || { echo "Missing pdftoppm for DOCX figure conversion"; exit 1; }
 	@mkdir -p "$(SUBMISSION_DIST)"
 	@test -f "$(MAKEDOC_OUTPUT_DIR)/manuscript.pdf" || { echo "Missing makedoc PDF"; exit 1; }
 	@test -f "$(MAKEDOC_OUTPUT_DIR)/manuscript.docx" || { echo "Missing makedoc DOCX"; exit 1; }
 	cp "$(MAKEDOC_OUTPUT_DIR)/manuscript.pdf" "$(SUBMISSION_DIST)/manuscript.pdf"
 	cp "$(MAKEDOC_OUTPUT_DIR)/manuscript.docx" "$(SUBMISSION_DIST)/manuscript.docx"
 	python3 scripts/normalize_docx_page_breaks.py "$(SUBMISSION_DIST)/manuscript.docx"
+	python3 scripts/normalize_docx_figures.py "$(SUBMISSION_DIST)/manuscript.docx" manuscript/text/figures.md
 	pandoc manuscript/submission/draft_cover_letter.md --standalone --pdf-engine=xelatex \
 		-V mainfont="DejaVu Serif" -V papersize=a4 -V geometry:margin=2.5cm \
 		-o "$(SUBMISSION_DIST)/cover_letter.pdf"

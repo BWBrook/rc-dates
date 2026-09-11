@@ -20,4 +20,9 @@ This research was supported by the ARC Centre of Excellence for Australian Biodi
 
 ## Author contributions
 
-CRediT author statement: B.W.B.: Conceptualization, Methodology, Software, Formal analysis, Visualization, Writing – original draft, Writing – review and editing, Project administration. R.W.: Conceptualization, Data curation, Writing – review and editing. C.N.J.: Conceptualization, Writing – review and editing. A.N.W.: Conceptualization, Resources, Writing – review and editing. S.U.: Conceptualization, Resources, Writing – review and editing. L.A.Y.: Methodology, Software, Formal analysis, Visualization, Writing – review and editing. All authors approved the submitted version and agree to be accountable for the content.
+CRediT author statement: B.W.B.: Conceptualization, Methodology, Software, Formal analysis, Visualization, Writing – original draft, Writing – review and editing, Project administration. R.W.: Conceptualization, Data curation, Writing – review and editing. C.N.J.: Conceptualization, Writing – review and editing. A.N.W.: Conceptualization, Resources, Writing – review and editing. S.U.: Conceptualization, Resources, Writing – review and editing. L.A.Y.: Methodology, Software, Formal analysis, Visualization, Writing – review and editing.
+
+
+## Co-author review status
+
+Draft prepared for co-author review on 10 September 2026. Author order, affiliations, funding, contributions and declarations await confirmation; approval of the final version will be recorded before submission.

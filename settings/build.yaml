@@ -2,13 +2,14 @@ default_profile: default
 
 profiles:
   default:
-    description: Double-anonymized JAS manuscript profile using converted artefacts.
+    description: Anonymous JAS manuscript; separate title page supports co-author review.
     manuscript_sources:
       - ../manuscript/text/main.md
       - ../manuscript/text/figures.md
     lint_sources:
       - ../manuscript/text/main.md
       - ../manuscript/text/figures.md
+      - ../manuscript/text/supplementary.md
     bibliography: ../references/refs.yaml
     csl: ../csl/journal-of-archaeological-science.csl
     journal: Journal of Archaeological Science
