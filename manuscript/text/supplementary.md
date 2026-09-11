@@ -8,7 +8,7 @@ AustArch is a continental radiocarbon and luminescence-age compilation for Austr
 
 The analysis used a project working derivative rather than a pristine ADS release. Its pre-analysis edit history is incomplete, but all 976 analysed identifiers occur in the ADS download with matching conventional ages, errors, methods, laboratory codes and analysis-status fields; differences in site, site-type and material labels are confined to spaces replaced by underscores. The full source reconciliation, historical differences and checksums are documented in `data/AUSTARCH_PROVENANCE.md` in the review archive. These checks establish the provenance of the analysed reference, without resolving the rationale for every historical change to the larger working file.
 
-Initial screening retained conventional or accelerator-mass-spectrometry radiocarbon determinations with reported ages and one-sigma errors, removed records flagged as erroneous or unrelated to human activity, and restricted conventional ages to 500–20,000 14C yr BP. The resulting tracked reference contains 976 determinations from 116 sites, each with at least five dates.
+Initial screening retained conventional or accelerator-mass-spectrometry radiocarbon determinations with reported ages and one-sigma errors, removed records flagged as erroneous or unrelated to human activity, and restricted conventional ages to 500–20,000 14C yr BP. The resulting filtered reference set contains 976 determinations from 116 sites, each with at least five dates.
 
 The primary empirical display analysis then applied a narrower, prespecified common-membership filter. We retained records classified as terrestrial whose material was `Charcoal`, `Charcoal_from_hearth`, `Scattered_charcoal`, `Wood_charcoal`, `Carbonised_wood`, `Burnt_wood`, `Charred_wood` or `Wood`. Shell determinations were excluded because appropriate local reservoir corrections were unavailable, and human bone was excluded because dietary reservoir effects and data-governance considerations require separate treatment. Records coded `Y` (occupation-related) or `U` (uncertain) were retained. All were calibrated with SHCal20 [@hogg2020SHCal20SouthernHemisphere].
 
@@ -16,7 +16,7 @@ For each posterior, we recorded its median, weighted mean and probability mass w
 
 | Filter stage | Dates | Sites |
 |---|---:|---:|
-| Tracked filtered reference | 976 | 116 |
+| Filtered reference set | 976 | 116 |
 | Terrestrial charcoal or wood | 737 | 106 |
 | Common calendar membership | 645 | 106 |
 | At least five eligible dates per site | 540 | 68 |
@@ -72,7 +72,7 @@ The nine configurations were prespecified for oldest and youngest retention. Bef
 
 ### S2.1 Empirical site-count and reported-error models
 
-Simulation parameterisation used the tracked 976-date, 116-site reference rather than the narrower display benchmark. The empirical number of dates per site had mean 8.414, median 7 and range 5–33. A negative-binomial distribution left-truncated at five dates was fitted by maximum likelihood. After conditioning at five, the fitted mean was 8.412 (Supplementary Fig. S2). The untruncated parameter estimates lie near the boundary: their conditional shape approaches a truncated logarithmic-series distribution with mass proportional to $q^k/k$ for $k\geq5$, where $q=0.8489$. This is a well-defined conditional count model used to reproduce the observed count shape; we attach no interpretation to the untruncated parameters, which are retained in the code and provenance records. Each synthetic replicate drew 116 site counts from this distribution.
+Simulation parameterisation used the 976-date, 116-site reference set rather than the narrower display benchmark. The empirical number of dates per site had mean 8.414, median 7 and range 5–33. A negative-binomial distribution left-truncated at five dates was fitted by maximum likelihood. After conditioning at five, the fitted mean was 8.412 (Supplementary Fig. S2). The untruncated parameter estimates lie near the boundary: their conditional shape approaches a truncated logarithmic-series distribution with mass proportional to $q^k/k$ for $k\geq5$, where $q=0.8489$. This is a well-defined conditional count model used to reproduce the observed count shape; we attach no interpretation to the untruncated parameters, which are retained in the code and provenance records. Each synthetic replicate drew 116 site counts from this distribution.
 
 Reported uncertainty was modelled as
 
@@ -118,7 +118,7 @@ $$
 
 Calibration used a uniform calendar-age prior. Each calibrated posterior was restricted to the strict interior of the 651–11,650 cal BP analysis window and renormalised before fitting. Conditional on posterior mass within this window, the first criterion is the observed-data marginal log likelihood up to a date-specific additive constant independent of $\theta$; these constants cancel in within-dataset AIC comparisons [@akaike1974NewLookStatistical; @timpson2021DirectlyModellingPopulation]. The second is the posterior expected log density; we applied the same parameter penalty as a scoring sensitivity but do not describe it as a marginal likelihood or its criterion as AIC. Integrals were finite sums on the calibrated calendar grids.
 
-A uniform candidate and signed linear and exponential candidates were fitted by bounded numerical optimisation. Minimum AIC under $\ell^1$ supplied the primary selected family. The criterion assumes independent regional draws and does not include retention probabilities. For bracketed retention, the oldest and youngest observations retained from a site are dependent; the product criterion treats their posteriors under working independence. Bracketed AIC and family-selection results therefore describe this analysis workflow rather than likelihood support under a joint paired-order-statistic model. We recorded the signed state, generating-family selection, direction reversal, fitted generating-family $\theta$ and boundary frequency. Truth-consistent state means uniform selection under uniform truth and the correct direction under a non-uniform truth, irrespective of functional family. Central 95% ranges in Figure 4 are empirical replicate quantiles, not confidence intervals for a historical parameter.
+A uniform candidate and linear and exponential candidates of either direction were fitted by bounded numerical optimisation. Minimum AIC under $\ell^1$ supplied the primary selected family. The criterion assumes independent regional draws and does not include retention probabilities. For bracketed retention, the oldest and youngest observations retained from a site are dependent; the product criterion treats their posteriors under working independence. Bracketed AIC and family-selection results therefore describe this analysis workflow rather than likelihood support under a joint paired-order-statistic model. We recorded the selected direction state (uniform, increasing or decreasing), generating-family selection, direction reversal, fitted generating-family $\theta$ and boundary frequency. Truth-consistent state means uniform selection under uniform truth and the correct direction under a non-uniform truth, irrespective of functional family. Central 95% ranges in Figure 4 are empirical replicate quantiles, not confidence intervals for a historical parameter.
 
 ### S2.5 Direction and family selection
 
@@ -157,7 +157,7 @@ This density is exactly uniform for $n=2$, when both observations are retained, 
 
 ## S3. Earlier realised-observation-noise sensitivity
 
-The signed revision retained, but did not extend, an earlier paired sensitivity based on uniform, linear-increase and exponential-increase truths. It covered all dates, random-1, random-3 and random-5 at the three treatment proportions, with 1,000 pairs per truth-by-proportion cell. Each pair shared the latent ages, site treatment, retained observations and structural random-number state. In the realised arm,
+The current analysis retained, but did not extend, an earlier paired sensitivity based on uniform, linear-increase and exponential-increase truths. It covered all dates, random-1, random-3 and random-5 at the three treatment proportions, with 1,000 pairs per truth-by-proportion cell. Each pair shared the latent ages, site treatment, retained observations and structural random-number state. In the realised arm,
 
 $$
 r_{\mathrm{CRA}}=\operatorname{round}\!\left[
@@ -167,7 +167,7 @@ $$
 
 where `ccError` is SHCal20 curve error and $\sigma_{\mathrm{quoted}}$ is the simulated laboratory error. Realised ages were recalibrated. Observations with zero posterior mass inside the strict likelihood window were dropped and recorded. Oldest, youngest and bracketed retention were not included.
 
-This earlier analysis also recorded unique generating-family selection under a prespecified parsimony rule. Models whose total criterion difference from the minimum did not exceed the estimated standard error of their pointwise differences were treated as similarly supported, after which only the lowest-dimensional supported model or models were retained. A replicate counted as unique support only when the generating family alone remained. This outcome is retained for audit continuity but is not used for the signed headline.
+This earlier analysis also recorded unique generating-family selection under a prespecified parsimony rule. Models whose total criterion difference from the minimum did not exceed the estimated standard error of their pointwise differences were treated as similarly supported, after which only the lowest-dimensional supported model or models were retained. A replicate counted as unique support only when the generating family alone remained. This outcome is retained for audit continuity but is not used for the main results.
 
 The prespecified v1 screen used 5,000 paired cluster-bootstrap resamples and simultaneous 95% max-deviation intervals over marginal arms and paired differences. It met 15 of 18 prespecified criteria and therefore is not treated as passed. Observed accuracy differences ranged from -0.015 to +0.008 and unique-support differences from -0.019 to +0.009. The pooled v1 maximum absolute endpoints were 0.0373 for accuracy and 0.049 for support against 0.03 margins; truth-specific endpoints were 0.047 and 0.063 against 0.05 margins. None of 72 realised-minus-mean boundary-rate differences was positive, but the symmetric simultaneous upper endpoint was 0.019 against a threshold below 0.01.
 
@@ -191,7 +191,7 @@ The author-anonymized supplementary review archive contains the active code, pin
 
 ![](../figures/SI_dates_per_site_in_austarch_holocene.png){#fig-si-s2 width=75%}
 
-**Supplementary Figure S2.** Empirical and fitted distribution of radiocarbon determinations per site in the tracked 976-date, 116-site reference. Points show the observed frequency; the line is the fitted negative-binomial distribution left-truncated at five dates. The empirical and fitted conditional means are 8.414 and 8.412 dates per site, respectively; the empirical range is 5–33.
+**Supplementary Figure S2.** Empirical and fitted distribution of radiocarbon determinations per site in the 976-date, 116-site reference set. Points show the observed frequency; the line is the fitted negative-binomial distribution left-truncated at five dates. The empirical and fitted conditional means are 8.414 and 8.412 dates per site, respectively; the empirical range is 5–33.
 
 ## References
 

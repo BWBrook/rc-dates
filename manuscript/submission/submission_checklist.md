@@ -13,7 +13,8 @@ Official sources: [JAS Guide for Authors](https://www.sciencedirect.com/journal/
 - [x] Five editable highlights are each within the journal's 85-character limit.
 - [x] Seven keywords satisfy the guide's 3–7 keyword range.
 - [x] Main manuscript contains five source-controlled figures; Supplementary Information contains two.
-- [x] Manuscript-preparation AI use is declared before the references, and research-method use is disclosed in Methods.
+- [x] AI assistance with analysis development and manuscript preparation is disclosed together before the references, following Barry’s requested placement; rerunning the analyses requires no AI tools or prompts.
+- [ ] At submission, reconcile this placement with Elsevier’s Methods disclosure wording for research-process and data-visualisation assistance; the use itself is fully disclosed.
 - [x] The data-availability statement contains no unresolved repository placeholders; the author-anonymized archive is supplied as review material.
 
 ## Scientific reconciliation
