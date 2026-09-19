@@ -38,8 +38,10 @@ make production-figures
 
 The first command reconstructs empirical Figures 1-2 and the associated audit summaries from the
 source data. The second independently validates the accepted production artefacts before rebuilding
-Figures 3-5. It can use the immutable 2026-07-10 source snapshot when the active simulation code has
-subsequently changed.
+Figures 3-5. Figure 4 uses a bounded endpoint-density contrast derived from each
+accepted fit; its new summary is stored separately in
+`out/revision/endpoint-contrast-20260919/`. The correction and acceptance checks
+are recorded in [docs/FIGURE4_BOUNDARY_REVISION_20260919.md](docs/FIGURE4_BOUNDARY_REVISION_20260919.md).
 
 The accepted Stage 2 signed-model audit remains outside the fast gate:
 

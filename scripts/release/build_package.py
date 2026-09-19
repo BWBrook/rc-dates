@@ -9,16 +9,18 @@ import subprocess
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[2]
-NAME = 'rc-dates-scientific-reproducibility-2026-09-11'
+NAME = 'rc-dates-scientific-reproducibility-2026-09-19'
 TREES = ('R', 'tests', 'out/empirical-sampling', 'out/revision/signed-models',
          'out/sensitivity/observation-noise', 'provenance/observation-noise-20260726',
+         'out/revision/endpoint-contrast-20260919',
          'release/inputs', 'release/historical', 'manuscript/figures')
 FILES = ('renv.lock', 'renv/activate.R', 'renv/settings.json',
          'scripts/source_population_simulation.R',
          'scripts/render_manuscript_methods_figures.R',
          'scripts/render_population_simulation_figures.R',
          'manuscript/text/main.md', 'manuscript/text/supplementary.md', 'manuscript/text/figures.md',
-         'docs/STAGE3_EMPIRICAL_REPAIR.md', 'release/claims.csv', 'references/refs.yaml')
+         'docs/STAGE3_EMPIRICAL_REPAIR.md', 'docs/FIGURE4_BOUNDARY_REVISION_20260919.md',
+         'release/claims.csv', 'references/refs.yaml')
 SCRIPTS = ('common.R', 'simulation_specification.R', 'rerun_simulations.R',
            'export_simulation_specification.R',
            'rebuild_signed_summaries.R', 'rebuild_noise_summaries.R',
@@ -71,7 +73,7 @@ def main():
         shutil.copyfile(path, dest)
     (target / '.gitignore').write_text('data/\ndata-raw/\nout/reproduced/\nout/rerun/\nrenv/library/\nrenv/staging/\nrenv/sandbox/\n.Rhistory\n.RData\n')
     commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
-    info = {'name': NAME, 'date': '2026-09-11', 'source_commit': commit, 'source_working_tree_dirty': dirty,
+    info = {'name': NAME, 'date': '2026-09-19', 'source_commit': commit, 'source_working_tree_dirty': dirty,
             'source_commit_is_exact': not dirty,
             'copied_source_files': len(sources), 'distributed_files': len(sources) + 3,
             'r_version': '4.5.3',
@@ -85,7 +87,7 @@ def main():
         raise SystemExit(f'Refusing to overwrite existing ZIP: {archive}')
     with zipfile.ZipFile(archive, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as zipped:
         for path in sorted(p for p in target.rglob('*') if p.is_file()):
-            entry = zipfile.ZipInfo(f'{NAME}/{path.relative_to(target).as_posix()}', (2026, 9, 11, 0, 0, 0))
+            entry = zipfile.ZipInfo(f'{NAME}/{path.relative_to(target).as_posix()}', (2026, 9, 19, 0, 0, 0))
             entry.compress_type = zipfile.ZIP_DEFLATED
             entry.external_attr = 0o100644 << 16
             zipped.writestr(entry, path.read_bytes())

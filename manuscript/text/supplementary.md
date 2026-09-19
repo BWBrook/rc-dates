@@ -118,7 +118,11 @@ $$
 
 Calibration used a uniform calendar-age prior. Each calibrated posterior was restricted to the strict interior of the 651–11,650 cal BP analysis window and renormalised before fitting. Conditional on posterior mass within this window, the first criterion is the observed-data marginal log likelihood up to a date-specific additive constant independent of $\theta$; these constants cancel in within-dataset AIC comparisons [@akaike1974NewLookStatistical; @timpson2021DirectlyModellingPopulation]. The second is the posterior expected log density; we applied the same parameter penalty as a scoring sensitivity but do not describe it as a marginal likelihood or its criterion as AIC. Integrals were finite sums on the calibrated calendar grids.
 
-A uniform candidate and linear and exponential candidates of either direction were fitted by bounded numerical optimisation. Minimum AIC under $\ell^1$ supplied the primary selected family. The criterion assumes independent regional draws and does not include retention probabilities. For bracketed retention, the oldest and youngest observations retained from a site are dependent; the product criterion treats their posteriors under working independence. Bracketed AIC and family-selection results therefore describe this analysis workflow rather than likelihood support under a joint paired-order-statistic model. We recorded the selected direction state (uniform, increasing or decreasing), generating-family selection, direction reversal, fitted generating-family $\theta$ and boundary frequency. Truth-consistent state means uniform selection under uniform truth and the correct direction under a non-uniform truth, irrespective of functional family. Central 95% ranges in Figure 4 are empirical replicate quantiles, not confidence intervals for a historical parameter.
+A uniform candidate and linear and exponential candidates of either direction were fitted by bounded numerical optimisation. With $L=11650-651=10999$ years, the linear slope $a$ lies in $[-2/L^2,2/L^2]$, its natural nonnegative-density domain. The exponential rate $r$ is restricted to $[-0.001,0.001]$ $\mathrm{yr}^{-1}$, an imposed finite cap. Optimisation used tolerance $10^{-6}$ on the scaled parameters $10^6a$ and $10^3r$. The original near-boundary flag means that the scaled estimate is within $5\times10^{-6}$ of either bound; it does not certify an exact endpoint optimum.
+
+Minimum AIC under $\ell^1$ supplied the primary selected family. The criterion assumes independent regional draws and does not include retention probabilities. For bracketed retention, the oldest and youngest observations retained from a site are dependent; the product criterion treats their posteriors under working independence. Bracketed AIC and family-selection results therefore describe this analysis workflow rather than likelihood support under a joint paired-order-statistic model. We recorded the selected direction state (uniform, increasing or decreasing), generating-family selection, direction reversal, fitted generating-family $\theta$ and boundary frequency. Truth-consistent state means uniform selection under uniform truth and the correct direction under a non-uniform truth, irrespective of functional family.
+
+Figure 4 summarises the bounded endpoint contrast $c=\tanh(\theta/2)$, which equals $aL^2/2$ for linear fits and $\tanh(rL/2)$ for exponential fits. At the natural linear endpoints, $c=\pm1$ while $\theta=\pm\infty$; at the exponential cap, $|\theta|=10.999$ and $|c|=\tanh(10.999/2)<1$. The figure transforms each stored generating-family fit regardless of which family AIC selected, then calculates the mean and type-7 2.5th and 97.5th percentiles across all 1,000 replicates. These are empirical replicate ranges, not confidence intervals for a historical parameter. Fractions beside every group retain the original near-boundary flags. This derived presentation preserves the original fits and model-selection results without reclassifying any fit as an exact boundary optimum.
 
 ### S2.5 Direction and family selection
 
@@ -157,7 +161,7 @@ This density is exactly uniform for $n=2$, when both observations are retained, 
 
 ## S3. Earlier realised-observation-noise sensitivity
 
-The current analysis retained, but did not extend, an earlier paired sensitivity based on uniform, linear-increase and exponential-increase truths. It covered all dates, random-1, random-3 and random-5 at the three treatment proportions, with 1,000 pairs per truth-by-proportion cell. Each pair shared the latent ages, site treatment, retained observations and structural random-number state. In the realised arm,
+The current analysis retained, but did not extend, an earlier paired sensitivity based on uniform, linear-increase and exponential-increase truths. Its candidate set comprised uniform and growth-only linear and exponential models; it did not include the decreasing linear and exponential candidates used in the current signed competition. Historical “accuracy” therefore means selection of the generating family within that restricted candidate set. The sensitivity covered all dates, random-1, random-3 and random-5 at the three treatment proportions, with 1,000 pairs per truth-by-proportion cell. Each pair shared the latent ages, site treatment, retained observations and structural random-number state. In the realised arm,
 
 $$
 r_{\mathrm{CRA}}=\operatorname{round}\!\left[
@@ -186,6 +190,8 @@ The named scientific reproducibility archive contains the active code, pinned en
 ![](../figures/SI_data_generating_distributions.png){#fig-si-s1 width=95%}
 
 **Supplementary Figure S1.** The five unit-normalised regional event-age densities used in the simulation. Increasing trajectories have greater density at the recent (low-cal-BP) boundary; decreasing trajectories have greater density at the old boundary. Each non-uniform trajectory has a ten-fold end-to-end ratio, $|\theta|=\log(10)$, over 651–11,650 cal BP. Colour and line type jointly identify the truth.
+
+\newpage
 
 ### Empirical dates-per-site model
 

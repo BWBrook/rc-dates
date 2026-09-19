@@ -168,28 +168,60 @@ prepare_manuscript_signed_performance <- function(performance, type = "l1") {
   out
 }
 
-#' Prepare common-scale fitted effects for manuscript Figure 4
-#' @param bias Parsed `log_ratio_bias.csv` table.
-#' @param type Primary score identifier.
-#' @param proportion Site-treatment proportion shown in the figure.
-#' @return Validated and labelled 32-row effect summary.
-prepare_manuscript_theta_panel <- function(bias, type = "l1", proportion = 1) {
-  required <- c(
-    "type", "true", "true_family", "true_direction", "true_log_ratio",
-    "prop", "strategy", "n", "mean_estimate_log_ratio", "mean_bias_log_ratio",
-    "bias_q025", "bias_q975", "boundary_rate"
-  )
-  if (!is.data.frame(bias) || !all(required %in% names(bias))) {
+#' Convert an endpoint log-density ratio to a bounded contrast.
+#'
+#' The transformation is applied to each stored fitted replicate before any
+#' summary is calculated. Infinite boundary estimates therefore map to -1/+1.
+endpoint_contrast_from_log_ratio <- function(log_ratio) {
+  if (anyNA(log_ratio)) {
     rlang::abort(
-      "The signed-model effect summary lacks required columns.",
+      "Endpoint log-density ratios must not contain missing values.",
       class = "rcdates_manuscript_figure_error"
     )
   }
-  out <- bias[
-    bias$type == type & bias$prop == proportion & bias$true != "uni",
-    required,
-    drop = FALSE
-  ]
+  tanh(log_ratio / 2)
+}
+
+#' Prepare bounded endpoint contrasts for manuscript Figure 4.
+#' @param results Parsed full-treatment signed-model result rows.
+#' @param type Primary score identifier.
+#' @param proportion Site-treatment proportion shown in the figure.
+#' @param nsim Expected number of fitted replicates per cell.
+#' @return Validated and labelled 32-row bounded-effect summary.
+prepare_manuscript_endpoint_contrast_panel <- function(
+  results,
+  type = "l1",
+  proportion = 1,
+  nsim = 1000L
+) {
+  required <- c(
+    "sim", "true", "true_family", "true_direction", "true_log_ratio",
+    "prop", "strategy", "type", "model", "estimate_log_ratio", "boundary"
+  )
+  if (!is.data.frame(results) || !all(required %in% names(results))) {
+    rlang::abort(
+      "The signed-model fitted results lack required columns.",
+      class = "rcdates_manuscript_figure_error"
+    )
+  }
+  if (length(type) != 1L || is.na(type) || length(proportion) != 1L ||
+      !is.finite(proportion) || length(nsim) != 1L || !is.finite(nsim) ||
+      nsim < 1L || nsim != as.integer(nsim)) {
+    rlang::abort(
+      "Invalid endpoint-contrast panel settings.",
+      class = "rcdates_manuscript_figure_error"
+    )
+  }
+  keep <- results$type == type &
+    abs(results$prop - proportion) < sqrt(.Machine$double.eps) &
+    results$true != "uni" & results$model == results$true_family
+  source_file <- if ("source_file" %in% names(results)) {
+    as.character(results$source_file)
+  } else {
+    rep(NA_character_, nrow(results))
+  }
+  selected <- results[keep, required, drop = FALSE]
+  selected$source_file <- source_file[keep]
   expected_truths <- setdiff(names(manuscript_signed_truth_labels()), "uni")
   expected <- expand.grid(
     true = expected_truths,
@@ -197,25 +229,64 @@ prepare_manuscript_theta_panel <- function(bias, type = "l1", proportion = 1) {
     stringsAsFactors = FALSE
   )
   key <- function(x) paste(x$true, x$strategy, sep = "|")
-  numeric_columns <- setdiff(required, c(
-    "type", "true", "true_family", "true_direction", "strategy"
-  ))
-  if (nrow(out) != 32L || anyDuplicated(key(out)) ||
-      !setequal(key(out), key(expected)) ||
-      any(!is.finite(unlist(out[numeric_columns], use.names = FALSE))) ||
-      any(out$n != 1000L) || any(out$boundary_rate < 0 | out$boundary_rate > 1)) {
+  cell_id <- interaction(selected$true, selected$strategy, selected$sim, drop = TRUE)
+  if (nrow(selected) != 32L * as.integer(nsim) ||
+      anyDuplicated(cell_id) ||
+      !setequal(unique(key(selected)), key(expected)) ||
+      !is.numeric(selected$sim) || any(!is.finite(selected$sim)) ||
+      any(selected$sim != as.integer(selected$sim)) ||
+      !is.numeric(selected$true_log_ratio) ||
+      any(!is.finite(selected$true_log_ratio)) ||
+      !is.numeric(selected$estimate_log_ratio) ||
+      any(is.na(selected$estimate_log_ratio)) ||
+      any(is.nan(selected$estimate_log_ratio)) ||
+      !is.logical(selected$boundary) || anyNA(selected$boundary)) {
     rlang::abort(
-      "The signed-model effect summary is incomplete or invalid.",
+      "The signed-model fitted results are incomplete or invalid.",
       class = "rcdates_manuscript_figure_error"
     )
   }
-  out$estimate_low <- out$true_log_ratio + out$bias_q025
-  out$estimate_high <- out$true_log_ratio + out$bias_q975
-  tolerance <- 1e-12
-  if (any(out$estimate_low - tolerance > out$mean_estimate_log_ratio) ||
-      any(out$estimate_high + tolerance < out$mean_estimate_log_ratio)) {
+  cell_rows <- split(selected, interaction(selected$true, selected$strategy, drop = TRUE))
+  complete_ids <- vapply(cell_rows, function(rows) {
+    identical(sort(unique(as.integer(rows$sim))), seq_len(as.integer(nsim)))
+  }, logical(1))
+  if (!all(complete_ids)) {
     rlang::abort(
-      "The signed-model effect ranges do not contain their means.",
+      "Each endpoint-contrast cell must contain exactly one row for every replicate.",
+      class = "rcdates_manuscript_figure_error"
+    )
+  }
+  out <- do.call(rbind, lapply(cell_rows, function(rows) {
+    contrasts <- endpoint_contrast_from_log_ratio(rows$estimate_log_ratio)
+    true_values <- unique(rows$true_log_ratio)
+    if (length(true_values) != 1L) {
+      rlang::abort(
+        "Each endpoint-contrast cell must have one generating truth value.",
+        class = "rcdates_manuscript_figure_error"
+      )
+    }
+    data.frame(
+      true = rows$true[[1L]],
+      type = rows$type[[1L]],
+      prop = rows$prop[[1L]],
+      strategy = rows$strategy[[1L]],
+      n = nrow(rows),
+      mean_contrast = mean(contrasts),
+      contrast_q025 = stats::quantile(contrasts, 0.025, type = 7, names = FALSE),
+      contrast_q975 = stats::quantile(contrasts, 0.975, type = 7, names = FALSE),
+      true_contrast = endpoint_contrast_from_log_ratio(true_values),
+      boundary_n = sum(rows$boundary),
+      boundary_rate = mean(rows$boundary),
+      source_file = paste(unique(rows$source_file), collapse = ";"),
+      stringsAsFactors = FALSE
+    )
+  }))
+  rownames(out) <- NULL
+  if (nrow(out) != nrow(expected) || anyDuplicated(key(out)) ||
+      !setequal(key(out), key(expected)) || any(out$n != as.integer(nsim)) ||
+      any(out$boundary_rate < 0 | out$boundary_rate > 1)) {
+    rlang::abort(
+      "The endpoint-contrast summary is incomplete or invalid.",
       class = "rcdates_manuscript_figure_error"
     )
   }
@@ -231,7 +302,8 @@ prepare_manuscript_theta_panel <- function(bias, type = "l1", proportion = 1) {
     levels = rev(names(strategy_labels)),
     labels = rev(unname(strategy_labels))
   )
-  out$boundary_saturated <- out$boundary_rate >= 0.5
+  out$boundary_any <- out$boundary_n > 0L
+  out$boundary_label <- sprintf("%.1f%%", 100 * out$boundary_rate)
   out
 }
 
@@ -246,7 +318,7 @@ manuscript_signed_heatmap <- function(data, rate, fill_label) {
     ggplot2::geom_tile(colour = "white", linewidth = 0.35) +
     ggplot2::geom_text(
       ggplot2::aes(label = cell_label, colour = label_colour),
-      size = 2.55,
+      size = 3.1,
       show.legend = FALSE
     ) +
     ggplot2::facet_grid(cols = ggplot2::vars(prop_label)) +
@@ -263,12 +335,13 @@ manuscript_signed_heatmap <- function(data, rate, fill_label) {
       y = "Generating truth",
       caption = "Cell labels are percentages; n = 1,000 replicates per cell."
     ) +
-    ggplot2::theme_minimal(base_size = 9) +
+    ggplot2::theme_minimal(base_size = 10) +
     ggplot2::theme(
       legend.position = "bottom",
       panel.grid = ggplot2::element_blank(),
-      axis.text.x = ggplot2::element_text(angle = 45, hjust = 1),
-      strip.text = ggplot2::element_text(face = "plain"),
+      axis.text.x = ggplot2::element_text(angle = 45, hjust = 1, size = 9.5),
+      axis.text.y = ggplot2::element_text(size = 9.5),
+      strip.text = ggplot2::element_text(face = "plain", size = 10),
       plot.caption = ggplot2::element_text(hjust = 0)
     )
 }
@@ -284,34 +357,40 @@ manuscript_signed_state_plot <- function(data) {
   )
 }
 
-#' Plot common-scale fitted effects for Figure 4
-#' @param data Output of [prepare_manuscript_theta_panel()].
+#' Plot bounded endpoint contrasts for Figure 4
+#' @param data Output of [prepare_manuscript_endpoint_contrast_panel()].
 #' @return ggplot object.
-manuscript_theta_plot <- function(data) {
-  references <- unique(data[c("truth_label", "true_log_ratio")])
+manuscript_endpoint_contrast_plot <- function(data) {
+  references <- unique(data[c("truth_label", "true_contrast")])
   ggplot2::ggplot(
     data,
-    ggplot2::aes(y = strategy_label, x = mean_estimate_log_ratio)
+    ggplot2::aes(y = strategy_label, x = mean_contrast)
   ) +
     ggplot2::geom_vline(xintercept = 0, colour = "grey65", linewidth = 0.35) +
     ggplot2::geom_vline(
       data = references,
-      ggplot2::aes(xintercept = true_log_ratio),
+      ggplot2::aes(xintercept = true_contrast),
       linetype = "dashed",
       linewidth = 0.45,
       inherit.aes = FALSE
     ) +
     ggplot2::geom_errorbar(
-      ggplot2::aes(xmin = estimate_low, xmax = estimate_high),
+      ggplot2::aes(xmin = contrast_q025, xmax = contrast_q975),
       width = 0.16,
       orientation = "y",
       linewidth = 0.4
     ) +
     ggplot2::geom_point(
-      ggplot2::aes(shape = boundary_saturated),
+      ggplot2::aes(shape = boundary_any),
       size = 2.25,
       fill = "white",
       stroke = 0.65
+    ) +
+    ggplot2::geom_text(
+      ggplot2::aes(x = Inf, label = boundary_label),
+      hjust = -0.1,
+      size = 3,
+      colour = "grey25"
     ) +
     ggplot2::facet_wrap(
       ggplot2::vars(truth_label),
@@ -320,23 +399,32 @@ manuscript_theta_plot <- function(data) {
     ) +
     ggplot2::scale_shape_manual(
       values = c(`FALSE` = 21, `TRUE` = 24),
-      labels = c("no", "yes"),
-      name = "At least 50% of\nestimates at bound"
+      labels = c("none", "at least one"),
+      name = "Near original parameter\nbound flag"
     ) +
     ggplot2::scale_x_continuous(
-      limits = c(-11.5, 11.5),
-      breaks = c(-10, -5, 0, 5, 10)
+      limits = c(-1, 1),
+      breaks = c(-1, -0.5, 0, 0.5, 1)
     ) +
     ggplot2::labs(
-      x = expression("Fitted generating-family effect " * theta),
-      y = "Post hoc date-retention rule"
+      x = "Normalised endpoint-density contrast, c",
+      y = "Post hoc date-retention rule",
+      caption = paste(
+        "Percentages: near original parameter bound.",
+        "Triangles indicate at least one stored flag, not an exact endpoint.",
+        sep = "\n"
+      )
     ) +
-    ggplot2::theme_classic(base_size = 9) +
+    ggplot2::theme_classic(base_size = 11) +
     ggplot2::theme(
       legend.position = "bottom",
       strip.background = ggplot2::element_blank(),
-      strip.text = ggplot2::element_text(face = "plain")
-    )
+      strip.text = ggplot2::element_text(face = "plain"),
+      panel.spacing.x = grid::unit(45, "pt"),
+      plot.margin = ggplot2::margin(5.5, 40, 5.5, 5.5),
+      plot.caption = ggplot2::element_text(hjust = 0)
+    ) +
+    ggplot2::coord_cartesian(xlim = c(-1, 1), clip = "off")
 }
 
 #' Plot minimum-AIC generating-family selection for Figure 5

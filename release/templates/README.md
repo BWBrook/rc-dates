@@ -2,7 +2,7 @@
 
 Companion to **Within-site date-retention rules can distort radiocarbon
 “dates-as-data” inference**, by Barry W. Brook, Rebecca Wheatley, Christopher N.
-Johnson, Alan N. Williams, Sean Ulm and Luke A. Yates. Prepared 11 September 2026
+Johnson, Alan N. Williams, Sean Ulm and Luke A. Yates. Revised 19 September 2026
 for co-author review, preprinting and Journal of Archaeological Science.
 Authorship details remain subject to co-author confirmation.
 
@@ -26,10 +26,16 @@ docker run --rm --user "$(id -u):$(id -g)" --cpus 4 --memory 16g \
 `make reproduce-paper` verifies the distributed checksums, derives every signed-model
 summary from 720,000 fitted rows, recomputes both observation-noise bootstrap
 analyses from the nine paired checkpoints, renders the seven paper figures,
-and checks the 80 registered numerical values in `release/claims.csv`.
+and checks the 82 registered numerical values in `release/claims.csv`.
 Summaries and figures are rebuilt independently from accepted evidence; the
 summary comparisons require exact equality before the complete command passes.
 Outputs go to `out/reproduced/`; accepted records are retained in place.
+Figure 4 now summarises the bounded endpoint-density contrast computed for
+each stored fit, with every original near-boundary frequency displayed. Its
+32-row reference summary is in `out/revision/endpoint-contrast-20260919/`;
+see `docs/FIGURE4_BOUNDARY_REVISION_20260919.md` for the post-review correction.
+The original log-ratio summaries remain archived as historical computational
+outputs; their boundary-dependent means are not the revised figure evidence.
 The registry checks values against evidence and validates manuscript anchors;
 manual manuscript concordance and its coverage limits are recorded in `CLAIM_AUDIT.md`.
 The original observation-noise decision remains **FAIL (15/18 criteria)**.

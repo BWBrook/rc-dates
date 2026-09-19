@@ -23,7 +23,7 @@ summaries: verify
 	$(RSCRIPT) --vanilla scripts/release/rebuild_noise_summaries.R
 figures: verify
 	$(RSCRIPT) --vanilla scripts/release/render_empirical_figures.R
-	$(RSCRIPT) --vanilla scripts/render_population_simulation_figures.R --figure-dir=out/reproduced/figures
+	$(RSCRIPT) --vanilla scripts/render_population_simulation_figures.R --figure-dir=out/reproduced/figures --summary-dir=out/reproduced/endpoint-contrast
 	$(RSCRIPT) --vanilla scripts/release/render_site_counts.R
 claims:
 	python3 scripts/release/audit_manuscript_claims.py

@@ -1219,30 +1219,6 @@ references:
   type: book
   URL: https://www.taylorfrancis.com/books/9781439898208
 
-- id: hanna2025SumPoissonApproach
-  accessed:
-    - year: 2025
-      month: 11
-      day: 20
-  author:
-    - family: Hanna
-      given: Jonathan
-  citation-key: hanna2025SumPoissonApproach
-  container-title: Peer Community in Archaeology
-  container-title-short: PCI Archaeology
-  DOI: 10.24072/pci.archaeo.100583
-  ISSN: 2742-1929
-  issued:
-    - year: 2025
-  language: en
-  license: https://creativecommons.org/licenses/by/4.0/
-  page: '100583'
-  source: DOI.org (Crossref)
-  title: 'Beyond the sum: A Poisson approach to radiocarbon analysis'
-  title-short: Beyond the Sum
-  type: article-journal
-  URL: https://archaeo.peercommunityin.org/articles/rec?id=583
-
 - id: heaton2020Marine20TheMarineRadiocarbon
   abstract: |-
     ABSTRACT
@@ -1813,6 +1789,26 @@ references:
   type: article-journal
   volume: '49'
 
+- id: nicholls2001RadiocarbonDatingTemporal
+  author:
+    - family: Nicholls
+      given: Geoff
+    - family: Jones
+      given: Martin
+  citation-key: nicholls2001RadiocarbonDatingTemporal
+  container-title: 'Journal of the Royal Statistical Society Series C: Applied Statistics'
+  container-title-short: Journal of the Royal Statistical Society Series C
+  DOI: 10.1111/1467-9876.00250
+  issue: '4'
+  issued:
+    - year: 2001
+  page: 503–521
+  source: Oxford University Research Archive
+  title: Radiocarbon dating with temporal order constraints
+  type: article-journal
+  URL: https://doi.org/10.1111/1467-9876.00250
+  volume: '50'
+
 - id: park2026RescalingRadiocarbonData
   abstract: |-
     Abstract
@@ -1838,7 +1834,8 @@ references:
   issued:
     - year: 2026
   language: en
-  page: 1–26
+  issue: '3'
+  page: 541–566
   source: DOI.org (Crossref)
   title: >-
     Rescaling radiocarbon data: A method for addressing inter-site sampling
@@ -1847,6 +1844,7 @@ references:
   type: article-journal
   URL: >-
     https://www.cambridge.org/core/product/identifier/S0033822226102033/type/journal_article
+  volume: '68'
 
 - id: perez2016PopulationDynamicsNorthwest
   abstract: >-

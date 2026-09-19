@@ -138,7 +138,7 @@ submission-build: manuscript-build
 		--resource-path=.:../figures \
 		-o ../submission/dist/supplementary_information.docx
 
-SCIENTIFIC_RELEASE_DIR ?= dist/rc-dates-scientific-reproducibility-2026-09-11
+SCIENTIFIC_RELEASE_DIR ?= dist/rc-dates-scientific-reproducibility-2026-09-19
 .PHONY: scientific-release
 scientific-release:
 	python3 scripts/release/build_package.py --destination="$(SCIENTIFIC_RELEASE_DIR)"

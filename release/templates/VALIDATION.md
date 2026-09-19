@@ -1,4 +1,36 @@
-# Scientific release verification — 11 September 2026
+# Scientific release verification — 19 September 2026
+
+## Bounded Figure 4 revision
+
+This release supersedes the 11 September presentation. Figure 4 now reports
+per-replicate bounded endpoint contrasts and every original near-boundary
+frequency. Figures 3 and 5 have larger labels. Raw fits, original summaries,
+empirical evidence, noise decisions and the R lock are unchanged.
+The correction is specified in `docs/FIGURE4_BOUNDARY_REVISION_20260919.md`.
+
+The revision passed the following checks in the same pinned R 4.5.3 image:
+
+- All 37 scientific test blocks passed without failures, warnings or skips.
+- Independent direct-parameter reconstruction matched all 32 new means,
+  type-7 quantile ranges, truth values, denominators and boundary counts to
+  absolute tolerance 1e-12. The near-boundary random-1 fractions remain 0.072
+  and 0.082.
+- A clean release candidate rebuilt the five original signed summary tables
+  exactly from all 720,000 fitted rows and passed all 82 current registry values.
+- All seven figure commands completed. Figures 1–5 and S1 match the distributed
+  revised figures pixel for pixel; the previous S2 presentation caveat remains.
+- The complete 190-file inventory and all nested inventories passed before and
+  after reproduction, including the two-file derived-contrast inventory.
+- The independent reviewer accepted the targeted correction. The rebuilt paper
+  and supplement passed strict manuscript checks and affected-page PDF/DOCX
+  inspection.
+
+No new simulation campaign, noise-bootstrap recalculation or empirical-source
+reconstruction was needed for this presentation correction. Those unchanged
+calculations retain the dated verification below. The runtime image and lockfile
+were not rebuilt or changed.
+
+## Inherited verification — 11 September 2026
 
 Verification used Linux x86_64 on the analysis server, with R 4.5.3. The
 archaeological source was accessible only in the separate author workspace;
@@ -38,8 +70,9 @@ Supplementary Figure S2's original plotting code could not be recovered.
 Its release renderer uses the exact aggregate histogram and fitted distribution,
 but its title and point sizing differ from the accepted raster. At the original
 971 × 747 pixels, 32,782 pixels (4.52%) differ. The accepted S2 image is distributed
-unchanged for comparison. All other accepted figures reproduce pixel for pixel
-in the verified rendering environment. The Dockerfile installs a small fontconfig
+unchanged for comparison. At the 11 September release, all other figures reproduced pixel for pixel
+in the verified rendering environment. The 19 September Figure 4 correction
+and Figure 3/5 typography supersede those three historical presentations. The Dockerfile installs a small fontconfig
 rule preserving the production Nimbus faces in mathematical axis labels; other
 font/device stacks may differ.
 
@@ -51,7 +84,9 @@ co-authors remain responsible for reviewing the scientific interpretation.
 The full 1,000-replicate experiments were not regenerated for release assembly.
 The package includes every accepted replicate and an executable resumable rerun
 path; limited replay checks every scenario and preserves the original RNG and
-pairing semantics. No new experiment or post-result decision gate was introduced.
+pairing semantics. No new simulation experiment was introduced. The 19 September derived
+presentation correction was specified after review of the accepted results
+and does not replace any original scientific decision gate.
 
 The original observation-noise v1 decision remains FAIL (15 of 18 criteria).
 The separately labelled v2 diagnostic uses the accepted 50,000-resample seeds;
