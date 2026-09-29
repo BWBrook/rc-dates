@@ -142,7 +142,7 @@ Which dates a site contributes can determine whether a regional analysis infers 
 
 ## Data availability
 
-For peer review, supporting code, aggregate empirical evidence and accepted synthetic simulation outputs are supplied as a named scientific reproducibility archive. The archive excludes raw and record-level AustArch data. Rebuilding the empirical curves from source records requires separately governed access to the cited AustArch dataset [@williams2014AustArchDataset]. A citable repository record containing code, synthetic simulation outputs and permitted aggregate evidence will be made public no later than publication; release of source or record-level archaeological data remains subject to source licensing, sensitive-location review and Indigenous data-governance requirements.
+For peer review, the analysis code, pinned computational environment, synthetic simulation outputs and aggregate empirical evidence are supplied as an anonymised supplementary archive. The archive excludes raw and record-level AustArch data, so rebuilding the empirical curves from source records requires separately governed access to the cited AustArch dataset [@williams2014AustArchDataset]. A citable repository record containing the code, synthetic simulation outputs and permitted aggregate evidence will be made public no later than publication. Release of source or record-level archaeological data remains subject to source licensing, sensitive-location review and Indigenous data-governance requirements.
 
 ## Competing interests
 

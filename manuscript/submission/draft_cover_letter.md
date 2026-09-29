@@ -11,7 +11,7 @@ Regional radiocarbon analyses inherit decisions about which dates each archaeolo
 
 The paper fits the journal's archaeological-methods remit by quantifying a dataset-formation problem that precedes the choice of radiocarbon summary or population model. It offers a practical response: document site contributions and assess whether conclusions survive plausible alternative retention rules. The experiment isolates post hoc selection among completed determinations; it does not model occupation histories or prospective context selection.
 
-A named scientific reproducibility archive accompanies the manuscript so reviewers can inspect the accepted analyses. It excludes raw and record-level AustArch data. A citable repository record containing permitted materials will be released no later than publication, with archaeological source data governed separately.
+A scientific reproducibility archive accompanies the manuscript, as an anonymised copy for reviewers, so that the accepted analyses can be inspected during review. It excludes raw and record-level AustArch data. A citable repository record containing permitted materials will be released no later than publication, with archaeological source data governed separately.
 
 Thank you for considering the manuscript.
 

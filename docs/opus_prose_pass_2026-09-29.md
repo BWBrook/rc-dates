@@ -107,3 +107,17 @@ authors' own extinction-timing work.
 - Section 2.3 does not say that the 976-date reference, used for the site-count and error models,
   includes the marine records that the benchmark excludes.
 - The AI declaration names "Opus", which covers this pass. The authors should confirm version details.
+
+## Follow-up, 29 September
+
+At Barry's request, the offered and open items above were resolved in the two commits that follow
+the prose pass.
+
+- The bridge sentence is now in Section 4.1, reworded to match its sources. It cites Signor and Lipps
+  (1982) and Bradshaw et al. (2012), both verified against Crossref and added to `refs.yaml`.
+- Section 2.3 now states that the 976-date reference also contains the 239 shell and human-bone
+  determinations excluded from the benchmark.
+- The Data availability statement, Supplementary Section S4 and the cover letter now describe an
+  anonymised review archive. The submission checklist records that the release README, which names
+  the authors, must be anonymised in the copy uploaded for review.
+- The AI declaration is left for Barry's editorial pass.

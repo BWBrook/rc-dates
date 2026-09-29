@@ -15,7 +15,8 @@ Official sources: [JAS Guide for Authors](https://www.sciencedirect.com/journal/
 - [x] Main manuscript contains five source-controlled figures; Supplementary Information contains two.
 - [x] AI assistance with analysis development and manuscript preparation is disclosed together before the references, following Barry’s requested placement; rerunning the analyses requires no AI tools or prompts.
 - [ ] At submission, reconcile this placement with Elsevier’s Methods disclosure wording for research-process and data-visualisation assistance; the use itself is fully disclosed.
-- [x] The data-availability statement contains no unresolved repository placeholders; the named scientific archive is supplied as review material.
+- [x] The data-availability statement contains no unresolved repository placeholders and describes an anonymised review archive, consistent with double-anonymised review.
+- [ ] Before upload, build an author-anonymised copy of the scientific reproducibility archive for reviewers. The release README (lines 4–5) is the only author-identifying text found in the release templates and scripts; keep the named release for the public repository record.
 
 ## Scientific reconciliation
 
