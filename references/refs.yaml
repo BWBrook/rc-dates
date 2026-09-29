@@ -364,6 +364,27 @@ references:
   type: article-journal
   volume: '91'
 
+- id: bradshaw2012RobustEstimatesExtinction
+  author:
+    - family: Bradshaw
+      given: C. J. A.
+    - family: Cooper
+      given: A.
+    - family: Turney
+      given: C. S. M.
+    - family: Brook
+      given: B. W.
+  citation-key: bradshaw2012RobustEstimatesExtinction
+  container-title: Quaternary Science Reviews
+  container-title-short: Quaternary Science Reviews
+  DOI: 10.1016/j.quascirev.2011.11.021
+  issued:
+    - year: 2012
+  page: 14–19
+  title: Robust estimates of extinction time in the geological record
+  type: article-journal
+  volume: '33'
+
 - id: bronkramsey2017MethodsSummarizingRadiocarbon
   abstract: >-
     Bayesian models have proved very powerful in analyzing large datasets of
@@ -2507,6 +2528,33 @@ references:
     mid-Holocene Europe
   type: article-journal
   volume: '4'
+
+- id: signor1982SamplingBiasGradual
+  author:
+    - family: Signor
+      given: P. W.
+    - family: Lipps
+      given: J. H.
+  citation-key: signor1982SamplingBiasGradual
+  collection-title: Geological Society of America Special Paper 190
+  container-title: >-
+    Geological Implications of Impacts of Large Asteroids and Comets on the
+    Earth
+  DOI: 10.1130/SPE190-p291
+  editor:
+    - family: Silver
+      given: L. T.
+    - family: Schultz
+      given: P. H.
+  issued:
+    - year: 1982
+  page: 291–296
+  publisher: Geological Society of America
+  publisher-place: Boulder, Colorado
+  title: >-
+    Sampling bias, gradual extinction patterns and catastrophes in the fossil
+    record
+  type: chapter
 
 - id: smith2016UseSummedprobabilityPlots
   abstract: >-
