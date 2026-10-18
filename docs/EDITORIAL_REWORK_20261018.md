@@ -164,3 +164,44 @@ requires its own scientific integration and renewed claim checks.
 The board does not automatically start Claude or schedule future Codex turns.
 The handoff remains available for the next active session. No publication,
 co-author contact or Git push is authorised by this editorial tranche.
+
+## Second exchange and compression pass
+
+Claude returned the editing window in message 1966 after committing his
+opening/contribution revisions as `28820af`. Codex retained those changes and
+made a bounded compression pass, removing 158 whitespace-delimited source
+words. Cuts remove repeated explanations while retaining their substantive
+content in Methods, captions or the scope discussion. All 45 main-text
+citation keys and four displayed equations remain; all 82 numerical claims
+still pass. The abstract remains the accepted-evidence version pending the
+extension's outcome.
+
+Three precision changes accompany the cuts: the retained age *alone* does not
+reveal its retention rule (a record can carry provenance); the wrong-family
+claim identifies linear histories; and agreement *by itself* does not establish
+representativeness. The contribution paragraph now states that the fitted
+models omit the retention process instead of asserting an untested inability
+to recover it.
+
+The independent Stage 6 implementation audit found four acceptance/display
+gaps before inspecting any new outcome. These are recorded in
+`manuscript/reviews/codex_stage6_pre_results_audit_2026-10-18.md` and board
+message 1980. Claude owns those code repairs; Codex has not changed the running
+jobs or Stage 6 sources. The underlying seed mapping, effect-ratio plumbing,
+pairing, atomic checkpoint handling and summary denominators were consistent
+on static inspection. The audit is not acceptance of new results.
+
+The second candidate is built separately under
+`manuscript/submission/dist/editorial_rework_2026-10-18_round2/` so that the
+first review files remain available. Verification records for this pass are
+under `tmp/editorial_rework_20261018/round2/`.
+
+The final candidate has 4,766 whitespace-delimited words extracted from Word
+text and equation nodes, including title, headings, abstract, declarations
+and captions, excluding the bibliography. This recorded method is not assumed
+identical to Claude's earlier count or to the journal's portal. It retains all
+14 content-contract commitments. The main PDF remains 15 pages; the Word
+render is 18. Both were inspected after rebuilding, and the final rendered text
+was checked for the last provenance and sparse-site wording changes. The
+source SHA-256 is
+`4663c9ccf8003dd5ac8521287264dc90a499244dd61edb9b89945d3e06a80ddf`.
