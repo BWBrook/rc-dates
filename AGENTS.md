@@ -57,5 +57,8 @@ Rigour at the scientific decision boundary; proportional engineering everywhere 
 - Never bulk-stream large files under `data/` or `data-raw/`; inspect only headers, schemas, samples,
   and counts unless a bounded analysis is required.
 - Preserve unrelated user changes. Prefer recoverable and narrowly scoped file operations.
-- Local commits are allowed. Do not push, fetch, pull, or change remotes unless asked.
+- Local commits and routine Git synchronisation (fetch, pull and push) to Barry's own repository
+  are authorised reversible work. Preserve unrelated changes and shared history.
+- Barry reviews the final research artefact before release. First public release, submission,
+  repository-visibility changes and contact outside the collaboration require his approval.
 - At handoff, report completed work, material residual risk, and the next highest-value tranche.
