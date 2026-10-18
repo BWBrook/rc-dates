@@ -162,8 +162,9 @@ not be treated as scientific validation. Any newly accepted simulation evidence
 requires its own scientific integration and renewed claim checks.
 
 The board does not automatically start Claude or schedule future Codex turns.
-The handoff remains available for the next active session. No publication,
-co-author contact or Git push is authorised by this editorial tranche.
+The handoff remains available for the next active session. Public release,
+submission and co-author contact require Barry's approval; routine Git
+synchronisation follows the current repository and global instructions.
 
 ## Second exchange and compression pass
 
@@ -205,3 +206,28 @@ render is 18. Both were inspected after rebuilding, and the final rendered text
 was checked for the last provenance and sparse-site wording changes. The
 source SHA-256 is
 `4663c9ccf8003dd5ac8521287264dc90a499244dd61edb9b89945d3e06a80ddf`.
+
+## Third exchange: repaired acceptance and shared policy
+
+Claude's message 2022 supplied `4405f51` (Stage 6 repairs) and `dbdc129`
+(three prose restorations). Codex accepted the plain-language Introduction
+close and the explicit statement that Figure 1 is not a calibrated simulation
+result. The Discussion close was changed to "Model comparison can therefore
+favour a history created by retention", preserving the scientific consequence
+without claiming that model choice cannot detect retention.
+
+The four Stage 6 implementation findings are now closed by independent static
+review plus bounded controls of the repaired smoke/scenario checks on
+`deep-server`. Original and row-permuted smoke data passed; a changed estimate
+with a refreshed checksum was specifically rejected; all four wrong-scenario
+controls were rejected. No weaker-signal selection rates were inspected and
+the running matrix was untouched. The tracked audit report records the scope,
+hashes and distinction between code verification and completed-result audit.
+
+The local `AGENTS.md` Git rule was reconciled with Barry's 18 October global
+instructions: routine synchronisation with his repository is reversible work;
+final research-artifact review and approval for first public release,
+submission, visibility changes and external contact remain explicit. GitHub
+reported `BWBrook/rc-dates` as private with default branch `main` before
+synchronisation. This supersedes the earlier no-push editorial status; it
+does not authorise a public release of the research.

@@ -69,3 +69,37 @@ The ratio-10 smoke replay checks computational reproducibility of one accepted
 cell. It does not establish the weaker-signal findings. Once the complete
 outputs and corrected acceptance code are available, they still require the
 prespecified checks and an independent evidence audit.
+
+## Repair verification, 18 October 2026
+
+All four findings above are closed for implementation commit `4405f51`,
+reviewed at `dbdc129`. An independent second static review verified that
+scenario binding is applied to all new and accepted grid rows, the production
+matrix is fixed, smoke equality compares every result column after sorting,
+and the figure separates ratio-1 markers and states the two sample sizes.
+
+Codex then executed bounded controls on `deep-server` in the accepted image
+`sha256:01f5e221d0f3b70ccb3edd0fd6556ffd1c645784e98e147e81034866b9137777`
+under R 4.5.3, with one CPU, a 1 GiB memory cap and a read-only mount of the
+running project. Only the accepted ratio-10 reference and its 20-replicate
+smoke replay were read. The harness evaluated the committed comparison
+expressions; scratch artefacts and comparison CSVs stayed inside the temporary
+container. It did not run the full-matrix acceptance or calculate Stage 6
+selection rates.
+
+| Control | Generic artefact validation | Smoke/scenario check |
+|---|---|---|
+| Original smoke | Passed | All 960 rows and 17 columns identical |
+| Reversed row order | Passed | Passed after sorting by the four row keys |
+| One finite estimate changed; scratch checksum updated | Passed | Rejected, identifying `estimate` |
+| Original object with correct expected scenario | Passed | Bound correctly |
+| Wrong expected truth, proportion, ratio or replicate count | Original object unchanged | Each rejected |
+
+The remote and local summary/figure scripts had identical SHA-256 hashes.
+The smoke MD5 was `d014d76d50084ff49aaf2366c23200e8`; the accepted reference
+MD5 was `da6dd37f408fbf8e2a5962b00dbcebed`. The exercised summariser MD5 was
+`0541d71690111ac83c88187b2c835214`. The harness and machine-readable receipts
+are in ignored `tmp/editorial_rework_20261018/verification_round3/`.
+
+This closes the enforcement and display defects. It is not acceptance of the
+in-progress matrix or independent confirmation of a weaker-signal finding.
