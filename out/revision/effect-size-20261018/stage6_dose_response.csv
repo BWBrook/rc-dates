@@ -1,0 +1,361 @@
+"family","direction","role","strategy","ratio","prop","correct_state_rate","reversal_rate","uniform_rate","family_rate","source","replicates"
+"exp","decrease","adverse","r_young",1,0.5,0.021,0,0.021,0.021,"accepted Stage 2",1000
+"exp","decrease","adverse","r_young",1.5,0.5,0.002,0.222,0.776,0.22,"Stage 6",500
+"exp","decrease","adverse","r_young",2,0.5,0.406,0.002,0.592,0.4,"Stage 6",500
+"exp","decrease","adverse","r_young",3,0.5,0.994,0,0.006,0.98,"Stage 6",500
+"exp","decrease","adverse","r_young",5,0.5,1,0,0,0.986,"Stage 6",500
+"exp","decrease","adverse","r_young",10,0.5,1,0,0,0.995,"accepted Stage 2",1000
+"exp","decrease","adverse","r_young",1,0.75,0,0,0,0,"accepted Stage 2",1000
+"exp","decrease","adverse","r_young",1.5,0.75,0,1,0,1,"Stage 6",500
+"exp","decrease","adverse","r_young",2,0.75,0,0.978,0.022,0.978,"Stage 6",500
+"exp","decrease","adverse","r_young",3,0.75,0,0.394,0.606,0.394,"Stage 6",500
+"exp","decrease","adverse","r_young",5,0.75,0.45,0.002,0.548,0.452,"Stage 6",500
+"exp","decrease","adverse","r_young",10,0.75,1,0,0,0.983,"accepted Stage 2",1000
+"exp","decrease","adverse","r_young",1,1,0,0,0,0,"accepted Stage 2",1000
+"exp","decrease","adverse","r_young",1.5,1,0,1,0,1,"Stage 6",500
+"exp","decrease","adverse","r_young",2,1,0,1,0,1,"Stage 6",500
+"exp","decrease","adverse","r_young",3,1,0,1,0,1,"Stage 6",500
+"exp","decrease","adverse","r_young",5,1,0,1,0,0.998,"Stage 6",500
+"exp","decrease","adverse","r_young",10,1,0,1,0,0.433,"accepted Stage 2",1000
+"exp","decrease","all dates","r_all",1,0.5,0.848,0,0.848,0.848,"accepted Stage 2",1000
+"exp","decrease","all dates","r_all",1.5,0.5,0.982,0,0.018,0.504,"Stage 6",500
+"exp","decrease","all dates","r_all",2,0.5,1,0,0,0.602,"Stage 6",500
+"exp","decrease","all dates","r_all",3,0.5,1,0,0,0.738,"Stage 6",500
+"exp","decrease","all dates","r_all",5,0.5,1,0,0,0.932,"Stage 6",500
+"exp","decrease","all dates","r_all",10,0.5,1,0,0,0.998,"accepted Stage 2",1000
+"exp","decrease","all dates","r_all",1,0.75,0.848,0,0.848,0.848,"accepted Stage 2",1000
+"exp","decrease","all dates","r_all",1.5,0.75,0.982,0,0.018,0.504,"Stage 6",500
+"exp","decrease","all dates","r_all",2,0.75,1,0,0,0.602,"Stage 6",500
+"exp","decrease","all dates","r_all",3,0.75,1,0,0,0.738,"Stage 6",500
+"exp","decrease","all dates","r_all",5,0.75,1,0,0,0.932,"Stage 6",500
+"exp","decrease","all dates","r_all",10,0.75,1,0,0,0.998,"accepted Stage 2",1000
+"exp","decrease","all dates","r_all",1,1,0.848,0,0.848,0.848,"accepted Stage 2",1000
+"exp","decrease","all dates","r_all",1.5,1,0.982,0,0.018,0.504,"Stage 6",500
+"exp","decrease","all dates","r_all",2,1,1,0,0,0.602,"Stage 6",500
+"exp","decrease","all dates","r_all",3,1,1,0,0,0.738,"Stage 6",500
+"exp","decrease","all dates","r_all",5,1,1,0,0,0.932,"Stage 6",500
+"exp","decrease","all dates","r_all",10,1,1,0,0,0.998,"accepted Stage 2",1000
+"exp","decrease","bracketed","r_bracket",1,0.5,0.884,0,0.884,0.884,"accepted Stage 2",1000
+"exp","decrease","bracketed","r_bracket",1.5,0.5,0.896,0,0.104,0.896,"Stage 6",500
+"exp","decrease","bracketed","r_bracket",2,0.5,0.998,0,0.002,0.998,"Stage 6",500
+"exp","decrease","bracketed","r_bracket",3,0.5,1,0,0,1,"Stage 6",500
+"exp","decrease","bracketed","r_bracket",5,0.5,1,0,0,1,"Stage 6",500
+"exp","decrease","bracketed","r_bracket",10,0.5,1,0,0,1,"accepted Stage 2",1000
+"exp","decrease","bracketed","r_bracket",1,0.75,0.91,0,0.91,0.91,"accepted Stage 2",1000
+"exp","decrease","bracketed","r_bracket",1.5,0.75,0.714,0,0.286,0.714,"Stage 6",500
+"exp","decrease","bracketed","r_bracket",2,0.75,0.99,0,0.01,0.99,"Stage 6",500
+"exp","decrease","bracketed","r_bracket",3,0.75,1,0,0,1,"Stage 6",500
+"exp","decrease","bracketed","r_bracket",5,0.75,1,0,0,1,"Stage 6",500
+"exp","decrease","bracketed","r_bracket",10,0.75,1,0,0,1,"accepted Stage 2",1000
+"exp","decrease","bracketed","r_bracket",1,1,0.999,0,0.999,0.999,"accepted Stage 2",1000
+"exp","decrease","bracketed","r_bracket",1.5,1,0.11,0,0.89,0.11,"Stage 6",500
+"exp","decrease","bracketed","r_bracket",2,1,0.718,0,0.282,0.718,"Stage 6",500
+"exp","decrease","bracketed","r_bracket",3,1,1,0,0,1,"Stage 6",500
+"exp","decrease","bracketed","r_bracket",5,1,1,0,0,1,"Stage 6",500
+"exp","decrease","bracketed","r_bracket",10,1,1,0,0,1,"accepted Stage 2",1000
+"exp","decrease","concordant","r_old",1,0.5,0.027,0,0.027,0.027,"accepted Stage 2",1000
+"exp","decrease","concordant","r_old",1.5,0.5,1,0,0,0.994,"Stage 6",500
+"exp","decrease","concordant","r_old",2,0.5,1,0,0,0.994,"Stage 6",500
+"exp","decrease","concordant","r_old",3,0.5,1,0,0,0.998,"Stage 6",500
+"exp","decrease","concordant","r_old",5,0.5,1,0,0,1,"Stage 6",500
+"exp","decrease","concordant","r_old",10,0.5,1,0,0,1,"accepted Stage 2",1000
+"exp","decrease","concordant","r_old",1,0.75,0,0,0,0,"accepted Stage 2",1000
+"exp","decrease","concordant","r_old",1.5,0.75,1,0,0,1,"Stage 6",500
+"exp","decrease","concordant","r_old",2,0.75,1,0,0,1,"Stage 6",500
+"exp","decrease","concordant","r_old",3,0.75,1,0,0,1,"Stage 6",500
+"exp","decrease","concordant","r_old",5,0.75,1,0,0,1,"Stage 6",500
+"exp","decrease","concordant","r_old",10,0.75,1,0,0,1,"accepted Stage 2",1000
+"exp","decrease","concordant","r_old",1,1,0,0,0,0,"accepted Stage 2",1000
+"exp","decrease","concordant","r_old",1.5,1,1,0,0,1,"Stage 6",500
+"exp","decrease","concordant","r_old",2,1,1,0,0,1,"Stage 6",500
+"exp","decrease","concordant","r_old",3,1,1,0,0,1,"Stage 6",500
+"exp","decrease","concordant","r_old",5,1,1,0,0,1,"Stage 6",500
+"exp","decrease","concordant","r_old",10,1,1,0,0,1,"accepted Stage 2",1000
+"exp","decrease","random-1","r_1",1,0.5,0.846,0,0.846,0.846,"accepted Stage 2",1000
+"exp","decrease","random-1","r_1",1.5,0.5,0.896,0,0.104,0.454,"Stage 6",500
+"exp","decrease","random-1","r_1",2,0.5,0.998,0,0.002,0.572,"Stage 6",500
+"exp","decrease","random-1","r_1",3,0.5,1,0,0,0.684,"Stage 6",500
+"exp","decrease","random-1","r_1",5,0.5,1,0,0,0.854,"Stage 6",500
+"exp","decrease","random-1","r_1",10,0.5,1,0,0,0.991,"accepted Stage 2",1000
+"exp","decrease","random-1","r_1",1,0.75,0.829,0,0.829,0.829,"accepted Stage 2",1000
+"exp","decrease","random-1","r_1",1.5,0.75,0.732,0,0.268,0.372,"Stage 6",500
+"exp","decrease","random-1","r_1",2,0.75,0.982,0,0.018,0.522,"Stage 6",500
+"exp","decrease","random-1","r_1",3,0.75,1,0,0,0.64,"Stage 6",500
+"exp","decrease","random-1","r_1",5,0.75,1,0,0,0.778,"Stage 6",500
+"exp","decrease","random-1","r_1",10,0.75,1,0,0,0.945,"accepted Stage 2",1000
+"exp","decrease","random-1","r_1",1,1,0.824,0,0.824,0.824,"accepted Stage 2",1000
+"exp","decrease","random-1","r_1",1.5,1,0.412,0.006,0.582,0.196,"Stage 6",500
+"exp","decrease","random-1","r_1",2,1,0.732,0.002,0.266,0.362,"Stage 6",500
+"exp","decrease","random-1","r_1",3,1,0.974,0,0.026,0.53,"Stage 6",500
+"exp","decrease","random-1","r_1",5,1,0.998,0,0.002,0.66,"Stage 6",500
+"exp","decrease","random-1","r_1",10,1,1,0,0,0.823,"accepted Stage 2",1000
+"exp","increase","adverse","r_old",1,0.5,0.027,0,0.027,0.027,"accepted Stage 2",1000
+"exp","increase","adverse","r_old",1.5,0.5,0.02,0.19,0.79,0.208,"Stage 6",500
+"exp","increase","adverse","r_old",2,0.5,0.432,0,0.568,0.422,"Stage 6",500
+"exp","increase","adverse","r_old",3,0.5,1,0,0,0.986,"Stage 6",500
+"exp","increase","adverse","r_old",5,0.5,1,0,0,0.992,"Stage 6",500
+"exp","increase","adverse","r_old",10,0.5,1,0,0,0.993,"accepted Stage 2",1000
+"exp","increase","adverse","r_old",1,0.75,0,0,0,0,"accepted Stage 2",1000
+"exp","increase","adverse","r_old",1.5,0.75,0,0.998,0.002,0.998,"Stage 6",500
+"exp","increase","adverse","r_old",2,0.75,0,0.934,0.066,0.934,"Stage 6",500
+"exp","increase","adverse","r_old",3,0.75,0.01,0.352,0.638,0.362,"Stage 6",500
+"exp","increase","adverse","r_old",5,0.75,0.498,0.004,0.498,0.502,"Stage 6",500
+"exp","increase","adverse","r_old",10,0.75,1,0,0,0.987,"accepted Stage 2",1000
+"exp","increase","adverse","r_old",1,1,0,0,0,0,"accepted Stage 2",1000
+"exp","increase","adverse","r_old",1.5,1,0,1,0,1,"Stage 6",500
+"exp","increase","adverse","r_old",2,1,0,1,0,1,"Stage 6",500
+"exp","increase","adverse","r_old",3,1,0,1,0,1,"Stage 6",500
+"exp","increase","adverse","r_old",5,1,0,1,0,1,"Stage 6",500
+"exp","increase","adverse","r_old",10,1,0,1,0,0.416,"accepted Stage 2",1000
+"exp","increase","all dates","r_all",1,0.5,0.848,0,0.848,0.848,"accepted Stage 2",1000
+"exp","increase","all dates","r_all",1.5,0.5,0.996,0,0.004,0.506,"Stage 6",500
+"exp","increase","all dates","r_all",2,0.5,1,0,0,0.584,"Stage 6",500
+"exp","increase","all dates","r_all",3,0.5,1,0,0,0.734,"Stage 6",500
+"exp","increase","all dates","r_all",5,0.5,1,0,0,0.926,"Stage 6",500
+"exp","increase","all dates","r_all",10,0.5,1,0,0,0.996,"accepted Stage 2",1000
+"exp","increase","all dates","r_all",1,0.75,0.848,0,0.848,0.848,"accepted Stage 2",1000
+"exp","increase","all dates","r_all",1.5,0.75,0.996,0,0.004,0.506,"Stage 6",500
+"exp","increase","all dates","r_all",2,0.75,1,0,0,0.584,"Stage 6",500
+"exp","increase","all dates","r_all",3,0.75,1,0,0,0.734,"Stage 6",500
+"exp","increase","all dates","r_all",5,0.75,1,0,0,0.926,"Stage 6",500
+"exp","increase","all dates","r_all",10,0.75,1,0,0,0.996,"accepted Stage 2",1000
+"exp","increase","all dates","r_all",1,1,0.848,0,0.848,0.848,"accepted Stage 2",1000
+"exp","increase","all dates","r_all",1.5,1,0.996,0,0.004,0.506,"Stage 6",500
+"exp","increase","all dates","r_all",2,1,1,0,0,0.584,"Stage 6",500
+"exp","increase","all dates","r_all",3,1,1,0,0,0.734,"Stage 6",500
+"exp","increase","all dates","r_all",5,1,1,0,0,0.926,"Stage 6",500
+"exp","increase","all dates","r_all",10,1,1,0,0,0.996,"accepted Stage 2",1000
+"exp","increase","bracketed","r_bracket",1,0.5,0.884,0,0.884,0.884,"accepted Stage 2",1000
+"exp","increase","bracketed","r_bracket",1.5,0.5,0.922,0,0.078,0.922,"Stage 6",500
+"exp","increase","bracketed","r_bracket",2,0.5,1,0,0,1,"Stage 6",500
+"exp","increase","bracketed","r_bracket",3,0.5,1,0,0,1,"Stage 6",500
+"exp","increase","bracketed","r_bracket",5,0.5,1,0,0,1,"Stage 6",500
+"exp","increase","bracketed","r_bracket",10,0.5,1,0,0,1,"accepted Stage 2",1000
+"exp","increase","bracketed","r_bracket",1,0.75,0.91,0,0.91,0.91,"accepted Stage 2",1000
+"exp","increase","bracketed","r_bracket",1.5,0.75,0.786,0,0.214,0.786,"Stage 6",500
+"exp","increase","bracketed","r_bracket",2,0.75,0.996,0,0.004,0.996,"Stage 6",500
+"exp","increase","bracketed","r_bracket",3,0.75,1,0,0,1,"Stage 6",500
+"exp","increase","bracketed","r_bracket",5,0.75,1,0,0,1,"Stage 6",500
+"exp","increase","bracketed","r_bracket",10,0.75,1,0,0,1,"accepted Stage 2",1000
+"exp","increase","bracketed","r_bracket",1,1,0.999,0,0.999,0.999,"accepted Stage 2",1000
+"exp","increase","bracketed","r_bracket",1.5,1,0.168,0,0.832,0.168,"Stage 6",500
+"exp","increase","bracketed","r_bracket",2,1,0.796,0,0.204,0.796,"Stage 6",500
+"exp","increase","bracketed","r_bracket",3,1,1,0,0,1,"Stage 6",500
+"exp","increase","bracketed","r_bracket",5,1,1,0,0,1,"Stage 6",500
+"exp","increase","bracketed","r_bracket",10,1,1,0,0,1,"accepted Stage 2",1000
+"exp","increase","concordant","r_young",1,0.5,0.021,0,0.021,0.021,"accepted Stage 2",1000
+"exp","increase","concordant","r_young",1.5,0.5,1,0,0,0.988,"Stage 6",500
+"exp","increase","concordant","r_young",2,0.5,1,0,0,0.994,"Stage 6",500
+"exp","increase","concordant","r_young",3,0.5,1,0,0,0.998,"Stage 6",500
+"exp","increase","concordant","r_young",5,0.5,1,0,0,0.998,"Stage 6",500
+"exp","increase","concordant","r_young",10,0.5,1,0,0,1,"accepted Stage 2",1000
+"exp","increase","concordant","r_young",1,0.75,0,0,0,0,"accepted Stage 2",1000
+"exp","increase","concordant","r_young",1.5,0.75,1,0,0,1,"Stage 6",500
+"exp","increase","concordant","r_young",2,0.75,1,0,0,1,"Stage 6",500
+"exp","increase","concordant","r_young",3,0.75,1,0,0,1,"Stage 6",500
+"exp","increase","concordant","r_young",5,0.75,1,0,0,1,"Stage 6",500
+"exp","increase","concordant","r_young",10,0.75,1,0,0,1,"accepted Stage 2",1000
+"exp","increase","concordant","r_young",1,1,0,0,0,0,"accepted Stage 2",1000
+"exp","increase","concordant","r_young",1.5,1,1,0,0,1,"Stage 6",500
+"exp","increase","concordant","r_young",2,1,1,0,0,1,"Stage 6",500
+"exp","increase","concordant","r_young",3,1,1,0,0,1,"Stage 6",500
+"exp","increase","concordant","r_young",5,1,1,0,0,1,"Stage 6",500
+"exp","increase","concordant","r_young",10,1,1,0,0,1,"accepted Stage 2",1000
+"exp","increase","random-1","r_1",1,0.5,0.846,0,0.846,0.846,"accepted Stage 2",1000
+"exp","increase","random-1","r_1",1.5,0.5,0.928,0,0.072,0.488,"Stage 6",500
+"exp","increase","random-1","r_1",2,0.5,1,0,0,0.586,"Stage 6",500
+"exp","increase","random-1","r_1",3,0.5,1,0,0,0.67,"Stage 6",500
+"exp","increase","random-1","r_1",5,0.5,1,0,0,0.84,"Stage 6",500
+"exp","increase","random-1","r_1",10,0.5,1,0,0,0.981,"accepted Stage 2",1000
+"exp","increase","random-1","r_1",1,0.75,0.829,0,0.829,0.829,"accepted Stage 2",1000
+"exp","increase","random-1","r_1",1.5,0.75,0.788,0,0.212,0.396,"Stage 6",500
+"exp","increase","random-1","r_1",2,0.75,0.988,0,0.012,0.532,"Stage 6",500
+"exp","increase","random-1","r_1",3,0.75,1,0,0,0.636,"Stage 6",500
+"exp","increase","random-1","r_1",5,0.75,1,0,0,0.786,"Stage 6",500
+"exp","increase","random-1","r_1",10,0.75,1,0,0,0.946,"accepted Stage 2",1000
+"exp","increase","random-1","r_1",1,1,0.824,0,0.824,0.824,"accepted Stage 2",1000
+"exp","increase","random-1","r_1",1.5,1,0.492,0.002,0.506,0.252,"Stage 6",500
+"exp","increase","random-1","r_1",2,1,0.794,0,0.206,0.434,"Stage 6",500
+"exp","increase","random-1","r_1",3,1,0.976,0,0.024,0.576,"Stage 6",500
+"exp","increase","random-1","r_1",5,1,1,0,0,0.676,"Stage 6",500
+"exp","increase","random-1","r_1",10,1,1,0,0,0.829,"accepted Stage 2",1000
+"lin","decrease","adverse","r_young",1,0.5,0.021,0,0.021,0.021,"accepted Stage 2",1000
+"lin","decrease","adverse","r_young",1.5,0.5,0.002,0.226,0.772,0.004,"Stage 6",500
+"lin","decrease","adverse","r_young",2,0.5,0.336,0.004,0.66,0.012,"Stage 6",500
+"lin","decrease","adverse","r_young",3,0.5,0.976,0,0.024,0.116,"Stage 6",500
+"lin","decrease","adverse","r_young",5,0.5,1,0,0,0.358,"Stage 6",500
+"lin","decrease","adverse","r_young",10,0.5,1,0,0,0.747,"accepted Stage 2",1000
+"lin","decrease","adverse","r_young",1,0.75,0,0,0,0,"accepted Stage 2",1000
+"lin","decrease","adverse","r_young",1.5,0.75,0,1,0,0,"Stage 6",500
+"lin","decrease","adverse","r_young",2,0.75,0,0.986,0.014,0,"Stage 6",500
+"lin","decrease","adverse","r_young",3,0.75,0,0.5,0.5,0.002,"Stage 6",500
+"lin","decrease","adverse","r_young",5,0.75,0.14,0.024,0.836,0.018,"Stage 6",500
+"lin","decrease","adverse","r_young",10,0.75,0.788,0,0.212,0.356,"accepted Stage 2",1000
+"lin","decrease","adverse","r_young",1,1,0,0,0,0,"accepted Stage 2",1000
+"lin","decrease","adverse","r_young",1.5,1,0,1,0,0,"Stage 6",500
+"lin","decrease","adverse","r_young",2,1,0,1,0,0,"Stage 6",500
+"lin","decrease","adverse","r_young",3,1,0,1,0,0,"Stage 6",500
+"lin","decrease","adverse","r_young",5,1,0,1,0,0,"Stage 6",500
+"lin","decrease","adverse","r_young",10,1,0,1,0,0.168,"accepted Stage 2",1000
+"lin","decrease","all dates","r_all",1,0.5,0.848,0,0.848,0.848,"accepted Stage 2",1000
+"lin","decrease","all dates","r_all",1.5,0.5,0.982,0,0.018,0.548,"Stage 6",500
+"lin","decrease","all dates","r_all",2,0.5,1,0,0,0.624,"Stage 6",500
+"lin","decrease","all dates","r_all",3,0.5,1,0,0,0.75,"Stage 6",500
+"lin","decrease","all dates","r_all",5,0.5,1,0,0,0.898,"Stage 6",500
+"lin","decrease","all dates","r_all",10,0.5,1,0,0,0.974,"accepted Stage 2",1000
+"lin","decrease","all dates","r_all",1,0.75,0.848,0,0.848,0.848,"accepted Stage 2",1000
+"lin","decrease","all dates","r_all",1.5,0.75,0.982,0,0.018,0.548,"Stage 6",500
+"lin","decrease","all dates","r_all",2,0.75,1,0,0,0.624,"Stage 6",500
+"lin","decrease","all dates","r_all",3,0.75,1,0,0,0.75,"Stage 6",500
+"lin","decrease","all dates","r_all",5,0.75,1,0,0,0.898,"Stage 6",500
+"lin","decrease","all dates","r_all",10,0.75,1,0,0,0.974,"accepted Stage 2",1000
+"lin","decrease","all dates","r_all",1,1,0.848,0,0.848,0.848,"accepted Stage 2",1000
+"lin","decrease","all dates","r_all",1.5,1,0.982,0,0.018,0.548,"Stage 6",500
+"lin","decrease","all dates","r_all",2,1,1,0,0,0.624,"Stage 6",500
+"lin","decrease","all dates","r_all",3,1,1,0,0,0.75,"Stage 6",500
+"lin","decrease","all dates","r_all",5,1,1,0,0,0.898,"Stage 6",500
+"lin","decrease","all dates","r_all",10,1,1,0,0,0.974,"accepted Stage 2",1000
+"lin","decrease","bracketed","r_bracket",1,0.5,0.884,0,0.884,0.884,"accepted Stage 2",1000
+"lin","decrease","bracketed","r_bracket",1.5,0.5,0.896,0,0.104,0,"Stage 6",500
+"lin","decrease","bracketed","r_bracket",2,0.5,0.998,0,0.002,0,"Stage 6",500
+"lin","decrease","bracketed","r_bracket",3,0.5,1,0,0,0,"Stage 6",500
+"lin","decrease","bracketed","r_bracket",5,0.5,1,0,0,0.004,"Stage 6",500
+"lin","decrease","bracketed","r_bracket",10,0.5,1,0,0,0.034,"accepted Stage 2",1000
+"lin","decrease","bracketed","r_bracket",1,0.75,0.91,0,0.91,0.91,"accepted Stage 2",1000
+"lin","decrease","bracketed","r_bracket",1.5,0.75,0.706,0,0.294,0,"Stage 6",500
+"lin","decrease","bracketed","r_bracket",2,0.75,0.986,0,0.014,0,"Stage 6",500
+"lin","decrease","bracketed","r_bracket",3,0.75,1,0,0,0,"Stage 6",500
+"lin","decrease","bracketed","r_bracket",5,0.75,1,0,0,0,"Stage 6",500
+"lin","decrease","bracketed","r_bracket",10,0.75,1,0,0,0,"accepted Stage 2",1000
+"lin","decrease","bracketed","r_bracket",1,1,0.999,0,0.999,0.999,"accepted Stage 2",1000
+"lin","decrease","bracketed","r_bracket",1.5,1,0.106,0,0.894,0,"Stage 6",500
+"lin","decrease","bracketed","r_bracket",2,1,0.696,0,0.304,0,"Stage 6",500
+"lin","decrease","bracketed","r_bracket",3,1,0.998,0,0.002,0,"Stage 6",500
+"lin","decrease","bracketed","r_bracket",5,1,1,0,0,0,"Stage 6",500
+"lin","decrease","bracketed","r_bracket",10,1,1,0,0,0,"accepted Stage 2",1000
+"lin","decrease","concordant","r_old",1,0.5,0.027,0,0.027,0.027,"accepted Stage 2",1000
+"lin","decrease","concordant","r_old",1.5,0.5,1,0,0,0.008,"Stage 6",500
+"lin","decrease","concordant","r_old",2,0.5,1,0,0,0.01,"Stage 6",500
+"lin","decrease","concordant","r_old",3,0.5,1,0,0,0.018,"Stage 6",500
+"lin","decrease","concordant","r_old",5,0.5,1,0,0,0.048,"Stage 6",500
+"lin","decrease","concordant","r_old",10,0.5,1,0,0,0.139,"accepted Stage 2",1000
+"lin","decrease","concordant","r_old",1,0.75,0,0,0,0,"accepted Stage 2",1000
+"lin","decrease","concordant","r_old",1.5,0.75,1,0,0,0,"Stage 6",500
+"lin","decrease","concordant","r_old",2,0.75,1,0,0,0,"Stage 6",500
+"lin","decrease","concordant","r_old",3,0.75,1,0,0,0,"Stage 6",500
+"lin","decrease","concordant","r_old",5,0.75,1,0,0,0,"Stage 6",500
+"lin","decrease","concordant","r_old",10,0.75,1,0,0,0,"accepted Stage 2",1000
+"lin","decrease","concordant","r_old",1,1,0,0,0,0,"accepted Stage 2",1000
+"lin","decrease","concordant","r_old",1.5,1,1,0,0,0,"Stage 6",500
+"lin","decrease","concordant","r_old",2,1,1,0,0,0,"Stage 6",500
+"lin","decrease","concordant","r_old",3,1,1,0,0,0,"Stage 6",500
+"lin","decrease","concordant","r_old",5,1,1,0,0,0,"Stage 6",500
+"lin","decrease","concordant","r_old",10,1,1,0,0,0,"accepted Stage 2",1000
+"lin","decrease","random-1","r_1",1,0.5,0.846,0,0.846,0.846,"accepted Stage 2",1000
+"lin","decrease","random-1","r_1",1.5,0.5,0.892,0,0.108,0.468,"Stage 6",500
+"lin","decrease","random-1","r_1",2,0.5,0.998,0,0.002,0.582,"Stage 6",500
+"lin","decrease","random-1","r_1",3,0.5,1,0,0,0.702,"Stage 6",500
+"lin","decrease","random-1","r_1",5,0.5,1,0,0,0.836,"Stage 6",500
+"lin","decrease","random-1","r_1",10,0.5,1,0,0,0.94,"accepted Stage 2",1000
+"lin","decrease","random-1","r_1",1,0.75,0.829,0,0.829,0.829,"accepted Stage 2",1000
+"lin","decrease","random-1","r_1",1.5,0.75,0.726,0,0.274,0.396,"Stage 6",500
+"lin","decrease","random-1","r_1",2,0.75,0.97,0,0.03,0.572,"Stage 6",500
+"lin","decrease","random-1","r_1",3,0.75,1,0,0,0.664,"Stage 6",500
+"lin","decrease","random-1","r_1",5,0.75,1,0,0,0.762,"Stage 6",500
+"lin","decrease","random-1","r_1",10,0.75,1,0,0,0.907,"accepted Stage 2",1000
+"lin","decrease","random-1","r_1",1,1,0.824,0,0.824,0.824,"accepted Stage 2",1000
+"lin","decrease","random-1","r_1",1.5,1,0.404,0.006,0.59,0.228,"Stage 6",500
+"lin","decrease","random-1","r_1",2,1,0.712,0.002,0.286,0.41,"Stage 6",500
+"lin","decrease","random-1","r_1",3,1,0.968,0,0.032,0.618,"Stage 6",500
+"lin","decrease","random-1","r_1",5,1,0.994,0,0.006,0.698,"Stage 6",500
+"lin","decrease","random-1","r_1",10,1,1,0,0,0.807,"accepted Stage 2",1000
+"lin","increase","adverse","r_old",1,0.5,0.027,0,0.027,0.027,"accepted Stage 2",1000
+"lin","increase","adverse","r_old",1.5,0.5,0.018,0.196,0.786,0.01,"Stage 6",500
+"lin","increase","adverse","r_old",2,0.5,0.376,0,0.624,0.018,"Stage 6",500
+"lin","increase","adverse","r_old",3,0.5,0.986,0,0.014,0.116,"Stage 6",500
+"lin","increase","adverse","r_old",5,0.5,1,0,0,0.392,"Stage 6",500
+"lin","increase","adverse","r_old",10,0.5,1,0,0,0.774,"accepted Stage 2",1000
+"lin","increase","adverse","r_old",1,0.75,0,0,0,0,"accepted Stage 2",1000
+"lin","increase","adverse","r_old",1.5,0.75,0,0.998,0.002,0,"Stage 6",500
+"lin","increase","adverse","r_old",2,0.75,0,0.944,0.056,0,"Stage 6",500
+"lin","increase","adverse","r_old",3,0.75,0.006,0.442,0.552,0.004,"Stage 6",500
+"lin","increase","adverse","r_old",5,0.75,0.178,0.028,0.794,0.018,"Stage 6",500
+"lin","increase","adverse","r_old",10,0.75,0.819,0,0.181,0.353,"accepted Stage 2",1000
+"lin","increase","adverse","r_old",1,1,0,0,0,0,"accepted Stage 2",1000
+"lin","increase","adverse","r_old",1.5,1,0,1,0,0,"Stage 6",500
+"lin","increase","adverse","r_old",2,1,0,1,0,0,"Stage 6",500
+"lin","increase","adverse","r_old",3,1,0,1,0,0,"Stage 6",500
+"lin","increase","adverse","r_old",5,1,0,1,0,0,"Stage 6",500
+"lin","increase","adverse","r_old",10,1,0,1,0,0.195,"accepted Stage 2",1000
+"lin","increase","all dates","r_all",1,0.5,0.848,0,0.848,0.848,"accepted Stage 2",1000
+"lin","increase","all dates","r_all",1.5,0.5,0.996,0,0.004,0.562,"Stage 6",500
+"lin","increase","all dates","r_all",2,0.5,1,0,0,0.64,"Stage 6",500
+"lin","increase","all dates","r_all",3,0.5,1,0,0,0.764,"Stage 6",500
+"lin","increase","all dates","r_all",5,0.5,1,0,0,0.868,"Stage 6",500
+"lin","increase","all dates","r_all",10,0.5,1,0,0,0.976,"accepted Stage 2",1000
+"lin","increase","all dates","r_all",1,0.75,0.848,0,0.848,0.848,"accepted Stage 2",1000
+"lin","increase","all dates","r_all",1.5,0.75,0.996,0,0.004,0.562,"Stage 6",500
+"lin","increase","all dates","r_all",2,0.75,1,0,0,0.64,"Stage 6",500
+"lin","increase","all dates","r_all",3,0.75,1,0,0,0.764,"Stage 6",500
+"lin","increase","all dates","r_all",5,0.75,1,0,0,0.868,"Stage 6",500
+"lin","increase","all dates","r_all",10,0.75,1,0,0,0.976,"accepted Stage 2",1000
+"lin","increase","all dates","r_all",1,1,0.848,0,0.848,0.848,"accepted Stage 2",1000
+"lin","increase","all dates","r_all",1.5,1,0.996,0,0.004,0.562,"Stage 6",500
+"lin","increase","all dates","r_all",2,1,1,0,0,0.64,"Stage 6",500
+"lin","increase","all dates","r_all",3,1,1,0,0,0.764,"Stage 6",500
+"lin","increase","all dates","r_all",5,1,1,0,0,0.868,"Stage 6",500
+"lin","increase","all dates","r_all",10,1,1,0,0,0.976,"accepted Stage 2",1000
+"lin","increase","bracketed","r_bracket",1,0.5,0.884,0,0.884,0.884,"accepted Stage 2",1000
+"lin","increase","bracketed","r_bracket",1.5,0.5,0.916,0,0.084,0,"Stage 6",500
+"lin","increase","bracketed","r_bracket",2,0.5,1,0,0,0,"Stage 6",500
+"lin","increase","bracketed","r_bracket",3,0.5,1,0,0,0.002,"Stage 6",500
+"lin","increase","bracketed","r_bracket",5,0.5,1,0,0,0.004,"Stage 6",500
+"lin","increase","bracketed","r_bracket",10,0.5,1,0,0,0.035,"accepted Stage 2",1000
+"lin","increase","bracketed","r_bracket",1,0.75,0.91,0,0.91,0.91,"accepted Stage 2",1000
+"lin","increase","bracketed","r_bracket",1.5,0.75,0.78,0,0.22,0,"Stage 6",500
+"lin","increase","bracketed","r_bracket",2,0.75,0.994,0,0.006,0,"Stage 6",500
+"lin","increase","bracketed","r_bracket",3,0.75,1,0,0,0,"Stage 6",500
+"lin","increase","bracketed","r_bracket",5,0.75,1,0,0,0,"Stage 6",500
+"lin","increase","bracketed","r_bracket",10,0.75,1,0,0,0,"accepted Stage 2",1000
+"lin","increase","bracketed","r_bracket",1,1,0.999,0,0.999,0.999,"accepted Stage 2",1000
+"lin","increase","bracketed","r_bracket",1.5,1,0.166,0,0.834,0,"Stage 6",500
+"lin","increase","bracketed","r_bracket",2,1,0.774,0,0.226,0,"Stage 6",500
+"lin","increase","bracketed","r_bracket",3,1,1,0,0,0,"Stage 6",500
+"lin","increase","bracketed","r_bracket",5,1,1,0,0,0,"Stage 6",500
+"lin","increase","bracketed","r_bracket",10,1,1,0,0,0,"accepted Stage 2",1000
+"lin","increase","concordant","r_young",1,0.5,0.021,0,0.021,0.021,"accepted Stage 2",1000
+"lin","increase","concordant","r_young",1.5,0.5,1,0,0,0.016,"Stage 6",500
+"lin","increase","concordant","r_young",2,0.5,1,0,0,0.02,"Stage 6",500
+"lin","increase","concordant","r_young",3,0.5,1,0,0,0.028,"Stage 6",500
+"lin","increase","concordant","r_young",5,0.5,1,0,0,0.04,"Stage 6",500
+"lin","increase","concordant","r_young",10,0.5,1,0,0,0.143,"accepted Stage 2",1000
+"lin","increase","concordant","r_young",1,0.75,0,0,0,0,"accepted Stage 2",1000
+"lin","increase","concordant","r_young",1.5,0.75,1,0,0,0,"Stage 6",500
+"lin","increase","concordant","r_young",2,0.75,1,0,0,0,"Stage 6",500
+"lin","increase","concordant","r_young",3,0.75,1,0,0,0,"Stage 6",500
+"lin","increase","concordant","r_young",5,0.75,1,0,0,0,"Stage 6",500
+"lin","increase","concordant","r_young",10,0.75,1,0,0,0,"accepted Stage 2",1000
+"lin","increase","concordant","r_young",1,1,0,0,0,0,"accepted Stage 2",1000
+"lin","increase","concordant","r_young",1.5,1,1,0,0,0,"Stage 6",500
+"lin","increase","concordant","r_young",2,1,1,0,0,0,"Stage 6",500
+"lin","increase","concordant","r_young",3,1,1,0,0,0,"Stage 6",500
+"lin","increase","concordant","r_young",5,1,1,0,0,0,"Stage 6",500
+"lin","increase","concordant","r_young",10,1,1,0,0,0,"accepted Stage 2",1000
+"lin","increase","random-1","r_1",1,0.5,0.846,0,0.846,0.846,"accepted Stage 2",1000
+"lin","increase","random-1","r_1",1.5,0.5,0.928,0,0.072,0.484,"Stage 6",500
+"lin","increase","random-1","r_1",2,0.5,1,0,0,0.588,"Stage 6",500
+"lin","increase","random-1","r_1",3,0.5,1,0,0,0.69,"Stage 6",500
+"lin","increase","random-1","r_1",5,0.5,1,0,0,0.814,"Stage 6",500
+"lin","increase","random-1","r_1",10,0.5,1,0,0,0.933,"accepted Stage 2",1000
+"lin","increase","random-1","r_1",1,0.75,0.829,0,0.829,0.829,"accepted Stage 2",1000
+"lin","increase","random-1","r_1",1.5,0.75,0.782,0,0.218,0.436,"Stage 6",500
+"lin","increase","random-1","r_1",2,0.75,0.984,0,0.016,0.582,"Stage 6",500
+"lin","increase","random-1","r_1",3,0.75,1,0,0,0.642,"Stage 6",500
+"lin","increase","random-1","r_1",5,0.75,1,0,0,0.75,"Stage 6",500
+"lin","increase","random-1","r_1",10,0.75,1,0,0,0.866,"accepted Stage 2",1000
+"lin","increase","random-1","r_1",1,1,0.824,0,0.824,0.824,"accepted Stage 2",1000
+"lin","increase","random-1","r_1",1.5,1,0.488,0.002,0.51,0.258,"Stage 6",500
+"lin","increase","random-1","r_1",2,1,0.782,0,0.218,0.424,"Stage 6",500
+"lin","increase","random-1","r_1",3,1,0.96,0,0.04,0.572,"Stage 6",500
+"lin","increase","random-1","r_1",5,1,0.998,0,0.002,0.656,"Stage 6",500
+"lin","increase","random-1","r_1",10,1,1,0,0,0.754,"accepted Stage 2",1000

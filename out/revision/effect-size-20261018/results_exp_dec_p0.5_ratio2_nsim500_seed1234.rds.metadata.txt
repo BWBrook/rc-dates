@@ -1,0 +1,23 @@
+rc-dates Stage 2 signed-model simulation
+schema_version: 3
+generation_completed_utc: 2026-10-18 07:25:12 UTC
+metadata_recorded_utc: 2026-10-18 07:25:12 UTC
+r_version: R version 4.5.3 (2026-03-11)
+truth: exp_dec
+effect_ratio: 2
+design: signed-v1
+observation_model: curve_mean
+site_treatment_proportion: 0.5
+replicates: 500
+master_seed: 1234
+seed_design: common random numbers; replicate seed = master seed + replicate number
+input_md5: 8d30b24e98088a7808c234d6b77ac382
+renv_lock_md5: 96135a2d8be3bbf3d5e6efe11890188f
+model_source_md5: c4e086799dc9ad978890842d1121e04f
+distribution_source_md5: 07e0e8531ba818b36fc9764602f67da5
+runner_source_md5: 2232db41817470ab616186968a5bf032
+container_recipe_md5: 3b2b85ce72c4b7cd30200607d9ae8da9
+container_install_md5: bad3250c4a6e9a0c779157a074d1f9a9
+container_image_id: sha256:01f5e221d0f3b70ccb3edd0fd6556ffd1c645784e98e147e81034866b9137777
+output_md5: af2399ae9c2e17db9ba04e82cfde2fd7
+packages: digest=0.6.39; fitdistrplus=1.2.6; rcarbon=1.5.2; readr=2.2.0; rlang=1.1.7; tibble=3.3.1

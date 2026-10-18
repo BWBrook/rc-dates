@@ -128,3 +128,24 @@ matched in all 17 columns, and the binding rejected a wrong truth, proportion, r
 Only completeness and acceptance status were read in that exercise, not selection rates. Files from
 scenarios still running are checkpoints written to the final filename and correctly fail the
 completeness check.
+
+## Result and display amendment after acceptance (18 October 2026, about 09:50 UTC)
+
+The matrix finished at 09:35 UTC with exit status 0. The committed summariser passed every check:
+- the smoke rerun matched all 960 rows and 17 columns;
+- all 48 Stage 6 scenarios had 500 replicates;
+- all 15 accepted cells had 1,000 replicates;
+- `l1`/`l2` selected-state agreement was 0.9969.
+
+Stage 6 is technically accepted. Checksums for the evidence are in
+`out/revision/effect-size-20261018/SHA256SUMS`.
+
+**Display change, made after the results were seen.** The prespecified display plots only the
+correct-state rate. Under the opposing one-sided rule, that cannot separate a reversal from a uniform
+selection. For example, 0% correct means 100% reversed at 75% treatment and a ratio of 1.5, but about
+78% uniform and 22% reversed at 50% treatment and the same ratio. Both rates are prespecified outcomes.
+
+The manuscript figure therefore plots the correct-state rate above zero and the reversal rate below
+zero. The gap between them is uniform selection. Nothing else changes: estimands, cells, rules and
+interpretation are as before. The prespecified display is kept unchanged as an audit record at
+`out/revision/effect-size-20261018/fig_effect_size_prespecified.{pdf,png}`.

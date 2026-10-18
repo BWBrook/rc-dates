@@ -1,0 +1,5 @@
+rc-dates Stage 6 summary
+acceptance 1: smoke rerun reproduced accepted replicates 1-20 (960 rows, 17 columns; smoke md5 d014d76d50084ff49aaf2366c23200e8)
+acceptance 2-4: 48 of 48 Stage 6 scenarios (500 replicates) and 15 of 15 accepted cells (1000 replicates)
+container image: sha256:01f5e221d0f3b70ccb3edd0fd6556ffd1c645784e98e147e81034866b9137777
+l1/l2 selected-state agreement over all Stage 6 and pooled cells: 0.9969

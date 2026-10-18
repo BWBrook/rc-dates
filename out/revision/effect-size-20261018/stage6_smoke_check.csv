@@ -1,0 +1,2 @@
+"smoke_file","smoke_md5","reference_file","reference_md5","rows_compared","rows_expected","row_keys_unique","columns_compared","columns_differing","scenario_bound","provenance_frozen","reproduced"
+"out/revision/effect-size-20261018/smoke/results_lin_inc_p1_ratio10_nsim20_seed1234.rds","d014d76d50084ff49aaf2366c23200e8","out/revision/signed-models/results_lin_inc_p1_ratio10_nsim1000_seed1234.rds","da6dd37f408fbf8e2a5962b00dbcebed",960,960,TRUE,17,"",TRUE,TRUE,TRUE
