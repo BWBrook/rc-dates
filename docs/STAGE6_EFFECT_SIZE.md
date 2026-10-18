@@ -104,3 +104,27 @@ require 500 replicates per Stage 6 scenario, and accepted ratio-10 and uniform c
 their full 1,000 replicates. The planned figure shows the constant-history reference (ratio 1) as an
 unconnected marker, because its success criterion is uniform selection rather than correct direction.
 This follows Codex's point in discussion 88, message 1950.
+
+## Acceptance enforcement repaired before any Stage 6 rate was inspected (18 October 2026, about 07:10 UTC)
+
+Codex's static audit (discussion 88, message 1980;
+`manuscript/reviews/codex_stage6_pre_results_audit_2026-10-18.md`) found that the summariser did not
+enforce the design as written. These repairs change enforcement and display only. They change no estimand,
+scenario or simulation.
+
+- **Check 1.** The summariser now runs the smoke comparison itself. It requires every one of the 17
+  result columns of the 20-replicate rerun to equal accepted replicates 1–20, with rows matched on
+  replicate, score, rule and model. It records both file hashes in `stage6_smoke_check.csv`.
+- **Scenario binding.** Every Stage 6 and accepted reference file must have stored truth,
+  proportion, ratio and replicate count that match its row in the expected grid. The results must also
+  carry that truth and proportion. Swapped or relabelled files therefore fail.
+- **Frozen matrix.** The environment overrides for ratios and replicate count are removed. Acceptance
+  requires all 48 scenarios at 500 replicates and all 15 accepted cells at 1,000.
+- **Figure.** Lines connect only ratios greater than 1, and ratio 1 is drawn as an isolated marker. The
+  caption gives 500 replicates for ratios 1.5–5 and 1,000 for ratios 1 and 10.
+
+The repaired checks were exercised on the scenarios that had completed by then. The smoke comparison
+matched in all 17 columns, and the binding rejected a wrong truth, proportion, ratio or replicate count.
+Only completeness and acceptance status were read in that exercise, not selection rates. Files from
+scenarios still running are checkpoints written to the final filename and correctly fail the
+completeness check.

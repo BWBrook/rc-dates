@@ -8,7 +8,9 @@ figure_stem <- if (length(args) >= 2L) args[[2L]] else file.path("manuscript", "
 
 dose <- utils::read.csv(file.path(summary_dir, "stage6_dose_response.csv"), stringsAsFactors = FALSE)
 dose <- dose[dose$role %in% c("adverse", "bracketed", "random-1"), ]
-dose <- unique(dose[c("family", "direction", "role", "ratio", "prop", "correct_state_rate")])
+dose <- unique(dose[c("family", "direction", "role", "ratio", "prop", "correct_state_rate", "replicates")])
+stopifnot(all(dose$replicates[dose$ratio %in% c(1, 10)] == 1000L),
+          all(dose$replicates[!dose$ratio %in% c(1, 10)] == 500L))
 
 dose$family_label <- factor(dose$family, levels = c("lin", "exp"),
                             labels = c("Linear histories", "Exponential histories"))
@@ -33,7 +35,8 @@ plot <- ggplot2::ggplot(
                group = interaction(prop_label, direction_label))
 ) +
   ggplot2::geom_hline(yintercept = c(0, 1), colour = "grey85", linewidth = 0.3) +
-  ggplot2::geom_line(linewidth = 0.55) +
+  ggplot2::geom_vline(xintercept = sqrt(1.5), colour = "grey85", linewidth = 0.3, linetype = "dotted") +
+  ggplot2::geom_line(data = dose[dose$ratio > 1, ], linewidth = 0.55) +
   ggplot2::geom_point(size = 1.7, fill = "white", stroke = 0.6) +
   ggplot2::facet_grid(rows = ggplot2::vars(family_label), cols = ggplot2::vars(role_label)) +
   ggplot2::scale_x_log10(breaks = ratio_breaks, labels = ratio_labels) +
@@ -45,8 +48,9 @@ plot <- ggplot2::ggplot(
   ggplot2::labs(
     x = "True end-to-end density ratio over 651–11,650 cal BP (log scale)",
     y = "Replicates in which AIC favours the true state",
-    caption = paste("True state: correct direction of change, or uniform for a constant history.",
-                    "n = 1,000 replicates per point.")
+    caption = paste("True state: uniform for the constant history (ratio 1, unconnected), otherwise the correct",
+                    "direction of change.\nRatios 1.5–5: 500 replicates per point (Stage 6).",
+                    "Ratios 1 and 10: 1,000 replicates per point (accepted evidence).")
   ) +
   ggplot2::theme_classic(base_size = 10) +
   ggplot2::theme(
