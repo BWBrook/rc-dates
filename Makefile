@@ -23,8 +23,9 @@ help:
 	@echo "  make renv-restore          Restore the frozen R environment"
 	@echo
 	@echo "Evidence:"
-	@echo "  make empirical-figures     Rebuild empirical Figures 1-2 and audit summaries"
-	@echo "  make production-figures    Validate accepted simulations and rebuild Figures 3-5"
+	@echo "  make concept-figure        Draw the exact-age retention illustration (Python/uv)"
+	@echo "  make empirical-figures     Rebuild empirical Figure 5, SI Figure S3 and audit summaries"
+	@echo "  make production-figures    Validate accepted simulations and rebuild Figures 2-4"
 	@echo "  make stage2-rerun          Run the signed-model matrix and acceptance summary"
 	@echo "  make stage2-summarise      Revalidate completed Stage 2 evidence"
 	@echo
@@ -60,6 +61,10 @@ empirical-figures: r-preflight
 .PHONY: production-figures
 production-figures: r-preflight
 	"$(RSCRIPT)" scripts/render_population_simulation_figures.R
+
+.PHONY: concept-figure
+concept-figure:
+	uv run --script scripts/render_retention_mechanism.py
 
 .PHONY: stage2-rerun
 stage2-rerun:
@@ -130,13 +135,14 @@ submission-build: manuscript-build
 		--csl ../../csl/journal-of-archaeological-science.csl \
 		--resource-path=.:../figures --pdf-engine=xelatex \
 		-V mainfont="DejaVu Serif" -V papersize=a4 -V geometry:margin=2.5cm \
-		-o ../submission/dist/supplementary_information.pdf
+		-o "$(abspath $(SUBMISSION_DIST))/supplementary_information.pdf"
 	cd manuscript/text && pandoc supplementary.md --standalone \
 		--from markdown+tex_math_dollars+tex_math_single_backslash --citeproc \
 		--bibliography ../../references/refs.yaml \
 		--csl ../../csl/journal-of-archaeological-science.csl \
 		--resource-path=.:../figures \
-		-o ../submission/dist/supplementary_information.docx
+		-o "$(abspath $(SUBMISSION_DIST))/supplementary_information.docx"
+	python3 scripts/normalize_docx_page_breaks.py "$(SUBMISSION_DIST)/supplementary_information.docx"
 
 SCIENTIFIC_RELEASE_DIR ?= dist/rc-dates-scientific-reproducibility-2026-09-19
 .PHONY: scientific-release

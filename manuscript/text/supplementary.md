@@ -122,7 +122,7 @@ A uniform candidate and linear and exponential candidates of either direction we
 
 Minimum AIC under $\ell^1$ supplied the primary selected family. The criterion assumes independent regional draws and does not include retention probabilities. For bracketed retention, the oldest and youngest observations retained from a site are dependent; the product criterion treats their posteriors under working independence. Bracketed AIC and family-selection results therefore describe this analysis workflow rather than likelihood support under a joint paired-order-statistic model. We recorded the selected direction state (uniform, increasing or decreasing), generating-family selection, direction reversal, fitted generating-family $\theta$ and boundary frequency. Truth-consistent state means uniform selection under uniform truth and the correct direction under a non-uniform truth, irrespective of functional family.
 
-Figure 4 summarises the bounded endpoint contrast $c=\tanh(\theta/2)$, which equals $aL^2/2$ for linear fits and $\tanh(rL/2)$ for exponential fits. At the natural linear endpoints, $c=\pm1$ while $\theta=\pm\infty$; at the exponential cap, $|\theta|=10.999$ and $|c|=\tanh(10.999/2)<1$. The figure transforms each stored generating-family fit regardless of which family AIC selected, then calculates the mean and type-7 2.5th and 97.5th percentiles across all 1,000 replicates. These are empirical replicate ranges, not confidence intervals for a historical parameter. Fractions beside every group retain the original near-boundary flags. This derived presentation preserves the original fits and model-selection results without reclassifying any fit as an exact boundary optimum.
+Figure 3 summarises the bounded endpoint contrast $c=\tanh(\theta/2)$, which equals $aL^2/2$ for linear fits and $\tanh(rL/2)$ for exponential fits. At the natural linear endpoints, $c=\pm1$ while $\theta=\pm\infty$; at the exponential cap, $|\theta|=10.999$ and $|c|=\tanh(10.999/2)<1$. The figure transforms each stored generating-family fit regardless of which family AIC selected, then calculates the mean and type-7 2.5th and 97.5th percentiles across all 1,000 replicates. These are empirical replicate ranges, not confidence intervals for a historical parameter. Fractions beside every group retain the original near-boundary flags. This derived presentation preserves the original fits and model-selection results without reclassifying any fit as an exact boundary optimum.
 
 ### S2.5 Direction and family selection
 
@@ -198,6 +198,18 @@ The supplementary reproducibility archive, supplied in anonymised form for peer 
 ![](../figures/SI_dates_per_site_in_austarch_holocene.png){#fig-si-s2 width=75%}
 
 **Supplementary Figure S2.** Empirical and fitted distribution of radiocarbon determinations per site in the 976-date, 116-site reference set. Points show the observed frequency; the line is the fitted negative-binomial distribution left-truncated at five dates. The empirical and fitted conditional means are 8.414 and 8.412 dates per site, respectively; the empirical range is 5–33.
+
+\newpage
+
+```{=openxml}
+<w:p><w:r><w:br w:type="page"/></w:r></w:p>
+```
+
+### All-date empirical summaries
+
+![](../figures/fig_1.png){#fig-si-s3 width=95%}
+
+**Supplementary Figure S3.** All-date calendar-age summaries for the common-membership empirical benchmark: 540 terrestrial charcoal or wood determinations from 68 AustArch sites. The SPD sums calibrated posterior mass and applies a centred 100-year running mean; the FD bins posterior medians at 100-year resolution and applies a two-bin display smooth; the reflected Gaussian KDE uses the same medians and a 100-year bandwidth. Every method receives the same dates and is normalised to unit integral over 651–11,650 cal BP. Pairwise total-variation distances are 0.046 (SPD–KDE), 0.088 (FD–KDE) and 0.101 (SPD–FD). The padded plotting range is 12,000–0 cal BP; the curves describe relative temporal shape, not date count or population abundance.
 
 ## References
 
