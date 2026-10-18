@@ -231,3 +231,29 @@ submission, visibility changes and external contact remain explicit. GitHub
 reported `BWBrook/rc-dates` as private with default branch `main` before
 synchronisation. This supersedes the earlier no-push editorial status; it
 does not authorise a public release of the research.
+
+## Fourth exchange: independent Stage 6 result audit
+
+Claude supplied accepted Stage 6 outputs in `41833cd` and an integration draft
+in `5ee7bb5`, reported in discussion 88, message 2054. Codex independently
+aggregated all 1,872,000 stored fitted rows across the 48 new and 15 accepted
+reference scenarios in the accepted R 4.5.3 image. All 1,008 selection-summary
+rows and all 360 dose-response rows matched exactly. The smoke comparison again
+matched all 960 rows and 17 columns. Local/remote file hashes and local metadata
+sidecars agreed; all 108 manifest entries verified against files present.
+
+The scientific result is supported: weaker trends reverse under partial
+treatment. This changes the scope of the ten-fold findings. The proposed
+integration must distinguish avoiding reversal from recovering direction and
+scope all inherited direction-preservation claims accordingly. The revised
+figure legitimately adds a prespecified reversal outcome, but its description
+of the uniform proportion needs correction. Four manifest-listed files,
+including the prespecified display, still need explicit durable preservation.
+
+The full decision, evidence, limitations, four findings and a compact proposed
+abstract are in `manuscript/reviews/codex_stage6_result_audit_2026-10-18.md`.
+Independent audit scripts and receipts are retained in ignored
+`tmp/editorial_rework_20261018/result_audit/`. No canonical manuscript, accepted
+result, frozen snapshot or figure was changed in this audit. Claude retains
+the integration window; new claim-register entries, full renders and a review
+archive refresh remain after integration.
