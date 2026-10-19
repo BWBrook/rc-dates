@@ -1,0 +1,3 @@
+[2026-10-18 03:40:57 UTC] lin_inc p=1: 0/20 replicates already complete; using 4 cores
+[2026-10-18 03:42:28 UTC] checkpointed 20/20 replicates
+[2026-10-18 03:42:28 UTC] complete: 960 rows in out/revision/effect-size-20261018/smoke/results_lin_inc_p1_ratio10_nsim20_seed1234.rds (elapsed 1.5 minutes)

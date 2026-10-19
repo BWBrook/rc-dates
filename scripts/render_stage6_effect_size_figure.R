@@ -72,8 +72,8 @@ manuscript_plot <- rate_plot(outcomes) +
     y = "Replicates: reversed direction (below zero) or true state (above zero)",
     caption = paste("Opposing extreme: oldest date for increasing histories, youngest for decreasing.",
                     "Above zero: AIC favours the correct direction,\nor uniform for the constant history",
-                    "(ratio 1, unconnected). Below zero: AIC favours the opposite direction; the remainder",
-                    "favours uniform.\nRatios 1.5–5: 500 replicates; ratios 1 and 10: 1,000.")
+                    "(ratio 1, unconnected). Below zero: AIC favours the opposite direction. For ratios above 1,",
+                    "\nthe remaining replicates favour uniform. Ratios 1.5–5: 500 replicates; ratios 1 and 10: 1,000.")
   )
 
 # Prespecified display, kept as the audit record ---------------------------------------------

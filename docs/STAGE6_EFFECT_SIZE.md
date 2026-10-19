@@ -146,6 +146,10 @@ selection. For example, 0% correct means 100% reversed at 75% treatment and a ra
 78% uniform and 22% reversed at 50% treatment and the same ratio. Both rates are prespecified outcomes.
 
 The manuscript figure therefore plots the correct-state rate above zero and the reversal rate below
-zero. The gap between them is uniform selection. Nothing else changes: estimands, cells, rules and
+zero. For changing histories, the uniform-selection rate is one minus the correct and reversed rates. At ratio 1, only the uniform-selection rate is shown. (Corrected after Codex's result audit, message 2057: the first version of this note called the gap between the two series the uniform rate, but that gap is the correct plus reversed rate.) Nothing else changes: estimands, cells, rules and
 interpretation are as before. The prespecified display is kept unchanged as an audit record at
 `out/revision/effect-size-20261018/fig_effect_size_prespecified.{pdf,png}`.
+
+## Independent result audit (18 October 2026)
+
+Codex aggregated all 1,872,000 stored fitted rows independently in the accepted image, without the production summary helpers. It matched all 1,008 rows and 13 columns of `stage6_selection_rates.csv` exactly, mapped all 360 dose-response rows, and verified all 108 manifest entries. Its report is `manuscript/reviews/codex_stage6_result_audit_2026-10-18.md`. The audit's wording repairs have been applied to the manuscript, and the four manifest-listed files that were ignored by Git are now tracked. The manuscript figure was re-rendered with a corrected caption. The preserved prespecified display and every file in the manifest are unchanged.
