@@ -146,6 +146,6 @@ None to declare.
 
 ## Declaration of generative AI and AI-assisted technologies in the manuscript preparation process
 
-The authors used OpenAI ChatGPT and Codex (GPT-5.6 Sol, GPT-6 Astra and GPT-6) and Anthropic Claude (Opus, Fable 5.1 and claude-opus-5-5). The systems contributed to analysis design, developed and checked code, executed simulations, produced figures, audited evidence, and drafted and revised the manuscript. The authors provided scientific direction and are responsible for the interpretation, final review and approval. Rerunning the analyses requires the archived code, pinned environment and input data, but no AI tools or original prompts. The authors take full responsibility for the article.
+The authors used OpenAI ChatGPT and Codex (GPT-5.6 Sol, GPT-6 Astra and GPT-6) and Anthropic Claude (Fable 5.1 and Opus 5.5). The systems contributed to analysis design, developed and checked code, executed simulations, produced figures, audited evidence, and drafted and revised the manuscript. The authors provided scientific direction and are responsible for the interpretation, final review and approval. Rerunning the analyses requires the archived code, pinned environment and input data, but no AI tools or original prompts. The authors take full responsibility for the article.
 
 ## References
