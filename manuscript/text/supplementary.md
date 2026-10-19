@@ -62,7 +62,7 @@ The following full-site SPD comparisons show retention effects at a fixed retain
 
 These are descriptive comparisons of the accepted outputs, not a new hypothesis test. The bracketed mean shift falls within the random-1 shift range, but its SPD distance exceeds the 97.5th percentile of random-1 distances. Moreover, random-1 retains half as many dates as bracketed retention; no empirical random-2 comparison was made.
 
-The prespecified retention-versus-method criterion is a separate comparison. Only all-site oldest, youngest and bracketed retention met it, with contrasts of +0.193, +0.370 and +0.084, respectively. Their method-specific distances were 0.455–0.535, 0.524–0.554 and 0.279–0.326; the largest between-method distances were 0.263, 0.154 and 0.195. Neither half-site extremum, either random rule at either proportion, nor half-site bracketed retention met the criterion. Figure 2 envelopes describe conditional retention realisations; they do not estimate uncertainty over sites, archive inclusion or population history.
+The prespecified retention-versus-method criterion is a separate comparison. Only all-site oldest, youngest and bracketed retention met it, with contrasts of +0.193, +0.370 and +0.084, respectively. Their method-specific distances were 0.455–0.535, 0.524–0.554 and 0.279–0.326; the largest between-method distances were 0.263, 0.154 and 0.195. Neither half-site extremum, either random rule at either proportion, nor half-site bracketed retention met the criterion. Figure 6 envelopes describe conditional retention realisations; they do not estimate uncertainty over sites, archive inclusion or population history.
 
 ### S1.4 Frozen sensitivity suite
 
@@ -84,13 +84,13 @@ with residual standard deviation 0.4719 and $R^2=0.170$. This regression reprodu
 
 ### S2.2 Generating truths and observation model
 
-Five unit-integral regional event-age densities were defined over 651–11,650 cal BP: uniform, linear increase, linear decrease, exponential increase and exponential decrease (Supplementary Fig. S1). “Increase” means greater density at the recent, low-cal-BP boundary. Every non-uniform truth had a ten-fold endpoint ratio, summarised on the common scale
+Five unit-integral regional event-age densities were defined over 651–11,650 cal BP: uniform, linear increase, linear decrease, exponential increase and exponential decrease (Supplementary Fig. S1). “Increase” means greater density at the recent, low-cal-BP boundary. In the main experiment, every non-uniform truth had a ten-fold endpoint ratio, summarised on the common scale
 
 $$
 \theta=\log\!\left\{\frac{f(651)}{f(11650)}\right\}.
 $$
 
-Thus $\theta=\log(10)$ for increasing truths, $-\log(10)$ for decreasing truths and 0 for uniform truth. Linear slopes and exponential rates were signed, so both fitted families could represent either temporal direction.
+Thus $\theta=\log(10)$ for ten-fold increasing truths, $-\log(10)$ for decreasing truths and 0 for uniform truth. Linear slopes and exponential rates were signed, so both fitted families could represent either temporal direction.
 
 For each replicate, all calendar ages were independent draws from the regional truth. Site labels determined only how many dates were grouped together and which observations were subsequently retained. They did not impose occupation windows, durations, stratigraphic order or within-site dependence.
 
@@ -122,11 +122,11 @@ A uniform candidate and linear and exponential candidates of either direction we
 
 Minimum AIC under $\ell^1$ supplied the primary selected family. The criterion assumes independent regional draws and does not include retention probabilities. For bracketed retention, the oldest and youngest observations retained from a site are dependent; the product criterion treats their posteriors under working independence. Bracketed AIC and family-selection results therefore describe this analysis workflow rather than likelihood support under a joint paired-order-statistic model. We recorded the selected direction state (uniform, increasing or decreasing), generating-family selection, direction reversal, fitted generating-family $\theta$ and boundary frequency. Truth-consistent state means uniform selection under uniform truth and the correct direction under a non-uniform truth, irrespective of functional family.
 
-Figure 3 summarises the bounded endpoint contrast $c=\tanh(\theta/2)$, which equals $aL^2/2$ for linear fits and $\tanh(rL/2)$ for exponential fits. At the natural linear endpoints, $c=\pm1$ while $\theta=\pm\infty$; at the exponential cap, $|\theta|=10.999$ and $|c|=\tanh(10.999/2)<1$. The figure transforms each stored generating-family fit regardless of which family AIC selected, then calculates the mean and type-7 2.5th and 97.5th percentiles across all 1,000 replicates. These are empirical replicate ranges, not confidence intervals for a historical parameter. Fractions beside every group retain the original near-boundary flags. This derived presentation preserves the original fits and model-selection results without reclassifying any fit as an exact boundary optimum.
+Figure 4 summarises the bounded endpoint contrast $c=\tanh(\theta/2)$, which equals $aL^2/2$ for linear fits and $\tanh(rL/2)$ for exponential fits. At the natural linear endpoints, $c=\pm1$ while $\theta=\pm\infty$; at the exponential cap, $|\theta|=10.999$ and $|c|=\tanh(10.999/2)<1$. The figure transforms each stored generating-family fit regardless of which family AIC selected, then calculates the mean and type-7 2.5th and 97.5th percentiles across all 1,000 replicates. These are empirical replicate ranges, not confidence intervals for a historical parameter. Fractions beside every group retain the original near-boundary flags. Even random-1 produced near-boundary linear fits in 7.2% and 8.2% of full-treatment replicates under increasing and decreasing truths, respectively, so finite log-ratio means at the linear boundary would depend on optimiser tolerance. This derived presentation preserves the original fits and model-selection results without reclassifying any fit as an exact boundary optimum.
 
 ### S2.5 Direction and family selection
 
-The full-site results below report “family; state” percentages under the primary marginal likelihood. For uniform truth, state is uniform; for non-uniform truth, state is the correct direction. An adverse one-sided rule is oldest for increasing truths and youngest for decreasing truths.
+The full-site ten-fold results below report “family; state” percentages under the primary marginal likelihood. For uniform truth, state is uniform; for non-uniform truth, state is the correct direction. An adverse one-sided rule is oldest for increasing truths and youngest for decreasing truths.
 
 | Truth | All dates | Oldest | Youngest | Bracketed |
 |---|---:|---:|---:|---:|
@@ -138,9 +138,9 @@ The full-site results below report “family; state” percentages under the pri
 
 Full oldest retention selected a decreasing direction and full youngest retention an increasing direction in every replicate under every truth. When the rule opposed a non-uniform truth, the directional-reversal rate was 1.000. Under uniform truth, oldest and youngest selected the corresponding exponential direction in all replicates. Concordant one-sided retention frequently drove fitted effects to their bounds. Under the working-independence criterion, bracketed retention preserved direction but selected exponential in every full-treatment linear-truth replicate.
 
-The full-treatment reversal should not be extrapolated to partial treatment. At proportions 0.50 and 0.75, no non-uniform replicate selected the opposite direction under the adverse rule; at 0.75, uniform was instead selected in 18.1% of linear-increase and 21.2% of linear-decrease replicates. Uniform truth was affected sooner: half-site oldest and youngest retention selected a directional model in 97.3% and 97.9% of replicates.
+For ten-fold changes, the full-treatment reversal did not extend to partial treatment. At proportions 0.50 and 0.75, no ten-fold non-uniform replicate selected the opposite direction under the adverse rule; at 0.75, uniform was instead selected in 18.1% of linear-increase and 21.2% of linear-decrease replicates. Uniform truth was affected sooner: half-site oldest and youngest retention selected a directional model in 97.3% and 97.9% of replicates. Weaker changes were reversed at partial treatment (Section S2.7).
 
-Across random-1, random-2, random-3 and random-5, all four non-uniform truths and all three treatment proportions, direction selection was 1.000. Generating-family selection ranged from 0.754 to 0.995 as information was discarded. The $\ell^1$ and $\ell^2$ analyses agreed on the selected family-and-direction combination in 99.75% of 120,000 paired selections, including all full-treatment one-sided cells.
+Across random-1, random-2, random-3 and random-5, all four ten-fold non-uniform truths and all three treatment proportions, direction selection was 1.000. Generating-family selection ranged from 0.754 to 0.995 as information was discarded. The $\ell^1$ and $\ell^2$ analyses agreed on the selected family-and-direction combination in 99.75% of 120,000 paired selections, including all full-treatment one-sided cells.
 
 ### S2.6 Order statistics and the limits of model selection
 
@@ -158,6 +158,48 @@ g_{\mathrm{bracket}}(x)=\frac{n}{2(b-a)}\left[u^{n-1}+(1-u)^{n-1}\right].
 $$
 
 This density is exactly uniform for $n=2$, when both observations are retained, and symmetric and U-shaped for every $n\geq3$. All site counts used here satisfy $n\geq5$, and mixing over these counts preserves symmetry and the U-shape. The fitted uniform, linear and exponential families cannot represent this shape. Thus, selecting uniform under bracketed uniform truth need not indicate that the retained age distribution is uniform: it may indicate only that neither monotonic alternative fits better after the parameter penalty. Similarly, generating-family selection under non-uniform truth is a comparison within the candidate set, not an absolute goodness-of-fit test. These formulae describe exact-age selection. The simulation instead selects extrema by calibrated posterior median and fits their full posteriors; the formulae explain the mechanism without replacing that observation model or its empirical results.
+
+### S2.7 Signal-strength extension
+
+The extension was prespecified on 18 October 2026, before any of its results existed (`docs/STAGE6_EFFECT_SIZE.md` in the archive). It asked how reversal, direction recovery and uniform selection depend jointly on the true end-to-end ratio and the proportion of sites treated. The four changing truths were repeated at ratios of 1.5, 2, 3 and 5 at each treatment proportion, giving 48 scenarios. The simulation code, input data, container image and seeds were those of the main experiment, verified against all seven recorded source and environment fingerprints. Replicate $i$ again used seed $1234+i$, independent of the ratio, so latent draws were paired across ratios. The planned 1,000 replicates per scenario were reduced to the first 500 before any rate was computed, halving the runtime; the largest possible Monte Carlo standard error for a rate is therefore 0.022. Ratio-10 and constant-history (ratio 1) values are the accepted 1,000-replicate main-experiment results.
+
+Technical acceptance was checked before interpretation. A 20-replicate rerun of the accepted linear-increase, full-treatment, ten-fold scenario reproduced the first 20 accepted replicates exactly in all 17 result columns. Every scenario file was complete, matched its expected truth, proportion, ratio and replicate count, and carried the accepted provenance. Every truth integrated to one with the requested endpoint ratio. A separate aggregation of all 1,872,000 stored fitted rows, written without the production summary functions, reproduced every reported rate. The $\ell^1$ and $\ell^2$ analyses selected the same family and direction in 99.69% of 312,000 paired selections.
+
+Main Figure 3 plots both the correct-state and the reversal rate. The prespecified display showed only the correct-state rate, which cannot distinguish reversal from uniform selection. The reversal rate, also a prespecified outcome, was therefore added to the display after the results were seen; the prespecified display is retained in the archive. For changing histories, the uniform-selection rate is 100% minus the correct and reversed percentages.
+
+Under the opposing one-sided rule (oldest for increasing truths, youngest for decreasing truths), each cell below gives correct direction; reversed direction, as percentages of replicates under the primary marginal likelihood. Columns are true end-to-end ratios. Ratios 1.5–5 have 500 replicates and ratio 10 has 1,000.
+
+| Truth | Sites treated | 1.5 | 2 | 3 | 5 | 10 |
+|---|---:|---:|---:|---:|---:|---:|
+| Linear increase | 50% | 1.8; 19.6 | 37.6; 0.0 | 98.6; 0.0 | 100; 0.0 | 100; 0.0 |
+| Linear increase | 75% | 0.0; 99.8 | 0.0; 94.4 | 0.6; 44.2 | 17.8; 2.8 | 81.9; 0.0 |
+| Linear increase | 100% | 0.0; 100 | 0.0; 100 | 0.0; 100 | 0.0; 100 | 0.0; 100 |
+| Linear decrease | 50% | 0.2; 22.6 | 33.6; 0.4 | 97.6; 0.0 | 100; 0.0 | 100; 0.0 |
+| Linear decrease | 75% | 0.0; 100 | 0.0; 98.6 | 0.0; 50.0 | 14.0; 2.4 | 78.8; 0.0 |
+| Linear decrease | 100% | 0.0; 100 | 0.0; 100 | 0.0; 100 | 0.0; 100 | 0.0; 100 |
+| Exponential increase | 50% | 2.0; 19.0 | 43.2; 0.0 | 100; 0.0 | 100; 0.0 | 100; 0.0 |
+| Exponential increase | 75% | 0.0; 99.8 | 0.0; 93.4 | 1.0; 35.2 | 49.8; 0.4 | 100; 0.0 |
+| Exponential increase | 100% | 0.0; 100 | 0.0; 100 | 0.0; 100 | 0.0; 100 | 0.0; 100 |
+| Exponential decrease | 50% | 0.2; 22.2 | 40.6; 0.2 | 99.4; 0.0 | 100; 0.0 | 100; 0.0 |
+| Exponential decrease | 75% | 0.0; 100 | 0.0; 97.8 | 0.0; 39.4 | 45.0; 0.2 | 100; 0.0 |
+| Exponential decrease | 100% | 0.0; 100 | 0.0; 100 | 0.0; 100 | 0.0; 100 | 0.0; 100 |
+
+The next table gives correct-direction percentages for the other rules, as the range across the four changing truths. The ratio-1 column gives uniform selection under the constant history. No random rule reversed more than 0.6% of replicates in any changing-history scenario, and bracketed retention and all dates reversed none.
+
+| Rule | Sites treated | 1 (uniform) | 1.5 | 2 | 3 | 5 | 10 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Bracketed | 50% | 88.4 | 89.6–92.2 | 99.8–100 | 100 | 100 | 100 |
+| Bracketed | 75% | 91.0 | 70.6–78.6 | 98.6–99.6 | 100 | 100 | 100 |
+| Bracketed | 100% | 99.9 | 10.6–16.8 | 69.6–79.6 | 99.8–100 | 100 | 100 |
+| Random-1 | 50% | 84.6 | 89.2–92.8 | 99.8–100 | 100 | 100 | 100 |
+| Random-1 | 75% | 82.9 | 72.6–78.8 | 97.0–98.8 | 100 | 100 | 100 |
+| Random-1 | 100% | 82.4 | 40.4–49.2 | 71.2–79.4 | 96.0–97.6 | 99.4–100 | 100 |
+| Random-2 | 50% | 84.1 | 92.2–94.4 | 99.8–100 | 100 | 100 | 100 |
+| Random-2 | 75% | 83.7 | 82.4–85.4 | 99.4–99.6 | 100 | 100 | 100 |
+| Random-2 | 100% | 83.1 | 60.6–66.6 | 93.2–95.2 | 99.8–100 | 100 | 100 |
+| All dates | all | 84.8 | 98.2–99.6 | 100 | 100 | 100 | 100 |
+
+Bracketed retention avoided reversal but often selected uniform for weak changes, more often than its count-matched random-2 comparison. It also never selected the linear family for a linear history at 75% or 100% treatment at any ratio, and did so for at most 3.5% at 50%. Random-2 selected the linear family for 32.0–94.6% of linear histories. Under the concordant one-sided rule, every changing history at every ratio and treatment proportion was given the correct direction. The complete rates for every rule, truth, ratio, proportion and score, including generating-family selection and $\ell^1$/$\ell^2$ agreement, are in `out/revision/effect-size-20261018/stage6_selection_rates.csv`.
 
 ## S3. Earlier realised-observation-noise sensitivity
 
@@ -189,7 +231,7 @@ The supplementary reproducibility archive, supplied in anonymised form for peer 
 
 ![](../figures/SI_data_generating_distributions.png){#fig-si-s1 width=95%}
 
-**Supplementary Figure S1.** The five unit-normalised regional event-age densities used in the simulation. Increasing trajectories have greater density at the recent (low-cal-BP) boundary; decreasing trajectories have greater density at the old boundary. Each non-uniform trajectory has a ten-fold end-to-end ratio, $|\theta|=\log(10)$, over 651–11,650 cal BP. Colour and line type jointly identify the truth.
+**Supplementary Figure S1.** The five unit-normalised regional event-age densities used in the simulation. Increasing trajectories have greater density at the recent (low-cal-BP) boundary; decreasing trajectories have greater density at the old boundary. Each non-uniform trajectory has the main experiment's ten-fold end-to-end ratio, $|\theta|=\log(10)$, over 651–11,650 cal BP. Colour and line type jointly identify the truth.
 
 \newpage
 

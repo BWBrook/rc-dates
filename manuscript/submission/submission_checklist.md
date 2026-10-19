@@ -40,7 +40,7 @@ Official sources: [JAS Guide for Authors](https://www.sciencedirect.com/journal/
 - [x] The abstract is below 250 words; this is a conservative preparation limit pending direct confirmation of the current guide.
 - [x] The article is below 5,000 words including abstract, declarations and captions but excluding bibliography entries; confirm the journal's current counting scope before upload.
 - [x] The rebuilt anonymous manuscript PDF uses A4 pages and is below 10 MB.
-- [x] Figure captions define empirical retained counts, estimands, replicate ranges and the primary likelihood where relevant; Figure 3 explicitly limits uniform selection to the candidate set.
+- [x] Figure captions define empirical retained counts, estimands, replicate ranges and the primary likelihood where relevant; Figure 2 explicitly limits uniform selection to the candidate set.
 - [x] The AustArch dataset DOI, exact deposited file, project-derivative history and record-count reconciliation are documented.
 - [x] Data availability distinguishes code/evidence from data whose release depends on licensing, sensitive-location review and Indigenous data governance.
 - [ ] Inspect the portal-built review PDF for author-identifying text and file metadata.

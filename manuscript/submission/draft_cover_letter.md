@@ -7,7 +7,7 @@ Dear Editors,
 
 Please consider our manuscript, *Choosing among a site's radiocarbon dates can create or reverse regional trends*, as a Research Article in the *Journal of Archaeological Science*.
 
-Regional radiocarbon analyses inherit decisions about which dates each archaeological site contributes. Our AustArch benchmark and controlled simulations show that retaining each site's oldest or youngest date can manufacture a temporal trend from a constant history or reverse an opposing trend. Comparing these rules with random retention at the same date count separates age-based selection from sample size.
+Regional radiocarbon analyses inherit decisions about which dates each archaeological site contributes. Our AustArch benchmark and controlled simulations show that retaining each site's oldest or youngest date can manufacture a temporal trend from a constant history or reverse an opposing trend, and that applying such a rule at only some sites is enough to reverse weak trends. Comparing these rules with random retention at the same date count separates age-based selection from sample size.
 
 The paper fits the journal's archaeological-methods remit by quantifying a dataset-formation problem that precedes the choice of radiocarbon summary or population model. It offers a practical response: document site contributions and assess whether conclusions survive plausible alternative retention rules. The experiment isolates post hoc selection among completed determinations; it does not model occupation histories or prospective context selection.
 
