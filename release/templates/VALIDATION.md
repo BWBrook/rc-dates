@@ -1,6 +1,78 @@
-# Scientific release verification — 19 September 2026
+# Scientific release verification — 19 October 2026
 
-## Bounded Figure 4 revision
+## October revision and current verification scope
+
+The current package adds the analytic retention illustration (Figure 1) and
+Stage 6 weaker-trend experiment (Figure 3). It distributes six main and three
+supplementary figures. The prior bounded-contrast correction remains Figure 4;
+the empirical retention comparison is now Figure 6 and its all-date baseline
+is Supplementary Figure S3. Historical figure numbers below refer to their
+dated manuscript version.
+
+The accepted Stage 6 campaign completed on 18 October in the original R 4.5.3
+production image. Its independent result audit matched all 1,008 selection-rate
+summaries against 1,872,000 fitted rows, mapped all 360 dose-response rows and
+verified all 108 inventory entries. The evidence includes 48 new scenarios at
+500 replicates each, pooled with 15 accepted scenarios at 1,000 replicates each.
+The original 20-replicate bridge check reproduced all 960 rows and 17 columns.
+The Stage 6 design and post-result display amendment are preserved in
+`docs/STAGE6_EFFECT_SIZE.md`; the original display and entire inventory remain
+unchanged.
+
+Current executable checks are `make verify`, `make test`, `make reproduce-paper`
+and `make simulation-check`. Summary reconstruction compares all Stage 6 CSV
+values, acceptance fingerprints and text exactly. The bounded simulation check
+replays two replicates in each of all 72 original and Stage 6 scenarios and
+compares scientific columns exactly. The new Python figure runtime pins
+matplotlib 3.11.2 and NumPy 2.5.4 separately from the unchanged R lockfile.
+The clean Docker build completed on 19 October 2026, producing image
+`sha256:c42742f8be3467c2a8468dac79fe715299b5fd1be27fdf3feea203f997e21852`.
+Execution used Linux x86_64 and R 4.5.3. Reconstruction and tests ran in a
+four-CPU/16-GiB container; independent replay groups used two CPUs and 8 GiB
+each, with separate output directories. Network access was disabled throughout
+execution. The isolated package contained no source or filtered archaeological
+records.
+
+The current package passed these checks:
+
+- The 307-entry top-level inventory and all seven nested inventories passed,
+  including every one of the 108 Stage 6 entries.
+- Stage 6 reconstruction matched all four CSVs and the summary text exactly:
+  63 acceptance records, one smoke-check record, 1,008 selection-rate rows and
+  360 dose-response rows. All stored provenance fields were included.
+- The five original signed-model summary CSVs matched exactly after rebuilding
+  from 720,000 fitted rows; all-date pairing across proportions also matched.
+- Every historical observation-noise v1 CSV and all v2 metrics, gates and
+  stability values matched exactly. The original overall decision remains
+  FAIL, with 15 of 18 criteria met; v2 retains its separate diagnostic status.
+- All 111 numerical-registry checks and all 37 scientific test blocks passed,
+  without warnings, failures or skips.
+- All nine figure commands completed. Figures 1–6, S1 and S3 match the
+  distributed figures pixel for pixel; PDFs were rasterised at 144 dpi for
+  comparison. S2 has the same 32,782 differing pixels as the earlier documented
+  presentation difference below, with its aggregate data and fitted curve
+  reproduced.
+
+- Two-replicate replays matched all 72 scenarios: 1,440 signed-model rows,
+  864 observation-noise rows and 4,608 Stage 6 rows, plus all 18 noise-pair
+  records. The normal Make entrypoint also resumed and verified the completed
+  noise and Stage 6 groups successfully.
+- Invalid Stage 6 ratios, replicate counts above 500 and destinations inside
+  accepted evidence were rejected before creating the requested directories.
+  Changing the ratio when resuming a completed output was rejected. An
+  unchanged resume left its checkpoint and final RDS byte-identical.
+- The complete top-level and nested inventories still passed after all
+  reconstruction, replay and safeguard checks.
+
+Final assembly uses the same scientific code, evidence, tests, runtime recipe
+and Make commands as the executable candidate, checked byte for byte. Later
+changes are confined to supplementary pagination, claim anchors, documentation
+and release metadata. The final inventory and numerical registry are checked
+again against that assembled package.
+
+## Historical verification — 19 September 2026
+
+### Bounded Figure 4 revision
 
 This release supersedes the 11 September presentation. Figure 4 now reports
 per-replicate bounded endpoint contrasts and every original near-boundary
@@ -30,7 +102,7 @@ reconstruction was needed for this presentation correction. Those unchanged
 calculations retain the dated verification below. The runtime image and lockfile
 were not rebuilt or changed.
 
-## Inherited verification — 11 September 2026
+## Historical verification — 11 September 2026
 
 Verification used Linux x86_64 on the analysis server, with R 4.5.3. The
 archaeological source was accessible only in the separate author workspace;
@@ -81,10 +153,11 @@ checks manuscript locations. It is not an automated semantic review of prose.
 The accompanying dated manual concordance check covers the registered values;
 co-authors remain responsible for reviewing the scientific interpretation.
 
-The full 1,000-replicate experiments were not regenerated for release assembly.
-The package includes every accepted replicate and an executable resumable rerun
-path; limited replay checks every scenario and preserves the original RNG and
-pairing semantics. No new simulation experiment was introduced. The 19 September derived
+The original 1,000-replicate experiments were not regenerated for the September
+release assembly. The October package includes those accepted replicates and
+the new 500-replicate Stage 6 experiment, with executable resumable replay paths
+for both. Limited replay checks every scenario and preserves the original RNG
+and pairing semantics. The 19 September derived
 presentation correction was specified after review of the accepted results
 and does not replace any original scientific decision gate.
 

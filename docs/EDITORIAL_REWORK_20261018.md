@@ -257,3 +257,64 @@ Independent audit scripts and receipts are retained in ignored
 result, frozen snapshot or figure was changed in this audit. Claude retains
 the integration window; new claim-register entries, full renders and a review
 archive refresh remain after integration.
+
+## Fifth exchange: integrated manuscript and reproducibility refresh
+
+Claude preserved the original Stage 6 display and missing logs in `a9bfcd5`
+and integrated the experiment in `ce5471b`, returning the canonical editing
+window in discussion 88, message 2064. Codex's independent reader check found
+all 29 added claim calculations and 280 values or range endpoints in the three
+supplementary simulation tables consistent with the accepted evidence.
+
+The final scope repairs restrict inherited score-agreement and family-selection
+rates to the ten-fold experiment, make that scope explicit in Figures 2, 4 and
+5, and identify the one-date contribution under partial treatment as a property
+of one-sided retention. Two inherited registry anchors were corrected. The AI
+declaration now specifies the systems and their roles in design, implementation,
+simulation execution, figures, evidence audit and drafting, with authors
+responsible for interpretation, final review and approval.
+
+The main manuscript is 4,949 words including title, headings, abstract,
+declarations and captions but excluding reference entries; its abstract is 239
+words. All 45 citation keys and four display equations from the pre-rework
+manuscript remain. Strict manuscript checks, all 111 registry calculations,
+PDF structure checks and PDF/Word inspection passed. The new supplementary
+tables have readable columns and complete page layouts in both formats.
+The main PDF has 16 pages and the supplement 12; their Word renders have 20
+and 15 pages. These integration changes and the one-page co-author revision
+note are committed in `cb92ae0`.
+
+The scientific release now includes all 108 Stage 6 inventory entries, both
+displays and logs, reconstruction of all Stage 6 summaries, the two new figure
+renderers, and a resumable replay path for the 48 new scenarios. R 4.5.3, its
+lockfile, the simulation kernels and accepted evidence remain unchanged.
+A separate Python environment supplies the analytic illustration.
+
+A clean container build and full evidence reconstruction passed. All four
+Stage 6 CSVs and summary text matched exactly, as did the five original signed
+summary CSVs and every historical observation-noise v1/v2 aggregate. The
+prespecified noise screen still fails overall, with 15 of 18 criteria met;
+the later diagnostic remains separate. All 37 scientific test blocks passed.
+Figures 1–6, S1 and S3 reproduce pixel for pixel; S2 retains exactly its earlier
+documented presentation difference. `release/templates/VALIDATION.md` records
+the image, execution scope and figure comparison.
+
+The 72-scenario limited replay passed: all 6,912 fitted-result rows and 18
+noise-pair records matched. Independent noise and Stage 6 groups ran in
+separate output directories, then the normal Make entrypoint resumed and
+verified them. Invalid ratios, excessive replicate counts and accepted-output
+destinations were rejected; changing a resumed ratio was rejected, while an
+unchanged resume preserved both RDS files byte for byte. All inventories still
+passed after execution. These checks completed at 15:40 AEDT on 19 October
+2026. The final archive's scientific code, inputs and runtime match the tested
+candidate byte for byte; later changes concern supplementary pagination,
+claim anchors, documentation and release metadata.
+
+The dated review documents are in
+`manuscript/submission/dist/editorial_rework_2026-10-19/`. The refreshed named
+scientific repository and co-author ZIP use the same date. Earlier review
+packets remain available. The new package excludes source and record-level
+archaeological data; a reviewer-anonymous scientific copy and final author
+declarations remain submission tasks. Realised observation noise for oldest,
+youngest and bracketed retention remains untested. No public release or
+submission is authorised by this integration check.

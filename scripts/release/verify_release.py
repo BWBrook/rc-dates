@@ -46,6 +46,7 @@ if __name__ == '__main__':
                          f'absent={sorted(listed-actual)}')
     for folder in ('out/empirical-sampling', 'out/revision/signed-models',
                    'out/revision/endpoint-contrast-20260919',
+                   'out/revision/effect-size-20261018',
                    'out/sensitivity/observation-noise',
                    'out/sensitivity/observation-noise/estimand-aligned-v2',
                    'provenance/observation-noise-20260726'):

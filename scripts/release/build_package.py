@@ -9,7 +9,7 @@ import subprocess
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[2]
-NAME = 'rc-dates-scientific-reproducibility-2026-09-19'
+NAME = 'rc-dates-scientific-reproducibility-2026-10-19'
 TREES = ('R', 'tests', 'out/empirical-sampling', 'out/revision/signed-models',
          'out/sensitivity/observation-noise', 'provenance/observation-noise-20260726',
          'out/revision/endpoint-contrast-20260919',
@@ -18,12 +18,17 @@ FILES = ('renv.lock', 'renv/activate.R', 'renv/settings.json',
          'scripts/source_population_simulation.R',
          'scripts/render_manuscript_methods_figures.R',
          'scripts/render_population_simulation_figures.R',
+         'scripts/render_retention_mechanism.py',
+         'scripts/render_stage6_effect_size_figure.R',
+         'scripts/summarise_stage6_effect_size.R',
          'manuscript/text/main.md', 'manuscript/text/supplementary.md', 'manuscript/text/figures.md',
+         'docs/STAGE6_EFFECT_SIZE.md',
          'docs/STAGE3_EMPIRICAL_REPAIR.md', 'docs/FIGURE4_BOUNDARY_REVISION_20260919.md',
          'release/claims.csv', 'references/refs.yaml')
 SCRIPTS = ('common.R', 'simulation_specification.R', 'rerun_simulations.R',
            'export_simulation_specification.R',
            'rebuild_signed_summaries.R', 'rebuild_noise_summaries.R',
+           'rebuild_stage6_summaries.R',
            'render_empirical_figures.R', 'render_site_counts.R',
            'reconstruct_austarch_reference.R', 'compare_empirical.R',
            'audit_manuscript_claims.py', 'verify_release.py')
@@ -61,6 +66,21 @@ def main():
         paths |= {p.relative_to(ROOT).as_posix() for p in (ROOT / tree).rglob('*')
                   if p.is_file() and not any(part.startswith('.') or part in
                       ('logs', '__pycache__') for part in p.relative_to(ROOT / tree).parts)}
+    # Preserve every entry of the frozen Stage 6 inventory, including its
+    # original display and logs (which the general tree filter excludes).
+    stage6 = ROOT / 'out/revision/effect-size-20261018'
+    manifest = stage6 / 'SHA256SUMS'
+    paths.add(manifest.relative_to(ROOT).as_posix())
+    for line in manifest.read_text().splitlines():
+        if not line.strip():
+            continue
+        expected, name = line.split(maxsplit=1)
+        source = stage6 / name.lstrip('*')
+        if not source.resolve().is_relative_to(stage6.resolve()) or source.is_symlink():
+            raise SystemExit(f'Unsafe Stage 6 inventory path: {name}')
+        if not source.is_file() or sha(source) != expected:
+            raise SystemExit(f'Missing or changed Stage 6 evidence: {name}')
+        paths.add(source.relative_to(ROOT).as_posix())
     sources = {name: ROOT / name for name in paths}
     sources.update({dest: ROOT / 'release/templates' / src for src, dest in TEMPLATES.items()})
     for name, path in sources.items():
@@ -73,7 +93,7 @@ def main():
         shutil.copyfile(path, dest)
     (target / '.gitignore').write_text('data/\ndata-raw/\nout/reproduced/\nout/rerun/\nrenv/library/\nrenv/staging/\nrenv/sandbox/\n.Rhistory\n.RData\n')
     commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
-    info = {'name': NAME, 'date': '2026-09-19', 'source_commit': commit, 'source_working_tree_dirty': dirty,
+    info = {'name': NAME, 'date': '2026-10-19', 'source_commit': commit, 'source_working_tree_dirty': dirty,
             'source_commit_is_exact': not dirty,
             'copied_source_files': len(sources), 'distributed_files': len(sources) + 3,
             'r_version': '4.5.3',
@@ -87,7 +107,7 @@ def main():
         raise SystemExit(f'Refusing to overwrite existing ZIP: {archive}')
     with zipfile.ZipFile(archive, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as zipped:
         for path in sorted(p for p in target.rglob('*') if p.is_file()):
-            entry = zipfile.ZipInfo(f'{NAME}/{path.relative_to(target).as_posix()}', (2026, 9, 19, 0, 0, 0))
+            entry = zipfile.ZipInfo(f'{NAME}/{path.relative_to(target).as_posix()}', (2026, 10, 19, 0, 0, 0))
             entry.compress_type = zipfile.ZIP_DEFLATED
             entry.external_attr = 0o100644 << 16
             zipped.writestr(entry, path.read_bytes())

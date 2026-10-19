@@ -11,6 +11,7 @@ Run with `make concept-figure`; the scientific R environment is unchanged.
 """
 
 from pathlib import Path
+import argparse
 
 import matplotlib
 matplotlib.use("Agg")
@@ -35,6 +36,10 @@ def densities(u, increasing=False, n=5):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output-dir", type=Path,
+                        help="Write both figure formats here instead of the manuscript paths")
+    args = parser.parse_args()
     u = np.linspace(0.0, 1.0, 20001)
     plt.rcParams.update({
         "font.family": "DejaVu Sans", "font.size": 10,
@@ -72,9 +77,12 @@ def main():
     fig.legend(handles, labels, loc="lower center", ncol=2, frameon=False,
                bbox_to_anchor=(0.51, 0.005), fontsize=9)
     fig.subplots_adjust(left=0.075, right=0.985, top=0.88, bottom=0.28, wspace=0.12)
-    target = ROOT / "manuscript/figures/retention_mechanism.pdf"
+    target = (ROOT / args.output_dir / "retention_mechanism.pdf" if args.output_dir
+              else ROOT / "manuscript/figures/retention_mechanism.pdf")
+    target.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(target, metadata={"CreationDate": None, "ModDate": None})
-    preview = ROOT / "tmp/editorial_rework_20261018/retention_mechanism.png"
+    preview = (ROOT / args.output_dir / "retention_mechanism.png" if args.output_dir
+               else ROOT / "tmp/editorial_rework_20261018/retention_mechanism.png")
     preview.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(preview, dpi=180)
     plt.close(fig)

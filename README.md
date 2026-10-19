@@ -87,7 +87,7 @@ make submission-build
 and highlights under `manuscript/submission/dist/`.
 
 `make scientific-release` assembles the named minimal scientific repository and matching ZIP
-under `dist/`. It includes the accepted evidence, exact-value summary rebuilds, seven figure
+under `dist/`. It includes the accepted evidence, exact-value summary rebuilds, nine figure
 renderers, simulation rerun commands, and hash-gated reconstruction from separately acquired
 AustArch source. The explicit allowlist in `scripts/release/build_package.py` excludes working
 notes, development history and governed record-level data. See `release/templates/README.md`

@@ -1,8 +1,8 @@
 # rc-dates: scientific reproduction files
 
-Companion to **Within-site date-retention rules can distort radiocarbon
-“dates-as-data” inference**, by Barry W. Brook, Rebecca Wheatley, Christopher N.
-Johnson, Alan N. Williams, Sean Ulm and Luke A. Yates. Revised 19 September 2026
+Companion to **Choosing among a site's radiocarbon dates can create or reverse
+regional trends**, by Barry W. Brook, Rebecca Wheatley, Christopher N.
+Johnson, Alan N. Williams, Sean Ulm and Luke A. Yates. Revised 19 October 2026
 for co-author review, preprinting and Journal of Archaeological Science.
 Authorship details remain subject to co-author confirmation.
 
@@ -20,15 +20,20 @@ and preserves the production font mapping for mathematical axis labels:
 ```sh
 make docker-build
 docker run --rm --user "$(id -u):$(id -g)" --cpus 4 --memory 16g \
+  -e MPLCONFIGDIR=/tmp/rc-dates-matplotlib \
   -v "$PWD:/workspace" -w /workspace rc-dates-release:r4.5.3 make reproduce-paper
 ```
 
 `make reproduce-paper` verifies the distributed checksums, derives every signed-model
 summary from 720,000 fitted rows, recomputes both observation-noise bootstrap
-analyses from the nine paired checkpoints, renders the seven paper figures,
-and checks the 82 registered numerical values in `release/claims.csv`.
-Summaries and figures are rebuilt independently from accepted evidence; the
-summary comparisons require exact equality before the complete command passes.
+analyses from the nine paired checkpoints, rebuilds Stage 6 summaries from
+1,872,000 fitted rows (including the 720,000 accepted reference rows), renders
+all nine paper and supplementary figures, and checks the numerical registry in
+`release/claims.csv`. Stage 6 comparisons cover all 1,008 selection-rate rows,
+360 dose-response rows, 63 scenario acceptance records and the original smoke
+check, including their stored input fingerprints and provenance checks.
+Rebuilt summaries must equal the accepted summaries exactly before the complete
+command passes.
 Outputs go to `out/reproduced/`; accepted records are retained in place.
 Figure 4 now summarises the bounded endpoint-density contrast computed for
 each stored fit, with every original near-boundary frequency displayed. Its
@@ -36,6 +41,33 @@ each stored fit, with every original near-boundary frequency displayed. Its
 see `docs/FIGURE4_BOUNDARY_REVISION_20260919.md` for the post-review correction.
 The original log-ratio summaries remain archived as historical computational
 outputs; their boundary-dependent means are not the revised figure evidence.
+The weaker-trend experiment adds ratios 1.5, 2, 3 and 5, with 500 replicates
+in each of 48 scenarios; constant and ratio-10 histories reuse the 15 accepted
+1,000-replicate scenarios. `docs/STAGE6_EFFECT_SIZE.md` preserves the design,
+acceptance criteria and disclosed post-result display amendment. Its original
+correct-state-only display, logs, raw synthetic fits, sidecars and all 108
+manifest entries are distributed unchanged. Reproduction writes both the
+current Figure 3 and the correct-state-only view under `out/reproduced/`.
+
+| Paper figure | Distributed filename | Calculation |
+|---|---|---|
+| Figure 1 | `retention_mechanism.pdf` | Analytic order-statistic illustration |
+| Figure 2 | `fig_3.pdf` | Correct-direction selection |
+| Figure 3 | `fig_effect_size.pdf` | Stage 6 correct-state and reversal rates |
+| Figure 4 | `fig_4.pdf` | Bounded endpoint contrast |
+| Figure 5 | `fig_5.pdf` | Generating-family selection |
+| Figure 6 | `fig_2.png` | Empirical retention differences |
+| Figure S1 | `SI_data_generating_distributions.png` | Generating densities |
+| Figure S2 | `SI_dates_per_site_in_austarch_holocene.png` | Aggregate site-count fit |
+| Figure S3 | `fig_1.png` | Empirical all-date baseline |
+
+Figure 1 runs the original Python renderer with matplotlib 3.11.2 and NumPy
+2.5.4, installed in a separate virtual environment by the Dockerfile. It needs
+no archaeological inputs and leaves the R environment unchanged. For an
+existing environment, `uv run --script scripts/render_retention_mechanism.py
+--output-dir=out/reproduced/figures` uses the same dependency pins; configure
+`PYTHON` to an interpreter containing those packages when running `make figures`.
+
 The registry checks values against evidence and validates manuscript anchors;
 manual manuscript concordance and its coverage limits are recorded in `CLAIM_AUDIT.md`.
 The original observation-noise decision remains **FAIL (15/18 criteria)**.
@@ -56,12 +88,22 @@ make simulation-check CORES=4
 make simulations CORES=8
 ```
 
-The first command checks two replicates in every signed and observation-noise
-scenario. The second reruns all 1,000 replicates per scenario. Both compare
-scientific rows against the accepted output, including the paired-noise
+The first command checks two replicates in every scenario: 15 original signed,
+nine observation-noise and 48 Stage 6 cells (72 total). The second reruns all
+1,000 replicates in the original signed/noise cells and all 500 replicates in
+each Stage 6 cell. Both compare scientific rows against the accepted output, including the paired-noise
 manifest. These are expensive computations: run the full command in `tmux` on a
 server. It checkpoints atomically and resumes when repeated with the same
-settings, sources and runtime. New outputs are under `out/rerun/`.
+settings, sources and runtime. Stage 6 checkpoints are separate for each ratio;
+the original signed and noise replay routes remain available. For example:
+
+```sh
+Rscript --vanilla scripts/release/rerun_simulations.R \
+  --design=stage6 --ratio=1.5 --nsim=2 --cores=4 --batch-size=2 \
+  --output-dir=out/rerun/check-stage6/ratio1.5
+```
+
+New outputs are under `out/rerun/`.
 
 The generating site-count distribution and age-to-error regression are recorded
 at full precision in `release/inputs/simulation_parameters.csv`. The adapter uses
@@ -112,7 +154,7 @@ record-level calibration has been rerun. The reconstructed reference checksum is
 - `provenance/`, `release/historical/`: source required by the accepted noise analysis.
   Frozen historical notes refer to the original development layout; the raw-input
   exception for this release is documented above and in `docs/AUSTARCH_PROVENANCE.md`.
-- `manuscript/`: paper and supplement text plus the seven accepted figures, for
+- `manuscript/`: paper and supplement text plus the nine accepted figures, for
   interpreting the claims and comparing presentation; no document builder.
 - `SHA256SUMS`, `RELEASE.json`: release inventory and source commit.
 

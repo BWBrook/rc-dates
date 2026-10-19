@@ -13,6 +13,7 @@ DEFAULT_RSCRIPT := $(firstword $(wildcard /usr/local/bin/Rscript) Rscript)
 RSCRIPT ?= $(DEFAULT_RSCRIPT)
 R_VERSION_REQUIRED ?= 4.5.3
 STAGE2_OUTPUT_DIR ?= out/revision/signed-models
+STAGE6_REPRODUCED_DIR := out/reproduced/effect-size
 
 .PHONY: help
 help:
@@ -24,10 +25,12 @@ help:
 	@echo
 	@echo "Evidence:"
 	@echo "  make concept-figure        Draw the exact-age retention illustration (Python/uv)"
-	@echo "  make empirical-figures     Rebuild empirical Figure 5, SI Figure S3 and audit summaries"
-	@echo "  make production-figures    Validate accepted simulations and rebuild Figures 2-4"
+	@echo "  make empirical-figures     Rebuild empirical Figure 6, SI Figure S3 and audit summaries"
+	@echo "  make production-figures    Validate accepted simulations and rebuild Figures 2, 4 and 5"
 	@echo "  make stage2-rerun          Run the signed-model matrix and acceptance summary"
 	@echo "  make stage2-summarise      Revalidate completed Stage 2 evidence"
+	@echo "  make stage6-reproduce      Rebuild and compare Stage 6 summaries and Figure 3"
+	@echo "  make scientific-release   Assemble the nine-figure scientific reproduction package"
 	@echo
 	@echo "Manuscript:"
 	@echo "  make manuscript-validate   Validate the makedoc profile"
@@ -78,6 +81,11 @@ stage2-summarise:
 		--volume "$(CURDIR):/workspace" --workdir /workspace rc-dates-sim:r4.5.3 \
 		Rscript --vanilla scripts/summarise_stage2_signed_models.R \
 			--input-dir="$(STAGE2_OUTPUT_DIR)"
+
+.PHONY: stage6-reproduce
+stage6-reproduce: r-preflight
+	"$(RSCRIPT)" --vanilla scripts/release/rebuild_stage6_summaries.R
+	"$(RSCRIPT)" --vanilla scripts/render_stage6_effect_size_figure.R "$(STAGE6_REPRODUCED_DIR)" out/reproduced/figures/fig_effect_size
 
 .PHONY: makedoc-preflight
 makedoc-preflight:
@@ -144,7 +152,7 @@ submission-build: manuscript-build
 		-o "$(abspath $(SUBMISSION_DIST))/supplementary_information.docx"
 	python3 scripts/normalize_docx_page_breaks.py "$(SUBMISSION_DIST)/supplementary_information.docx"
 
-SCIENTIFIC_RELEASE_DIR ?= dist/rc-dates-scientific-reproducibility-2026-09-19
+SCIENTIFIC_RELEASE_DIR ?= dist/rc-dates-scientific-reproducibility-2026-10-19
 .PHONY: scientific-release
 scientific-release:
 	python3 scripts/release/build_package.py --destination="$(SCIENTIFIC_RELEASE_DIR)"

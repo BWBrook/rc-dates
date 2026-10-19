@@ -46,4 +46,15 @@ RUN Rscript docker/install-release-packages.R
 
 COPY docker/99-rc-dates-fonts.conf /etc/fonts/conf.d/99-rc-dates-fonts.conf
 
+# Figure 1 uses its original Python renderer and pinned scientific dependencies.
+# This environment is separate from the unchanged R lockfile.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends python3-venv \
+    && rm -rf /var/lib/apt/lists/* \
+    && python3 -m venv /opt/rc-dates-figures \
+    && /opt/rc-dates-figures/bin/pip install --no-cache-dir \
+        matplotlib==3.11.2 numpy==2.5.4
+
+ENV PATH="/opt/rc-dates-figures/bin:${PATH}"
+
 WORKDIR /workspace

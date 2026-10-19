@@ -8,7 +8,16 @@ if (!file.exists("scripts/source_population_simulation.R")) {
 source("scripts/source_population_simulation.R")
 
 stage6_dir <- file.path("out", "revision", "effect-size-20261018")
-out_dir <- stage6_dir
+args <- commandArgs(trailingOnly = TRUE)
+if (length(args) == 1L && args[[1L]] %in% c("--help", "-h")) {
+  cat("Usage: Rscript --vanilla scripts/summarise_stage6_effect_size.R [--output-dir=PATH]\n")
+  quit(status = 0L)
+}
+if (length(args) > 1L || (length(args) && !grepl("^--output-dir=.+$", args[[1L]]))) {
+  stop("Only --output-dir=PATH is supported.", call. = FALSE)
+}
+out_dir <- if (length(args)) sub("^--output-dir=", "", args[[1L]]) else stage6_dir
+dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
 stage2_dir <- file.path("out", "revision", "signed-models")
 accepted_image <- "sha256:01f5e221d0f3b70ccb3edd0fd6556ffd1c645784e98e147e81034866b9137777"
 nsim <- 1000L

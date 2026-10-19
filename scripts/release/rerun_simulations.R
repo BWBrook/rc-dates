@@ -8,11 +8,12 @@
 if (length(commandArgs(trailingOnly = TRUE)) == 1L &&
     commandArgs(trailingOnly = TRUE)[[1L]] %in% c("--help", "-h")) {
   writeLines(c(
-    "Rerun the signed or paired observation-noise simulation design.",
+    "Rerun the signed, Stage 6 or paired observation-noise simulation design.",
     "",
-    "  --design=signed|noise --nsim=1000 --cores=4 --batch-size=20",
+    "  --design=signed|noise|stage6 --nsim=1000 --cores=4 --batch-size=20",
     "  --output-dir=out/rerun/signed|out/rerun/noise",
-    "All requested replicates (1-1000) are compared with the accepted evidence."
+    "Stage 6 requires --ratio=1.5|2|3|5 and --nsim=1..500.",
+    "All requested replicates are compared with the accepted evidence."
   ))
   quit(status = 0L)
 }
@@ -20,6 +21,7 @@ if (length(commandArgs(trailingOnly = TRUE)) == 1L &&
 source("scripts/release/common.R")
 args <- release_arguments(list(
   design = "signed",
+  ratio = "10",
   nsim = "1000",
   cores = "4",
   `batch-size` = "20",
@@ -27,7 +29,15 @@ args <- release_arguments(list(
 ))
 
 design <- tolower(args$design)
-if (!design %in% c("signed", "noise")) stop("--design must be signed or noise.", call. = FALSE)
+if (!design %in% c("signed", "noise", "stage6")) {
+  stop("--design must be signed, noise or stage6.", call. = FALSE)
+}
+signed_design <- design != "noise"
+ratio <- suppressWarnings(as.numeric(args$ratio))
+allowed_ratios <- if (design == "stage6") c(1.5, 2, 3, 5) else 10
+if (length(ratio) != 1L || is.na(ratio) || !ratio %in% allowed_ratios) {
+  stop("--ratio must be ", paste(allowed_ratios, collapse = ", "), " for ", design, ".", call. = FALSE)
+}
 to_positive_integer <- function(value, label) {
   parsed <- suppressWarnings(as.integer(value))
   if (length(parsed) != 1L || is.na(parsed) || parsed < 1L ||
@@ -43,9 +53,15 @@ if (.Platform$OS.type == "windows" && cores > 1L) {
   warning("Multicore execution is unavailable on Windows; using one core.", call. = FALSE)
   cores <- 1L
 }
-if (nsim > 1000L) stop("The release supports only the accepted replicates 1-1000.")
+accepted_nsim <- if (design == "stage6") 500L else 1000L
+if (nsim > accepted_nsim) {
+  stop("The release supports only accepted replicates 1-", accepted_nsim, " for ", design, ".")
+}
 if (!nzchar(args[["output-dir"]])) {
   args[["output-dir"]] <- file.path("out", "rerun", design)
+  if (design == "stage6") {
+    args[["output-dir"]] <- file.path(args[["output-dir"]], paste0("ratio", ratio))
+  }
 }
 output_dir <- args[["output-dir"]]
 if (length(output_dir) != 1L || !nzchar(output_dir)) {
@@ -53,7 +69,8 @@ if (length(output_dir) != 1L || !nzchar(output_dir)) {
 }
 
 accepted_dirs <- normalizePath(
-  c("out/production", "out/revision/signed-models", "out/sensitivity/observation-noise"),
+  c("out/production", "out/revision/signed-models", "out/sensitivity/observation-noise",
+    "out/revision/effect-size-20261018"),
   mustWork = FALSE
 )
 resolve_destination <- function(path) {
@@ -83,16 +100,20 @@ if (length(missing_packages) > 0L) {
 }
 
 master_seed <- 1234L
-ratio <- 10
 proportions <- c(0.5, 0.75, 1)
 spec_path <- "release/inputs/simulation_parameters.csv"
 if (!file.exists(spec_path)) stop("Missing scalar simulation specification: ", spec_path, call. = FALSE)
 
-if (identical(design, "signed")) {
+if (signed_design) {
   source("scripts/source_population_simulation.R")
   source("scripts/release/simulation_specification.R")
   specification <- release_simulation_specification(spec_path, signed = TRUE)
+  specification$ratio <- ratio
+  span <- specification$max_age - specification$min_age
+  specification$slope <- 2 * (ratio - 1) / ((ratio + 1) * span^2)
+  specification$rate <- log(ratio) / span
   truths <- population_simulation_contract("signed-v1")$truths
+  if (design == "stage6") truths <- setdiff(truths, "uni")
   strategies <- population_simulation_contract("signed-v1")$strategies
   source_paths <- c(
     "scripts/source_population_simulation.R",
@@ -190,7 +211,7 @@ if (file.exists(checkpoint_path)) {
   results <- checkpoint$results
   if (identical(design, "noise")) pair_manifest <- checkpoint$pair_manifest
   if (is.null(results) || !is.data.frame(results)) stop("Existing rerun checkpoint lacks result rows.", call. = FALSE)
-  if (identical(design, "signed")) {
+  if (signed_design) {
     validate_population_simulation_results(results, design = "signed-v1")
   } else {
     validate_observation_noise_sensitivity_results(results, strategies = strategies)
@@ -213,17 +234,17 @@ completed_sims <- function(data, truth, prop) {
 }
 
 compare_scenario <- function(truth, prop, results, pair_manifest = NULL) {
-  if (identical(design, "signed")) {
+  if (signed_design) {
     expected_path <- file.path(
-      "out/revision/signed-models",
-      production_simulation_filename(truth, prop, 1000L, master_seed, ratio)
+      if (design == "stage6") "out/revision/effect-size-20261018" else "out/revision/signed-models",
+      production_simulation_filename(truth, prop, accepted_nsim, master_seed, ratio)
     )
     expected <- readRDS(expected_path)
     actual <- scenario_rows(results, truth, prop)
     expected <- expected[expected$sim <= nsim, , drop = FALSE]
     release_compare_rows(
       actual, expected, c("sim", "strategy", "type", "model"),
-      paste("signed", truth, prop)
+      paste(design, truth, prop, "ratio", ratio)
     )
   } else {
     expected_path <- file.path(
@@ -276,7 +297,7 @@ for (i in seq_len(nrow(scenario_table))) {
         }, character(1))
         stop("Simulation batch failed: ", paste(details, collapse = "; "), call. = FALSE)
       }
-      if (identical(design, "signed")) {
+      if (signed_design) {
         results <- append_rows(results, do.call(rbind, lapply(batch_results, `[[`, "value")))
         validate_population_simulation_results(results, design = "signed-v1")
       } else {
@@ -301,7 +322,7 @@ present_keys <- unique(vapply(seq_len(nrow(scenario_table)), function(i) {
 if (!setequal(present_keys[present_keys != ""], scenario_key_set)) {
   stop("Rerun finished without all requested scenarios and replicates.", call. = FALSE)
 }
-if (identical(design, "signed")) {
+if (signed_design) {
   validate_population_simulation_results(results, nsim = nsim, design = "signed-v1")
 } else {
   validate_observation_noise_sensitivity_results(results, nsim = nsim, strategies = strategies)
