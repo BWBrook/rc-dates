@@ -1,6 +1,6 @@
 # JAS Submission Checklist
 
-Prepared for co-author circulation on 10 September 2026. Scientific checks below use the accepted evidence; no simulations were rerun. The journal-specific requirements were last recorded on 12 August 2026. A fresh official-guide fetch on 10 September returned HTTP 403, so review mode and exact length rules must be rechecked in the submission portal. Retain the anonymous manuscript and separate title page in the meantime.
+Updated for co-author circulation on 19 October 2026. The manuscript now includes the accepted weaker-trend experiment and the editorial rework. The original experiments and failed observation-noise gate remain preserved. The journal-specific requirements were last recorded on 12 August 2026. An official-guide fetch on 10 September returned HTTP 403, so review mode and exact length rules must be rechecked in the submission portal. Retain the anonymous manuscript and separate title page in the meantime.
 
 Official sources: [JAS Guide for Authors](https://www.sciencedirect.com/journal/journal-of-archaeological-science/publish/guide-for-authors); [Elsevier AI policy](https://www.elsevier.com/about/policies-and-standards/generative-ai-policies-for-journals) (read 10 September 2026).
 
@@ -12,17 +12,19 @@ Official sources: [JAS Guide for Authors](https://www.sciencedirect.com/journal/
 - [x] Cover letter is explicitly a co-author-review draft dated 10 September 2026 and addressed to the Editors. Final submission declarations and date remain to be completed.
 - [x] Five editable highlights are each within the journal's 85-character limit.
 - [x] Seven keywords satisfy the guide's 3–7 keyword range.
-- [x] Main manuscript contains five source-controlled figures; Supplementary Information contains two.
+- [x] Main manuscript contains six source-controlled figures; Supplementary Information contains three.
 - [x] AI assistance with analysis development and manuscript preparation is disclosed together before the references, following Barry’s requested placement; rerunning the analyses requires no AI tools or prompts.
 - [ ] At submission, reconcile this placement with Elsevier’s Methods disclosure wording for research-process and data-visualisation assistance; the use itself is fully disclosed.
 - [x] The data-availability statement contains no unresolved repository placeholders and describes an anonymised review archive, consistent with double-anonymised review.
-- [ ] Before upload, build an author-anonymised copy of the scientific reproducibility archive for reviewers. The release README (lines 4–5) is the only author-identifying text found in the release templates and scripts; keep the named release for the public repository record.
+- [ ] Before upload, build and inspect an author-anonymised copy of the scientific reproducibility archive for reviewers. The co-author package contains the named scientific repository; inspect its README, provenance documents, logs and metadata as well as active scripts when preparing the anonymous copy.
 
 ## Scientific reconciliation
 
 - [x] Primary empirical claims use the 540-date, 68-site terrestrial charcoal/wood common-membership benchmark.
 - [x] Oldest and youngest pass all nine empirical sensitivity configurations; bracketed passes the primary gate but not the `Y`-only sensitivity and is reported as passing eight of nine configurations.
-- [x] Signed simulations include uniform, linear and exponential truths in both temporal directions, all eight retention rules, three site-treatment proportions and 1,000 replicates per cell.
+- [x] The original signed experiment includes uniform and ten-fold linear/exponential truths in both temporal directions, all eight retention rules, three site-treatment proportions and 1,000 replicates per cell. The extension adds 48 scenarios at ratios 1.5, 2, 3 and 5, with 500 replicates per cell.
+- [x] The weaker-trend extension passed independent reconstruction of all 1,008 selection-rate summaries from the stored fitted rows. This checks aggregation and stored selections, not independent refitting of every likelihood.
+- [x] Reversal avoidance, direction recovery and generating-family selection remain distinct. No tested proportion is presented as a safe retention threshold.
 - [x] The headline is retention-induced directional distortion: full oldest and youngest retention impose their respective directions, including reversal of adverse non-uniform truths.
 - [x] Direction selection is distinguished from linear-versus-exponential generating-family selection; neither is presented as an absolute goodness-of-fit test.
 - [x] The empirical count-matched random-1 comparison is reported with conditional ranges; bracketed has no empirical random-2 comparator.
@@ -40,7 +42,7 @@ Official sources: [JAS Guide for Authors](https://www.sciencedirect.com/journal/
 - [x] The abstract is below 250 words; this is a conservative preparation limit pending direct confirmation of the current guide.
 - [x] The article is below 5,000 words including abstract, declarations and captions but excluding bibliography entries; confirm the journal's current counting scope before upload.
 - [x] The rebuilt anonymous manuscript PDF uses A4 pages and is below 10 MB.
-- [x] Figure captions define empirical retained counts, estimands, replicate ranges and the primary likelihood where relevant; Figure 2 explicitly limits uniform selection to the candidate set.
+- [x] Figure captions define empirical retained counts, estimands, replicate ranges and the primary likelihood where relevant; Figure 5 explicitly limits uniform selection to the candidate set.
 - [x] The AustArch dataset DOI, exact deposited file, project-derivative history and record-count reconciliation are documented.
 - [x] Data availability distinguishes code/evidence from data whose release depends on licensing, sensitive-location review and Indigenous data governance.
 - [ ] Inspect the portal-built review PDF for author-identifying text and file metadata.
@@ -55,7 +57,7 @@ Official sources: [JAS Guide for Authors](https://www.sciencedirect.com/journal/
 - [ ] Obtain all authors' approval of the final manuscript and submission declarations; remove co-author-draft status text from the title page and cover letter.
 
 
-- [x] Build and audit the replacement reviewer-facing archive; it contains the signed and common-membership revision while excluding raw and record-level AustArch data.
+- [x] Build and audit the replacement co-author archive; it contains the signed, common-membership and weaker-trend revisions while excluding raw and record-level AustArch data.
 - [ ] Record the final redistribution decision for aggregate empirical files and any later public data release; the current review archive excludes source and record-level data.
 - [x] Replace the earlier author-anonymized archive in the co-author packet with the named minimal scientific repository ZIP; its bytes and release checksums match the standalone checkout. Recheck the chosen file before journal upload.
 - [ ] Select the permanent public repository, mint its citable identifier and release permitted materials no later than publication.

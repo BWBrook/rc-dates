@@ -188,3 +188,28 @@ build both PDF and Word, and measure the complete text-plus-caption word count.
 The previous 82-claim audit and earlier review PDFs do not cover that future
 integrated manuscript. Refresh the scientific review archive after the
 integrated candidate passes; its earlier package does not contain Stage 6.
+
+## Integration check — 19 October 2026
+
+Claude addressed the display description and preserved the four previously
+untracked inventory files in `a9bfcd5`, then integrated the accepted extension
+in `ce5471b`. The original display and logs now survive a fresh checkout.
+Codex checked the integrated manuscript with a separate read-only reviewer.
+All 29 added registry calculations and 280 values or range endpoints in the
+three supplementary simulation tables matched the accepted evidence.
+
+The remaining qualifications have been repaired: the 99.75% score agreement
+and inherited family-selection rates refer to the main ten-fold experiment;
+Figures 2, 4 and 5 state that scope; and the one-date contribution under partial
+treatment is explicitly restricted to one-sided retention. The claim register
+contains 111 passing entries. Its two inherited incorrect anchors were fixed,
+and all supplementary anchors follow their paragraphs after pagination changes.
+
+The main PDF and Word files, all figure/caption pairs and the supplementary
+tables have been inspected. The manuscript has 4,949 words including its title,
+headings, abstract, declarations and captions but excluding reference entries;
+the abstract has 239 words. All 45 citation keys and four display equations from
+the pre-rework manuscript remain. The source evidence, R lock and scientific
+decision gates are unchanged by integration. The archive refresh and its
+executable verification are recorded separately in the release validation
+record and `docs/EDITORIAL_REWORK_20261018.md`.

@@ -167,10 +167,14 @@ Technical acceptance was checked before interpretation. A 20-replicate rerun of 
 
 Main Figure 3 plots both the correct-state and the reversal rate. The prespecified display showed only the correct-state rate, which cannot distinguish reversal from uniform selection. The reversal rate, also a prespecified outcome, was therefore added to the display after the results were seen; the prespecified display is retained in the archive. For changing histories, the uniform-selection rate is 100% minus the correct and reversed percentages.
 
+```{=openxml}
+<w:p><w:r><w:br w:type="page"/></w:r></w:p>
+```
+
 Under the opposing one-sided rule (oldest for increasing truths, youngest for decreasing truths), each cell below gives correct direction; reversed direction, as percentages of replicates under the primary marginal likelihood. Columns are true end-to-end ratios. Ratios 1.5–5 have 500 replicates and ratio 10 has 1,000.
 
 | Truth | Sites treated | 1.5 | 2 | 3 | 5 | 10 |
-|---|---:|---:|---:|---:|---:|---:|
+|------------------------|----------:|------------:|------------:|------------:|------------:|------------:|
 | Linear increase | 50% | 1.8; 19.6 | 37.6; 0.0 | 98.6; 0.0 | 100; 0.0 | 100; 0.0 |
 | Linear increase | 75% | 0.0; 99.8 | 0.0; 94.4 | 0.6; 44.2 | 17.8; 2.8 | 81.9; 0.0 |
 | Linear increase | 100% | 0.0; 100 | 0.0; 100 | 0.0; 100 | 0.0; 100 | 0.0; 100 |
@@ -184,10 +188,16 @@ Under the opposing one-sided rule (oldest for increasing truths, youngest for de
 | Exponential decrease | 75% | 0.0; 100 | 0.0; 97.8 | 0.0; 39.4 | 45.0; 0.2 | 100; 0.0 |
 | Exponential decrease | 100% | 0.0; 100 | 0.0; 100 | 0.0; 100 | 0.0; 100 | 0.0; 100 |
 
+\newpage
+
+```{=openxml}
+<w:p><w:r><w:br w:type="page"/></w:r></w:p>
+```
+
 The next table gives correct-direction percentages for the other rules, as the range across the four changing truths. The ratio-1 column gives uniform selection under the constant history. No random rule reversed more than 0.6% of replicates in any changing-history scenario, and bracketed retention and all dates reversed none.
 
-| Rule | Sites treated | 1 (uniform) | 1.5 | 2 | 3 | 5 | 10 |
-|---|---:|---:|---:|---:|---:|---:|---:|
+| Rule | Sites treated | 1 | 1.5 | 2 | 3 | 5 | 10 |
+|-----------------|---------:|-------:|-------------:|-------------:|--------------:|------------:|--------:|
 | Bracketed | 50% | 88.4 | 89.6–92.2 | 99.8–100 | 100 | 100 | 100 |
 | Bracketed | 75% | 91.0 | 70.6–78.6 | 98.6–99.6 | 100 | 100 | 100 |
 | Bracketed | 100% | 99.9 | 10.6–16.8 | 69.6–79.6 | 99.8–100 | 100 | 100 |
