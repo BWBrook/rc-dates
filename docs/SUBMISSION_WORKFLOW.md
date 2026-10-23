@@ -121,7 +121,7 @@ Each stage closes before the next begins, unless it is marked as able to run in 
 
 | # | Decision | Owner | Status |
 |---|---|---|---|
-| 1 | Realised-noise check for one-sided and bracketed rules (stage 2) | Barry | Open; Claude recommends Option A |
+| 1 | Realised-noise check for one-sided and bracketed rules (stage 2) | Barry | Option A chosen on 23 Oct 2026. Stage 7 was prespecified in `5e93971`; its smoke run was bit-identical; the matrix was launched at 06:01 UTC |
 | 2 | Final AI declaration wording and system versions | Barry | Open |
 | 3 | Offer the human–AI correspondence record with the paper | Barry | Open |
 | 4 | Author list, order, affiliations, CRediT, funding, competing interests | Co-authors | Open |
