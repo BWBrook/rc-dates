@@ -78,6 +78,7 @@ message("Acceptance 1 passed: wrapper reproduces accepted replicates 1-20 in all
 input <- readr::read_csv("data/austarch_filtered.csv", show_col_types = FALSE)
 specification <- prepare_population_simulation(input, ratio = 10)
 simulate_with <- function(truth, prop, sim, observation_model) {
+  requireNamespace("rcarbon", quietly = TRUE)
   set.seed(production_simulation_seed(truth, prop, sim, seed), kind = "L'Ecuyer-CMRG")
   simulate_population_data_set(truth, prop, specification, observation_model = observation_model)
 }

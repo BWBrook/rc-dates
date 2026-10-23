@@ -113,3 +113,19 @@ which oldest and youngest retention favour, so the reported rates also include t
 fingerprint changes, the partial checkpoints are moved, unused, to
 `out/revision/realised-noise-20261023/aborted-drop-empty-false/`. The smoke run and the matrix are both rerun with the
 amended runner.
+
+## Correction to acceptance check 2 before any selection rate was computed (23 October 2026, about 11:30 UTC)
+
+The rerun matrix finished at 11:08 UTC with status 0, and all 15 scenarios completed. The first summariser run stopped
+at acceptance check 2: the first of six paired datasets (`lin_inc`, 50%, replicate 1) had identical calendar ages but
+different quoted errors and random-rule selections. The other five pairs were identical.
+
+The cause was the check itself. Loading the rcarbon namespace in a fresh R session consumes random numbers; this was
+confirmed directly in the accepted image. Both production replicate functions call
+`requireNamespace("rcarbon")` before seeding, which is why acceptance check 1 reproduces the accepted replicates exactly.
+The pairing check did not, so the first dataset it generated, the curve-mean arm, was drawn after the namespace load
+had shifted the stream.
+
+The check now loads rcarbon before seeding, exactly as the production code does, and the summariser was rerun. No
+selection rate had been computed when the correction was made: the summariser stops at the first failed check, before
+any rates are calculated.
