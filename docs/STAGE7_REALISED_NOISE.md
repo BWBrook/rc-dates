@@ -149,3 +149,14 @@ realised scatter, `l1`/`l2` agreement on family and direction was 0.9975.
 The evidence is in `out/revision/realised-noise-20261023/`, with checksums in `SHA256SUMS`. Per-replicate job logs are
 on `deep-server` and are not tracked, following the repository's ignore rule for `logs/`. The partial checkpoints from
 the aborted first launch remain unused on `deep-server` under `aborted-drop-empty-false/`.
+
+## Independent verification (23 October 2026)
+
+An independent Claude Sonnet subagent wrote its own base-R aggregation without sourcing any project code. It ran in the
+accepted image with the checkout mounted read-only, and its script is `~/s7verify/verify_stage7.R` on `deep-server`.
+It checked 1,440,000 fitted rows: every (replicate, score, rule) group had exactly one selected model, and every file
+held replicates 1–1,000. Its rates matched all 240 rows of `stage7_selection_rates.csv` exactly in every rate column,
+and its change columns agreed to within 1.4e-17. It rebuilt all 75 headline rows with exact agreement; the only nonzero
+changes were the two constant-history half-treatment rows (±0.001). The committed SHA-256 manifest, which was
+generated locally after copying, was then checked against the files on `deep-server`, and all 40 entries matched. As
+in the Stage 6 audit, this verifies the stored selections and their aggregation; it does not refit every model.
