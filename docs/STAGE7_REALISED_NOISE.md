@@ -129,3 +129,23 @@ had shifted the stream.
 The check now loads rcarbon before seeding, exactly as the production code does, and the summariser was rerun. No
 selection rate had been computed when the correction was made: the summariser stops at the first failed check, before
 any rates are calculated.
+
+## Result (23 October 2026)
+
+Technical acceptance passed:
+1. The curve-mean wrapper reproduced accepted replicates 1–20 exactly, in 960 rows and 17 columns.
+2. All six paired datasets had identical structural draws, and conventional ages differed for 99.9–100% of dates.
+3. All 15 scenarios had 1,000 replicates, matched their expected scenarios and carried the accepted provenance, apart
+   from the realised observation model and the Stage 7 runner.
+
+**The headline rule holds.** All 75 headline rates stayed within 0.02 of their accepted values, and the largest
+absolute change was 0.001. Across all cells, the largest change in any `l1` rate was 0.015, a generating-family rate for
+random-3 under linear increase at full treatment, and direction and reversal rates were essentially unchanged. At
+least 95.2% of replicates in each cell selected the same family and direction under both observation models; the
+median was 99.1%. Realised scatter changed which date was a site's posterior-median oldest for only about 0.2–1.5% of
+dates in the paired check. At most 0.011% of retained dates were dropped for having no mass in the window. Under
+realised scatter, `l1`/`l2` agreement on family and direction was 0.9975.
+
+The evidence is in `out/revision/realised-noise-20261023/`, with checksums in `SHA256SUMS`. Per-replicate job logs are
+on `deep-server` and are not tracked, following the repository's ignore rule for `logs/`. The partial checkpoints from
+the aborted first launch remain unused on `deep-server` under `aborted-drop-empty-false/`.

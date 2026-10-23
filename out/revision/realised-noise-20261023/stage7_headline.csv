@@ -1,0 +1,76 @@
+"headline","truth","prop","strategy","accepted","realised","change","within_0.02"
+"1 full adverse reversal","lin_inc",1,"r_old",1,1,0,TRUE
+"1 full adverse reversal","lin_dec",1,"r_young",1,1,0,TRUE
+"1 full adverse reversal","exp_inc",1,"r_old",1,1,0,TRUE
+"1 full adverse reversal","exp_dec",1,"r_young",1,1,0,TRUE
+"1 full concordant direction","lin_inc",1,"r_young",1,1,0,TRUE
+"1 full concordant direction","lin_dec",1,"r_old",1,1,0,TRUE
+"1 full concordant direction","exp_inc",1,"r_young",1,1,0,TRUE
+"1 full concordant direction","exp_dec",1,"r_old",1,1,0,TRUE
+"2 constant full uniform selection","uni",1,"r_old",0,0,0,TRUE
+"2 constant full uniform selection","uni",1,"r_young",0,0,0,TRUE
+"2 constant half directional","uni",0.5,"r_old",0.973,0.972,-0.001,TRUE
+"2 constant half directional","uni",0.5,"r_young",0.979,0.98,0.001,TRUE
+"3 partial adverse reversal","lin_inc",0.5,"r_old",0,0,0,TRUE
+"3 partial adverse reversal","lin_inc",0.75,"r_old",0,0,0,TRUE
+"3 partial adverse reversal","lin_dec",0.5,"r_young",0,0,0,TRUE
+"3 partial adverse reversal","lin_dec",0.75,"r_young",0,0,0,TRUE
+"3 partial adverse reversal","exp_inc",0.5,"r_old",0,0,0,TRUE
+"3 partial adverse reversal","exp_inc",0.75,"r_old",0,0,0,TRUE
+"3 partial adverse reversal","exp_dec",0.5,"r_young",0,0,0,TRUE
+"3 partial adverse reversal","exp_dec",0.75,"r_young",0,0,0,TRUE
+"4 random reversal","lin_inc",0.5,"r_1",0,0,0,TRUE
+"4 random reversal","lin_inc",0.75,"r_1",0,0,0,TRUE
+"4 random reversal","lin_inc",1,"r_1",0,0,0,TRUE
+"4 random reversal","lin_dec",0.5,"r_1",0,0,0,TRUE
+"4 random reversal","lin_dec",0.75,"r_1",0,0,0,TRUE
+"4 random reversal","lin_dec",1,"r_1",0,0,0,TRUE
+"4 random reversal","exp_inc",0.5,"r_1",0,0,0,TRUE
+"4 random reversal","exp_inc",0.75,"r_1",0,0,0,TRUE
+"4 random reversal","exp_inc",1,"r_1",0,0,0,TRUE
+"4 random reversal","exp_dec",0.5,"r_1",0,0,0,TRUE
+"4 random reversal","exp_dec",0.75,"r_1",0,0,0,TRUE
+"4 random reversal","exp_dec",1,"r_1",0,0,0,TRUE
+"4 random reversal","lin_inc",0.5,"r_2",0,0,0,TRUE
+"4 random reversal","lin_inc",0.75,"r_2",0,0,0,TRUE
+"4 random reversal","lin_inc",1,"r_2",0,0,0,TRUE
+"4 random reversal","lin_dec",0.5,"r_2",0,0,0,TRUE
+"4 random reversal","lin_dec",0.75,"r_2",0,0,0,TRUE
+"4 random reversal","lin_dec",1,"r_2",0,0,0,TRUE
+"4 random reversal","exp_inc",0.5,"r_2",0,0,0,TRUE
+"4 random reversal","exp_inc",0.75,"r_2",0,0,0,TRUE
+"4 random reversal","exp_inc",1,"r_2",0,0,0,TRUE
+"4 random reversal","exp_dec",0.5,"r_2",0,0,0,TRUE
+"4 random reversal","exp_dec",0.75,"r_2",0,0,0,TRUE
+"4 random reversal","exp_dec",1,"r_2",0,0,0,TRUE
+"4 random reversal","lin_inc",0.5,"r_3",0,0,0,TRUE
+"4 random reversal","lin_inc",0.75,"r_3",0,0,0,TRUE
+"4 random reversal","lin_inc",1,"r_3",0,0,0,TRUE
+"4 random reversal","lin_dec",0.5,"r_3",0,0,0,TRUE
+"4 random reversal","lin_dec",0.75,"r_3",0,0,0,TRUE
+"4 random reversal","lin_dec",1,"r_3",0,0,0,TRUE
+"4 random reversal","exp_inc",0.5,"r_3",0,0,0,TRUE
+"4 random reversal","exp_inc",0.75,"r_3",0,0,0,TRUE
+"4 random reversal","exp_inc",1,"r_3",0,0,0,TRUE
+"4 random reversal","exp_dec",0.5,"r_3",0,0,0,TRUE
+"4 random reversal","exp_dec",0.75,"r_3",0,0,0,TRUE
+"4 random reversal","exp_dec",1,"r_3",0,0,0,TRUE
+"4 random reversal","lin_inc",0.5,"r_5",0,0,0,TRUE
+"4 random reversal","lin_inc",0.75,"r_5",0,0,0,TRUE
+"4 random reversal","lin_inc",1,"r_5",0,0,0,TRUE
+"4 random reversal","lin_dec",0.5,"r_5",0,0,0,TRUE
+"4 random reversal","lin_dec",0.75,"r_5",0,0,0,TRUE
+"4 random reversal","lin_dec",1,"r_5",0,0,0,TRUE
+"4 random reversal","exp_inc",0.5,"r_5",0,0,0,TRUE
+"4 random reversal","exp_inc",0.75,"r_5",0,0,0,TRUE
+"4 random reversal","exp_inc",1,"r_5",0,0,0,TRUE
+"4 random reversal","exp_dec",0.5,"r_5",0,0,0,TRUE
+"4 random reversal","exp_dec",0.75,"r_5",0,0,0,TRUE
+"4 random reversal","exp_dec",1,"r_5",0,0,0,TRUE
+"5 full bracketed direction","lin_inc",1,"r_bracket",1,1,0,TRUE
+"5 full bracketed direction","lin_dec",1,"r_bracket",1,1,0,TRUE
+"5 full bracketed direction","exp_inc",1,"r_bracket",1,1,0,TRUE
+"5 full bracketed direction","exp_dec",1,"r_bracket",1,1,0,TRUE
+"5 full bracketed linear family","lin_inc",1,"r_bracket",0,0,0,TRUE
+"5 full bracketed linear family","lin_dec",1,"r_bracket",0,0,0,TRUE
+"5 full bracketed constant uniform","uni",1,"r_bracket",0.999,0.999,0,TRUE

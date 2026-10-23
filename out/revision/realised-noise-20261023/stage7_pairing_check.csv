@@ -1,0 +1,7 @@
+"truth","prop","sim","dates","structural_identical","cra_differs_share","extreme_old_changed_share","accepted"
+"lin_inc",0.5,1,1032,TRUE,1,0.00193798449612403,TRUE
+"lin_inc",0.5,2,998,TRUE,1,0.00801603206412826,TRUE
+"lin_inc",0.5,3,959,TRUE,0.99895724713243,0.0104275286757039,TRUE
+"uni",0.5,1,1032,TRUE,1,0.00775193798449612,TRUE
+"uni",0.5,2,998,TRUE,0.998997995991984,0.0120240480961924,TRUE
+"uni",0.5,3,959,TRUE,1,0.0145985401459854,TRUE

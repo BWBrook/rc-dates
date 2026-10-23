@@ -1,0 +1,16 @@
+[06:54:28] launching uni p=1 realised
+[06:54:28] launching lin_inc p=1 realised
+[06:54:28] launching lin_dec p=1 realised
+[06:54:28] launching exp_inc p=1 realised
+[06:54:28] launching exp_dec p=1 realised
+[06:54:28] launching uni p=0.75 realised
+[06:54:28] launching lin_inc p=0.75 realised
+[06:54:28] launching lin_dec p=0.75 realised
+[06:54:28] launching exp_inc p=0.75 realised
+[06:54:28] launching exp_dec p=0.75 realised
+[06:54:28] launching uni p=0.5 realised
+[06:54:28] launching lin_inc p=0.5 realised
+[06:54:28] launching lin_dec p=0.5 realised
+[06:54:28] launching exp_inc p=0.5 realised
+[06:54:28] launching exp_dec p=0.5 realised
+[11:08:50] matrix finished with status 0

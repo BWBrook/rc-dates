@@ -1,0 +1,9 @@
+rc-dates Stage 7 summary
+acceptance 1: curve_mean wrapper reproduced accepted replicates 1-20 (960 rows, 17 columns)
+acceptance 2: structural draws identical in 6 of 6 paired datasets; conventional ages differ for 0.999-1.000 of dates
+acceptance 3-4: 15 of 15 scenarios accepted (1000 replicates each)
+container image: sha256:01f5e221d0f3b70ccb3edd0fd6556ffd1c645784e98e147e81034866b9137777
+headline rule (all 75 headline rates within 0.02 of accepted): HOLDS
+largest absolute headline change: 0.001
+l1/l2 family-and-direction agreement under realised scatter: 0.9975
+retained dates dropped for zero in-window mass: 0.0000-0.0001 of retained dates across rules and scenarios
