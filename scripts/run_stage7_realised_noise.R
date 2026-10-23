@@ -40,14 +40,16 @@ observation_model <- if (any(model_args)) sub("^--observation-model=", "", args[
 observation_model <- normalize_population_observation_model(observation_model)
 settings <- parse_population_simulation_args(args[!model_args])
 
-# The accepted replicate function with the observation model passed to the existing data generator.
+# The accepted replicate function with the observation model passed to the existing data generator. As in the
+# earlier realised-noise sensitivity, a retained date with no posterior mass in the analysis window is dropped and
+# counted (n_dropped); under curve_mean no date is ever dropped, so the accepted path is unchanged.
 run_stage7_replicate <- function(sim, truth, prop, specification, master_seed) {
   requireNamespace("rcarbon", quietly = TRUE)
   set.seed(production_simulation_seed(truth, prop, sim, master_seed), kind = "L'Ecuyer-CMRG")
   simulated_data <- simulate_population_data_set(truth, prop, specification, observation_model = observation_model)
   result <- do.call(rbind, lapply(specification$strategies, function(strategy) {
     evaluate_population_models(simulated_data, truth = truth, strategy = strategy, prop = prop, sim = sim,
-                               specification = specification)
+                               specification = specification, drop_empty = TRUE)
   }))
   rownames(result) <- NULL
   validate_population_simulation_results(result, design = "signed-v1")

@@ -167,6 +167,10 @@ rates <- do.call(rbind, lapply(seq_len(nrow(grid)), function(i) {
   scores <- merge(l1, l2, by = c("sim", "strategy"), suffixes = c("_l1", "_l2"))
   agreement <- tapply(scores$selected_state_l1 == scores$selected_state_l2, scores$strategy, mean)
   out$l1_l2_agreement_realised <- unname(agreement[out$strategy])
+  drops <- realised[realised$type == "l1", c("strategy", "n_observations", "n_dropped")]
+  dropped <- tapply(drops$n_dropped, drops$strategy, sum)
+  retained <- tapply(drops$n_observations + drops$n_dropped, drops$strategy, sum)
+  out$dropped_share_realised <- unname((dropped / retained)[out$strategy])
   cbind(truth = grid$truth[[i]], prop = grid$prop[[i]], out, stringsAsFactors = FALSE)
 }))
 rates <- rates[order(rates$type, rates$truth, rates$prop, rates$strategy), ]
@@ -223,6 +227,8 @@ writeLines(c(
           if (holds) "HOLDS" else "DOES NOT HOLD"),
   sprintf("largest absolute headline change: %.3f", max(abs(headline$change))),
   sprintf("l1/l2 family-and-direction agreement under realised scatter: %.4f",
-          stats::weighted.mean(l1$l1_l2_agreement_realised, l1$n))
+          stats::weighted.mean(l1$l1_l2_agreement_realised, l1$n)),
+  sprintf("retained dates dropped for zero in-window mass: %.4f-%.4f of retained dates across rules and scenarios",
+          min(l1$dropped_share_realised), max(l1$dropped_share_realised))
 ), file.path(stage7_dir, "stage7_summary.txt"))
 message("Wrote Stage 7 summaries to ", stage7_dir, "; headline rule ", if (holds) "holds" else "does not hold")

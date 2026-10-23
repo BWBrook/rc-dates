@@ -91,3 +91,25 @@ Information either way.
   across dates, not correlated.
 - Stage 7 does not revisit the earlier failed v1 noise gate or its v2 diagnostic. Those used a growth-only candidate
   set and a different design and remain as reported.
+
+## Amendment before any Stage 7 result was inspected (23 October 2026, 06:55 UTC)
+
+The first matrix launch (06:01 UTC) stopped at 06:47 UTC. All 15 jobs aborted between replicates 27 and 212 with "A
+calibrated date has no probability within the analysis window." Under realised scatter, a date near either end of the
+window can calibrate wholly outside the strict 651–11,650 cal BP interior. The accepted evaluation aborts in that case
+(`drop_empty = FALSE`). This never arises under the curve-mean model, which is why the prespecification did not cover
+it. No selection rate was computed or inspected; only the job logs were read.
+
+The earlier realised-noise sensitivity (Supplementary Section S3) met the same condition. It dropped such observations
+and recorded the number (`drop_empty = TRUE`, counted in `n_dropped`). Stage 7 adopts that rule unchanged:
+
+- Extrema are still chosen by posterior median among all of a site's dates.
+- A retained date with no in-window mass is dropped from that rule's fit and counted.
+- Under `curve_mean`, no date is ever dropped, so acceptance check 1 still tests exact reproduction of the accepted
+  replicates.
+
+The summaries report the dropped dates for each rule and scenario. Dropping falls mainly on dates near the window edges,
+which oldest and youngest retention favour, so the reported rates also include these drops. Because the runner
+fingerprint changes, the partial checkpoints are moved, unused, to
+`out/revision/realised-noise-20261023/aborted-drop-empty-false/`. The smoke run and the matrix are both rerun with the
+amended runner.
