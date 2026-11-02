@@ -1,5 +1,7 @@
 # rc-dates
 
+> **Status:** developed in the open as a working record. This is work in progress: contents may change, and nothing here is peer-reviewed unless stated.
+
 Scientific analysis and manuscript sources for testing how within-site date-retention rules and
 model choice affect inference from radiocarbon-date distributions.
 
