@@ -93,6 +93,19 @@ step.
    "migrating an existing paper" section in `SKILL.md` would help: rename the SI first, keep the existing makedoc
    profile settings, and remap any line-anchored checks.
 
+## Fixes made (8 November 2026, at Barry's request)
+
+| Finding | Fix | Where |
+|---|---|---|
+| 1 refs.py keys and years | Better BibTeX skip words and per-word casing; print year before `issued`; DataCite through doi.org content negotiation; failures reported, not a crash; suffix on key collisions. Agreement with the Zotero export rose from 55 to 72 of 80; the remaining eight differ in the source metadata (title casing, name particles, one record's year, one hand-assigned key), not in the algorithm. rc-dates keeps its Zotero export. | claude-config 397057b |
+| 2–3 bindings | Selectors take `aggregate` `min`/`max` and `abs`/`scale` transforms. C19 now carries nine strict bindings across the abstract, Results, Discussion and brief (V006–V014); a swapped range fails, and `abs` binds "2,439 years younger" to −2439.06. | claude-config 397057b; this repo |
+| 4 rounding | Documented in `claims.py` and `claims-ledger.md`. | claude-config 397057b |
+| 5 article template | `products.md` and `SKILL.md` direct word-limited journals to put these sections in the supplement. | claude-config 397057b |
+| 6 makedoc tmpfs | The normalised DOCX is written beside its target, so the replace is atomic and stays on one filesystem; builds no longer need `TMPDIR`. Pinned here. | makedoc 1178639 |
+| 7 ignored PDFs | `init_paper.py` adds `!manuscript/build/*.pdf` when a repository-wide rule would hide them (tested). | claude-config 397057b |
+| 8 rebased stamps | `claims.py check` fails on stamps that are not ancestors of HEAD (tested with an orphan commit). | claude-config 397057b |
+| 9 migration | `SKILL.md` has a "Migrating an existing paper" section. | claude-config 397057b |
+
 ## Next tranche
 
 - Supplement sections the skill expects: a pivotal-records table, an assumption table, "what would sharpen the

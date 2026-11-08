@@ -28,7 +28,7 @@ Each date has its own measurement uncertainty, and careful methods already handl
 
 2. **When every site was affected, the selection rule decided the answer.** In the simulations, keeping every site's oldest date always produced an apparent decline, and keeping its youngest always an apparent rise, whatever the true history; true trends running the other way were reversed[]{.C10}. Applying the rule to only half the sites still created a trend from a steady history in over [97]{.C11}% of runs.
 
-3. **Weaker true trends were reversed even when only some sites were affected.** With three-quarters of sites affected, gentle trends (a one-and-a-half- to twofold change over 11,000 years) were reversed in [93]{.C19}–[100]{.C19}% of runs, although no tenfold trend was. The proportions we tested do not establish a safe threshold.
+3. **Weaker true trends were reversed even when only some sites were affected.** With three-quarters of sites affected, gentle trends (a one-and-a-half- to twofold change over 11,000 years) were reversed in [93]{.C19 .V013}–[100]{.C19 .V014}% of runs, although no tenfold trend was. The proportions we tested do not establish a safe threshold.
 
 4. **Keeping both the oldest and youngest dates avoided reversals but blurred the picture.** It never reversed a trend[]{.C21}. With every site affected, it detected only [11]{.C22}–[17]{.C22}% of the gentlest trends, against [61]{.C22}–[67]{.C22}% for two dates per site picked at random, and it always made tenfold straight-line trends look exponential[]{.C13}.
 

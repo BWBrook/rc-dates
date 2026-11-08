@@ -12,6 +12,13 @@ limit, superseded_by. Documents cite claims in two ways:
   `[452.6]{.C35 .superseded}`. Spans are invisible in rendered PDF and DOCX.
 - A bare `C27` (the agent guide) is checked for existence only.
 
+A shown number matches a value when the value rounds (half up) to it at the precision shown, so `[11]{.C22}` matches a
+value of 10.6 without a separate `~11` entry.
+
+Strict bindings (value-bindings.csv) select one row, or aggregate rows with {"where": {...}, "aggregate": {"op":
+"count"|"min"|"max", "column": ...}}. A selector may add {"abs": true} or {"scale": 100} so that unsigned or percentage
+prose binds to signed or proportional evidence.
+
 In `value`, a number prefixed with `~` is derived (a difference, a rounding) and is not looked for in
 the evidence files. Every other value number must appear, at its precision, in at least one evidence
 file. A current claim whose evidence changed after its recorded commit is reported as stale.
@@ -103,7 +110,7 @@ def _selected_rows(path, selector):
     """Return rows selected by an equality selector and its optional aggregate."""
     if not isinstance(selector, dict):
         raise ValueError("selector must be a JSON object")
-    where = selector.get("where", selector)
+    where = selector.get("where", {k: v for k, v in selector.items() if k not in {"abs", "scale"}})
     if not isinstance(where, dict):
         raise ValueError("selector.where must be an object")
     if not where:
@@ -121,18 +128,30 @@ def _binding_value(binding, evidence_path):
         value = selected[0].get(binding["value_column"], "")
         if value == "":
             raise ValueError(f"selected row has no value in {binding['value_column']}")
-        return [Decimal(value.replace("−", "-"))]
-    if not isinstance(aggregate, dict) or aggregate.get("op") != "count":
-        raise ValueError("aggregate must be {\"op\": \"count\"}")
+        return [_transform(Decimal(value.replace("−", "-")), binding["selector_json"])]
+    if not isinstance(aggregate, dict) or aggregate.get("op") not in {"count", "min", "max"}:
+        raise ValueError("aggregate op must be count, min or max")
     if not selected:
         raise ValueError("aggregate selector matched no rows")
     column = aggregate.get("column", binding["value_column"])
     values = [row.get(column, "") for row in selected]
     if any(value == "" for value in values):
         raise ValueError(f"aggregate column {column} contains blank values")
+    if aggregate["op"] in {"min", "max"}:
+        numbers = [Decimal(v.replace("−", "-")) for v in values]
+        return [_transform(min(numbers) if aggregate["op"] == "min" else max(numbers), binding["selector_json"])]
     if aggregate.get("distinct", False):
         values = list(dict.fromkeys(values))
     return [Decimal(len(values))]
+
+
+def _transform(value, selector):
+    """Optional display transforms: {"abs": true} for unsigned prose, {"scale": 100} for percentages."""
+    if selector.get("abs"):
+        value = abs(value)
+    if "scale" in selector:
+        value = value * Decimal(str(selector["scale"]))
+    return value
 
 
 def check_bindings(path, by_id, docs, errors):
@@ -235,6 +254,8 @@ def check_ledger(rows, errors, warnings):
             errors.append(f"{cid}: evidence {p} does not exist")
         if not r["commit"] or git("cat-file", "-e", f"{r['commit']}^{{commit}}").returncode:
             errors.append(f"{cid}: commit '{r['commit']}' not found; run stamp")
+        elif git("merge-base", "--is-ancestor", r["commit"], "HEAD").returncode:
+            errors.append(f"{cid}: commit {r['commit']} is not an ancestor of HEAD (rebased or amended?); run stamp")
         elif not missing and r["status"] in {"supported", "provisional"} and (git("diff", "--quiet", r["commit"], "--", *paths).returncode
                               or git("diff", "--quiet", "HEAD", "--", *paths).returncode):
             warnings.append(f"{cid}: evidence changed since {r['commit']}; reverify, then stamp")

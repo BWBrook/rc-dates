@@ -125,8 +125,6 @@ make test                 # scientific tests under R 4.5.3
 python3 scripts/release/count_manuscript_words.py manuscript/build/manuscript.docx   # JAS limit 5,000; abstract 250
 ```
 
-On a machine whose `/tmp` is a tmpfs, set `TMPDIR` to a directory on the repository's filesystem before building.
-
 Invariants: seeds `production_simulation_seed(truth, prop, sim, 1234)` under `L'Ecuyer-CMRG` with common random numbers
 across rules; 48 rows per replicate; accepted evidence directories have `SHA256SUMS` manifests that must verify;
 `r_all` results are identical across treatment proportions.
@@ -140,7 +138,8 @@ across rules; 48 rows per replicate; accepted evidence directories have `SHA256S
 - **Prevalence.** How often archives hold extreme-retained dates is unknown; it needs archival metadata, not simulation.
 - **Weaker trends under realised scatter** (Stage 7 covered ten-fold only).
 - **Ledger convergence.** `release/claims.csv` (row-filter checks) and `manuscript/claims.csv` (result-level claims)
-  overlap; merging them into value bindings is pending.
+  overlap. Bindings now support `min`/`max` aggregates and `abs`/`scale` transforms, so the registry's range checks can
+  move into `manuscript/value-bindings.csv`; that merge is pending.
 
 ## 8. Conduct in this repository
 

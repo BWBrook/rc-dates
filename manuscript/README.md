@@ -25,10 +25,6 @@ make manuscript-build             # PDF and DOCX into manuscript/build/, then th
 make submission-build             # journal-facing files in manuscript/submission/dist/
 ```
 
-On a machine whose `/tmp` is a tmpfs (wsl-laptop since its Ubuntu 26.04 upgrade), makedoc's DOCX step
-fails with "Invalid cross-device link"; set `TMPDIR` to a directory on the same filesystem as the
-repository, for example `export TMPDIR=$HOME/.cache/tmp-makedoc`.
-
 The bibliography is a Better BibTeX CSL-YAML export from Zotero (`references/refs.yaml`).
 `references/dois.txt` lists every cited DOI, one per line, for Zotero's magic-wand import; two works
 without DOIs (the R reference and Ulm et al. 1996) are maintained in Zotero directly. Re-export rather
