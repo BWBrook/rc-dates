@@ -9,14 +9,14 @@ and where it was adapted, and what the test exposed about the skill and its tool
 
 | Step | Result | Commit |
 |---|---|---|
-| makedoc checkout moved from a stale September feature branch to `main` (3d1934c) and pinned | `manuscript/makedoc.lock.json` | 30a5904 |
-| Build migrated to `manuscript/settings/build.yaml`, with three profiles: main, supplement and brief | Article renders unchanged (4,949 words, 16 pages); the SI is now built by makedoc, with Figs S1–S3, instead of an ad hoc pandoc step | 30a5904 |
-| `supplementary.md` renamed `supplement.md`; SI figures moved to `supplement_figures.md`; JAS CSL moved to `manuscript/csl/` | numeric-registry anchors updated | 30a5904 |
-| `manuscript/estimands.md` written from the October review record, quoting the rejected phrasings | allowed and forbidden phrasings, results by claim range | 10db22d |
-| `manuscript/claims.csv`: 28 result-level claims with evidence, reproduce command and limit; C04 has strict value bindings | 0 errors; all claims cited | 10db22d |
-| Stage 7 (realised scatter) integrated into the article and SI (S2.8), using the verified draft | article 4,947 words, abstract 243 | 10db22d |
-| Brief (two pages, one new figure) and agent guide written | brief 2 pages; render scan clean | (Phase 3) |
-| Independent ledger, span and semantic review by a Claude Sonnet subagent | all 28 values confirmed from evidence; three product errors and eight phrasing issues fixed; claims marked supported | (Phase 4) |
+| makedoc checkout moved from a stale September feature branch to `main` (3d1934c) and pinned | `manuscript/makedoc.lock.json` | 2eb9f38 |
+| Build migrated to `manuscript/settings/build.yaml`, with three profiles: main, supplement and brief | Article renders unchanged (4,949 words, 16 pages); the SI is now built by makedoc, with Figs S1–S3, instead of an ad hoc pandoc step | 2eb9f38 |
+| `supplementary.md` renamed `supplement.md`; SI figures moved to `supplement_figures.md`; JAS CSL moved to `manuscript/csl/` | numeric-registry anchors updated | 2eb9f38 |
+| `manuscript/estimands.md` written from the October review record, quoting the rejected phrasings | allowed and forbidden phrasings, results by claim range | 8298fb9 |
+| `manuscript/claims.csv`: 28 result-level claims with evidence, reproduce command and limit; C04 has strict value bindings | 0 errors; all claims cited | 8298fb9 |
+| Stage 7 (realised scatter) integrated into the article and SI (S2.8), using the verified draft | article 4,947 words, abstract 243 | 8298fb9 |
+| Brief (two pages, one new figure) and agent guide written | brief 2 pages; render scan clean | 5883796 |
+| Independent ledger, span and semantic review by a Claude Sonnet subagent | all 28 values confirmed from evidence; three product errors and eight phrasing issues fixed; claims marked supported | 6dca88f, 72b51d0 |
 
 The root Makefile remains the command index. `make manuscript-check` runs the ledger check, the render scan, makedoc
 lint and the reference audit for all profiles, and the 111-check registry.
