@@ -49,3 +49,4 @@ __pycache__/
 # living-paper build outputs (PDFs are tracked)
 manuscript/build/*.docx
 manuscript/build/*_build_manifest.json
+.scrivmark/
