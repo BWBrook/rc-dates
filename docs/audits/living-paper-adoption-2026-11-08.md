@@ -16,10 +16,33 @@ and where it was adapted, and what the test exposed about the skill and its tool
 | `manuscript/claims.csv`: 28 result-level claims with evidence, reproduce command and limit; C04 has strict value bindings | 0 errors; all claims cited | 10db22d |
 | Stage 7 (realised scatter) integrated into the article and SI (S2.8), using the verified draft | article 4,947 words, abstract 243 | 10db22d |
 | Brief (two pages, one new figure) and agent guide written | brief 2 pages; render scan clean | (Phase 3) |
-| Independent ledger, span and semantic review by a Claude Sonnet subagent | see below | (Phase 4) |
+| Independent ledger, span and semantic review by a Claude Sonnet subagent | all 28 values confirmed from evidence; three product errors and eight phrasing issues fixed; claims marked supported | (Phase 4) |
 
 The root Makefile remains the command index. `make manuscript-check` runs the ledger check, the render scan, makedoc
 lint and the reference audit for all profiles, and the 111-check registry.
+
+## Independent review outcome
+
+A Claude Sonnet subagent, which did not write the ledger or the products, re-derived every claim value from the
+evidence files with its own code. All 28 were correct. It also found:
+
+- **A pre-existing error in the article (since September).** "The primary and expected-log-density analyses agreed on
+  the selected family and direction ... including every all-site oldest and youngest result" was false for family: for
+  example, linear increase under oldest retention selected linear in 0.195 of replicates under `l1` and 0.21 under
+  `l2`. The scores agree on direction in every replicate. This is corrected in the article, SI and agent guide, and
+  recorded in SI S5.
+- **A misplaced span.** C18 was attached to a sentence about weaker trends rather than to the full-treatment sentence.
+- **Brief phrasings that loosened forbidden ones:**
+  - "random selection rarely misled";
+  - measurement-error results extended beyond the ten-fold design;
+  - "a database often holds only some of those dates", a prevalence claim;
+  - "cannot reveal" without "by itself";
+  - unqualified "always" and "real trends".
+- **Agent-guide trap 3** generalised the ten-fold exponential result to all ratios.
+
+All were fixed. A new claim, C29 (concordant-rule direction), covers a sentence that had no claim. The numeric checker
+could not have caught any of these: it verifies numbers, not meaning. That is the case for the skill's semantic review
+step.
 
 ## Deliberate deviations from the skill
 

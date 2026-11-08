@@ -255,6 +255,15 @@ The accepted empirical and simulation evidence was generated under R 4.5.3 in a 
 
 The supplementary reproducibility archive, supplied in anonymised form for peer review, contains the active code, pinned environment, focused tests, synthetic simulation outputs, aggregate empirical evidence and provenance snapshots. It excludes raw and record-level AustArch data, including source site identities, coordinates, laboratory identifiers and human-remains records. A citable repository record containing code, synthetic artefacts and permitted aggregate evidence will be made public no later than publication. Any release of source or record-level archaeological data remains conditional on licensing, sensitive-location review and Indigenous data-governance requirements.
 
+## S5. Statements corrected during review
+
+| Earlier statement | Found by | Replaced by | Record |
+|---|---|---|---|
+| Reversal of opposing trends occurred only when every site was treated | the weaker-trend extension (Section S2.7) | specific to ten-fold trends; at three-quarter treatment, 1.5- and 2-fold trends were mostly reversed[]{.C19} | `docs/STAGE6_EFFECT_SIZE.md` |
+| A tested treatment proportion is safe because it produced no reversals | Codex result audit, 18 October 2026 | the tested proportions do not establish a safe retention threshold | `manuscript/reviews/codex_stage6_result_audit_2026-10-18.md` |
+| The two scores agreed on family and direction in every full-treatment one-sided cell | independent Claude Sonnet review, 8 November 2026 | they agreed on direction in every replicate, but not always on family[]{.C16} | `docs/audits/living-paper-adoption-2026-11-08.md` |
+| Oldest, youngest and bracketed retention are untested under realised scatter | the realised-scatter rerun (Section S2.8) | headline results held in the ten-fold design[]{.C25} | `docs/STAGE7_REALISED_NOISE.md` |
+
 ## References
 
 <div id="refs"></div>
