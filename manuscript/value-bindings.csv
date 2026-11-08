@@ -1,0 +1,6 @@
+binding_id,claim_id,evidence,selector,value_column,estimand,display_values
+V001,C04,out/empirical-sampling/curve_distance_summaries.csv,"{""strategy_label"": ""oldest"", ""proportion"": ""1"", ""comparison"": ""retention_vs_all"", ""method"": ""SPD""}",mean,"SPD total-variation distance, full-site oldest vs all dates","[""0.455""]"
+V002,C04,out/empirical-sampling/curve_distance_summaries.csv,"{""strategy_label"": ""youngest"", ""proportion"": ""1"", ""comparison"": ""retention_vs_all"", ""method"": ""SPD""}",mean,"SPD total-variation distance, full-site youngest vs all dates","[""0.524""]"
+V003,C04,out/empirical-sampling/curve_distance_summaries.csv,"{""strategy_label"": ""random-1"", ""proportion"": ""1"", ""comparison"": ""retention_vs_all"", ""method"": ""SPD""}",mean,"mean SPD total-variation distance, full-site random-1, 1,000 realisations","[""0.204""]"
+V004,C04,out/empirical-sampling/curve_distance_summaries.csv,"{""strategy_label"": ""random-1"", ""proportion"": ""1"", ""comparison"": ""retention_vs_all"", ""method"": ""SPD""}",q025,2.5th percentile of the random-1 SPD distance,"[""0.158""]"
+V005,C04,out/empirical-sampling/curve_distance_summaries.csv,"{""strategy_label"": ""random-1"", ""proportion"": ""1"", ""comparison"": ""retention_vs_all"", ""method"": ""SPD""}",q975,97.5th percentile of the random-1 SPD distance,"[""0.256""]"
