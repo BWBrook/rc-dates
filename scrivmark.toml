@@ -1,5 +1,5 @@
 [manuscript]
 # Source files in reading order.
 files = ["manuscript/text/main.md", "manuscript/text/figures.md", "manuscript/text/brief.md"]
-bibliography = []
+bibliography = ["references/refs.yaml"]
 csl = "manuscript/csl/journal-of-archaeological-science.csl"
