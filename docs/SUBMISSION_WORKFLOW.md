@@ -14,19 +14,17 @@ abstract has 239 words against a limit of 250. All 111 registered claims pass an
 
 Each stage closes before the next begins, unless it is marked as able to run in parallel.
 
-### 1. Barry's read-through (now)
+### 1. Barry's read-through (now, through scrivmark)
 
-- **Files.** `manuscript/submission/dist/barry_readthrough_2026-10-23/`, built from `40323ca`. It holds the main text and
-  the SI as DOCX and PDF.
-- **How to mark.** Use Word with Track Changes and comments, as many as needed and unresolved if necessary. PDF annotations
-  or plain notes also work.
-- **Questions to read for.** Is this the argument to make? Will an archaeologist see why it matters? Are the conclusions
-  proportionate to the evidence?
-- **Claude's part.** Read the tracked changes and comments, apply them to the Markdown source, and keep the numbers and
-  methods intact. Rerun the claims audit, the strict build and the word count. Return a disposition table showing what
-  was applied, what was adjusted and why, and what needs Barry's decision.
-- **Word budget.** Any additions need matching cuts. Claude proposes the cuts, and Barry chooses.
-- **Done when** every mark has a disposition and Barry accepts the revised build.
+- **Process (8 November 2026).** Barry reviews as scientific supervisor in scrivmark; Claude (and, where asked,
+  Codex) are the authors. The review sources are the article (`manuscript/text/main.md` and `figures.md`) and the
+  brief (`brief.md`), set in `scrivmark.toml`. The text stays unchanged until his round comes back.
+- **On return.** `scrivmark open <round> --as "Claude"`, with `SCRIVMARK_AGENT` set, then decide every change on its
+  merits, giving reasons for rejections, and reply to every comment. Edits to bound numbers are requests: change the
+  ledger or the analysis and rebuild. Then run `make manuscript-check`, check the word count, `scrivmark respond`, and
+  Barry signs off.
+- **Word budget.** The article is 4,957 words against 5,000 and the abstract 248 against 250. Additions need matching
+  cuts.
 
 ### 2. Science scope gate (decide during stage 1; can run in parallel)
 
