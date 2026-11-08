@@ -140,7 +140,7 @@ Full oldest retention selected a decreasing direction and full youngest retentio
 
 For ten-fold changes, the full-treatment reversal did not extend to partial treatment. At proportions 0.50 and 0.75, no ten-fold non-uniform replicate selected the opposite direction under the adverse rule; at 0.75, uniform was instead selected in 18.1% of linear-increase and 21.2% of linear-decrease replicates. Uniform truth was affected sooner: half-site oldest and youngest retention selected a directional model in 97.3% and 97.9% of replicates. Weaker changes were reversed at partial treatment (Section S2.7).
 
-Across random-1, random-2, random-3 and random-5, all four ten-fold non-uniform truths and all three treatment proportions, direction selection was 1.000. Generating-family selection ranged from 0.754 to 0.995 as information was discarded. The $\ell^1$ and $\ell^2$ analyses agreed on the selected family-and-direction combination in 99.75% of 120,000 paired selections, including all full-treatment one-sided cells.
+Across random-1, random-2, random-3 and random-5, all four ten-fold non-uniform truths and all three treatment proportions, direction selection was 1.000. Generating-family selection ranged from 0.754 to 0.995 as information was discarded. The $\ell^1$ and $\ell^2$ analyses agreed on the selected family-and-direction combination in [99.75]{.C16}% of [120,000]{.C16} paired selections. In every full-treatment one-sided cell they selected the same direction in every replicate, but not always the same family: under oldest retention, for example, linear increase was selected as linear in 0.195 of replicates under $\ell^1$ and 0.21 under $\ell^2$.
 
 ### S2.6 Order statistics and the limits of model selection
 
@@ -209,7 +209,7 @@ The next table gives correct-direction percentages for the other rules, as the r
 | Random-2 | 100% | 83.1 | 60.6–66.6 | 93.2–95.2 | 99.8–100 | 100 | 100 |
 | All dates | all | 84.8 | 98.2–99.6 | 100 | 100 | 100 | 100 |
 
-Bracketed retention avoided reversal but often selected uniform for weak changes, more often than its count-matched random-2 comparison. It also never selected the linear family for a linear history at 75% or 100% treatment at any ratio, and did so for at most [3.5]{.C23}% at 50%. Random-2 selected the linear family for [32.0]{.C23}–[94.6]{.C23}% of linear histories. Under the concordant one-sided rule, every changing history at every ratio and treatment proportion was given the correct direction[]{.C18}. The complete rates for every rule, truth, ratio, proportion and score, including generating-family selection and $\ell^1$/$\ell^2$ agreement, are in `out/revision/effect-size-20261018/stage6_selection_rates.csv`.
+Bracketed retention avoided reversal but often selected uniform for weak changes, more often than its count-matched random-2 comparison. It also never selected the linear family for a linear history at 75% or 100% treatment at any ratio, and did so for at most [3.5]{.C23}% at 50%. Random-2 selected the linear family for [32.0]{.C23}–[94.6]{.C23}% of linear histories. Under the concordant one-sided rule, every changing history at every ratio and treatment proportion was given the correct direction[]{.C29}. The complete rates for every rule, truth, ratio, proportion and score, including generating-family selection and $\ell^1$/$\ell^2$ agreement, are in `out/revision/effect-size-20261018/stage6_selection_rates.csv`.
 
 ### S2.8 Realised measurement scatter
 

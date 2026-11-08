@@ -94,9 +94,10 @@ Row filters that select the primary results (most misquotations drop one):
    three-quarter and half treatment (C19, C20). Governs: `estimands.md`, weaker trends.
 2. **"No reversal at partial treatment, so that proportion is safe."** Absence of reversal is not recovery: at
    three-quarter treatment up to 21.2% of ten-fold trends were read as constant (C19), and bracketed retention detected
-   few weak trends (C22). No tested proportion is a safe threshold.
-3. **"Bracketed retention preserves the history."** It preserves direction for ten-fold trends but always selects the
-   exponential family for linear histories at three-quarter or full treatment (C13, C23), and its uniform selection for
+   few weak trends (C22). The tested proportions do not establish a safe threshold.
+3. **"Bracketed retention preserves the history."** It preserves direction for ten-fold trends, and for ten-fold linear
+   histories it always selects exponential at full treatment (C13). At weaker ratios it never selects the linear family at
+   three-quarter or full treatment and mostly selects uniform (C22, C23), and its uniform selection for
    a constant history does not establish shape: the pooled extrema are U-shaped, outside the candidate set (SI S2.6).
 4. **"The noise sensitivity passed."** v1 met 15 of 18 criteria and remains failed; v2 is a post-unblinding diagnostic
    (C26). Stage 7 is a separate, prespecified test of the extreme rules and does not rescue v1 (C25).
@@ -109,7 +110,10 @@ Row filters that select the primary results (most misquotations drop one):
 9. **Accepted sources are fingerprinted.** Editing any file in `R/population_*` or `scripts/run_population_simulation.R`
    breaks the Stage 2 summary rebuild, which checks active sources against checkpoint fingerprints. New analyses get
    their own runner (as Stage 7 did).
-10. **A results file present is not a complete scenario.** Runners checkpoint into the final filename; check replicate
+10. **The two scores agree on direction, not always on family.** In full-treatment one-sided cells, `l1` and `l2` select
+    the same direction in every replicate but different generating families in some (C16). The September text said they
+    agreed on family and direction in those cells; corrected on 8 November 2026 after the independent review.
+11. **A results file present is not a complete scenario.** Runners checkpoint into the final filename; check replicate
     IDs before reading rates (Stage 6 progress-count error).
 
 ## 6. Checks before and after any change
