@@ -85,7 +85,10 @@ step.
    `shutil.move` instead of `os.rename` in makedoc.
 7. **The scaffold's `.gitignore` handling missed a repository-wide `*.pdf` ignore**, so built PDFs would silently go
    untracked. `init_paper.py` could check `git check-ignore manuscript/build/x.pdf` and add the negation.
-8. **`init_paper.py` assumes a fresh repository.** In this mature repo the substantive work was migration: the build
+8. **Stamps break silently after a rebase.** `claims.py` checks only that a stamped commit exists. After rebasing onto
+   a remote commit, every stamp pointed at an orphaned pre-rebase hash: it passed locally, but would fail on a fresh
+   clone. Suggestion: check `git merge-base --is-ancestor <commit> HEAD`, and warn to restamp.
+9. **`init_paper.py` assumes a fresh repository.** In this mature repo the substantive work was migration: the build
    config, renaming the supplement, re-anchoring an existing registry, and integrating pending text. A short
    "migrating an existing paper" section in `SKILL.md` would help: rename the SI first, keep the existing makedoc
    profile settings, and remap any line-anchored checks.
