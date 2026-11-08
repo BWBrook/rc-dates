@@ -1,12 +1,5 @@
 SHELL := /bin/bash
 
-DEFAULT_MAKEDOC_DIR := $(firstword $(wildcard /home/bwbrook/work/makedoc) $(wildcard /Users/bwbrook/work/makedoc))
-MAKEDOC_DIR ?= $(if $(DEFAULT_MAKEDOC_DIR),$(DEFAULT_MAKEDOC_DIR),/Users/bwbrook/work/makedoc)
-MAKEDOC_CONFIG := $(abspath settings/build.yaml)
-MAKEDOC_VENV_BIN ?= $(MAKEDOC_DIR)/.venv/bin
-MAKEDOC_PATH = $(if $(wildcard $(MAKEDOC_VENV_BIN)/python3),$(MAKEDOC_VENV_BIN):$(PATH),$(PATH))
-MAKEDOC_OUTPUT_DIR ?= $(MAKEDOC_DIR)/dist/rc-dates
-MAKEDOC_PDF_ENGINE_OUTPUT_DIR ?= .cache/latex/rc-dates
 SUBMISSION_DIST ?= manuscript/submission/dist
 
 DEFAULT_RSCRIPT := $(firstword $(wildcard /usr/local/bin/Rscript) Rscript)
@@ -33,9 +26,8 @@ help:
 	@echo "  make scientific-release   Assemble the nine-figure scientific reproduction package"
 	@echo
 	@echo "Manuscript:"
-	@echo "  make manuscript-validate   Validate the makedoc profile"
-	@echo "  make manuscript-check      Run strict makedoc checks and build"
-	@echo "  make manuscript-build      Build manuscript DOCX/PDF"
+	@echo "  make manuscript-check      Claims ledger, render scan, makedoc lint and the numeric registry"
+	@echo "  make manuscript-build      Build article, supplement and brief (manuscript/build/)"
 	@echo "  make submission-build      Assemble journal-facing manuscript files"
 
 .PHONY: r-preflight
@@ -87,31 +79,14 @@ stage6-reproduce: r-preflight
 	"$(RSCRIPT)" --vanilla scripts/release/rebuild_stage6_summaries.R
 	"$(RSCRIPT)" --vanilla scripts/render_stage6_effect_size_figure.R "$(STAGE6_REPRODUCED_DIR)" out/reproduced/figures/fig_effect_size
 
-.PHONY: makedoc-preflight
-makedoc-preflight:
-	@test -d "$(MAKEDOC_DIR)" || { echo "Missing makedoc repo: $(MAKEDOC_DIR)"; exit 1; }
-	@if ! test -x "$(MAKEDOC_VENV_BIN)/python3"; then \
-		command -v python3 >/dev/null || { echo "Missing python3 and makedoc virtualenv"; exit 1; }; \
-	fi
-	@test -f "$(MAKEDOC_CONFIG)" || { echo "Missing makedoc config: $(MAKEDOC_CONFIG)"; exit 1; }
-
-.PHONY: manuscript-validate
-manuscript-validate: makedoc-preflight
-	@PATH="$(MAKEDOC_PATH)" $(MAKE) -C "$(MAKEDOC_DIR)" validate-config CONFIG="$(MAKEDOC_CONFIG)"
-
 .PHONY: manuscript-check
-manuscript-check: makedoc-preflight
-	@PATH="$(MAKEDOC_PATH)" $(MAKE) -C "$(MAKEDOC_DIR)" check CONFIG="$(MAKEDOC_CONFIG)" \
-		PDF_ENGINE_OUTPUT_DIR="$(MAKEDOC_PDF_ENGINE_OUTPUT_DIR)"
+manuscript-check:
+	$(MAKE) -C manuscript check
+	python3 scripts/release/audit_manuscript_claims.py --root . --claims release/claims.csv
 
 .PHONY: manuscript-build
-manuscript-build: makedoc-preflight
-	@PATH="$(MAKEDOC_PATH)" $(MAKE) -C "$(MAKEDOC_DIR)" all CONFIG="$(MAKEDOC_CONFIG)" \
-		PDF_ENGINE_OUTPUT_DIR="$(MAKEDOC_PDF_ENGINE_OUTPUT_DIR)"
-
-.PHONY: manuscript-profile
-manuscript-profile: makedoc-preflight
-	@PATH="$(MAKEDOC_PATH)" $(MAKE) -C "$(MAKEDOC_DIR)" profile-show CONFIG="$(MAKEDOC_CONFIG)"
+manuscript-build:
+	$(MAKE) -C manuscript
 
 .PHONY: submission-build
 submission-build: manuscript-build
@@ -119,10 +94,10 @@ submission-build: manuscript-build
 	@command -v xelatex >/dev/null || { echo "Missing xelatex"; exit 1; }
 	@command -v pdftoppm >/dev/null || { echo "Missing pdftoppm for DOCX figure conversion"; exit 1; }
 	@mkdir -p "$(SUBMISSION_DIST)"
-	@test -f "$(MAKEDOC_OUTPUT_DIR)/manuscript.pdf" || { echo "Missing makedoc PDF"; exit 1; }
-	@test -f "$(MAKEDOC_OUTPUT_DIR)/manuscript.docx" || { echo "Missing makedoc DOCX"; exit 1; }
-	cp "$(MAKEDOC_OUTPUT_DIR)/manuscript.pdf" "$(SUBMISSION_DIST)/manuscript.pdf"
-	cp "$(MAKEDOC_OUTPUT_DIR)/manuscript.docx" "$(SUBMISSION_DIST)/manuscript.docx"
+	@test -f "manuscript/build/manuscript.pdf" || { echo "Missing makedoc PDF"; exit 1; }
+	@test -f "manuscript/build/manuscript.docx" || { echo "Missing makedoc DOCX"; exit 1; }
+	cp "manuscript/build/manuscript.pdf" "$(SUBMISSION_DIST)/manuscript.pdf"
+	cp "manuscript/build/manuscript.docx" "$(SUBMISSION_DIST)/manuscript.docx"
 	python3 scripts/normalize_docx_page_breaks.py "$(SUBMISSION_DIST)/manuscript.docx"
 	python3 scripts/normalize_docx_figures.py "$(SUBMISSION_DIST)/manuscript.docx" manuscript/text/figures.md
 	pandoc manuscript/submission/draft_cover_letter.md --standalone --pdf-engine=xelatex \
@@ -137,19 +112,8 @@ submission-build: manuscript-build
 		-o "$(SUBMISSION_DIST)/title_page.docx"
 	pandoc manuscript/submission/highlights.md --standalone \
 		-o "$(SUBMISSION_DIST)/highlights.docx"
-	cd manuscript/text && pandoc supplementary.md --standalone \
-		--from markdown+tex_math_dollars+tex_math_single_backslash --citeproc \
-		--bibliography ../../references/refs.yaml \
-		--csl ../../csl/journal-of-archaeological-science.csl \
-		--resource-path=.:../figures --pdf-engine=xelatex \
-		-V mainfont="DejaVu Serif" -V papersize=a4 -V geometry:margin=2.5cm \
-		-o "$(abspath $(SUBMISSION_DIST))/supplementary_information.pdf"
-	cd manuscript/text && pandoc supplementary.md --standalone \
-		--from markdown+tex_math_dollars+tex_math_single_backslash --citeproc \
-		--bibliography ../../references/refs.yaml \
-		--csl ../../csl/journal-of-archaeological-science.csl \
-		--resource-path=.:../figures \
-		-o "$(abspath $(SUBMISSION_DIST))/supplementary_information.docx"
+	cp manuscript/build/supplement.pdf "$(SUBMISSION_DIST)/supplementary_information.pdf"
+	cp manuscript/build/supplement.docx "$(SUBMISSION_DIST)/supplementary_information.docx"
 	python3 scripts/normalize_docx_page_breaks.py "$(SUBMISSION_DIST)/supplementary_information.docx"
 
 SCIENTIFIC_RELEASE_DIR ?= dist/rc-dates-scientific-reproducibility-2026-10-19

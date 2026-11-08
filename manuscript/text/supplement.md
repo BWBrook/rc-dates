@@ -235,34 +235,6 @@ The accepted empirical and simulation evidence was generated under R 4.5.3 in a 
 
 The supplementary reproducibility archive, supplied in anonymised form for peer review, contains the active code, pinned environment, focused tests, synthetic simulation outputs, aggregate empirical evidence and provenance snapshots. It excludes raw and record-level AustArch data, including source site identities, coordinates, laboratory identifiers and human-remains records. A citable repository record containing code, synthetic artefacts and permitted aggregate evidence will be made public no later than publication. Any release of source or record-level archaeological data remains conditional on licensing, sensitive-location review and Indigenous data-governance requirements.
 
-## Supplementary Figures
-
-### Data-generating densities
-
-![](../figures/SI_data_generating_distributions.png){#fig-si-s1 width=95%}
-
-**Supplementary Figure S1.** The five unit-normalised regional event-age densities used in the simulation. Increasing trajectories have greater density at the recent (low-cal-BP) boundary; decreasing trajectories have greater density at the old boundary. Each non-uniform trajectory has the main experiment's ten-fold end-to-end ratio, $|\theta|=\log(10)$, over 651–11,650 cal BP. Colour and line type jointly identify the truth.
-
-\newpage
-
-### Empirical dates-per-site model
-
-![](../figures/SI_dates_per_site_in_austarch_holocene.png){#fig-si-s2 width=75%}
-
-**Supplementary Figure S2.** Empirical and fitted distribution of radiocarbon determinations per site in the 976-date, 116-site reference set. Points show the observed frequency; the line is the fitted negative-binomial distribution left-truncated at five dates. The empirical and fitted conditional means are 8.414 and 8.412 dates per site, respectively; the empirical range is 5–33.
-
-\newpage
-
-```{=openxml}
-<w:p><w:r><w:br w:type="page"/></w:r></w:p>
-```
-
-### All-date empirical summaries
-
-![](../figures/fig_1.png){#fig-si-s3 width=95%}
-
-**Supplementary Figure S3.** All-date calendar-age summaries for the common-membership empirical benchmark: 540 terrestrial charcoal or wood determinations from 68 AustArch sites. The SPD sums calibrated posterior mass and applies a centred 100-year running mean; the FD bins posterior medians at 100-year resolution and applies a two-bin display smooth; the reflected Gaussian KDE uses the same medians and a 100-year bandwidth. Every method receives the same dates and is normalised to unit integral over 651–11,650 cal BP. Pairwise total-variation distances are 0.046 (SPD–KDE), 0.088 (FD–KDE) and 0.101 (SPD–FD). The padded plotting range is 12,000–0 cal BP; the curves describe relative temporal shape, not date count or population abundance.
-
 ## References
 
 <div id="refs"></div>

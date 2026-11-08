@@ -1,0 +1,5 @@
+{
+  "repository": "https://github.com/BWBrook/makedoc",
+  "commit": "3d1934ca42fd4368c6e9faf0c84992f9df279464",
+  "scope": "Exact makedoc source revision used for the paper build. TeX and Pandoc versions remain system dependencies."
+}

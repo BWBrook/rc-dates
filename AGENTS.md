@@ -42,6 +42,14 @@ Rigour at the scientific decision boundary; proportional engineering everywhere 
 - Do not claim data are de-identified or shareable without checking licensing, sensitivity, and
   Indigenous data-governance constraints.
 
+## Paper products
+
+- The paper is a living paper (the `living-paper` skill): an article with supplement, a two-page
+  brief and an agent guide, all in `manuscript/text/`, all citing `manuscript/claims.csv`. An agent
+  arriving cold starts with `manuscript/text/for-agents.md`, then `manuscript/estimands.md`.
+- Change a reported result in the ledger first, then in all four products in the same commit. State
+  results only in the terms `manuscript/estimands.md` allows. `make manuscript-check` must pass.
+
 ## Verification
 
 - Keep fast tests only where they protect a distinct consequential failure: likelihood maths,

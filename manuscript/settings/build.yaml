@@ -1,0 +1,72 @@
+# makedoc profiles (https://github.com/BWBrook/makedoc). Build with `make -C manuscript` from the repo root.
+# Paths are relative to this file. The article and supplement are anonymous for double-anonymised review;
+# authors and affiliations are on the separate title page (manuscript/submission/title_page.md).
+default_profile: main
+
+common: &common
+  bibliography: ../../references/refs.yaml
+  csl: ../csl/journal-of-archaeological-science.csl
+  journal: Journal of Archaeological Science
+  csl_search_dirs:
+    - ../csl
+  output_dir: ../build
+  page_numbers: lower_right
+  review_markup:
+    enabled: false
+  margins:
+    unit: cm
+    paper_size: a4
+    top: 2.0
+    right: 2.5
+    bottom: 2.0
+    left: 2.5
+
+profiles:
+  main:
+    <<: *common
+    description: Anonymous JAS article.
+    manuscript_sources:
+      - ../text/main.md
+      - ../text/figures.md
+    output_stem: manuscript
+    line_spacing: single
+    line_numbering: continuous
+    figures:
+      placement: pages
+      caption_position: top
+      placeholder_id: figures
+
+  supplement:
+    <<: *common
+    description: Supplementary Information with methods, sensitivities and the audit trail.
+    manuscript_sources:
+      - ../text/supplement.md
+      - ../text/supplement_figures.md
+    output_stem: supplement
+    line_spacing: single
+    line_numbering: none
+    figures:
+      placement: pages
+      caption_position: top
+      placeholder_id: figures
+
+  brief:
+    <<: *common
+    description: Two-page plain-language brief (one A4 sheet printed double-sided).
+    manuscript_sources:
+      - ../text/brief.md
+      - ../text/brief_figures.md
+    output_stem: brief
+    line_spacing: single
+    line_numbering: none
+    margins:
+      unit: cm
+      paper_size: a4
+      top: 1.8
+      right: 2.0
+      bottom: 1.8
+      left: 2.0
+    figures:
+      placement: inline
+      caption_position: bottom
+      placeholder_id: figures
