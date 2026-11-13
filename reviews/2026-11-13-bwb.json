@@ -1,0 +1,20 @@
+{
+  "scrivmark": 1,
+  "round": {
+    "id": "2026-11-13-bwb",
+    "reviewer": {
+      "name": "Barry W. Brook",
+      "initials": "BWB"
+    },
+    "author": null,
+    "author_branch": "main",
+    "base": "3612daa8bd5ccfb948e8fc295f0b2d32f6ef6b4b",
+    "returned": null,
+    "integrated": null,
+    "closed": null,
+    "status": "open",
+    "statement": "Reviewed by Barry W. Brook as scientific supervisor; Claude (Opus 5.5) and Codex wrote the manuscript."
+  },
+  "changes": [],
+  "threads": []
+}
