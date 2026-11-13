@@ -79,7 +79,7 @@ commit.
 | weaker trends | as Stage 2 | `scripts/run_stage6_effect_size.sh`, `scripts/summarise_stage6_effect_size.R`, `scripts/render_stage6_effect_size_figure.R` | `out/revision/effect-size-20261018/` | C17–C24 |
 | realised scatter | as Stage 2 | `scripts/run_stage7_realised_noise.{R,sh}`, `scripts/summarise_stage7_realised_noise.R` | `out/revision/realised-noise-20261023/` | C25 |
 | earlier noise gate | frozen snapshot | `provenance/observation-noise-20260726/` | `out/sensitivity/observation-noise/` | C26 |
-| brief figure | `out/empirical-sampling/figure{1_baseline,2_sampling}_curves.csv` | `scripts/render_brief_figure.py` | `manuscript/figures/figB1_brief.png` | C01–C03 |
+| graphical abstract (brief) | `out/empirical-sampling/` curves and shifts; `out/revision/signed-models/truth_state_confusion.csv`; Stage 6 dose and selection tables | `scripts/render_graphical_abstract.py` (`make graphical-abstract`) | `manuscript/figures/graphical_abstract.{svg,pdf,png}` | C01–C03, C10, C12, C13, C18–C20, C22 |
 
 Row filters that select the primary results (most misquotations drop one):
 

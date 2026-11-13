@@ -1,0 +1,339 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="170.0mm" height="124.0mm" viewBox="0 0 1700 1240" font-family="Inter">
+<rect width="1700" height="1240" fill="white"/>
+<text x="0.0" y="40.0" font-size="40" fill="#1f2328" font-weight="700" text-anchor="start">Which date each site keeps can decide the story a regional curve tells</text>
+<circle cx="17.0" cy="109.0" r="17" fill="#1f2328" stroke="none" stroke-width="0"/>
+<text x="17.0" y="118.0" font-size="24" fill="white" font-weight="700" text-anchor="middle">1</text>
+<text x="46.0" y="120.0" font-size="31" fill="#1f2328" font-weight="650" text-anchor="start">One site, several dates</text>
+<clipPath id="c4"><rect x="46" y="160" width="140" height="330" rx="10"/></clipPath>
+<g clip-path="url(#c4)">
+<path d="M44,160 C88.0,151.75 130.0,168.25 188,160 L188,251.2 L44,251.2 Z" stroke="none" stroke-width="2" fill="#f3ece0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M44,239.2 C88.0,230.95 130.0,247.45 188,239.2 L188,320.5 L44,320.5 Z" stroke="none" stroke-width="2" fill="#ebdfcb" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M44,308.5 C88.0,300.25 130.0,316.75 188,308.5 L188,379.9 L44,379.9 Z" stroke="none" stroke-width="2" fill="#e2d1b5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M44,367.9 C88.0,359.65 130.0,376.15 188,367.9 L188,502.0 L44,502.0 Z" stroke="none" stroke-width="2" fill="#d8c39f" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<rect x="46.0" y="160.0" width="140.0" height="330.0" rx="10" fill="none" stroke="#c9b48f" stroke-width="1.5"/>
+<circle cx="132.8" cy="202.9" r="11" fill="#1f2328" stroke="white" stroke-width="2.5"/>
+<circle cx="95.0" cy="268.9" r="11" fill="#1f2328" stroke="white" stroke-width="2.5"/>
+<circle cx="127.2" cy="331.6" r="11" fill="#1f2328" stroke="white" stroke-width="2.5"/>
+<circle cx="88.0" cy="391.0" r="11" fill="#1f2328" stroke="white" stroke-width="2.5"/>
+<circle cx="118.8" cy="450.4" r="11" fill="#1f2328" stroke="white" stroke-width="2.5"/>
+<line x1="32.0" y1="190.0" x2="32.0" y2="460.0" stroke="#5b6069" stroke-width="2" stroke-linecap="round"/>
+<path d="M32.0,468.0 L32.0,468.0 L32.0,468.0 Z" stroke="none" stroke-width="2" fill="#1f2328" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M25,450 L32,464 L39,450" stroke="#5b6069" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="22.0" y="325.0" font-size="23" fill="#5b6069" font-weight="400" text-anchor="middle" transform="rotate(-90 22 325.0)">oldest at the bottom</text>
+<text x="116.0" y="524.0" font-size="24" fill="#5b6069" font-weight="400" text-anchor="middle">five dates</text>
+<text x="222.0" y="172.0" font-size="24" fill="#5b6069" font-weight="400" text-anchor="start" font-style="italic">A database keeps …</text>
+<clipPath id="c23"><rect x="222" y="194" width="38" height="58" rx="4"/></clipPath>
+<g clip-path="url(#c23)">
+<path d="M220,194 C233.4,192.55 244.8,195.45 262,194 L262,219.92 L220,219.92 Z" stroke="none" stroke-width="2" fill="#f3ece0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M220,207.92 C233.4,206.47 244.8,209.36999999999998 262,207.92 L262,232.1 L220,232.1 Z" stroke="none" stroke-width="2" fill="#ebdfcb" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M220,220.1 C233.4,218.65 244.8,221.54999999999998 262,220.1 L262,242.54 L220,242.54 Z" stroke="none" stroke-width="2" fill="#e2d1b5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M220,230.54 C233.4,229.09 244.8,231.98999999999998 262,230.54 L262,264.0 L220,264.0 Z" stroke="none" stroke-width="2" fill="#d8c39f" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<rect x="222.0" y="194.0" width="38.0" height="58.0" rx="4" fill="none" stroke="#c9b48f" stroke-width="1.5"/>
+<circle cx="245.6" cy="201.5" r="3.8" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="235.3" cy="213.1" r="3.8" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="244.0" cy="224.2" r="3.8" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="233.4" cy="234.6" r="3.8" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="241.8" cy="245.0" r="6.1" fill="#b8432b" stroke="white" stroke-width="1.2"/>
+<text x="276.0" y="231.0" font-size="26" fill="#b8432b" font-weight="650" text-anchor="start">Oldest</text>
+<clipPath id="c37"><rect x="222" y="268" width="38" height="58" rx="4"/></clipPath>
+<g clip-path="url(#c37)">
+<path d="M220,268 C233.4,266.55 244.8,269.45 262,268 L262,293.92 L220,293.92 Z" stroke="none" stroke-width="2" fill="#f3ece0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M220,281.92 C233.4,280.47 244.8,283.37 262,281.92 L262,306.1 L220,306.1 Z" stroke="none" stroke-width="2" fill="#ebdfcb" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M220,294.1 C233.4,292.65000000000003 244.8,295.55 262,294.1 L262,316.54 L220,316.54 Z" stroke="none" stroke-width="2" fill="#e2d1b5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M220,304.54 C233.4,303.09000000000003 244.8,305.99 262,304.54 L262,338.0 L220,338.0 Z" stroke="none" stroke-width="2" fill="#d8c39f" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<rect x="222.0" y="268.0" width="38.0" height="58.0" rx="4" fill="none" stroke="#c9b48f" stroke-width="1.5"/>
+<circle cx="245.6" cy="275.5" r="6.1" fill="#2463a6" stroke="white" stroke-width="1.2"/>
+<circle cx="235.3" cy="287.1" r="3.8" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="244.0" cy="298.2" r="3.8" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="233.4" cy="308.6" r="3.8" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="241.8" cy="319.0" r="3.8" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<text x="276.0" y="305.0" font-size="26" fill="#2463a6" font-weight="650" text-anchor="start">Youngest</text>
+<clipPath id="c51"><rect x="222" y="342" width="38" height="58" rx="4"/></clipPath>
+<g clip-path="url(#c51)">
+<path d="M220,342 C233.4,340.55 244.8,343.45 262,342 L262,367.92 L220,367.92 Z" stroke="none" stroke-width="2" fill="#f3ece0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M220,355.92 C233.4,354.47 244.8,357.37 262,355.92 L262,380.1 L220,380.1 Z" stroke="none" stroke-width="2" fill="#ebdfcb" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M220,368.1 C233.4,366.65000000000003 244.8,369.55 262,368.1 L262,390.54 L220,390.54 Z" stroke="none" stroke-width="2" fill="#e2d1b5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M220,378.54 C233.4,377.09000000000003 244.8,379.99 262,378.54 L262,412.0 L220,412.0 Z" stroke="none" stroke-width="2" fill="#d8c39f" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<rect x="222.0" y="342.0" width="38.0" height="58.0" rx="4" fill="none" stroke="#c9b48f" stroke-width="1.5"/>
+<circle cx="245.6" cy="349.5" r="3.8" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="235.3" cy="361.1" r="3.8" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="244.0" cy="372.2" r="6.1" fill="#3b3f45" stroke="white" stroke-width="1.2"/>
+<circle cx="233.4" cy="382.6" r="3.8" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="241.8" cy="393.0" r="3.8" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<text x="276.0" y="379.0" font-size="26" fill="#3b3f45" font-weight="650" text-anchor="start">One at random</text>
+<clipPath id="c65"><rect x="222" y="416" width="38" height="58" rx="4"/></clipPath>
+<g clip-path="url(#c65)">
+<path d="M220,416 C233.4,414.55 244.8,417.45 262,416 L262,441.92 L220,441.92 Z" stroke="none" stroke-width="2" fill="#f3ece0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M220,429.92 C233.4,428.47 244.8,431.37 262,429.92 L262,454.1 L220,454.1 Z" stroke="none" stroke-width="2" fill="#ebdfcb" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M220,442.1 C233.4,440.65000000000003 244.8,443.55 262,442.1 L262,464.54 L220,464.54 Z" stroke="none" stroke-width="2" fill="#e2d1b5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M220,452.54 C233.4,451.09000000000003 244.8,453.99 262,452.54 L262,486.0 L220,486.0 Z" stroke="none" stroke-width="2" fill="#d8c39f" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<rect x="222.0" y="416.0" width="38.0" height="58.0" rx="4" fill="none" stroke="#c9b48f" stroke-width="1.5"/>
+<circle cx="245.6" cy="423.5" r="6.1" fill="#7a4c9e" stroke="white" stroke-width="1.2"/>
+<circle cx="235.3" cy="435.1" r="3.8" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="244.0" cy="446.2" r="3.8" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="233.4" cy="456.6" r="3.8" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="241.8" cy="467.0" r="6.1" fill="#7a4c9e" stroke="white" stroke-width="1.2"/>
+<text x="276.0" y="453.0" font-size="26" fill="#7a4c9e" font-weight="650" text-anchor="start">Both extremes</text>
+<text x="222.0" y="524.0" font-size="23.5" fill="#5b6069" font-weight="400" text-anchor="start" font-style="italic">and nothing in a date says which.</text>
+<circle cx="577.0" cy="109.0" r="17" fill="#1f2328" stroke="none" stroke-width="0"/>
+<text x="577.0" y="118.0" font-size="24" fill="white" font-weight="700" text-anchor="middle">2</text>
+<text x="606.0" y="120.0" font-size="31" fill="#1f2328" font-weight="650" text-anchor="start">Real dates: 540 from 68 Australian sites</text>
+<text x="606.0" y="152.0" font-size="24.5" fill="#5b6069" font-weight="400" text-anchor="start">if each site kept only one date (grey: all dates; ▼ average age)</text>
+<path d="M1625.8,273.2 L1617.8,234.9 L1609.7,219.6 L1601.7,225.1 L1593.7,229.5 L1585.6,220.1 L1577.6,214.0 L1569.6,214.0 L1561.5,222.6 L1553.5,230.2 L1545.5,227.7 L1537.4,235.9 L1529.4,244.3 L1521.4,239.4 L1513.3,229.2 L1505.3,224.5 L1497.3,224.5 L1489.2,232.4 L1481.2,241.2 L1473.2,242.0 L1465.1,241.7 L1457.1,236.9 L1449.1,238.5 L1441.0,243.7 L1433.0,246.1 L1425.0,246.7 L1416.9,248.9 L1408.9,253.1 L1400.9,251.1 L1392.8,247.8 L1384.8,250.5 L1376.8,249.5 L1368.7,252.6 L1360.7,253.3 L1352.7,250.0 L1344.6,250.1 L1336.6,253.6 L1328.6,257.4 L1320.5,262.2 L1312.5,263.2 L1304.5,262.9 L1296.4,262.6 L1288.4,264.1 L1280.4,267.8 L1272.3,270.7 L1264.3,272.2 L1256.3,271.6 L1248.2,269.0 L1240.2,269.3 L1232.2,271.4 L1224.1,271.2 L1216.1,266.4 L1208.1,264.4 L1200.0,265.1 L1192.0,265.4 L1184.0,264.6 L1175.9,263.5 L1167.9,268.1 L1159.9,269.0 L1151.8,267.4 L1143.8,265.3 L1135.8,263.4 L1127.7,265.6 L1119.7,268.7 L1111.7,267.8 L1103.6,267.3 L1095.6,265.6 L1087.6,263.1 L1079.5,263.5 L1071.5,266.0 L1063.5,269.4 L1055.4,269.4 L1047.4,268.6 L1039.4,266.5 L1031.3,265.8 L1023.3,264.8 L1015.3,259.5 L1007.2,263.0 L999.2,270.1 L991.2,272.3 L983.1,273.9 L975.1,273.3 L967.1,272.5 L959.0,272.3 L951.0,271.5 L943.0,272.3 L934.9,273.0 L926.9,274.2 L918.9,272.2 L910.8,268.1 L902.8,273.9 L894.8,274.2 L886.7,273.5 L878.7,271.6 L870.7,271.3 L862.6,271.5 L854.6,271.5 L846.6,269.3 L838.5,268.7 L830.5,271.6 L822.5,273.2 L814.4,272.3 L806.4,271.2 L798.4,271.3 L790.3,271.5 L782.3,272.1 L774.3,276.5 L766.2,278.9 L758.2,279.2 L750.2,279.2 L742.1,279.7 L742.1,280 L1625.8,280 Z" stroke="none" stroke-width="2" fill="#e3e5e8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M1625.8,280.0 L1617.8,280.0 L1609.7,280.0 L1601.7,280.0 L1593.7,280.0 L1585.6,280.0 L1577.6,279.9 L1569.6,275.2 L1561.5,258.6 L1553.5,258.4 L1545.5,266.0 L1537.4,273.6 L1529.4,275.5 L1521.4,271.6 L1513.3,266.8 L1505.3,264.7 L1497.3,264.5 L1489.2,265.9 L1481.2,267.9 L1473.2,270.8 L1465.1,270.3 L1457.1,265.1 L1449.1,259.5 L1441.0,263.1 L1433.0,256.8 L1425.0,256.1 L1416.9,262.4 L1408.9,264.6 L1400.9,266.9 L1392.8,270.6 L1384.8,265.2 L1376.8,249.7 L1368.7,251.2 L1360.7,256.2 L1352.7,250.6 L1344.6,236.6 L1336.6,237.3 L1328.6,249.6 L1320.5,262.4 L1312.5,264.8 L1304.5,268.3 L1296.4,268.7 L1288.4,266.5 L1280.4,265.8 L1272.3,267.6 L1264.3,271.4 L1256.3,269.5 L1248.2,267.4 L1240.2,267.6 L1232.2,267.4 L1224.1,268.8 L1216.1,250.3 L1208.1,243.0 L1200.0,247.8 L1192.0,241.3 L1184.0,238.7 L1175.9,240.6 L1167.9,257.9 L1159.9,261.4 L1151.8,263.1 L1143.8,263.1 L1135.8,262.3 L1127.7,263.8 L1119.7,268.1 L1111.7,272.0 L1103.6,272.8 L1095.6,274.0 L1087.6,271.5 L1079.5,260.0 L1071.5,249.1 L1063.5,253.9 L1055.4,265.7 L1047.4,264.5 L1039.4,257.1 L1031.3,248.8 L1023.3,241.9 L1015.3,223.3 L1007.2,236.8 L999.2,256.4 L991.2,254.8 L983.1,252.9 L975.1,249.7 L967.1,246.1 L959.0,247.4 L951.0,257.9 L943.0,260.8 L934.9,261.1 L926.9,262.1 L918.9,258.5 L910.8,247.1 L902.8,250.5 L894.8,257.1 L886.7,257.3 L878.7,248.6 L870.7,247.3 L862.6,244.1 L854.6,248.5 L846.6,245.0 L838.5,241.5 L830.5,246.8 L822.5,247.4 L814.4,238.2 L806.4,230.7 L798.4,231.2 L790.3,232.7 L782.3,234.9 L774.3,259.4 L766.2,273.6 L758.2,275.4 L750.2,275.5 L742.1,278.2" stroke="#b8432b" stroke-width="3.2" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="710.0" y1="280.0" x2="1674.0" y2="280.0" stroke="#d6d9de" stroke-width="1.5" stroke-linecap="round"/>
+<clipPath id="c87"><rect x="580" y="218" width="26" height="40" rx="4"/></clipPath>
+<g clip-path="url(#c87)">
+<path d="M578,218 C587.8,217.0 595.6,219.0 608,218 L608,239.6 L578,239.6 Z" stroke="none" stroke-width="2" fill="#f3ece0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M578,227.6 C587.8,226.6 595.6,228.6 608,227.6 L608,248.0 L578,248.0 Z" stroke="none" stroke-width="2" fill="#ebdfcb" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M578,236.0 C587.8,235.0 595.6,237.0 608,236.0 L608,255.2 L578,255.2 Z" stroke="none" stroke-width="2" fill="#e2d1b5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M578,243.2 C587.8,242.2 595.6,244.2 608,243.2 L608,270.0 L578,270.0 Z" stroke="none" stroke-width="2" fill="#d8c39f" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<rect x="580.0" y="218.0" width="26.0" height="40.0" rx="4" fill="none" stroke="#c9b48f" stroke-width="1.5"/>
+<circle cx="596.1" cy="223.2" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="589.1" cy="231.2" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="595.1" cy="238.8" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="587.8" cy="246.0" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="593.5" cy="253.2" r="4.2" fill="#b8432b" stroke="white" stroke-width="1.2"/>
+<text x="616.0" y="242.0" font-size="25" fill="#b8432b" font-weight="650" text-anchor="start">Oldest</text>
+<path d="M1347.0,184 L1365.0,184 L1356.0,199 Z" fill="#9aa0a8"/>
+<path d="M1094.4,183 L1114.4,183 L1104.4,200 Z" fill="#b8432b"/>
+<line x1="1120.4" y1="191.0" x2="1340.0" y2="191.0" stroke="#b8432b" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M1120.4,191.0 L1131.4,184.2 L1131.4,197.8 Z" stroke="none" stroke-width="2" fill="#b8432b" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="1086.4" y="198.0" font-size="23" fill="#b8432b" font-weight="600" text-anchor="end">3,133 years older</text>
+<path d="M1625.8,383.2 L1617.8,344.9 L1609.7,329.6 L1601.7,335.1 L1593.7,339.5 L1585.6,330.1 L1577.6,324.0 L1569.6,324.0 L1561.5,332.6 L1553.5,340.2 L1545.5,337.7 L1537.4,345.9 L1529.4,354.3 L1521.4,349.4 L1513.3,339.2 L1505.3,334.5 L1497.3,334.5 L1489.2,342.4 L1481.2,351.2 L1473.2,352.0 L1465.1,351.7 L1457.1,346.9 L1449.1,348.5 L1441.0,353.7 L1433.0,356.1 L1425.0,356.7 L1416.9,358.9 L1408.9,363.1 L1400.9,361.1 L1392.8,357.8 L1384.8,360.5 L1376.8,359.5 L1368.7,362.6 L1360.7,363.3 L1352.7,360.0 L1344.6,360.1 L1336.6,363.6 L1328.6,367.4 L1320.5,372.2 L1312.5,373.2 L1304.5,372.9 L1296.4,372.6 L1288.4,374.1 L1280.4,377.8 L1272.3,380.7 L1264.3,382.2 L1256.3,381.6 L1248.2,379.0 L1240.2,379.3 L1232.2,381.4 L1224.1,381.2 L1216.1,376.4 L1208.1,374.4 L1200.0,375.1 L1192.0,375.4 L1184.0,374.6 L1175.9,373.5 L1167.9,378.1 L1159.9,379.0 L1151.8,377.4 L1143.8,375.3 L1135.8,373.4 L1127.7,375.6 L1119.7,378.7 L1111.7,377.8 L1103.6,377.3 L1095.6,375.6 L1087.6,373.1 L1079.5,373.5 L1071.5,376.0 L1063.5,379.4 L1055.4,379.4 L1047.4,378.6 L1039.4,376.5 L1031.3,375.8 L1023.3,374.8 L1015.3,369.5 L1007.2,373.0 L999.2,380.1 L991.2,382.3 L983.1,383.9 L975.1,383.3 L967.1,382.5 L959.0,382.3 L951.0,381.5 L943.0,382.3 L934.9,383.0 L926.9,384.2 L918.9,382.2 L910.8,378.1 L902.8,383.9 L894.8,384.2 L886.7,383.5 L878.7,381.6 L870.7,381.3 L862.6,381.5 L854.6,381.5 L846.6,379.3 L838.5,378.7 L830.5,381.6 L822.5,383.2 L814.4,382.3 L806.4,381.2 L798.4,381.3 L790.3,381.5 L782.3,382.1 L774.3,386.5 L766.2,388.9 L758.2,389.2 L750.2,389.2 L742.1,389.7 L742.1,390 L1625.8,390 Z" stroke="none" stroke-width="2" fill="#e3e5e8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M1625.8,383.3 L1617.8,344.8 L1609.7,326.3 L1601.7,334.1 L1593.7,339.4 L1585.6,336.6 L1577.6,333.5 L1569.6,332.4 L1561.5,337.1 L1553.5,338.5 L1545.5,332.3 L1537.4,342.6 L1529.4,350.0 L1521.4,344.8 L1513.3,337.4 L1505.3,335.1 L1497.3,335.2 L1489.2,347.6 L1481.2,358.6 L1473.2,358.3 L1465.1,358.1 L1457.1,348.9 L1449.1,345.7 L1441.0,351.6 L1433.0,355.2 L1425.0,357.1 L1416.9,360.7 L1408.9,364.4 L1400.9,361.9 L1392.8,359.0 L1384.8,363.0 L1376.8,364.8 L1368.7,368.0 L1360.7,368.4 L1352.7,364.3 L1344.6,360.4 L1336.6,361.3 L1328.6,364.9 L1320.5,372.0 L1312.5,374.0 L1304.5,373.3 L1296.4,372.8 L1288.4,373.1 L1280.4,376.0 L1272.3,379.0 L1264.3,380.7 L1256.3,380.0 L1248.2,377.7 L1240.2,378.5 L1232.2,381.7 L1224.1,382.2 L1216.1,376.5 L1208.1,374.0 L1200.0,373.9 L1192.0,374.4 L1184.0,373.9 L1175.9,373.2 L1167.9,377.0 L1159.9,378.2 L1151.8,377.6 L1143.8,375.8 L1135.8,372.8 L1127.7,374.6 L1119.7,378.0 L1111.7,377.4 L1103.6,376.8 L1095.6,375.0 L1087.6,372.6 L1079.5,372.2 L1071.5,373.8 L1063.5,377.5 L1055.4,377.7 L1047.4,376.5 L1039.4,376.0 L1031.3,375.0 L1023.3,372.5 L1015.3,364.1 L1007.2,368.1 L999.2,378.6 L991.2,381.6 L983.1,382.9 L975.1,382.4 L967.1,381.7 L959.0,381.6 L951.0,381.6 L943.0,382.1 L934.9,382.5 L926.9,383.1 L918.9,380.9 L910.8,377.0 L902.8,382.7 L894.8,383.4 L886.7,383.0 L878.7,381.6 L870.7,381.4 L862.6,381.6 L854.6,381.6 L846.6,379.7 L838.5,379.4 L830.5,382.2 L822.5,383.4 L814.4,382.0 L806.4,380.9 L798.4,381.0 L790.3,381.2 L782.3,382.1 L774.3,386.6 L766.2,389.0 L758.2,389.3 L750.2,389.3 L742.1,389.7" stroke="#3b3f45" stroke-width="3.2" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="710.0" y1="390.0" x2="1674.0" y2="390.0" stroke="#d6d9de" stroke-width="1.5" stroke-linecap="round"/>
+<clipPath id="c109"><rect x="580" y="328" width="26" height="40" rx="4"/></clipPath>
+<g clip-path="url(#c109)">
+<path d="M578,328 C587.8,327.0 595.6,329.0 608,328 L608,349.6 L578,349.6 Z" stroke="none" stroke-width="2" fill="#f3ece0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M578,337.6 C587.8,336.6 595.6,338.6 608,337.6 L608,358.0 L578,358.0 Z" stroke="none" stroke-width="2" fill="#ebdfcb" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M578,346.0 C587.8,345.0 595.6,347.0 608,346.0 L608,365.2 L578,365.2 Z" stroke="none" stroke-width="2" fill="#e2d1b5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M578,353.2 C587.8,352.2 595.6,354.2 608,353.2 L608,380.0 L578,380.0 Z" stroke="none" stroke-width="2" fill="#d8c39f" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<rect x="580.0" y="328.0" width="26.0" height="40.0" rx="4" fill="none" stroke="#c9b48f" stroke-width="1.5"/>
+<circle cx="596.1" cy="333.2" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="589.1" cy="341.2" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="595.1" cy="348.8" r="4.2" fill="#3b3f45" stroke="white" stroke-width="1.2"/>
+<circle cx="587.8" cy="356.0" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="593.5" cy="363.2" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<text x="616.0" y="352.0" font-size="25" fill="#3b3f45" font-weight="650" text-anchor="start">Random</text>
+<path d="M1347.0,294 L1365.0,294 L1356.0,309 Z" fill="#9aa0a8"/>
+<path d="M1337.7,293 L1357.7,293 L1347.7,310 Z" fill="#3b3f45"/>
+<text x="1378.0" y="308.0" font-size="23" fill="#3b3f45" font-weight="600" text-anchor="start">about 100 years</text>
+<path d="M1625.8,498.5 L1617.8,490.3 L1609.7,487.1 L1601.7,488.3 L1593.7,489.2 L1585.6,487.2 L1577.6,485.9 L1569.6,485.9 L1561.5,487.7 L1553.5,489.3 L1545.5,488.8 L1537.4,490.6 L1529.4,492.4 L1521.4,491.3 L1513.3,489.1 L1505.3,488.1 L1497.3,488.1 L1489.2,489.8 L1481.2,491.7 L1473.2,491.9 L1465.1,491.8 L1457.1,490.8 L1449.1,491.1 L1441.0,492.2 L1433.0,492.8 L1425.0,492.9 L1416.9,493.3 L1408.9,494.2 L1400.9,493.8 L1392.8,493.1 L1384.8,493.7 L1376.8,493.5 L1368.7,494.1 L1360.7,494.3 L1352.7,493.6 L1344.6,493.6 L1336.6,494.3 L1328.6,495.2 L1320.5,496.2 L1312.5,496.4 L1304.5,496.3 L1296.4,496.3 L1288.4,496.6 L1280.4,497.4 L1272.3,498.0 L1264.3,498.3 L1256.3,498.2 L1248.2,497.6 L1240.2,497.7 L1232.2,498.2 L1224.1,498.1 L1216.1,497.1 L1208.1,496.7 L1200.0,496.8 L1192.0,496.9 L1184.0,496.7 L1175.9,496.5 L1167.9,497.4 L1159.9,497.6 L1151.8,497.3 L1143.8,496.9 L1135.8,496.4 L1127.7,496.9 L1119.7,497.6 L1111.7,497.4 L1103.6,497.3 L1095.6,496.9 L1087.6,496.4 L1079.5,496.5 L1071.5,497.0 L1063.5,497.7 L1055.4,497.7 L1047.4,497.5 L1039.4,497.1 L1031.3,497.0 L1023.3,496.7 L1015.3,495.6 L1007.2,496.4 L999.2,497.9 L991.2,498.4 L983.1,498.7 L975.1,498.6 L967.1,498.4 L959.0,498.4 L951.0,498.2 L943.0,498.4 L934.9,498.5 L926.9,498.8 L918.9,498.3 L910.8,497.4 L902.8,498.7 L894.8,498.7 L886.7,498.6 L878.7,498.2 L870.7,498.1 L862.6,498.2 L854.6,498.2 L846.6,497.7 L838.5,497.6 L830.5,498.2 L822.5,498.6 L814.4,498.3 L806.4,498.1 L798.4,498.1 L790.3,498.2 L782.3,498.3 L774.3,499.2 L766.2,499.8 L758.2,499.8 L750.2,499.8 L742.1,499.9 L742.1,500 L1625.8,500 Z" stroke="none" stroke-width="2" fill="#e3e5e8" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M1625.8,491.8 L1617.8,449.9 L1609.7,434.0 L1601.7,440.3 L1593.7,456.4 L1585.6,468.0 L1577.6,471.9 L1569.6,467.9 L1561.5,473.7 L1553.5,482.8 L1545.5,487.9 L1537.4,492.0 L1529.4,491.5 L1521.4,487.3 L1513.3,486.8 L1505.3,492.1 L1497.3,493.6 L1489.2,495.7 L1481.2,497.4 L1473.2,497.7 L1465.1,497.7 L1457.1,498.3 L1449.1,498.5 L1441.0,497.9 L1433.0,496.2 L1425.0,495.6 L1416.9,497.9 L1408.9,498.3 L1400.9,496.5 L1392.8,497.4 L1384.8,499.3 L1376.8,499.6 L1368.7,499.1 L1360.7,497.8 L1352.7,496.7 L1344.6,495.9 L1336.6,496.0 L1328.6,496.6 L1320.5,498.0 L1312.5,499.1 L1304.5,499.7 L1296.4,499.7 L1288.4,499.9 L1280.4,500.0 L1272.3,500.0 L1264.3,500.0 L1256.3,500.0 L1248.2,500.0 L1240.2,500.0 L1232.2,500.0 L1224.1,500.0 L1216.1,500.0 L1208.1,500.0 L1200.0,500.0 L1192.0,500.0 L1184.0,500.0 L1175.9,500.0 L1167.9,500.0 L1159.9,500.0 L1151.8,500.0 L1143.8,500.0 L1135.8,500.0 L1127.7,500.0 L1119.7,500.0 L1111.7,500.0 L1103.6,500.0 L1095.6,500.0 L1087.6,500.0 L1079.5,500.0 L1071.5,500.0 L1063.5,500.0 L1055.4,500.0 L1047.4,500.0 L1039.4,500.0 L1031.3,500.0 L1023.3,500.0 L1015.3,499.9 L1007.2,499.9 L999.2,499.8 L991.2,499.7 L983.1,499.6 L975.1,499.5 L967.1,499.5 L959.0,499.5 L951.0,499.4 L943.0,499.4 L934.9,499.4 L926.9,499.4 L918.9,499.5 L910.8,499.6 L902.8,499.7 L894.8,499.8 L886.7,499.8 L878.7,499.8 L870.7,499.8 L862.6,499.9 L854.6,499.9 L846.6,500.0 L838.5,500.0 L830.5,500.0 L822.5,500.0 L814.4,500.0 L806.4,500.0 L798.4,500.0 L790.3,500.0 L782.3,500.0 L774.3,500.0 L766.2,500.0 L758.2,500.0 L750.2,500.0 L742.1,500.0" stroke="#2463a6" stroke-width="3.2" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="710.0" y1="500.0" x2="1674.0" y2="500.0" stroke="#d6d9de" stroke-width="1.5" stroke-linecap="round"/>
+<clipPath id="c129"><rect x="580" y="438" width="26" height="40" rx="4"/></clipPath>
+<g clip-path="url(#c129)">
+<path d="M578,438 C587.8,437.0 595.6,439.0 608,438 L608,459.6 L578,459.6 Z" stroke="none" stroke-width="2" fill="#f3ece0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M578,447.6 C587.8,446.6 595.6,448.6 608,447.6 L608,468.0 L578,468.0 Z" stroke="none" stroke-width="2" fill="#ebdfcb" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M578,456.0 C587.8,455.0 595.6,457.0 608,456.0 L608,475.2 L578,475.2 Z" stroke="none" stroke-width="2" fill="#e2d1b5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M578,463.2 C587.8,462.2 595.6,464.2 608,463.2 L608,490.0 L578,490.0 Z" stroke="none" stroke-width="2" fill="#d8c39f" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<rect x="580.0" y="438.0" width="26.0" height="40.0" rx="4" fill="none" stroke="#c9b48f" stroke-width="1.5"/>
+<circle cx="596.1" cy="443.2" r="4.2" fill="#2463a6" stroke="white" stroke-width="1.2"/>
+<circle cx="589.1" cy="451.2" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="595.1" cy="458.8" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="587.8" cy="466.0" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="593.5" cy="473.2" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<text x="616.0" y="462.0" font-size="25" fill="#2463a6" font-weight="650" text-anchor="start">Youngest</text>
+<path d="M1347.0,404 L1365.0,404 L1356.0,419 Z" fill="#9aa0a8"/>
+<path d="M1542.0,403 L1562.0,403 L1552.0,420 Z" fill="#2463a6"/>
+<line x1="1372.0" y1="411.0" x2="1536.0" y2="411.0" stroke="#2463a6" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M1536.0,411.0 L1525.0,404.2 L1525.0,417.8 Z" stroke="none" stroke-width="2" fill="#2463a6" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="1338.0" y="418.0" font-size="23" fill="#2463a6" font-weight="600" text-anchor="end">2,439 years younger</text>
+<line x1="1674.0" y1="500.0" x2="1674.0" y2="508.0" stroke="#5b6069" stroke-width="1.5" stroke-linecap="round"/>
+<text x="1674.0" y="533.0" font-size="23.5" fill="#5b6069" font-weight="400" text-anchor="middle">0</text>
+<line x1="1513.3" y1="500.0" x2="1513.3" y2="508.0" stroke="#5b6069" stroke-width="1.5" stroke-linecap="round"/>
+<text x="1513.3" y="533.0" font-size="23.5" fill="#5b6069" font-weight="400" text-anchor="middle">2</text>
+<line x1="1352.7" y1="500.0" x2="1352.7" y2="508.0" stroke="#5b6069" stroke-width="1.5" stroke-linecap="round"/>
+<text x="1352.7" y="533.0" font-size="23.5" fill="#5b6069" font-weight="400" text-anchor="middle">4</text>
+<line x1="1192.0" y1="500.0" x2="1192.0" y2="508.0" stroke="#5b6069" stroke-width="1.5" stroke-linecap="round"/>
+<text x="1192.0" y="533.0" font-size="23.5" fill="#5b6069" font-weight="400" text-anchor="middle">6</text>
+<line x1="1031.3" y1="500.0" x2="1031.3" y2="508.0" stroke="#5b6069" stroke-width="1.5" stroke-linecap="round"/>
+<text x="1031.3" y="533.0" font-size="23.5" fill="#5b6069" font-weight="400" text-anchor="middle">8</text>
+<line x1="870.7" y1="500.0" x2="870.7" y2="508.0" stroke="#5b6069" stroke-width="1.5" stroke-linecap="round"/>
+<text x="870.7" y="533.0" font-size="23.5" fill="#5b6069" font-weight="400" text-anchor="middle">10</text>
+<line x1="710.0" y1="500.0" x2="710.0" y2="508.0" stroke="#5b6069" stroke-width="1.5" stroke-linecap="round"/>
+<text x="710.0" y="533.0" font-size="23.5" fill="#5b6069" font-weight="400" text-anchor="middle">12</text>
+<text x="1192.0" y="562.0" font-size="24" fill="#5b6069" font-weight="400" text-anchor="middle">thousands of years ago</text>
+<text x="1674.0" y="562.0" font-size="22" fill="#9aa0a8" font-weight="400" text-anchor="end" font-style="italic">each row on its own scale</text>
+<circle cx="17.0" cy="639.0" r="17" fill="#1f2328" stroke="none" stroke-width="0"/>
+<text x="17.0" y="648.0" font-size="24" fill="white" font-weight="700" text-anchor="middle">3</text>
+<text x="46.0" y="650.0" font-size="31" fill="#1f2328" font-weight="650" text-anchor="start">Simulated archives with a known history</text>
+<text x="46.0" y="682.0" font-size="24.5" fill="#5b6069" font-weight="400" text-anchor="start">rule applied at every site; tenfold change; cells: trend concluded</text>
+<text x="601.0" y="720.0" font-size="23.5" fill="#5b6069" font-weight="400" text-anchor="middle">true history</text>
+<path d="M282.0,741.0 L330.0,767.7" stroke="#5b6069" stroke-width="3.4" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M336.0,771.0 L328.1,758.4 L321.2,770.9 Z" stroke="none" stroke-width="2" fill="#5b6069" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="351.0" y="765.0" font-size="24" fill="#1f2328" font-weight="600" text-anchor="start">Falling</text>
+<path d="M532.0,756.0 L580.0,756.0" stroke="#5b6069" stroke-width="3.4" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M586.0,756.0 L573.0,748.9 L573.0,763.1 Z" stroke="none" stroke-width="2" fill="#5b6069" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="601.0" y="765.0" font-size="24" fill="#1f2328" font-weight="600" text-anchor="start">Steady</text>
+<path d="M782.0,771.0 L830.0,744.3" stroke="#5b6069" stroke-width="3.4" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M836.0,741.0 L821.2,741.1 L828.1,753.6 Z" stroke="none" stroke-width="2" fill="#5b6069" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="851.0" y="765.0" font-size="24" fill="#1f2328" font-weight="600" text-anchor="start">Rising</text>
+<clipPath id="c178"><rect x="10" y="800" width="26" height="40" rx="4"/></clipPath>
+<g clip-path="url(#c178)">
+<path d="M8,800 C17.8,799.0 25.6,801.0 38,800 L38,821.6 L8,821.6 Z" stroke="none" stroke-width="2" fill="#f3ece0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M8,809.6 C17.8,808.6 25.6,810.6 38,809.6 L38,830.0 L8,830.0 Z" stroke="none" stroke-width="2" fill="#ebdfcb" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M8,818.0 C17.8,817.0 25.6,819.0 38,818.0 L38,837.2 L8,837.2 Z" stroke="none" stroke-width="2" fill="#e2d1b5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M8,825.2 C17.8,824.2 25.6,826.2 38,825.2 L38,852.0 L8,852.0 Z" stroke="none" stroke-width="2" fill="#d8c39f" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<rect x="10.0" y="800.0" width="26.0" height="40.0" rx="4" fill="none" stroke="#c9b48f" stroke-width="1.5"/>
+<circle cx="26.1" cy="805.2" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="19.1" cy="813.2" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="25.1" cy="820.8" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="17.8" cy="828.0" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="23.5" cy="835.2" r="4.2" fill="#b8432b" stroke="white" stroke-width="1.2"/>
+<text x="48.0" y="824.0" font-size="24.5" fill="#b8432b" font-weight="650" text-anchor="start">Oldest</text>
+<text x="48.0" y="851.0" font-size="22" fill="#b8432b" font-weight="400" text-anchor="start" font-style="italic">always falling</text>
+<rect x="232.0" y="794.0" width="238.0" height="74.0" rx="10" fill="#f6f7f8" stroke="none" stroke-width="0"/>
+<path d="M243.0,816.0 L279.0,841.7" stroke="#b8432b" stroke-width="4" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M285.0,846.0 L278.6,832.6 L270.3,844.3 Z" stroke="none" stroke-width="2" fill="#b8432b" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="302.0" y="840.0" font-size="27" fill="#1f2328" font-weight="650" text-anchor="start">100%</text>
+<rect x="482.0" y="794.0" width="238.0" height="74.0" rx="10" fill="#fcefd3" stroke="none" stroke-width="0"/>
+<path d="M493.0,816.0 L529.0,841.7" stroke="#b8432b" stroke-width="4" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M535.0,846.0 L528.6,832.6 L520.3,844.3 Z" stroke="none" stroke-width="2" fill="#b8432b" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="552.0" y="830.0" font-size="27" fill="#1f2328" font-weight="650" text-anchor="start">100%</text>
+<text x="552.0" y="857.0" font-size="21.5" fill="#8a5600" font-weight="600" text-anchor="start">false trend</text>
+<rect x="732.0" y="794.0" width="238.0" height="74.0" rx="10" fill="#fcefd3" stroke="none" stroke-width="0"/>
+<path d="M743.0,816.0 L779.0,841.7" stroke="#b8432b" stroke-width="4" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M785.0,846.0 L778.6,832.6 L770.3,844.3 Z" stroke="none" stroke-width="2" fill="#b8432b" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="802.0" y="830.0" font-size="27" fill="#1f2328" font-weight="650" text-anchor="start">100%</text>
+<text x="802.0" y="857.0" font-size="21.5" fill="#8a5600" font-weight="600" text-anchor="start">wrong direction</text>
+<clipPath id="c207"><rect x="10" y="884" width="26" height="40" rx="4"/></clipPath>
+<g clip-path="url(#c207)">
+<path d="M8,884 C17.8,883.0 25.6,885.0 38,884 L38,905.6 L8,905.6 Z" stroke="none" stroke-width="2" fill="#f3ece0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M8,893.6 C17.8,892.6 25.6,894.6 38,893.6 L38,914.0 L8,914.0 Z" stroke="none" stroke-width="2" fill="#ebdfcb" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M8,902.0 C17.8,901.0 25.6,903.0 38,902.0 L38,921.2 L8,921.2 Z" stroke="none" stroke-width="2" fill="#e2d1b5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M8,909.2 C17.8,908.2 25.6,910.2 38,909.2 L38,936.0 L8,936.0 Z" stroke="none" stroke-width="2" fill="#d8c39f" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<rect x="10.0" y="884.0" width="26.0" height="40.0" rx="4" fill="none" stroke="#c9b48f" stroke-width="1.5"/>
+<circle cx="26.1" cy="889.2" r="4.2" fill="#2463a6" stroke="white" stroke-width="1.2"/>
+<circle cx="19.1" cy="897.2" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="25.1" cy="904.8" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="17.8" cy="912.0" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="23.5" cy="919.2" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<text x="48.0" y="908.0" font-size="24.5" fill="#2463a6" font-weight="650" text-anchor="start">Youngest</text>
+<text x="48.0" y="935.0" font-size="22" fill="#2463a6" font-weight="400" text-anchor="start" font-style="italic">always rising</text>
+<rect x="232.0" y="878.0" width="238.0" height="74.0" rx="10" fill="#fcefd3" stroke="none" stroke-width="0"/>
+<path d="M243.0,930.0 L279.0,904.3" stroke="#2463a6" stroke-width="4" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M285.0,900.0 L270.3,901.7 L278.6,913.4 Z" stroke="none" stroke-width="2" fill="#2463a6" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="302.0" y="914.0" font-size="27" fill="#1f2328" font-weight="650" text-anchor="start">100%</text>
+<text x="302.0" y="941.0" font-size="21.5" fill="#8a5600" font-weight="600" text-anchor="start">wrong direction</text>
+<rect x="482.0" y="878.0" width="238.0" height="74.0" rx="10" fill="#fcefd3" stroke="none" stroke-width="0"/>
+<path d="M493.0,930.0 L529.0,904.3" stroke="#2463a6" stroke-width="4" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M535.0,900.0 L520.3,901.7 L528.6,913.4 Z" stroke="none" stroke-width="2" fill="#2463a6" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="552.0" y="914.0" font-size="27" fill="#1f2328" font-weight="650" text-anchor="start">100%</text>
+<text x="552.0" y="941.0" font-size="21.5" fill="#8a5600" font-weight="600" text-anchor="start">false trend</text>
+<rect x="732.0" y="878.0" width="238.0" height="74.0" rx="10" fill="#f6f7f8" stroke="none" stroke-width="0"/>
+<path d="M743.0,930.0 L779.0,904.3" stroke="#2463a6" stroke-width="4" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M785.0,900.0 L770.3,901.7 L778.6,913.4 Z" stroke="none" stroke-width="2" fill="#2463a6" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="802.0" y="924.0" font-size="27" fill="#1f2328" font-weight="650" text-anchor="start">100%</text>
+<clipPath id="c236"><rect x="10" y="968" width="26" height="40" rx="4"/></clipPath>
+<g clip-path="url(#c236)">
+<path d="M8,968 C17.8,967.0 25.6,969.0 38,968 L38,989.6 L8,989.6 Z" stroke="none" stroke-width="2" fill="#f3ece0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M8,977.6 C17.8,976.6 25.6,978.6 38,977.6 L38,998.0 L8,998.0 Z" stroke="none" stroke-width="2" fill="#ebdfcb" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M8,986.0 C17.8,985.0 25.6,987.0 38,986.0 L38,1005.2 L8,1005.2 Z" stroke="none" stroke-width="2" fill="#e2d1b5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M8,993.2 C17.8,992.2 25.6,994.2 38,993.2 L38,1020.0 L8,1020.0 Z" stroke="none" stroke-width="2" fill="#d8c39f" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<rect x="10.0" y="968.0" width="26.0" height="40.0" rx="4" fill="none" stroke="#c9b48f" stroke-width="1.5"/>
+<circle cx="26.1" cy="973.2" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="19.1" cy="981.2" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="25.1" cy="988.8" r="4.2" fill="#3b3f45" stroke="white" stroke-width="1.2"/>
+<circle cx="17.8" cy="996.0" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="23.5" cy="1003.2" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<text x="48.0" y="1003.0" font-size="24.5" fill="#3b3f45" font-weight="650" text-anchor="start">One at random</text>
+<rect x="232.0" y="962.0" width="238.0" height="74.0" rx="10" fill="#f6f7f8" stroke="none" stroke-width="0"/>
+<path d="M243.0,984.0 L279.0,1009.7" stroke="#3b3f45" stroke-width="4" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M285.0,1014.0 L278.6,1000.6 L270.3,1012.3 Z" stroke="none" stroke-width="2" fill="#3b3f45" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="302.0" y="1008.0" font-size="27" fill="#1f2328" font-weight="650" text-anchor="start">100%</text>
+<rect x="482.0" y="962.0" width="238.0" height="74.0" rx="10" fill="#f6f7f8" stroke="none" stroke-width="0"/>
+<path d="M493.0,999.0 L529.0,999.0" stroke="#3b3f45" stroke-width="4" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M535.0,999.0 L522.0,991.9 L522.0,1006.1 Z" stroke="none" stroke-width="2" fill="#3b3f45" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="552.0" y="998.0" font-size="27" fill="#1f2328" font-weight="650" text-anchor="start">82%</text>
+<text x="552.0" y="1025.0" font-size="21.5" fill="#8a5600" font-weight="600" text-anchor="start">18% false trend</text>
+<rect x="732.0" y="962.0" width="238.0" height="74.0" rx="10" fill="#f6f7f8" stroke="none" stroke-width="0"/>
+<path d="M743.0,1014.0 L779.0,988.3" stroke="#3b3f45" stroke-width="4" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M785.0,984.0 L770.3,985.7 L778.6,997.4 Z" stroke="none" stroke-width="2" fill="#3b3f45" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="802.0" y="1008.0" font-size="27" fill="#1f2328" font-weight="650" text-anchor="start">100%</text>
+<clipPath id="c263"><rect x="10" y="1052" width="26" height="40" rx="4"/></clipPath>
+<g clip-path="url(#c263)">
+<path d="M8,1052 C17.8,1051.0 25.6,1053.0 38,1052 L38,1073.6 L8,1073.6 Z" stroke="none" stroke-width="2" fill="#f3ece0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M8,1061.6 C17.8,1060.6 25.6,1062.6 38,1061.6 L38,1082.0 L8,1082.0 Z" stroke="none" stroke-width="2" fill="#ebdfcb" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M8,1070.0 C17.8,1069.0 25.6,1071.0 38,1070.0 L38,1089.2 L8,1089.2 Z" stroke="none" stroke-width="2" fill="#e2d1b5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M8,1077.2 C17.8,1076.2 25.6,1078.2 38,1077.2 L38,1104.0 L8,1104.0 Z" stroke="none" stroke-width="2" fill="#d8c39f" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<rect x="10.0" y="1052.0" width="26.0" height="40.0" rx="4" fill="none" stroke="#c9b48f" stroke-width="1.5"/>
+<circle cx="26.1" cy="1057.2" r="4.2" fill="#7a4c9e" stroke="white" stroke-width="1.2"/>
+<circle cx="19.1" cy="1065.2" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="25.1" cy="1072.8" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="17.8" cy="1080.0" r="2.6" fill="white" stroke="#9aa0a8" stroke-width="1.2"/>
+<circle cx="23.5" cy="1087.2" r="4.2" fill="#7a4c9e" stroke="white" stroke-width="1.2"/>
+<text x="48.0" y="1087.0" font-size="24.5" fill="#7a4c9e" font-weight="650" text-anchor="start">Both extremes</text>
+<rect x="232.0" y="1046.0" width="238.0" height="74.0" rx="10" fill="#f6f7f8" stroke="none" stroke-width="0"/>
+<path d="M243.0,1068.0 L279.0,1093.7" stroke="#7a4c9e" stroke-width="4" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M285.0,1098.0 L278.6,1084.6 L270.3,1096.3 Z" stroke="none" stroke-width="2" fill="#7a4c9e" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="302.0" y="1092.0" font-size="27" fill="#1f2328" font-weight="650" text-anchor="start">100%</text>
+<rect x="482.0" y="1046.0" width="238.0" height="74.0" rx="10" fill="#f6f7f8" stroke="none" stroke-width="0"/>
+<path d="M493.0,1083.0 L529.0,1083.0" stroke="#7a4c9e" stroke-width="4" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M535.0,1083.0 L522.0,1075.8 L522.0,1090.2 Z" stroke="none" stroke-width="2" fill="#7a4c9e" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="552.0" y="1092.0" font-size="27" fill="#1f2328" font-weight="650" text-anchor="start">99.9%</text>
+<rect x="732.0" y="1046.0" width="238.0" height="74.0" rx="10" fill="#f6f7f8" stroke="none" stroke-width="0"/>
+<path d="M743.0,1098.0 L779.0,1072.3" stroke="#7a4c9e" stroke-width="4" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M785.0,1068.0 L770.3,1069.7 L778.6,1081.4 Z" stroke="none" stroke-width="2" fill="#7a4c9e" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="802.0" y="1092.0" font-size="27" fill="#1f2328" font-weight="650" text-anchor="start">100%</text>
+<text x="10.0" y="1160.0" font-size="24.5" text-anchor="start" xml:space="preserve"><tspan fill="#7a4c9e" font-weight="650">Both extremes</tspan><tspan fill="#1f2328" font-weight="400"> avoided reversals, but with gentle (1.5×) trends found the</tspan></text>
+<text x="10.0" y="1191.0" font-size="24.5" text-anchor="start" xml:space="preserve"><tspan fill="#1f2328" font-weight="400">true direction in only 11–17% of runs (two random dates per site: 61–67%).</tspan></text>
+<circle cx="1007.0" cy="639.0" r="17" fill="#1f2328" stroke="none" stroke-width="0"/>
+<text x="1007.0" y="648.0" font-size="24" fill="white" font-weight="700" text-anchor="middle">4</text>
+<text x="1036.0" y="650.0" font-size="31" fill="#1f2328" font-weight="650" text-anchor="start">Weaker trends need fewer sites to flip</text>
+<text x="1036.0" y="682.0" font-size="24.5" fill="#5b6069" font-weight="400" text-anchor="start">affected sites keep only the extreme opposing the</text>
+<text x="1036.0" y="710.0" font-size="24.5" fill="#5b6069" font-weight="400" text-anchor="start">trend (oldest if rising, youngest if falling);</text>
+<text x="1036.0" y="738.0" font-size="24.5" fill="#5b6069" font-weight="400" text-anchor="start">the other sites keep all their dates</text>
+<line x1="1086.0" y1="1042.0" x2="1670.0" y2="1042.0" stroke="#d6d9de" stroke-width="1.3" stroke-linecap="round"/>
+<text x="1074.0" y="1050.0" font-size="23" fill="#5b6069" font-weight="400" text-anchor="end">0%</text>
+<line x1="1086.0" y1="916.0" x2="1670.0" y2="916.0" stroke="#d6d9de" stroke-width="1.3" stroke-linecap="round"/>
+<text x="1074.0" y="924.0" font-size="23" fill="#5b6069" font-weight="400" text-anchor="end">50%</text>
+<line x1="1086.0" y1="790.0" x2="1670.0" y2="790.0" stroke="#d6d9de" stroke-width="1.3" stroke-linecap="round"/>
+<text x="1074.0" y="798.0" font-size="23" fill="#5b6069" font-weight="400" text-anchor="end">100%</text>
+<text x="1012.0" y="916.0" font-size="23" fill="#5b6069" font-weight="400" text-anchor="middle" transform="rotate(-90 1012 916.0)">runs reversed</text>
+<text x="1096.0" y="1076.0" font-size="23.5" fill="#5b6069" font-weight="400" text-anchor="middle">1.5×</text>
+<text x="1237.0" y="1076.0" font-size="23.5" fill="#5b6069" font-weight="400" text-anchor="middle">2×</text>
+<text x="1378.0" y="1076.0" font-size="23.5" fill="#5b6069" font-weight="400" text-anchor="middle">3×</text>
+<text x="1519.0" y="1076.0" font-size="23.5" fill="#5b6069" font-weight="400" text-anchor="middle">5×</text>
+<text x="1660.0" y="1076.0" font-size="23.5" fill="#5b6069" font-weight="400" text-anchor="middle">10×</text>
+<text x="1378.0" y="1106.0" font-size="24" fill="#5b6069" font-weight="400" text-anchor="middle">tested sizes of the true change over 11,000 years</text>
+<path d="M1096.0,790.0 L1237.0,790.0 L1378.0,790.0 L1519.0,790.0 L1660.0,790.0 L1660.0,790.0 L1519.0,790.0 L1378.0,790.0 L1237.0,790.0 L1096.0,790.0 Z" stroke="none" stroke-width="2" fill="#1f2328" stroke-linejoin="round" stroke-linecap="round" fill-opacity="0.16"/>
+<path d="M1096.0,790.0 L1237.0,790.0 L1378.0,790.0 L1519.0,790.0 L1660.0,790.0" stroke="#1f2328" stroke-width="2.4" fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="2 7"/>
+<circle cx="1096.0" cy="790.0" r="8" fill="#1f2328" stroke="white" stroke-width="2"/>
+<circle cx="1237.0" cy="790.0" r="8" fill="#1f2328" stroke="white" stroke-width="2"/>
+<circle cx="1378.0" cy="790.0" r="8" fill="#1f2328" stroke="white" stroke-width="2"/>
+<circle cx="1519.0" cy="790.0" r="8" fill="#1f2328" stroke="white" stroke-width="2"/>
+<circle cx="1660.0" cy="790.0" r="8" fill="#1f2328" stroke="white" stroke-width="2"/>
+<text x="1660.0" y="774.0" font-size="23.5" fill="#1f2328" font-weight="650" text-anchor="end">all sites</text>
+<path d="M1096.0,790.0 L1237.0,793.5 L1378.0,916.0 L1519.0,1034.9 L1660.0,1042.0 L1660.0,1042.0 L1519.0,1041.5 L1378.0,953.3 L1237.0,806.6 L1096.0,790.5 Z" stroke="none" stroke-width="2" fill="#6b7079" stroke-linejoin="round" stroke-linecap="round" fill-opacity="0.16"/>
+<path d="M1096.0,790.3 L1237.0,800.0 L1378.0,935.7 L1519.0,1038.3 L1660.0,1042.0" stroke="#6b7079" stroke-width="2.4" fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="2 7"/>
+<circle cx="1096.0" cy="790.3" r="8" fill="#6b7079" stroke="white" stroke-width="2"/>
+<circle cx="1237.0" cy="800.0" r="8" fill="#6b7079" stroke="white" stroke-width="2"/>
+<circle cx="1378.0" cy="935.7" r="8" fill="#6b7079" stroke="white" stroke-width="2"/>
+<circle cx="1519.0" cy="1038.3" r="8" fill="#6b7079" stroke="white" stroke-width="2"/>
+<circle cx="1660.0" cy="1042.0" r="8" fill="#6b7079" stroke="white" stroke-width="2"/>
+<text x="1394.0" y="921.7" font-size="23.5" fill="#6b7079" font-weight="650" text-anchor="start">three in four sites</text>
+<path d="M1096.0,985.0 L1237.0,1041.0 L1378.0,1042.0 L1519.0,1042.0 L1660.0,1042.0 L1660.0,1042.0 L1519.0,1042.0 L1378.0,1042.0 L1237.0,1042.0 L1096.0,994.1 Z" stroke="none" stroke-width="2" fill="#9aa0a8" stroke-linejoin="round" stroke-linecap="round" fill-opacity="0.16"/>
+<path d="M1096.0,989.5 L1237.0,1041.6 L1378.0,1042.0 L1519.0,1042.0 L1660.0,1042.0" stroke="#9aa0a8" stroke-width="2.4" fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="2 7"/>
+<circle cx="1096.0" cy="989.5" r="8" fill="#9aa0a8" stroke="white" stroke-width="2"/>
+<circle cx="1237.0" cy="1041.6" r="8" fill="#9aa0a8" stroke="white" stroke-width="2"/>
+<circle cx="1378.0" cy="1042.0" r="8" fill="#9aa0a8" stroke="white" stroke-width="2"/>
+<circle cx="1519.0" cy="1042.0" r="8" fill="#9aa0a8" stroke="white" stroke-width="2"/>
+<circle cx="1660.0" cy="1042.0" r="8" fill="#9aa0a8" stroke="white" stroke-width="2"/>
+<text x="1114.0" y="973.5" font-size="23.5" fill="#9aa0a8" font-weight="650" text-anchor="start">half the sites</text>
+<text x="1036.0" y="1150.0" font-size="24.5" fill="#1f2328" font-weight="400" text-anchor="start">Not reversed does not mean recovered: many such</text>
+<text x="1036.0" y="1181.0" font-size="24.5" fill="#1f2328" font-weight="400" text-anchor="start">runs read the trend as steady.</text>
+</svg>

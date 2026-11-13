@@ -105,6 +105,8 @@ Each stage closes before the next begins, unless it is marked as able to run in 
   - where AI must be disclosed;
   - figure and file formats.
 - Finalise the cover letter, highlights and keywords, and draft copy-and-paste answers for the portal.
+- Graphical abstract: the brief's version (`manuscript/figures/graphical_abstract.*`, `make graphical-abstract`) is
+  about 3:2. Elsevier asks for a wide image readable at 5 × 13 cm, so lay the same four panels out in one row for JAS.
 - **Barry decides:** suggested reviewers and conflicts, and the open-access or publication-cost route, after checking
   institutional coverage.
 

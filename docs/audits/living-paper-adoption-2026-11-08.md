@@ -92,6 +92,10 @@ step.
    config, renaming the supplement, re-anchoring an existing registry, and integrating pending text. A short
    "migrating an existing paper" section in `SKILL.md` would help: rename the SI first, keep the existing makedoc
    profile settings, and remap any line-anchored checks.
+10. **makedoc does not track figure files** (found 13 November 2026). Replacing a figure without touching the text
+    leaves the built PDF stale: `make manuscript-build` reported success with the old brief figure embedded. Workaround:
+    delete the profile's outputs in `manuscript/build/`. Fix: make each profile's figure files prerequisites of its
+    outputs in makedoc.
 
 ## Fixes made (8 November 2026, at Barry's request)
 

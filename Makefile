@@ -18,6 +18,7 @@ help:
 	@echo
 	@echo "Evidence:"
 	@echo "  make concept-figure        Draw the exact-age retention illustration (Python/uv)"
+	@echo "  make graphical-abstract    Draw the graphical abstract used in the brief (Python, Inkscape)"
 	@echo "  make empirical-figures     Rebuild empirical Figure 6, SI Figure S3 and audit summaries"
 	@echo "  make production-figures    Validate accepted simulations and rebuild Figures 2, 4 and 5"
 	@echo "  make stage2-rerun          Run the signed-model matrix and acceptance summary"
@@ -60,6 +61,10 @@ production-figures: r-preflight
 .PHONY: concept-figure
 concept-figure:
 	uv run --script scripts/render_retention_mechanism.py
+
+.PHONY: graphical-abstract
+graphical-abstract:
+	python3 scripts/render_graphical_abstract.py
 
 .PHONY: stage2-rerun
 stage2-rerun:
