@@ -1,7 +1,7 @@
 # rc-dates: scientific reproduction files
 
-Companion to **Choosing among a site's radiocarbon dates can create or reverse
-regional trends**, by Barry W. Brook, Rebecca Wheatley, Christopher N.
+Companion to **Which dates a site contributes can create or reverse regional
+radiocarbon trends**, by Barry W. Brook, Rebecca Wheatley, Christopher N.
 Johnson, Alan N. Williams, Sean Ulm and Luke A. Yates. Revised 19 October 2026
 for co-author review, preprinting and Journal of Archaeological Science.
 Authorship details remain subject to co-author confirmation.

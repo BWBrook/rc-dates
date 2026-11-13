@@ -27,8 +27,15 @@ Each stage closes before the next begins, unless it is marked as able to run in 
   merits, giving reasons for rejections, and reply to every comment. Edits to bound numbers are requests: change the
   ledger or the analysis and rebuild. Then run `make manuscript-check`, check the word count, `scrivmark respond`, and
   Barry signs off.
-- **Word budget.** The article is 4,957 words against 5,000 and the abstract 248 against 250. Additions need matching
-  cuts.
+- **Word budget.** The article is 4,987 words against 5,000 and the abstract 250 against 250 (13 November). Additions
+  need matching cuts.
+- **Brief round carried to the article (13 November).** Before the article round, Barry's brief comments were applied
+  to `main.md` where they were systemic: framing as retention of completed determinations (not an analyst's choice),
+  context before the opening numbers, what each range spans, the cost of random retention, positive phrasing in place
+  of "X, not Y", might for may, recommendations with named agents, and stray caveats moved to §4.3. The title is now
+  *Which dates a site contributes can create or reverse regional radiocarbon trends* (option 2 of the 18 October memo;
+  it avoids both "choosing" and the "date selection" collision). Codex (gpt-6.1-sol) did the first-pass sweep; Claude
+  adjudicated and edited.
 
 ### 2. Science scope gate (decide during stage 1; can run in parallel)
 

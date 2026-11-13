@@ -1,4 +1,4 @@
-# Choosing among a site's radiocarbon dates can create or reverse regional trends
+# Which dates a site contributes can create or reverse regional radiocarbon trends
 
 Barry W. Brook^a,\*^, Rebecca Wheatley^a^, Christopher N. Johnson^a^, Alan N. Williams^b,c^, Sean Ulm^c^, Luke A. Yates^a^
 

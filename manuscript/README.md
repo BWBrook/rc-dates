@@ -1,4 +1,4 @@
-# Choosing among a site's radiocarbon dates can create or reverse regional trends
+# Which dates a site contributes can create or reverse regional radiocarbon trends
 
 The same study is written three ways, all in `text/`, all from one evidence base:
 

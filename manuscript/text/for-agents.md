@@ -10,7 +10,7 @@ authority: Barry W. Brook decides public release, submission and any corresponde
 updated: 2026-11-08
 ---
 
-# Choosing among a site's radiocarbon dates, for agents: what this study established, how to verify it, and how not to break it
+# Which dates a site contributes, for agents: what this study established, how to verify it, and how not to break it
 
 This is the version of the paper written for an agent arriving cold. The human paper argues; this one indexes. It says
 what is claimed, where each number lives, which commands regenerate it, what has been superseded, and where the open
