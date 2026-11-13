@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="170.0mm" height="124.0mm" viewBox="0 0 1700 1240" font-family="Inter">
 <rect width="1700" height="1240" fill="white"/>
-<text x="0.0" y="40.0" font-size="40" fill="#1f2328" font-weight="700" text-anchor="start">Which date each site keeps can decide the story a regional curve tells</text>
+<text x="0.0" y="40.0" font-size="40" fill="#1f2328" font-weight="700" text-anchor="start">The dates each site contributes can change the story a regional curve tells</text>
 <circle cx="17.0" cy="109.0" r="17" fill="#1f2328" stroke="none" stroke-width="0"/>
 <text x="17.0" y="118.0" font-size="24" fill="white" font-weight="700" text-anchor="middle">1</text>
 <text x="46.0" y="120.0" font-size="31" fill="#1f2328" font-weight="650" text-anchor="start">One site, several dates</text>
@@ -22,7 +22,7 @@
 <path d="M25,450 L32,464 L39,450" stroke="#5b6069" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
 <text x="22.0" y="325.0" font-size="23" fill="#5b6069" font-weight="400" text-anchor="middle" transform="rotate(-90 22 325.0)">oldest at the bottom</text>
 <text x="116.0" y="524.0" font-size="24" fill="#5b6069" font-weight="400" text-anchor="middle">five dates</text>
-<text x="222.0" y="172.0" font-size="24" fill="#5b6069" font-weight="400" text-anchor="start" font-style="italic">A database keeps …</text>
+<text x="222.0" y="172.0" font-size="24" fill="#5b6069" font-weight="400" text-anchor="start" font-style="italic">What reaches an analysis …</text>
 <clipPath id="c23"><rect x="222" y="194" width="38" height="58" rx="4"/></clipPath>
 <g clip-path="url(#c23)">
 <path d="M220,194 C233.4,192.55 244.8,195.45 262,194 L262,219.92 L220,219.92 Z" stroke="none" stroke-width="2" fill="#f3ece0" stroke-linejoin="round" stroke-linecap="round"/>
@@ -334,6 +334,6 @@
 <circle cx="1519.0" cy="1042.0" r="8" fill="#9aa0a8" stroke="white" stroke-width="2"/>
 <circle cx="1660.0" cy="1042.0" r="8" fill="#9aa0a8" stroke="white" stroke-width="2"/>
 <text x="1114.0" y="973.5" font-size="23.5" fill="#9aa0a8" font-weight="650" text-anchor="start">half the sites</text>
-<text x="1036.0" y="1150.0" font-size="24.5" fill="#1f2328" font-weight="400" text-anchor="start">Not reversed does not mean recovered: many such</text>
-<text x="1036.0" y="1181.0" font-size="24.5" fill="#1f2328" font-weight="400" text-anchor="start">runs read the trend as steady.</text>
+<text x="1036.0" y="1150.0" font-size="24.5" fill="#1f2328" font-weight="400" text-anchor="start">Many runs that escaped reversal still read the</text>
+<text x="1036.0" y="1181.0" font-size="24.5" fill="#1f2328" font-weight="400" text-anchor="start">trend as steady.</text>
 </svg>
