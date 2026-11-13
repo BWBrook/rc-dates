@@ -6,7 +6,10 @@
       "name": "Barry W. Brook",
       "initials": "BWB"
     },
-    "author": null,
+    "author": {
+      "name": "Claude",
+      "initials": "C"
+    },
     "author_branch": "main",
     "base": "3612daa8bd5ccfb948e8fc295f0b2d32f6ef6b4b",
     "returned": "14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
