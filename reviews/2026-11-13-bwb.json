@@ -777,7 +777,7 @@
     },
     {
       "id": "t-de852627",
-      "status": "open",
+      "status": "resolved",
       "anchor": {
         "file": "manuscript/text/brief.md",
         "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
@@ -810,7 +810,11 @@
           "body": "Correction to my earlier reply. I had widened the framing to the choice of what to sample and date (e.g. a site dated only at its base). estimands.md rules that out ('post hoc retention equated with prospective choice of contexts to date'), and the article says the experiment concerns selection among completed determinations. The brief now puts your framing at the right scope: the dates 'we don't have' were obtained but never reached the database (unpublished reports, compilations that kept only each site's oldest). The analyst uses everything available and cannot see the rest.",
           "agent": "Claude (Opus 5.5)"
         }
-      ]
+      ],
+      "resolved_by": {
+        "by": "BWB",
+        "at": "2026-11-13T14:43:09.337+11:00"
+      }
     },
     {
       "id": "t-c0ce3a92",
