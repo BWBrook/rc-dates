@@ -1,0 +1,890 @@
+{
+  "scrivmark": 1,
+  "round": {
+    "id": "2026-11-13-bwb",
+    "reviewer": {
+      "name": "Barry W. Brook",
+      "initials": "BWB"
+    },
+    "author": {
+      "name": "Claude",
+      "initials": "C"
+    },
+    "author_branch": "main",
+    "base": "3612daa8bd5ccfb948e8fc295f0b2d32f6ef6b4b",
+    "returned": "14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
+    "integrated": "3612daa8bd5ccfb948e8fc295f0b2d32f6ef6b4b",
+    "closed": "2026-11-13T14:43:11.387+11:00",
+    "status": "closed",
+    "statement": "Reviewed by Barry W. Brook as scientific supervisor; Claude (Opus 5.5) and Codex wrote the manuscript.",
+    "returned_at": "2026-11-13T14:33:14.241+11:00",
+    "handovers": [
+      {
+        "to": "author",
+        "at": "2026-11-13T14:33:14.241+11:00",
+        "by": "BWB"
+      },
+      {
+        "to": "reviewer",
+        "at": "2026-11-13T14:38:24.599+11:00",
+        "by": "C",
+        "commit": "f5ab62fa236b7b867b0969c3fb15bc7cb35ddd88",
+        "agent": "Claude (Opus 5.5)"
+      },
+      {
+        "to": "author",
+        "at": "2026-11-13T14:41:56.671+11:00",
+        "by": "BWB",
+        "commit": "df87db82e00d6a8e9cc1255103e10c1ad63efea2"
+      },
+      {
+        "to": "reviewer",
+        "at": "2026-11-13T14:42:48.917+11:00",
+        "by": "C",
+        "commit": "186c6cc2413ced776299d8babbf418e9157dd9a6",
+        "agent": "Claude (Opus 5.5)"
+      }
+    ],
+    "responded_at": "2026-11-13T14:42:48.917+11:00"
+  },
+  "changes": [
+    {
+      "type": "text",
+      "file": "manuscript/text/brief.md",
+      "old_file": null,
+      "base": "",
+      "reviewer": " and their activities",
+      "r_range": [
+        1082,
+        1103
+      ],
+      "id": "c1",
+      "decision": "accepted",
+      "by": "C",
+      "at": "2026-11-13T14:34:04.140+11:00",
+      "agent": "Claude (Opus 5.5)"
+    },
+    {
+      "type": "text",
+      "file": "manuscript/text/brief.md",
+      "old_file": null,
+      "base": "",
+      "reviewer": "tempting to ",
+      "r_range": [
+        1321,
+        1333
+      ],
+      "id": "c2",
+      "decision": "accepted",
+      "by": "C",
+      "at": "2026-11-13T14:34:05.631+11:00",
+      "agent": "Claude (Opus 5.5)"
+    },
+    {
+      "type": "text",
+      "file": "manuscript/text/brief.md",
+      "old_file": null,
+      "base": "",
+      "reviewer": " directly",
+      "r_range": [
+        1337,
+        1346
+      ],
+      "id": "c3",
+      "decision": "accepted",
+      "by": "C",
+      "at": "2026-11-13T14:34:07.644+11:00",
+      "agent": "Claude (Opus 5.5)"
+    },
+    {
+      "type": "text",
+      "file": "manuscript/text/brief.md",
+      "old_file": null,
+      "base": "",
+      "reviewer": " from hundreds of sites",
+      "r_range": [
+        1430,
+        1453
+      ],
+      "id": "c4",
+      "decision": "accepted",
+      "by": "C",
+      "at": "2026-11-13T14:34:08.844+11:00",
+      "agent": "Claude (Opus 5.5)"
+    },
+    {
+      "type": "text",
+      "file": "manuscript/text/brief.md",
+      "old_file": null,
+      "base": "the",
+      "reviewer": "a",
+      "r_range": [
+        2373,
+        2374
+      ],
+      "id": "c5",
+      "decision": "accepted",
+      "by": "C",
+      "at": "2026-11-13T14:34:10.012+11:00",
+      "agent": "Claude (Opus 5.5)"
+    },
+    {
+      "type": "text",
+      "file": "manuscript/text/brief.md",
+      "old_file": null,
+      "base": "",
+      "reviewer": " only",
+      "r_range": [
+        2944,
+        2949
+      ],
+      "id": "c6",
+      "decision": "accepted",
+      "by": "C",
+      "at": "2026-11-13T14:34:11.260+11:00",
+      "agent": "Claude (Opus 5.5)"
+    },
+    {
+      "type": "text",
+      "file": "manuscript/text/brief.md",
+      "old_file": null,
+      "base": "; one",
+      "reviewer": ". One",
+      "r_range": [
+        3155,
+        3160
+      ],
+      "id": "c7",
+      "decision": "accepted",
+      "by": "C",
+      "at": "2026-11-13T14:34:12.393+11:00",
+      "agent": "Claude (Opus 5.5)"
+    },
+    {
+      "type": "text",
+      "file": "manuscript/text/brief.md",
+      "old_file": null,
+      "base": "",
+      "reviewer": ", by contrast,",
+      "r_range": [
+        3181,
+        3195
+      ],
+      "id": "c8",
+      "decision": "accepted",
+      "by": "C",
+      "at": "2026-11-13T14:34:13.654+11:00",
+      "agent": "Claude (Opus 5.5)"
+    },
+    {
+      "type": "text",
+      "file": "manuscript/text/brief.md",
+      "old_file": null,
+      "base": "about",
+      "reviewer": "just",
+      "r_range": [
+        3208,
+        3212
+      ],
+      "id": "c9",
+      "decision": "accepted",
+      "by": "C",
+      "at": "2026-11-13T14:34:15.061+11:00",
+      "agent": "Claude (Opus 5.5)"
+    }
+  ],
+  "threads": [
+    {
+      "id": "t-12c1c2e4",
+      "status": "resolved",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
+        "range": [
+          181,
+          225
+        ],
+        "exact": ", with Claude (Anthropic) and Codex (OpenAI)",
+        "prefix": "iams, Sean Ulm and Luke A. Yates",
+        "suffix": ". Draft of 13 November 2026, not"
+      },
+      "messages": [
+        {
+          "id": "m-724f9cc0",
+          "by": "BWB",
+          "at": "2026-11-13T11:38:56.788+11:00",
+          "body": "Most journals reject AI as co-authors, and instead want AI use declared elsewhere. I'm not sure that's right, but it's the current state of play."
+        },
+        {
+          "id": "m-aa3235b4",
+          "by": "C",
+          "at": "2026-11-13T14:37:40.161+11:00",
+          "body": "Agreed (your decision, 13 Nov chat). Removed 'with Claude (Anthropic) and Codex (OpenAI)' from the byline. 'How this work was done' still names each system, version and role, which is our disclosure and matches the AI-use declaration JAS will require. The article and agent guide will match when the article is revised.",
+          "agent": "Claude (Opus 5.5)"
+        }
+      ],
+      "resolved_by": {
+        "by": "C",
+        "at": "2026-11-13T14:37:40.906+11:00",
+        "agent": "Claude (Opus 5.5)"
+      }
+    },
+    {
+      "id": "t-09ca3031",
+      "status": "resolved",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
+        "range": [
+          415,
+          434
+        ],
+        "exact": "Graphical abstract.",
+        "prefix": "s>.\n\n<div id=\"figures\"></div>\n\n*",
+        "suffix": "* (1) A site dated several times"
+      },
+      "messages": [
+        {
+          "id": "m-f4e88bb8",
+          "by": "BWB",
+          "at": "2026-11-13T11:40:06.415+11:00",
+          "body": "The caption is currently shown at the top, but the figure is inserted at the bottom. The figure needs moving up to here: I agree that it should lead."
+        },
+        {
+          "id": "m-85232313",
+          "by": "C",
+          "at": "2026-11-13T14:37:41.844+11:00",
+          "body": "The PDF already puts the figure first: makedoc fills the placeholder under the byline. It's the scrivmark viewer that can't, so it shows brief_figures.md at the end. Fix: put the image directly into brief.md under the byline and remove brief_figures.md from the brief profile, scrivmark.toml and the Makefile. That changes which files the round tracks, so I'll do it once this round closes. Leaving this open until then.",
+          "agent": "Claude (Opus 5.5)"
+        },
+        {
+          "id": "m-15d53e06",
+          "by": "C",
+          "at": "2026-11-13T14:42:43.938+11:00",
+          "body": "Will fix on main straight after this round closes: the image goes directly into brief.md under the byline, and brief_figures.md comes out of the brief profile, scrivmark.toml and the Makefile, so the viewer and PDF agree.",
+          "agent": "Claude (Opus 5.5)"
+        }
+      ],
+      "resolved_by": {
+        "by": "C",
+        "at": "2026-11-13T14:42:45.173+11:00",
+        "agent": "Claude (Opus 5.5)"
+      }
+    },
+    {
+      "id": "t-84aae276",
+      "status": "resolved",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
+        "range": [
+          1463,
+          1466
+        ],
+        "exact": "may",
+        "prefix": "from hundreds of sites.\n\nA site ",
+        "suffix": " have been dated many times whil"
+      },
+      "messages": [
+        {
+          "id": "m-0b9a777e",
+          "by": "BWB",
+          "at": "2026-11-13T11:42:07.527+11:00",
+          "body": "I generally prefer \"might\" over \"may\" when permission is not being sought."
+        },
+        {
+          "id": "m-59c75b56",
+          "by": "C",
+          "at": "2026-11-13T14:37:42.724+11:00",
+          "body": "Changed: the brief now uses 'might' and no 'may'. I've saved this as a standing preference for the article too.",
+          "agent": "Claude (Opus 5.5)"
+        }
+      ],
+      "resolved_by": {
+        "by": "C",
+        "at": "2026-11-13T14:37:43.629+11:00",
+        "agent": "Claude (Opus 5.5)"
+      }
+    },
+    {
+      "id": "t-0d129df3",
+      "status": "resolved",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
+        "range": [
+          1784,
+          1823
+        ],
+        "exact": "and careful methods already handle that",
+        "prefix": "ts own measurement uncertainty, ",
+        "suffix": ". The problem here is different:"
+      },
+      "messages": [
+        {
+          "id": "m-8d8c16a6",
+          "by": "BWB",
+          "at": "2026-11-13T11:43:44.355+11:00",
+          "body": "Doesn't say anything useful, to experts or non-experts?"
+        },
+        {
+          "id": "m-2c03531d",
+          "by": "C",
+          "at": "2026-11-13T14:37:44.515+11:00",
+          "body": "Agreed, cut.",
+          "agent": "Claude (Opus 5.5)"
+        }
+      ],
+      "resolved_by": {
+        "by": "C",
+        "at": "2026-11-13T14:37:45.451+11:00",
+        "agent": "Claude (Opus 5.5)"
+      }
+    },
+    {
+      "id": "t-4866e755",
+      "status": "resolved",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
+        "range": [
+          1868,
+          1877
+        ],
+        "exact": "were kept",
+        "prefix": " here is different: which dates ",
+        "suffix": ". An extreme is not a typical me"
+      },
+      "messages": [
+        {
+          "id": "m-b81784a5",
+          "by": "BWB",
+          "at": "2026-11-13T11:43:59.192+11:00",
+          "body": "for what?"
+        },
+        {
+          "id": "m-e631a22b",
+          "by": "C",
+          "at": "2026-11-13T14:37:46.393+11:00",
+          "body": "Rewritten. The brief now says how a date comes to exist (someone chose a sample, had it dated, published it, entered it in a database) and that the analysis sees only the dates that came through those steps.",
+          "agent": "Claude (Opus 5.5)"
+        }
+      ],
+      "resolved_by": {
+        "by": "C",
+        "at": "2026-11-13T14:37:47.317+11:00",
+        "agent": "Claude (Opus 5.5)"
+      }
+    },
+    {
+      "id": "t-f8309394",
+      "status": "resolved",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
+        "range": [
+          1721,
+          1735
+        ],
+        "exact": "Why it is hard",
+        "prefix": " date itself records which.\n\n## ",
+        "suffix": "\n\nEach date has its own measurem"
+      },
+      "messages": [
+        {
+          "id": "m-d17fae2a",
+          "by": "BWB",
+          "at": "2026-11-13T11:45:01.432+11:00",
+          "body": "why what is hard? The question (inferring change in human activities/population) has never really been stated, has it?"
+        },
+        {
+          "id": "m-cd452495",
+          "by": "C",
+          "at": "2026-11-13T14:37:48.263+11:00",
+          "body": "Agreed. The section is now 'The question', and it states the inference (reading a rise or fall in dated traces as a rise or fall in human populations or activity) and our question about it. 'Why it is hard' is gone; its one useful point (why an extreme date misleads) is a paragraph in that section.",
+          "agent": "Claude (Opus 5.5)"
+        }
+      ],
+      "resolved_by": {
+        "by": "C",
+        "at": "2026-11-13T14:37:49.136+11:00",
+        "agent": "Claude (Opus 5.5)"
+      }
+    },
+    {
+      "id": "t-66e01a7b",
+      "status": "resolved",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
+        "range": [
+          1737,
+          2345
+        ],
+        "exact": "Each date has its own measurement uncertainty, and careful methods already handle that. The problem here is different: which dates were kept. An extreme is not a typical member of a set. Of five dates from a steady history, the oldest falls in the oldest fifth of the time span about two times in three[]{.C27}, against one time in five for a date picked at random. A curve built from oldest dates therefore tends to be pushed back in time even if nothing in the past changed. Agreement among standard ways of drawing the curve cannot, by itself, reveal this, because every method starts from the same dates.",
+        "prefix": "ords which.\n\n## Why it is hard\n\n",
+        "suffix": "\n\n## What we did\n\nWe redrew a re"
+      },
+      "messages": [
+        {
+          "id": "m-ca4f623e",
+          "by": "BWB",
+          "at": "2026-11-13T11:45:46.888+11:00",
+          "body": "why 5 dates? You're assuming too much prior knowledge of the reader."
+        },
+        {
+          "id": "m-b095f4fc",
+          "by": "C",
+          "at": "2026-11-13T14:37:50.176+11:00",
+          "body": "Rewritten as an explicit example: 'Suppose a site was occupied at a steady rate and dated five times.' The two-in-three figure (C27) then reads as a worked illustration. The measurement-uncertainty sentence is cut.",
+          "agent": "Claude (Opus 5.5)"
+        }
+      ],
+      "resolved_by": {
+        "by": "C",
+        "at": "2026-11-13T14:37:51.170+11:00",
+        "agent": "Claude (Opus 5.5)"
+      }
+    },
+    {
+      "id": "t-999e45e9",
+      "status": "resolved",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
+        "range": [
+          1321,
+          1346
+        ],
+        "exact": "tempting to read directly",
+        "prefix": "terial) fall in each century is ",
+        "suffix": " as a history of human activity."
+      },
+      "messages": [
+        {
+          "id": "m-2d8bf869",
+          "by": "BWB",
+          "at": "2026-11-13T11:47:02.163+11:00",
+          "body": "and this implies a \"but\" that you don't state"
+        },
+        {
+          "id": "m-9b68b407",
+          "by": "C",
+          "at": "2026-11-13T14:37:52.131+11:00",
+          "body": "Your edit is accepted and the 'but' is now stated: 'But the curve also records which dates exist', followed by how the dates come to exist. That paragraph is the hook into the question.",
+          "agent": "Claude (Opus 5.5)"
+        }
+      ],
+      "resolved_by": {
+        "by": "C",
+        "at": "2026-11-13T14:37:53.039+11:00",
+        "agent": "Claude (Opus 5.5)"
+      }
+    },
+    {
+      "id": "t-ffc62296",
+      "status": "resolved",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
+        "range": [
+          3409,
+          3447
+        ],
+        "exact": ", not which curve is the true history.",
+        "prefix": "an move this collection of dates",
+        "suffix": "\n\n2. **When every site was affec"
+      },
+      "messages": [
+        {
+          "id": "m-4f623b6a",
+          "by": "BWB",
+          "at": "2026-11-13T14:15:47.193+11:00",
+          "body": "I intensely dislike negations like this... \"it is this, it's  not that...\""
+        },
+        {
+          "id": "m-9d3a105c",
+          "by": "C",
+          "at": "2026-11-13T14:37:53.995+11:00",
+          "body": "Cut. The comparison is now stated positively in the first sentence: shifts are 'than with all 540 dates'.",
+          "agent": "Claude (Opus 5.5)"
+        }
+      ],
+      "resolved_by": {
+        "by": "C",
+        "at": "2026-11-13T14:37:55.014+11:00",
+        "agent": "Claude (Opus 5.5)"
+      }
+    },
+    {
+      "id": "t-a2cbdc51",
+      "status": "resolved",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
+        "range": [
+          3503,
+          3521
+        ],
+        "exact": "decided the answer",
+        "prefix": "as affected, the selection rule ",
+        "suffix": ".** In the simulations, keeping "
+      },
+      "messages": [
+        {
+          "id": "m-1792c129",
+          "by": "BWB",
+          "at": "2026-11-13T14:16:06.480+11:00",
+          "body": "this is an AI tic stock phrase"
+        },
+        {
+          "id": "m-bf63fbe9",
+          "by": "C",
+          "at": "2026-11-13T14:37:56.062+11:00",
+          "body": "Replaced with the literal statement: 'With every site affected, the rule fixed the apparent trend whatever the true history.' I removed the same phrase from the graphical abstract's headline ('Which date each site keeps can decide…' is now 'The dates each site contributes can change the story a regional curve tells').",
+          "agent": "Claude (Opus 5.5)"
+        }
+      ],
+      "resolved_by": {
+        "by": "C",
+        "at": "2026-11-13T14:37:57.050+11:00",
+        "agent": "Claude (Opus 5.5)"
+      }
+    },
+    {
+      "id": "t-0de3f063",
+      "status": "resolved",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
+        "range": [
+          3974,
+          3982
+        ],
+        "exact": "affected",
+        "prefix": "** With three-quarters of sites ",
+        "suffix": ", gentle trends (a one-and-a-hal"
+      },
+      "messages": [
+        {
+          "id": "m-ee3dfcf0",
+          "by": "BWB",
+          "at": "2026-11-13T14:16:41.815+11:00",
+          "body": "affected by what?"
+        },
+        {
+          "id": "m-838c5821",
+          "by": "C",
+          "at": "2026-11-13T14:37:58.036+11:00",
+          "body": "Defined in 'What we did': a share of sites (half, three-quarters or all; the *affected* sites) was represented only by what a rule kept, and the other sites kept all their dates.",
+          "agent": "Claude (Opus 5.5)"
+        }
+      ],
+      "resolved_by": {
+        "by": "C",
+        "at": "2026-11-13T14:37:58.994+11:00",
+        "agent": "Claude (Opus 5.5)"
+      }
+    },
+    {
+      "id": "t-d78a62a4",
+      "status": "resolved",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
+        "range": [
+          4147,
+          4207
+        ],
+        "exact": "The proportions we tested do not establish a safe threshold.",
+        "prefix": " although no tenfold trend was. ",
+        "suffix": "\n\n4. **Keeping both the oldest a"
+      },
+      "messages": [
+        {
+          "id": "m-3252f57a",
+          "by": "BWB",
+          "at": "2026-11-13T14:17:49.160+11:00",
+          "body": "You love caveats, I hate them; there is a compromise. But use in a measured way, especially in a brief, and for the main article, bundle them in a dedicated discussion paragraph or section."
+        },
+        {
+          "id": "m-853fbfa8",
+          "by": "C",
+          "at": "2026-11-13T14:38:00.029+11:00",
+          "body": "Agreed on the compromise. In the brief I cut the threshold sentence from finding 3 and the scatter caveats from finding 5, leaving one limits sentence at the end of 'What it means'. For the article I'll gather the caveats into one limitations paragraph. A Codex sweep is listing every scattered caveat in main.md now.",
+          "agent": "Claude (Opus 5.5)"
+        }
+      ],
+      "resolved_by": {
+        "by": "C",
+        "at": "2026-11-13T14:38:00.941+11:00",
+        "agent": "Claude (Opus 5.5)"
+      }
+    },
+    {
+      "id": "t-cf28b769",
+      "status": "resolved",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
+        "range": [
+          2932,
+          5050
+        ],
+        "exact": "1. **Keeping only each site's oldest or youngest date moved the Australian curve by millennia.** Its average age shifted [3,133]{.C02} years older or [2,439]{.C02} years younger, although both versions kept exactly 68 dates. One random date per site, by contrast, moved it by just [100]{.C03} years. Either extreme changed the curve's shape more than the choice among three standard ways of drawing it did[]{.C06}. This shows how far selection can move this collection of dates, not which curve is the true history.\n\n2. **When every site was affected, the selection rule decided the answer.** In the simulations, keeping every site's oldest date always produced an apparent decline, and keeping its youngest always an apparent rise, whatever the true history; true trends running the other way were reversed[]{.C10}. Applying the rule to only half the sites still created a trend from a steady history in over [97]{.C11}% of runs.\n\n3. **Weaker true trends were reversed even when only some sites were affected.** With three-quarters of sites affected, gentle trends (a one-and-a-half- to twofold change over 11,000 years) were reversed in [93]{.C19 .V013}–[100]{.C19 .V014}% of runs, although no tenfold trend was. The proportions we tested do not establish a safe threshold.\n\n4. **Keeping both the oldest and youngest dates avoided reversals but blurred the picture.** It never reversed a trend[]{.C21}. With every site affected, it detected only [11]{.C22}–[17]{.C22}% of the gentlest trends, against [61]{.C22}–[67]{.C22}% for two dates per site picked at random, and it always made tenfold straight-line trends look exponential[]{.C13}.\n\n5. **Random selection almost never reversed a trend, and measurement scatter did not change the main results.** Picking dates at random reversed at most [0.6]{.C21}% of runs, though with every site affected it often missed gentle trends. Measurement scatter moved no tenfold headline result by more than [0.1]{.C25} percentage points; weaker trends were not rerun, and errors shared between dates through the calibration curve, laboratory offsets and outliers remain untested.",
+        "prefix": " every date.\n\n## What we found\n\n",
+        "suffix": "\n\n## What it means\n\nA regional c"
+      },
+      "messages": [
+        {
+          "id": "m-959b2521",
+          "by": "BWB",
+          "at": "2026-11-13T14:18:01.749+11:00",
+          "body": "what does the range mean?"
+        },
+        {
+          "id": "m-4169d04f",
+          "by": "C",
+          "at": "2026-11-13T14:38:01.862+11:00",
+          "body": "Duplicate of the thread below (the viewer anchored both to the whole list); answered there.",
+          "agent": "Claude (Opus 5.5)"
+        }
+      ],
+      "resolved_by": {
+        "by": "C",
+        "at": "2026-11-13T14:42:46.422+11:00",
+        "agent": "Claude (Opus 5.5)"
+      }
+    },
+    {
+      "id": "t-e5618634",
+      "status": "resolved",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
+        "range": [
+          2932,
+          5050
+        ],
+        "exact": "1. **Keeping only each site's oldest or youngest date moved the Australian curve by millennia.** Its average age shifted [3,133]{.C02} years older or [2,439]{.C02} years younger, although both versions kept exactly 68 dates. One random date per site, by contrast, moved it by just [100]{.C03} years. Either extreme changed the curve's shape more than the choice among three standard ways of drawing it did[]{.C06}. This shows how far selection can move this collection of dates, not which curve is the true history.\n\n2. **When every site was affected, the selection rule decided the answer.** In the simulations, keeping every site's oldest date always produced an apparent decline, and keeping its youngest always an apparent rise, whatever the true history; true trends running the other way were reversed[]{.C10}. Applying the rule to only half the sites still created a trend from a steady history in over [97]{.C11}% of runs.\n\n3. **Weaker true trends were reversed even when only some sites were affected.** With three-quarters of sites affected, gentle trends (a one-and-a-half- to twofold change over 11,000 years) were reversed in [93]{.C19 .V013}–[100]{.C19 .V014}% of runs, although no tenfold trend was. The proportions we tested do not establish a safe threshold.\n\n4. **Keeping both the oldest and youngest dates avoided reversals but blurred the picture.** It never reversed a trend[]{.C21}. With every site affected, it detected only [11]{.C22}–[17]{.C22}% of the gentlest trends, against [61]{.C22}–[67]{.C22}% for two dates per site picked at random, and it always made tenfold straight-line trends look exponential[]{.C13}.\n\n5. **Random selection almost never reversed a trend, and measurement scatter did not change the main results.** Picking dates at random reversed at most [0.6]{.C21}% of runs, though with every site affected it often missed gentle trends. Measurement scatter moved no tenfold headline result by more than [0.1]{.C25} percentage points; weaker trends were not rerun, and errors shared between dates through the calibration curve, laboratory offsets and outliers remain untested.",
+        "prefix": " every date.\n\n## What we found\n\n",
+        "suffix": "\n\n## What it means\n\nA regional c"
+      },
+      "messages": [
+        {
+          "id": "m-f93bb206",
+          "by": "BWB",
+          "at": "2026-11-13T14:18:51.163+11:00",
+          "body": "what does the range mean? 93-100%",
+          "edited_at": "2026-11-13T14:19:12.437+11:00"
+        },
+        {
+          "id": "m-0f166cf2",
+          "by": "BWB",
+          "at": "2026-11-13T14:20:10.245+11:00",
+          "body": "This comment was weirdly tagged to the whole block instead of the specific highlight"
+        },
+        {
+          "id": "m-d678d019",
+          "by": "C",
+          "at": "2026-11-13T14:38:02.771+11:00",
+          "body": "The range spans the four simulated histories (rising or falling, straight-line or exponential) at both gentle sizes (1.5x and 2x). The text now says so. I've noted the anchoring bug (the comment attached to the whole list instead of your highlight) for scrivmark.",
+          "agent": "Claude (Opus 5.5)"
+        }
+      ],
+      "resolved_by": {
+        "by": "C",
+        "at": "2026-11-13T14:38:03.702+11:00",
+        "agent": "Claude (Opus 5.5)"
+      }
+    },
+    {
+      "id": "t-77fc105c",
+      "status": "resolved",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
+        "range": [
+          4579,
+          4682
+        ],
+        "exact": "Random selection almost never reversed a trend, and measurement scatter did not change the main results",
+        "prefix": "look exponential[]{.C13}.\n\n5. **",
+        "suffix": ".** Picking dates at random reve"
+      },
+      "messages": [
+        {
+          "id": "m-d9c6b673",
+          "by": "BWB",
+          "at": "2026-11-13T14:21:01.206+11:00",
+          "body": "so what's the penalty/trade-off from just picking a random site - I'd say sampling noise, but it's not stated here?"
+        },
+        {
+          "id": "m-179c5d93",
+          "by": "C",
+          "at": "2026-11-13T14:38:04.632+11:00",
+          "body": "The price is information. Finding 5 now says that with every site reduced to one random date, 1.5-fold trends were detected in only 40–49% of runs and most of the rest were read as steady. I checked this against stage6_selection_rates.csv: correct 0.404–0.492, steady 0.506–0.590, reversal at most 0.006. I added the rounded values to C22 in the ledger. The finding's heading now reads 'almost never reversed a trend, but it discarded information'.",
+          "agent": "Claude (Opus 5.5)"
+        }
+      ],
+      "resolved_by": {
+        "by": "C",
+        "at": "2026-11-13T14:38:05.656+11:00",
+        "agent": "Claude (Opus 5.5)"
+      }
+    },
+    {
+      "id": "t-7ef3f698",
+      "status": "resolved",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
+        "range": [
+          2,
+          77
+        ],
+        "exact": "Can choosing which radiocarbon dates to keep rewrite the story of the past?",
+        "prefix": "# ",
+        "suffix": "\n\nBarry W. Brook, Rebecca Wheatl"
+      },
+      "messages": [
+        {
+          "id": "m-42ffeb68",
+          "by": "BWB",
+          "at": "2026-11-13T14:22:55.254+11:00",
+          "body": "The biggest repeated problem with this was assuming too much prior knowledge from your audience (wood-for-trees issue). It should better lay out what these curves are, why people make them, how they're typically used, and the fact that we're testing here how sampling constraints alters the view you'd get from a direct reading of all dates. Right?"
+        },
+        {
+          "id": "m-762ea20f",
+          "by": "C",
+          "at": "2026-11-13T14:38:06.573+11:00",
+          "body": "Agreed, and this was the main fix. The brief now opens with 'The question', which covers what the curves are (dates counted per century), why people build them (populations and activity through time) and how they are used (first arrivals, growth and decline, comparison with climate). It then says the curve also records which dates exist, and asks how far it can move when some sites are represented only by an extreme date. The answer, and its practical upshot (test a trend against plausible gaps), now comes in that opening section rather than at the end. To make room I merged 'Why it is hard' into the question, trimmed caveats and folded 'Sources' into the closing paragraph; the brief is still 2 pages. I also changed the title to 'Can the radiocarbon dates we do not have rewrite the story of the past?', to match your framing. Please check the new opening and the title; leaving this open for you.",
+          "agent": "Claude (Opus 5.5)"
+        },
+        {
+          "id": "m-bb9f0503",
+          "by": "C",
+          "at": "2026-11-13T14:42:40.888+11:00",
+          "body": "Closing per your 13 Nov chat approval ('go ahead and run scrivmark return yourself and then take steps 2 to 4; approved'). The scope-corrected opening is in (see the framing thread). The title stays 'Can the radiocarbon dates we do not have rewrite the story of the past?', since the second paragraph now says which dates those are. Easy to change at the next review.",
+          "agent": "Claude (Opus 5.5)"
+        }
+      ],
+      "resolved_by": {
+        "by": "C",
+        "at": "2026-11-13T14:42:42.560+11:00",
+        "agent": "Claude (Opus 5.5)"
+      }
+    },
+    {
+      "id": "t-de852627",
+      "status": "resolved",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
+        "range": [
+          5100,
+          5136
+        ],
+        "exact": "choices made in assembling its dates",
+        "prefix": "\n\nA regional curve inherits the ",
+        "suffix": ". Equal numbers of dates per sit"
+      },
+      "messages": [
+        {
+          "id": "m-001db4e3",
+          "by": "BWB",
+          "at": "2026-11-13T14:24:21.832+11:00",
+          "body": "It's not so much about assembling dates as simulating poorer sampling situations. We don't know what we don't know, and we're simulating that effect and looking at sensitivities. We'd surely always use all the dates available, but we don't know what we don't have, right?"
+        },
+        {
+          "id": "m-9d39bf8c",
+          "by": "C",
+          "at": "2026-11-13T14:38:07.547+11:00",
+          "body": "Agreed, and it fits the design better than my wording did: affected sites are represented only by what a rule kept, and every other site keeps all its dates. So it models an analyst who uses everything available while some sites arrive with only an extreme date. 'Assembling' is gone; the brief now says how dates come to exist (what was sampled, dated, published, compiled) and calls the study a test against plausible gaps. One nuance I kept implicit: analysts sometimes filter too (e.g. first-arrival compilations that keep each site's oldest date). The article can say that in one sentence. Panel 1 of the graphic now says 'What reaches an analysis …' in place of 'A database keeps …'.",
+          "agent": "Claude (Opus 5.5)"
+        },
+        {
+          "id": "m-b27cbc15",
+          "by": "C",
+          "at": "2026-11-13T14:42:39.290+11:00",
+          "body": "Correction to my earlier reply. I had widened the framing to the choice of what to sample and date (e.g. a site dated only at its base). estimands.md rules that out ('post hoc retention equated with prospective choice of contexts to date'), and the article says the experiment concerns selection among completed determinations. The brief now puts your framing at the right scope: the dates 'we don't have' were obtained but never reached the database (unpublished reports, compilations that kept only each site's oldest). The analyst uses everything available and cannot see the rest.",
+          "agent": "Claude (Opus 5.5)"
+        }
+      ],
+      "resolved_by": {
+        "by": "BWB",
+        "at": "2026-11-13T14:43:09.337+11:00"
+      }
+    },
+    {
+      "id": "t-c0ce3a92",
+      "status": "resolved",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
+        "range": [
+          5323,
+          5336
+        ],
+        "exact": "should record",
+        "prefix": ", show that they are. Databases ",
+        "suffix": " whether a site's date is the on"
+      },
+      "messages": [
+        {
+          "id": "m-958694d8",
+          "by": "BWB",
+          "at": "2026-11-13T14:24:41.292+11:00",
+          "body": "sounds teleological: who decides the \"should\"?"
+        },
+        {
+          "id": "m-806125f6",
+          "by": "C",
+          "at": "2026-11-13T14:38:09.508+11:00",
+          "body": "Now conditional: 'If databases recorded whether a listed date is a site's only one or one chosen from several, and why, those tests could be targeted.'",
+          "agent": "Claude (Opus 5.5)"
+        }
+      ],
+      "resolved_by": {
+        "by": "C",
+        "at": "2026-11-13T14:38:10.519+11:00",
+        "agent": "Claude (Opus 5.5)"
+      }
+    },
+    {
+      "id": "t-f6f80136",
+      "status": "resolved",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
+        "range": [
+          5431,
+          5512
+        ],
+        "exact": "Analysts should test whether their conclusions survive plausible selection rules.",
+        "prefix": "rom several, and on what basis. ",
+        "suffix": " The simulations treat dates as "
+      },
+      "messages": [
+        {
+          "id": "m-b0845c78",
+          "by": "BWB",
+          "at": "2026-11-13T14:25:16.128+11:00",
+          "body": "yes, this is a key message, but is a bit buried here, see headline comment about proper context"
+        },
+        {
+          "id": "m-baeebe4a",
+          "by": "C",
+          "at": "2026-11-13T14:38:11.536+11:00",
+          "body": "Moved up: the opening section now ends with it ('a trend read from such a curve needs testing against plausible gaps in its dates'). 'What it means' restates it as a concrete step analysts can take.",
+          "agent": "Claude (Opus 5.5)"
+        }
+      ],
+      "resolved_by": {
+        "by": "C",
+        "at": "2026-11-13T14:38:12.821+11:00",
+        "agent": "Claude (Opus 5.5)"
+      }
+    }
+  ]
+}

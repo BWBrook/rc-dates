@@ -171,7 +171,7 @@ def trend(x, y, w, h, direction, colour=INK, width=4):
 
 # Headline ----------------------------------------------------------------------------------------------
 
-text(0, 40, "Which date each site keeps can decide the story a regional curve tells", size=40, weight=700)
+text(0, 40, "The dates each site contributes can change the story a regional curve tells", size=40, weight=700)
 
 # Panel 1: the choice -----------------------------------------------------------------------------------
 
@@ -189,7 +189,7 @@ text(sx - 24, sy + sh / 2, "oldest at the bottom", size=23, fill=MUTED, anchor="
 text(sx + sw / 2, sy + sh + 34, "five dates", size=24, fill=MUTED, anchor="middle")
 
 rules = [("oldest", "Oldest"), ("youngest", "Youngest"), ("random", "One at random"), ("both", "Both extremes")]
-text(222, P1Y + 52, "A database keeps …", size=24, fill=MUTED, italic=True)
+text(222, P1Y + 52, "What reaches an analysis …", size=24, fill=MUTED, italic=True)
 for i, (rule, label) in enumerate(rules):
     iy = P1Y + 78 + i * 74
     site_icon(222, iy - 4, rule, w=38, h=58)
@@ -350,8 +350,8 @@ for p, label, colour in props:
         text(DX(2) + 16, DY(mid[2]) - 14, label, size=23.5, fill=colour, weight=650)
     else:
         text(DX(0) + 18, DY(mid[0]) - 16, label, size=23.5, fill=colour, weight=650)
-text(P4X + 46, ay1 + 108, "Not reversed does not mean recovered: many such", size=24.5, fill=INK)
-text(P4X + 46, ay1 + 139, "runs read the trend as steady.", size=24.5, fill=INK)
+text(P4X + 46, ay1 + 108, "Many runs that escaped reversal still read the", size=24.5, fill=INK)
+text(P4X + 46, ay1 + 139, "trend as steady.", size=24.5, fill=INK)
 
 # Write -------------------------------------------------------------------------------------------------
 
