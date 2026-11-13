@@ -224,7 +224,7 @@
     },
     {
       "id": "t-09ca3031",
-      "status": "open",
+      "status": "resolved",
       "anchor": {
         "file": "manuscript/text/brief.md",
         "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
@@ -249,8 +249,20 @@
           "at": "2026-11-13T14:37:41.844+11:00",
           "body": "The PDF already puts the figure first: makedoc fills the placeholder under the byline. It's the scrivmark viewer that can't, so it shows brief_figures.md at the end. Fix: put the image directly into brief.md under the byline and remove brief_figures.md from the brief profile, scrivmark.toml and the Makefile. That changes which files the round tracks, so I'll do it once this round closes. Leaving this open until then.",
           "agent": "Claude (Opus 5.5)"
+        },
+        {
+          "id": "m-15d53e06",
+          "by": "C",
+          "at": "2026-11-13T14:42:43.938+11:00",
+          "body": "Will fix on main straight after this round closes: the image goes directly into brief.md under the byline, and brief_figures.md comes out of the brief profile, scrivmark.toml and the Makefile, so the viewer and PDF agree.",
+          "agent": "Claude (Opus 5.5)"
         }
-      ]
+      ],
+      "resolved_by": {
+        "by": "C",
+        "at": "2026-11-13T14:42:45.173+11:00",
+        "agent": "Claude (Opus 5.5)"
+      }
     },
     {
       "id": "t-84aae276",
@@ -604,7 +616,7 @@
     },
     {
       "id": "t-cf28b769",
-      "status": "open",
+      "status": "resolved",
       "anchor": {
         "file": "manuscript/text/brief.md",
         "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
@@ -630,7 +642,12 @@
           "body": "Duplicate of the thread below (the viewer anchored both to the whole list); answered there.",
           "agent": "Claude (Opus 5.5)"
         }
-      ]
+      ],
+      "resolved_by": {
+        "by": "C",
+        "at": "2026-11-13T14:42:46.422+11:00",
+        "agent": "Claude (Opus 5.5)"
+      }
     },
     {
       "id": "t-e5618634",
@@ -711,7 +728,7 @@
     },
     {
       "id": "t-7ef3f698",
-      "status": "open",
+      "status": "resolved",
       "anchor": {
         "file": "manuscript/text/brief.md",
         "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
@@ -736,12 +753,24 @@
           "at": "2026-11-13T14:38:06.573+11:00",
           "body": "Agreed, and this was the main fix. The brief now opens with 'The question', which covers what the curves are (dates counted per century), why people build them (populations and activity through time) and how they are used (first arrivals, growth and decline, comparison with climate). It then says the curve also records which dates exist, and asks how far it can move when some sites are represented only by an extreme date. The answer, and its practical upshot (test a trend against plausible gaps), now comes in that opening section rather than at the end. To make room I merged 'Why it is hard' into the question, trimmed caveats and folded 'Sources' into the closing paragraph; the brief is still 2 pages. I also changed the title to 'Can the radiocarbon dates we do not have rewrite the story of the past?', to match your framing. Please check the new opening and the title; leaving this open for you.",
           "agent": "Claude (Opus 5.5)"
+        },
+        {
+          "id": "m-bb9f0503",
+          "by": "C",
+          "at": "2026-11-13T14:42:40.888+11:00",
+          "body": "Closing per your 13 Nov chat approval ('go ahead and run scrivmark return yourself and then take steps 2 to 4; approved'). The scope-corrected opening is in (see the framing thread). The title stays 'Can the radiocarbon dates we do not have rewrite the story of the past?', since the second paragraph now says which dates those are. Easy to change at the next review.",
+          "agent": "Claude (Opus 5.5)"
         }
-      ]
+      ],
+      "resolved_by": {
+        "by": "C",
+        "at": "2026-11-13T14:42:42.560+11:00",
+        "agent": "Claude (Opus 5.5)"
+      }
     },
     {
       "id": "t-de852627",
-      "status": "resolved",
+      "status": "open",
       "anchor": {
         "file": "manuscript/text/brief.md",
         "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
@@ -766,13 +795,15 @@
           "at": "2026-11-13T14:38:07.547+11:00",
           "body": "Agreed, and it fits the design better than my wording did: affected sites are represented only by what a rule kept, and every other site keeps all its dates. So it models an analyst who uses everything available while some sites arrive with only an extreme date. 'Assembling' is gone; the brief now says how dates come to exist (what was sampled, dated, published, compiled) and calls the study a test against plausible gaps. One nuance I kept implicit: analysts sometimes filter too (e.g. first-arrival compilations that keep each site's oldest date). The article can say that in one sentence. Panel 1 of the graphic now says 'What reaches an analysis …' in place of 'A database keeps …'.",
           "agent": "Claude (Opus 5.5)"
+        },
+        {
+          "id": "m-b27cbc15",
+          "by": "C",
+          "at": "2026-11-13T14:42:39.290+11:00",
+          "body": "Correction to my earlier reply. I had widened the framing to the choice of what to sample and date (e.g. a site dated only at its base). estimands.md rules that out ('post hoc retention equated with prospective choice of contexts to date'), and the article says the experiment concerns selection among completed determinations. The brief now puts your framing at the right scope: the dates 'we don't have' were obtained but never reached the database (unpublished reports, compilations that kept only each site's oldest). The analyst uses everything available and cannot see the rest.",
+          "agent": "Claude (Opus 5.5)"
         }
-      ],
-      "resolved_by": {
-        "by": "C",
-        "at": "2026-11-13T14:38:08.486+11:00",
-        "agent": "Claude (Opus 5.5)"
-      }
+      ]
     },
     {
       "id": "t-c0ce3a92",
