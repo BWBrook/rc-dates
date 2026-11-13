@@ -20,8 +20,8 @@ Each stage closes before the next begins, unless it is marked as able to run in 
   Codex) are the authors. The review sources are the article (`manuscript/text/main.md` and `figures.md`) and the
   brief (`brief.md`), set in `scrivmark.toml`. The text stays unchanged until his round comes back.
 - **Rounds (13 November 2026, scrivmark 0.7.0).** The brief goes first, as a shakedown of the supervisor-reviews-agent
-  workflow: `scrivmark.toml` names `brief.md` and `brief_figures.md` (the graphical abstract, which the viewer shows
-  after the text, not at its placeholder). The article round follows with `scrivmark init manuscript/text/main.md
+  workflow: `scrivmark.toml` named `brief.md` and `brief_figures.md`; the viewer showed the graphical abstract after the
+  text, so after round `2026-11-13-bwb` (closed 13 November) the image sits inline in `brief.md` under the byline. The article round follows with `scrivmark init manuscript/text/main.md
   manuscript/text/figures.md` (re-add `bibliography = ["references/refs.yaml"]`, which `init` drops).
 - **On return.** `scrivmark open <round> --as "Claude"`, with `SCRIVMARK_AGENT` set, then decide every change on its
   merits, giving reasons for rejections, and reply to every comment. Edits to bound numbers are requests: change the

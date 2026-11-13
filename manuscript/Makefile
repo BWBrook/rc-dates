@@ -4,7 +4,7 @@ MAKEDOC ?= $(HOME)/work/makedoc
 CONFIG := $(CURDIR)/settings/build.yaml
 PROFILES := main supplement brief
 RUN := uv run --no-project --with pyyaml
-TEXT := text/main.md text/figures.md text/supplement.md text/supplement_figures.md text/brief.md text/brief_figures.md
+TEXT := text/main.md text/figures.md text/supplement.md text/supplement_figures.md text/brief.md
 
 .PHONY: all check check-makedoc check-render $(PROFILES)
 

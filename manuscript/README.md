@@ -5,7 +5,7 @@ The same study is written three ways, all in `text/`, all from one evidence base
 | File | Reader | Rendered |
 |---|---|---|
 | `main.md` + `figures.md`, `supplement.md` + `supplement_figures.md` | scientists; the journal snapshot | `build/manuscript.pdf`, `build/supplement.pdf` |
-| `brief.md` + `brief_figures.md` | anyone: two A4 pages, one sheet printed double-sided | `build/brief.pdf` |
+| `brief.md` (graphical abstract inline, under the byline) | anyone: two A4 pages, one sheet printed double-sided | `build/brief.pdf` |
 | `for-agents.md` | an agent arriving cold: claims, provenance, traps, checks | read as Markdown |
 
 `claims.csv` is the single claims ledger. All four renderings cite it, binding quoted numbers as

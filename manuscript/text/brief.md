@@ -4,6 +4,8 @@ Barry W. Brook, Rebecca Wheatley, Christopher N. Johnson, Alan N. Williams, Sean
 
 <div id="figures"></div>
 
+![](../figures/graphical_abstract.pdf){#fig-brief width=100%}
+
 *Graphical abstract.* (1) A site dated several times might reach an analysis as one date: its oldest, its youngest, one at random, or both extremes. (2) The AustArch benchmark[]{.C01} after keeping one date per site: summed-probability curves, each row on its own vertical scale[]{.C02}[]{.C03}. (3) What model comparison concluded in simulated archives of known history[]{.C10}[]{.C12}[]{.C13}[]{.C22}. (4) Runs in which the trend was reversed, by its true size and the share of sites keeping the extreme that runs against it; bands span four histories[]{.C18}[]{.C19}[]{.C20}.
 
 ## The question

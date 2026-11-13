@@ -55,7 +55,6 @@ profiles:
     description: Two-page plain-language brief (one A4 sheet printed double-sided).
     manuscript_sources:
       - ../text/brief.md
-      - ../text/brief_figures.md
     output_stem: brief
     line_spacing: single
     line_numbering: none
