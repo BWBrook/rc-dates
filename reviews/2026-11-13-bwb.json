@@ -16,5 +16,454 @@
     "statement": "Reviewed by Barry W. Brook as scientific supervisor; Claude (Opus 5.5) and Codex wrote the manuscript."
   },
   "changes": [],
-  "threads": []
+  "threads": [
+    {
+      "id": "t-12c1c2e4",
+      "status": "open",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "git:c550ba20e4814ae722fe2f255b931ccbd3bfcdde",
+        "range": [
+          181,
+          225
+        ],
+        "exact": ", with Claude (Anthropic) and Codex (OpenAI)",
+        "prefix": "iams, Sean Ulm and Luke A. Yates",
+        "suffix": ". Draft of 13 November 2026, not"
+      },
+      "messages": [
+        {
+          "id": "m-724f9cc0",
+          "by": "BWB",
+          "at": "2026-11-13T11:38:56.788+11:00",
+          "body": "Most journals reject AI as co-authors, and instead want AI use declared elsewhere. I'm not sure that's right, but it's the current state of play."
+        }
+      ]
+    },
+    {
+      "id": "t-09ca3031",
+      "status": "open",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "git:c550ba20e4814ae722fe2f255b931ccbd3bfcdde",
+        "range": [
+          415,
+          434
+        ],
+        "exact": "Graphical abstract.",
+        "prefix": "s>.\n\n<div id=\"figures\"></div>\n\n*",
+        "suffix": "* (1) A site dated several times"
+      },
+      "messages": [
+        {
+          "id": "m-f4e88bb8",
+          "by": "BWB",
+          "at": "2026-11-13T11:40:06.415+11:00",
+          "body": "The caption is currently shown at the top, but the figure is inserted at the bottom. The figure needs moving up to here: I agree that it should lead."
+        }
+      ]
+    },
+    {
+      "id": "t-84aae276",
+      "status": "open",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "snap:3702992fbe40778e",
+        "range": [
+          1442,
+          1445
+        ],
+        "exact": "may",
+        "prefix": "from hundreds of sites.\n\nA site ",
+        "suffix": " have been dated many times whil"
+      },
+      "messages": [
+        {
+          "id": "m-0b9a777e",
+          "by": "BWB",
+          "at": "2026-11-13T11:42:07.527+11:00",
+          "body": "I generally prefer \"might\" over \"may\" when permission is not being sought."
+        }
+      ]
+    },
+    {
+      "id": "t-0d129df3",
+      "status": "open",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "snap:3702992fbe40778e",
+        "range": [
+          1763,
+          1802
+        ],
+        "exact": "and careful methods already handle that",
+        "prefix": "ts own measurement uncertainty, ",
+        "suffix": ". The problem here is different:"
+      },
+      "messages": [
+        {
+          "id": "m-8d8c16a6",
+          "by": "BWB",
+          "at": "2026-11-13T11:43:44.355+11:00",
+          "body": "Doesn't say anything useful, to experts or non-experts?"
+        }
+      ]
+    },
+    {
+      "id": "t-4866e755",
+      "status": "open",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "snap:3702992fbe40778e",
+        "range": [
+          1847,
+          1856
+        ],
+        "exact": "were kept",
+        "prefix": " here is different: which dates ",
+        "suffix": ". An extreme is not a typical me"
+      },
+      "messages": [
+        {
+          "id": "m-b81784a5",
+          "by": "BWB",
+          "at": "2026-11-13T11:43:59.192+11:00",
+          "body": "for what?"
+        }
+      ]
+    },
+    {
+      "id": "t-f8309394",
+      "status": "open",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "snap:3702992fbe40778e",
+        "range": [
+          1700,
+          1714
+        ],
+        "exact": "Why it is hard",
+        "prefix": " date itself records which.\n\n## ",
+        "suffix": "\n\nEach date has its own measurem"
+      },
+      "messages": [
+        {
+          "id": "m-d17fae2a",
+          "by": "BWB",
+          "at": "2026-11-13T11:45:01.432+11:00",
+          "body": "why what is hard? The question (inferring change in human activities/population) has never really been stated, has it?"
+        }
+      ]
+    },
+    {
+      "id": "t-66e01a7b",
+      "status": "open",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "snap:3702992fbe40778e",
+        "range": [
+          1716,
+          2324
+        ],
+        "exact": "Each date has its own measurement uncertainty, and careful methods already handle that. The problem here is different: which dates were kept. An extreme is not a typical member of a set. Of five dates from a steady history, the oldest falls in the oldest fifth of the time span about two times in three[]{.C27}, against one time in five for a date picked at random. A curve built from oldest dates therefore tends to be pushed back in time even if nothing in the past changed. Agreement among standard ways of drawing the curve cannot, by itself, reveal this, because every method starts from the same dates.",
+        "prefix": "ords which.\n\n## Why it is hard\n\n",
+        "suffix": "\n\n## What we did\n\nWe redrew the "
+      },
+      "messages": [
+        {
+          "id": "m-ca4f623e",
+          "by": "BWB",
+          "at": "2026-11-13T11:45:46.888+11:00",
+          "body": "why 5 dates? You're assuming too much prior knowledge of the reader."
+        }
+      ]
+    },
+    {
+      "id": "t-999e45e9",
+      "status": "open",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "snap:a55478ce10c862f0",
+        "range": [
+          1321,
+          1346
+        ],
+        "exact": "tempting to read directly",
+        "prefix": "terial) fall in each century is ",
+        "suffix": " as a history of human activity."
+      },
+      "messages": [
+        {
+          "id": "m-2d8bf869",
+          "by": "BWB",
+          "at": "2026-11-13T11:47:02.163+11:00",
+          "body": "and this implies a \"but\" that you don't state"
+        }
+      ]
+    },
+    {
+      "id": "t-ffc62296",
+      "status": "open",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "snap:7881ac39c157d106",
+        "range": [
+          3409,
+          3447
+        ],
+        "exact": ", not which curve is the true history.",
+        "prefix": "an move this collection of dates",
+        "suffix": "\n\n2. **When every site was affec"
+      },
+      "messages": [
+        {
+          "id": "m-4f623b6a",
+          "by": "BWB",
+          "at": "2026-11-13T14:15:47.193+11:00",
+          "body": "I intensely dislike negations like this... \"it is this, it's  not that...\""
+        }
+      ]
+    },
+    {
+      "id": "t-a2cbdc51",
+      "status": "open",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "snap:7881ac39c157d106",
+        "range": [
+          3503,
+          3521
+        ],
+        "exact": "decided the answer",
+        "prefix": "as affected, the selection rule ",
+        "suffix": ".** In the simulations, keeping "
+      },
+      "messages": [
+        {
+          "id": "m-1792c129",
+          "by": "BWB",
+          "at": "2026-11-13T14:16:06.480+11:00",
+          "body": "this is an AI tic stock phrase"
+        }
+      ]
+    },
+    {
+      "id": "t-0de3f063",
+      "status": "open",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "snap:7881ac39c157d106",
+        "range": [
+          3974,
+          3982
+        ],
+        "exact": "affected",
+        "prefix": "** With three-quarters of sites ",
+        "suffix": ", gentle trends (a one-and-a-hal"
+      },
+      "messages": [
+        {
+          "id": "m-ee3dfcf0",
+          "by": "BWB",
+          "at": "2026-11-13T14:16:41.815+11:00",
+          "body": "affected by what?"
+        }
+      ]
+    },
+    {
+      "id": "t-d78a62a4",
+      "status": "open",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "snap:7881ac39c157d106",
+        "range": [
+          4147,
+          4207
+        ],
+        "exact": "The proportions we tested do not establish a safe threshold.",
+        "prefix": " although no tenfold trend was. ",
+        "suffix": "\n\n4. **Keeping both the oldest a"
+      },
+      "messages": [
+        {
+          "id": "m-3252f57a",
+          "by": "BWB",
+          "at": "2026-11-13T14:17:49.160+11:00",
+          "body": "You love caveats, I hate them; there is a compromise. But use in a measured way, especially in a brief, and for the main article, bundle them in a dedicated discussion paragraph or section."
+        }
+      ]
+    },
+    {
+      "id": "t-cf28b769",
+      "status": "resolved",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "snap:7881ac39c157d106",
+        "range": [
+          2932,
+          5050
+        ],
+        "exact": "1. **Keeping only each site's oldest or youngest date moved the Australian curve by millennia.** Its average age shifted [3,133]{.C02} years older or [2,439]{.C02} years younger, although both versions kept exactly 68 dates. One random date per site, by contrast, moved it by just [100]{.C03} years. Either extreme changed the curve's shape more than the choice among three standard ways of drawing it did[]{.C06}. This shows how far selection can move this collection of dates, not which curve is the true history.\n\n2. **When every site was affected, the selection rule decided the answer.** In the simulations, keeping every site's oldest date always produced an apparent decline, and keeping its youngest always an apparent rise, whatever the true history; true trends running the other way were reversed[]{.C10}. Applying the rule to only half the sites still created a trend from a steady history in over [97]{.C11}% of runs.\n\n3. **Weaker true trends were reversed even when only some sites were affected.** With three-quarters of sites affected, gentle trends (a one-and-a-half- to twofold change over 11,000 years) were reversed in [93]{.C19 .V013}–[100]{.C19 .V014}% of runs, although no tenfold trend was. The proportions we tested do not establish a safe threshold.\n\n4. **Keeping both the oldest and youngest dates avoided reversals but blurred the picture.** It never reversed a trend[]{.C21}. With every site affected, it detected only [11]{.C22}–[17]{.C22}% of the gentlest trends, against [61]{.C22}–[67]{.C22}% for two dates per site picked at random, and it always made tenfold straight-line trends look exponential[]{.C13}.\n\n5. **Random selection almost never reversed a trend, and measurement scatter did not change the main results.** Picking dates at random reversed at most [0.6]{.C21}% of runs, though with every site affected it often missed gentle trends. Measurement scatter moved no tenfold headline result by more than [0.1]{.C25} percentage points; weaker trends were not rerun, and errors shared between dates through the calibration curve, laboratory offsets and outliers remain untested.",
+        "prefix": " every date.\n\n## What we found\n\n",
+        "suffix": "\n\n## What it means\n\nA regional c"
+      },
+      "messages": [
+        {
+          "id": "m-959b2521",
+          "by": "BWB",
+          "at": "2026-11-13T14:18:01.749+11:00",
+          "body": "what does the range mean?"
+        }
+      ],
+      "resolved_by": {
+        "by": "BWB",
+        "at": "2026-11-13T14:18:41.482+11:00"
+      }
+    },
+    {
+      "id": "t-e5618634",
+      "status": "open",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "snap:7881ac39c157d106",
+        "range": [
+          2932,
+          5050
+        ],
+        "exact": "1. **Keeping only each site's oldest or youngest date moved the Australian curve by millennia.** Its average age shifted [3,133]{.C02} years older or [2,439]{.C02} years younger, although both versions kept exactly 68 dates. One random date per site, by contrast, moved it by just [100]{.C03} years. Either extreme changed the curve's shape more than the choice among three standard ways of drawing it did[]{.C06}. This shows how far selection can move this collection of dates, not which curve is the true history.\n\n2. **When every site was affected, the selection rule decided the answer.** In the simulations, keeping every site's oldest date always produced an apparent decline, and keeping its youngest always an apparent rise, whatever the true history; true trends running the other way were reversed[]{.C10}. Applying the rule to only half the sites still created a trend from a steady history in over [97]{.C11}% of runs.\n\n3. **Weaker true trends were reversed even when only some sites were affected.** With three-quarters of sites affected, gentle trends (a one-and-a-half- to twofold change over 11,000 years) were reversed in [93]{.C19 .V013}–[100]{.C19 .V014}% of runs, although no tenfold trend was. The proportions we tested do not establish a safe threshold.\n\n4. **Keeping both the oldest and youngest dates avoided reversals but blurred the picture.** It never reversed a trend[]{.C21}. With every site affected, it detected only [11]{.C22}–[17]{.C22}% of the gentlest trends, against [61]{.C22}–[67]{.C22}% for two dates per site picked at random, and it always made tenfold straight-line trends look exponential[]{.C13}.\n\n5. **Random selection almost never reversed a trend, and measurement scatter did not change the main results.** Picking dates at random reversed at most [0.6]{.C21}% of runs, though with every site affected it often missed gentle trends. Measurement scatter moved no tenfold headline result by more than [0.1]{.C25} percentage points; weaker trends were not rerun, and errors shared between dates through the calibration curve, laboratory offsets and outliers remain untested.",
+        "prefix": " every date.\n\n## What we found\n\n",
+        "suffix": "\n\n## What it means\n\nA regional c"
+      },
+      "messages": [
+        {
+          "id": "m-f93bb206",
+          "by": "BWB",
+          "at": "2026-11-13T14:18:51.163+11:00",
+          "body": "what does the range mean? 93-100%",
+          "edited_at": "2026-11-13T14:19:12.437+11:00"
+        },
+        {
+          "id": "m-0f166cf2",
+          "by": "BWB",
+          "at": "2026-11-13T14:20:10.245+11:00",
+          "body": "This comment was weirdly tagged to the whole block instead of the specific highlight"
+        }
+      ]
+    },
+    {
+      "id": "t-77fc105c",
+      "status": "open",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "snap:7881ac39c157d106",
+        "range": [
+          4579,
+          4682
+        ],
+        "exact": "Random selection almost never reversed a trend, and measurement scatter did not change the main results",
+        "prefix": "look exponential[]{.C13}.\n\n5. **",
+        "suffix": ".** Picking dates at random reve"
+      },
+      "messages": [
+        {
+          "id": "m-d9c6b673",
+          "by": "BWB",
+          "at": "2026-11-13T14:21:01.206+11:00",
+          "body": "so what's the penalty/trade-off from just picking a random site - I'd say sampling noise, but it's not stated here?"
+        }
+      ]
+    },
+    {
+      "id": "t-7ef3f698",
+      "status": "open",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "snap:7881ac39c157d106",
+        "range": [
+          2,
+          77
+        ],
+        "exact": "Can choosing which radiocarbon dates to keep rewrite the story of the past?",
+        "prefix": "# ",
+        "suffix": "\n\nBarry W. Brook, Rebecca Wheatl"
+      },
+      "messages": [
+        {
+          "id": "m-42ffeb68",
+          "by": "BWB",
+          "at": "2026-11-13T14:22:55.254+11:00",
+          "body": "The biggest repeated problem with this was assuming too much prior knowledge from your audience (wood-for-trees issue). It should better lay out what these curves are, why people make them, how they're typically used, and the fact that we're testing here how sampling constraints alters the view you'd get from a direct reading of all dates. Right?"
+        }
+      ]
+    },
+    {
+      "id": "t-de852627",
+      "status": "open",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "snap:7881ac39c157d106",
+        "range": [
+          5100,
+          5136
+        ],
+        "exact": "choices made in assembling its dates",
+        "prefix": "\n\nA regional curve inherits the ",
+        "suffix": ". Equal numbers of dates per sit"
+      },
+      "messages": [
+        {
+          "id": "m-001db4e3",
+          "by": "BWB",
+          "at": "2026-11-13T14:24:21.832+11:00",
+          "body": "It's not so much about assembling dates as simulating poorer sampling situations. We don't know what we don't know, and we're simulating that effect and looking at sensitivities. We'd surely always use all the dates available, but we don't know what we don't have, right?"
+        }
+      ]
+    },
+    {
+      "id": "t-c0ce3a92",
+      "status": "open",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "snap:7881ac39c157d106",
+        "range": [
+          5323,
+          5336
+        ],
+        "exact": "should record",
+        "prefix": ", show that they are. Databases ",
+        "suffix": " whether a site's date is the on"
+      },
+      "messages": [
+        {
+          "id": "m-958694d8",
+          "by": "BWB",
+          "at": "2026-11-13T14:24:41.292+11:00",
+          "body": "sounds teleological: who decides the \"should\"?"
+        }
+      ]
+    },
+    {
+      "id": "t-f6f80136",
+      "status": "open",
+      "anchor": {
+        "file": "manuscript/text/brief.md",
+        "rev": "snap:7881ac39c157d106",
+        "range": [
+          5431,
+          5512
+        ],
+        "exact": "Analysts should test whether their conclusions survive plausible selection rules.",
+        "prefix": "rom several, and on what basis. ",
+        "suffix": " The simulations treat dates as "
+      },
+      "messages": [
+        {
+          "id": "m-b0845c78",
+          "by": "BWB",
+          "at": "2026-11-13T14:25:16.128+11:00",
+          "body": "yes, this is a key message, but is a bit buried here, see headline comment about proper context"
+        }
+      ]
+    }
+  ]
 }

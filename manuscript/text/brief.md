@@ -8,7 +8,7 @@ Barry W. Brook, Rebecca Wheatley, Christopher N. Johnson, Alan N. Williams, Sean
 
 ## The puzzle
 
-Archaeologists reconstruct how human activity rose and fell over thousands of years by counting dated traces of people: charcoal from a hearth, shell from a midden. More people leave more traces, so a curve showing how many *radiocarbon dates* (age estimates from the decay of carbon-14 in once-living material) fall in each century is read as a history of human activity. Regional databases now pool thousands of such dates.
+Archaeologists reconstruct how human activity rose and fell over thousands of years by counting dated traces of people and their activities: charcoal from a hearth, shell from a midden. More people leave more traces, so a curve showing how many *radiocarbon dates* (age estimates from the decay of carbon-14 in once-living material) fall in each century is tempting to read directly as a history of human activity. Regional databases now pool thousands of such dates from hundreds of sites.
 
 A site may have been dated many times while a database lists only some of its dates. A listed date may be the site's only one, or one kept from several: the oldest, say, because a study asked when people first arrived. Nothing in the date itself records which.
 
@@ -18,11 +18,11 @@ Each date has its own measurement uncertainty, and careful methods already handl
 
 ## What we did
 
-We redrew the regional curve from [540]{.C01} well-replicated charcoal and wood dates at [68]{.C01} Australian archaeological sites after keeping each site's oldest date, its youngest date or one picked at random. We then simulated archives whose true history we knew (steady, or rising or falling by between one and a half and ten times over 11,000 years), applied the same rules, and asked whether standard model comparison recovered the true direction. Finally, we repeated the main tenfold simulations with measurement scatter added to every date.
+We redrew a regional curve from [540]{.C01} well-replicated charcoal and wood dates at [68]{.C01} Australian archaeological sites after keeping each site's oldest date, its youngest date or one picked at random. We then simulated archives whose true history we knew (steady, or rising or falling by between one and a half and ten times over 11,000 years), applied the same rules, and asked whether standard model comparison recovered the true direction. Finally, we repeated the main tenfold simulations with measurement scatter added to every date.
 
 ## What we found
 
-1. **Keeping each site's oldest or youngest date moved the Australian curve by millennia.** Its average age shifted [3,133]{.C02} years older or [2,439]{.C02} years younger, although both versions kept exactly 68 dates; one random date per site moved it by about [100]{.C03} years. Either extreme changed the curve's shape more than the choice among three standard ways of drawing it did[]{.C06}. This shows how far selection can move this collection of dates, not which curve is the true history.
+1. **Keeping only each site's oldest or youngest date moved the Australian curve by millennia.** Its average age shifted [3,133]{.C02} years older or [2,439]{.C02} years younger, although both versions kept exactly 68 dates. One random date per site, by contrast, moved it by just [100]{.C03} years. Either extreme changed the curve's shape more than the choice among three standard ways of drawing it did[]{.C06}. This shows how far selection can move this collection of dates, not which curve is the true history.
 
 2. **When every site was affected, the selection rule decided the answer.** In the simulations, keeping every site's oldest date always produced an apparent decline, and keeping its youngest always an apparent rise, whatever the true history; true trends running the other way were reversed[]{.C10}. Applying the rule to only half the sites still created a trend from a steady history in over [97]{.C11}% of runs.
 
