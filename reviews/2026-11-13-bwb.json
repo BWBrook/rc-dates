@@ -14,8 +14,8 @@
     "base": "3612daa8bd5ccfb948e8fc295f0b2d32f6ef6b4b",
     "returned": "14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
     "integrated": "3612daa8bd5ccfb948e8fc295f0b2d32f6ef6b4b",
-    "closed": null,
-    "status": "responded",
+    "closed": "2026-11-13T14:43:11.387+11:00",
+    "status": "closed",
     "statement": "Reviewed by Barry W. Brook as scientific supervisor; Claude (Opus 5.5) and Codex wrote the manuscript.",
     "returned_at": "2026-11-13T14:33:14.241+11:00",
     "handovers": [
