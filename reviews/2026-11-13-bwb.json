@@ -15,7 +15,7 @@
     "returned": "14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
     "integrated": "3612daa8bd5ccfb948e8fc295f0b2d32f6ef6b4b",
     "closed": null,
-    "status": "returned",
+    "status": "responded",
     "statement": "Reviewed by Barry W. Brook as scientific supervisor; Claude (Opus 5.5) and Codex wrote the manuscript.",
     "returned_at": "2026-11-13T14:33:14.241+11:00",
     "handovers": [
@@ -36,9 +36,16 @@
         "at": "2026-11-13T14:41:56.671+11:00",
         "by": "BWB",
         "commit": "df87db82e00d6a8e9cc1255103e10c1ad63efea2"
+      },
+      {
+        "to": "reviewer",
+        "at": "2026-11-13T14:42:48.917+11:00",
+        "by": "C",
+        "commit": "186c6cc2413ced776299d8babbf418e9157dd9a6",
+        "agent": "Claude (Opus 5.5)"
       }
     ],
-    "responded_at": "2026-11-13T14:38:24.599+11:00"
+    "responded_at": "2026-11-13T14:42:48.917+11:00"
   },
   "changes": [
     {
