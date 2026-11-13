@@ -9,20 +9,164 @@
     "author": null,
     "author_branch": "main",
     "base": "3612daa8bd5ccfb948e8fc295f0b2d32f6ef6b4b",
-    "returned": null,
-    "integrated": null,
+    "returned": "14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
+    "integrated": "3612daa8bd5ccfb948e8fc295f0b2d32f6ef6b4b",
     "closed": null,
-    "status": "open",
-    "statement": "Reviewed by Barry W. Brook as scientific supervisor; Claude (Opus 5.5) and Codex wrote the manuscript."
+    "status": "returned",
+    "statement": "Reviewed by Barry W. Brook as scientific supervisor; Claude (Opus 5.5) and Codex wrote the manuscript.",
+    "returned_at": "2026-11-13T14:33:14.241+11:00",
+    "handovers": [
+      {
+        "to": "author",
+        "at": "2026-11-13T14:33:14.241+11:00",
+        "by": "BWB"
+      }
+    ]
   },
-  "changes": [],
+  "changes": [
+    {
+      "type": "text",
+      "file": "manuscript/text/brief.md",
+      "old_file": null,
+      "base": "",
+      "reviewer": " and their activities",
+      "r_range": [
+        1082,
+        1103
+      ],
+      "id": "c1",
+      "decision": null,
+      "by": null,
+      "at": null
+    },
+    {
+      "type": "text",
+      "file": "manuscript/text/brief.md",
+      "old_file": null,
+      "base": "",
+      "reviewer": "tempting to ",
+      "r_range": [
+        1321,
+        1333
+      ],
+      "id": "c2",
+      "decision": null,
+      "by": null,
+      "at": null
+    },
+    {
+      "type": "text",
+      "file": "manuscript/text/brief.md",
+      "old_file": null,
+      "base": "",
+      "reviewer": " directly",
+      "r_range": [
+        1337,
+        1346
+      ],
+      "id": "c3",
+      "decision": null,
+      "by": null,
+      "at": null
+    },
+    {
+      "type": "text",
+      "file": "manuscript/text/brief.md",
+      "old_file": null,
+      "base": "",
+      "reviewer": " from hundreds of sites",
+      "r_range": [
+        1430,
+        1453
+      ],
+      "id": "c4",
+      "decision": null,
+      "by": null,
+      "at": null
+    },
+    {
+      "type": "text",
+      "file": "manuscript/text/brief.md",
+      "old_file": null,
+      "base": "the",
+      "reviewer": "a",
+      "r_range": [
+        2373,
+        2374
+      ],
+      "id": "c5",
+      "decision": null,
+      "by": null,
+      "at": null
+    },
+    {
+      "type": "text",
+      "file": "manuscript/text/brief.md",
+      "old_file": null,
+      "base": "",
+      "reviewer": " only",
+      "r_range": [
+        2944,
+        2949
+      ],
+      "id": "c6",
+      "decision": null,
+      "by": null,
+      "at": null
+    },
+    {
+      "type": "text",
+      "file": "manuscript/text/brief.md",
+      "old_file": null,
+      "base": "; one",
+      "reviewer": ". One",
+      "r_range": [
+        3155,
+        3160
+      ],
+      "id": "c7",
+      "decision": null,
+      "by": null,
+      "at": null
+    },
+    {
+      "type": "text",
+      "file": "manuscript/text/brief.md",
+      "old_file": null,
+      "base": "",
+      "reviewer": ", by contrast,",
+      "r_range": [
+        3181,
+        3195
+      ],
+      "id": "c8",
+      "decision": null,
+      "by": null,
+      "at": null
+    },
+    {
+      "type": "text",
+      "file": "manuscript/text/brief.md",
+      "old_file": null,
+      "base": "about",
+      "reviewer": "just",
+      "r_range": [
+        3208,
+        3212
+      ],
+      "id": "c9",
+      "decision": null,
+      "by": null,
+      "at": null
+    }
+  ],
   "threads": [
     {
       "id": "t-12c1c2e4",
       "status": "open",
       "anchor": {
         "file": "manuscript/text/brief.md",
-        "rev": "git:c550ba20e4814ae722fe2f255b931ccbd3bfcdde",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
         "range": [
           181,
           225
@@ -45,7 +189,7 @@
       "status": "open",
       "anchor": {
         "file": "manuscript/text/brief.md",
-        "rev": "git:c550ba20e4814ae722fe2f255b931ccbd3bfcdde",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
         "range": [
           415,
           434
@@ -68,10 +212,10 @@
       "status": "open",
       "anchor": {
         "file": "manuscript/text/brief.md",
-        "rev": "snap:3702992fbe40778e",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
         "range": [
-          1442,
-          1445
+          1463,
+          1466
         ],
         "exact": "may",
         "prefix": "from hundreds of sites.\n\nA site ",
@@ -91,10 +235,10 @@
       "status": "open",
       "anchor": {
         "file": "manuscript/text/brief.md",
-        "rev": "snap:3702992fbe40778e",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
         "range": [
-          1763,
-          1802
+          1784,
+          1823
         ],
         "exact": "and careful methods already handle that",
         "prefix": "ts own measurement uncertainty, ",
@@ -114,10 +258,10 @@
       "status": "open",
       "anchor": {
         "file": "manuscript/text/brief.md",
-        "rev": "snap:3702992fbe40778e",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
         "range": [
-          1847,
-          1856
+          1868,
+          1877
         ],
         "exact": "were kept",
         "prefix": " here is different: which dates ",
@@ -137,10 +281,10 @@
       "status": "open",
       "anchor": {
         "file": "manuscript/text/brief.md",
-        "rev": "snap:3702992fbe40778e",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
         "range": [
-          1700,
-          1714
+          1721,
+          1735
         ],
         "exact": "Why it is hard",
         "prefix": " date itself records which.\n\n## ",
@@ -160,14 +304,14 @@
       "status": "open",
       "anchor": {
         "file": "manuscript/text/brief.md",
-        "rev": "snap:3702992fbe40778e",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
         "range": [
-          1716,
-          2324
+          1737,
+          2345
         ],
         "exact": "Each date has its own measurement uncertainty, and careful methods already handle that. The problem here is different: which dates were kept. An extreme is not a typical member of a set. Of five dates from a steady history, the oldest falls in the oldest fifth of the time span about two times in three[]{.C27}, against one time in five for a date picked at random. A curve built from oldest dates therefore tends to be pushed back in time even if nothing in the past changed. Agreement among standard ways of drawing the curve cannot, by itself, reveal this, because every method starts from the same dates.",
         "prefix": "ords which.\n\n## Why it is hard\n\n",
-        "suffix": "\n\n## What we did\n\nWe redrew the "
+        "suffix": "\n\n## What we did\n\nWe redrew a re"
       },
       "messages": [
         {
@@ -183,7 +327,7 @@
       "status": "open",
       "anchor": {
         "file": "manuscript/text/brief.md",
-        "rev": "snap:a55478ce10c862f0",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
         "range": [
           1321,
           1346
@@ -206,7 +350,7 @@
       "status": "open",
       "anchor": {
         "file": "manuscript/text/brief.md",
-        "rev": "snap:7881ac39c157d106",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
         "range": [
           3409,
           3447
@@ -229,7 +373,7 @@
       "status": "open",
       "anchor": {
         "file": "manuscript/text/brief.md",
-        "rev": "snap:7881ac39c157d106",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
         "range": [
           3503,
           3521
@@ -252,7 +396,7 @@
       "status": "open",
       "anchor": {
         "file": "manuscript/text/brief.md",
-        "rev": "snap:7881ac39c157d106",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
         "range": [
           3974,
           3982
@@ -275,7 +419,7 @@
       "status": "open",
       "anchor": {
         "file": "manuscript/text/brief.md",
-        "rev": "snap:7881ac39c157d106",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
         "range": [
           4147,
           4207
@@ -298,7 +442,7 @@
       "status": "resolved",
       "anchor": {
         "file": "manuscript/text/brief.md",
-        "rev": "snap:7881ac39c157d106",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
         "range": [
           2932,
           5050
@@ -325,7 +469,7 @@
       "status": "open",
       "anchor": {
         "file": "manuscript/text/brief.md",
-        "rev": "snap:7881ac39c157d106",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
         "range": [
           2932,
           5050
@@ -355,7 +499,7 @@
       "status": "open",
       "anchor": {
         "file": "manuscript/text/brief.md",
-        "rev": "snap:7881ac39c157d106",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
         "range": [
           4579,
           4682
@@ -378,7 +522,7 @@
       "status": "open",
       "anchor": {
         "file": "manuscript/text/brief.md",
-        "rev": "snap:7881ac39c157d106",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
         "range": [
           2,
           77
@@ -401,7 +545,7 @@
       "status": "open",
       "anchor": {
         "file": "manuscript/text/brief.md",
-        "rev": "snap:7881ac39c157d106",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
         "range": [
           5100,
           5136
@@ -424,7 +568,7 @@
       "status": "open",
       "anchor": {
         "file": "manuscript/text/brief.md",
-        "rev": "snap:7881ac39c157d106",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
         "range": [
           5323,
           5336
@@ -447,7 +591,7 @@
       "status": "open",
       "anchor": {
         "file": "manuscript/text/brief.md",
-        "rev": "snap:7881ac39c157d106",
+        "rev": "git:14b090a1d7fcbe982eba3eb5490065c1c0400f7a",
         "range": [
           5431,
           5512
