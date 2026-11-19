@@ -8,7 +8,10 @@ TEXT := text/main.md text/figures.md text/supplement.md text/supplement_figures.
 
 .PHONY: all check check-makedoc check-render $(PROFILES)
 
-all: $(PROFILES) check-render
+# The render check reads the built PDFs, so it runs as a recipe, after every
+# profile has finished, not as a sibling prerequisite that -j could run first.
+all: $(PROFILES)
+	@$(MAKE) --no-print-directory check-render
 
 $(PROFILES): check-makedoc
 	$(RUN) $(MAKE) -C "$(MAKEDOC)" CONFIG="$(CONFIG)" PROFILE=$@ all
