@@ -24,8 +24,9 @@ Rigour at the scientific decision boundary; proportional engineering everywhere 
   it unless the user explicitly approves an environment change.
 - Keep reusable scientific functions in `R/`, focused execution scripts in `scripts/`, tests in
   `tests/testthat/`, manuscript sources in `manuscript/`, and generated evidence in `out/`.
-- Heavy simulations are explicit, resumable jobs. Use the documented container/runtime and run them
-  on `deep-server` in `tmux` when they exceed the local interactive budget.
+- Heavy simulations are explicit, resumable jobs. Use the documented container/runtime. Run
+  WSL-started jobs that exceed the local interactive budget on `deep` in `tmux`. Follow Nectar's
+  current compute guidance when starting elsewhere.
 - Use qualified package calls (`pkg::fun`) where this improves clarity. This is not a package, so do
   not add Roxygen exports, import scaffolding, `DESCRIPTION`, or `NAMESPACE` machinery.
 
@@ -57,8 +58,8 @@ Rigour at the scientific decision boundary; proportional engineering everywhere 
   transformations.
 - For a scientific revision, prespecify the decision gate, run the analysis once, and independently
   verify the emitted evidence. A successful parse, render, or pipeline run is not scientific proof.
-- Use one focused self-review and repair pass. Do not add redundant permutations or repeat an
-  unchanged full run without a named source of nondeterminism.
+- Review and repair while further work can materially improve the evidence or delivery. Repeat an
+  unchanged full run only when a distinct, named risk warrants it. Do not add redundant permutations.
 
 ## Safety and delivery
 
